@@ -12,13 +12,15 @@ set(SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
 set(SOURCE_LOGIC_DIR ${SOURCE_DIR}/logic)
 set(SOURCE_GAMES_DIR ${SOURCE_DIR}/games)
 
+set(LIB_DIR ${PROJECT_SOURCE_DIR}/lib)
+
 include_directories(${INCLUDE_DIR})
 include_directories(${INCLUDE_GAMES_DIR})
 include_directories(${INCLUDE_LOGIC_DIR})
 
 set(HEADER_FILES ${INCLUDE_LOGIC_DIR}/Piece.h ${INCLUDE_LOGIC_DIR}/GameBoard.h 
     ${INCLUDE_LOGIC_DIR}/Move.h)
-set(SRC_FILES ${SOURCE_LOGIC_DIR}/Move.cpp ${SOURCE_LOGIC_DIR}/Piece.cpp)
+set(SRC_FILES ${SOURCE_LOGIC_DIR}/Move.cpp ${SOURCE_LOGIC_DIR}/Piece.cpp ${SOURCE_LOGIC_DIR}/GameBoard.cpp)
 
 set(CMAKE_CXX_STANDARD 20)
 

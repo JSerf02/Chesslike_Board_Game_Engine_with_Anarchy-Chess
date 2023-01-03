@@ -129,4 +129,25 @@ src/CMakeFiles/anarchy-chess_build.dir/helloworld.cpp.obj: \
  C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/ostream.tcc \
  C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/istream \
  C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/istream.tcc \
- C:/Users/jserf/DOCUME~1/ANARCH~1/include/logic/Piece.h
+ C:/Users/jserf/DOCUME~1/ANARCH~1/include/logic/Piece.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/unordered_map \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/aligned_buffer.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/hashtable.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/hashtable_policy.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tuple \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/utility \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_relops.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/array \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/uses_allocator.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/invoke.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/node_handle.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/optional \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/enable_special_members.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/unordered_map.h \
+ C:/Users/jserf/DOCUME~1/ANARCH~1/include/logic/Move.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/vector \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_construct.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_uninitialized.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_vector.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_bvector.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/vector.tcc

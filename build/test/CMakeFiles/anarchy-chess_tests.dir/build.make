@@ -113,11 +113,26 @@ test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Piece.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Piece.cpp.s"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\jserf\Documents\Anarchy Chess\src\logic\Piece.cpp" -o CMakeFiles\anarchy-chess_tests.dir\__\src\logic\Piece.cpp.s
 
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/flags.make
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/src/logic/GameBoard.cpp
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.obj"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\__\src\logic\GameBoard.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\__\src\logic\GameBoard.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\src\logic\GameBoard.cpp"
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.i"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\jserf\Documents\Anarchy Chess\src\logic\GameBoard.cpp" > CMakeFiles\anarchy-chess_tests.dir\__\src\logic\GameBoard.cpp.i
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.s"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\jserf\Documents\Anarchy Chess\src\logic\GameBoard.cpp" -o CMakeFiles\anarchy-chess_tests.dir\__\src\logic\GameBoard.cpp.s
+
 test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/flags.make
 test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
 test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/test/logic/MoveTest.cpp
 test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\logic\MoveTest.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\logic\MoveTest.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\test\logic\MoveTest.cpp"
 
 test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.i: cmake_force
@@ -133,6 +148,7 @@ anarchy__chess_tests_OBJECTS = \
 "CMakeFiles/anarchy-chess_tests.dir/test.cpp.obj" \
 "CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Move.cpp.obj" \
 "CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Piece.cpp.obj" \
+"CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.obj" \
 "CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj"
 
 # External object files for target anarchy-chess_tests
@@ -141,12 +157,13 @@ anarchy__chess_tests_EXTERNAL_OBJECTS =
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/test.cpp.obj
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Move.cpp.obj
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Piece.cpp.obj
+test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.obj
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/build.make
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/linkLibs.rsp
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/objects1
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable anarchy-chess_tests.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable anarchy-chess_tests.exe"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\anarchy-chess_tests.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

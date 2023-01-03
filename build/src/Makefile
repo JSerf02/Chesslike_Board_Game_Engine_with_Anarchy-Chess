@@ -153,6 +153,30 @@ helloworld.cpp.s:
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/helloworld.cpp.s
 .PHONY : helloworld.cpp.s
 
+logic/GameBoard.obj: logic/GameBoard.cpp.obj
+.PHONY : logic/GameBoard.obj
+
+# target to build an object file
+logic/GameBoard.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/GameBoard.cpp.obj
+.PHONY : logic/GameBoard.cpp.obj
+
+logic/GameBoard.i: logic/GameBoard.cpp.i
+.PHONY : logic/GameBoard.i
+
+# target to preprocess a source file
+logic/GameBoard.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/GameBoard.cpp.i
+.PHONY : logic/GameBoard.cpp.i
+
+logic/GameBoard.s: logic/GameBoard.cpp.s
+.PHONY : logic/GameBoard.s
+
+# target to generate assembly for a file
+logic/GameBoard.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/GameBoard.cpp.s
+.PHONY : logic/GameBoard.cpp.s
+
 logic/Move.obj: logic/Move.cpp.obj
 .PHONY : logic/Move.obj
 
@@ -213,6 +237,9 @@ help:
 	@echo ... helloworld.obj
 	@echo ... helloworld.i
 	@echo ... helloworld.s
+	@echo ... logic/GameBoard.obj
+	@echo ... logic/GameBoard.i
+	@echo ... logic/GameBoard.s
 	@echo ... logic/Move.obj
 	@echo ... logic/Move.i
 	@echo ... logic/Move.s

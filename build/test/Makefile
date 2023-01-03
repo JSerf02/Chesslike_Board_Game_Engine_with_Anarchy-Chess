@@ -129,6 +129,30 @@ anarchy-chess_tests/fast:
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/build
 .PHONY : anarchy-chess_tests/fast
 
+__/src/logic/GameBoard.obj: __/src/logic/GameBoard.cpp.obj
+.PHONY : __/src/logic/GameBoard.obj
+
+# target to build an object file
+__/src/logic/GameBoard.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.obj
+.PHONY : __/src/logic/GameBoard.cpp.obj
+
+__/src/logic/GameBoard.i: __/src/logic/GameBoard.cpp.i
+.PHONY : __/src/logic/GameBoard.i
+
+# target to preprocess a source file
+__/src/logic/GameBoard.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.i
+.PHONY : __/src/logic/GameBoard.cpp.i
+
+__/src/logic/GameBoard.s: __/src/logic/GameBoard.cpp.s
+.PHONY : __/src/logic/GameBoard.s
+
+# target to generate assembly for a file
+__/src/logic/GameBoard.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.s
+.PHONY : __/src/logic/GameBoard.cpp.s
+
 __/src/logic/Move.obj: __/src/logic/Move.cpp.obj
 .PHONY : __/src/logic/Move.obj
 
@@ -234,6 +258,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... anarchy-chess_tests
+	@echo ... __/src/logic/GameBoard.obj
+	@echo ... __/src/logic/GameBoard.i
+	@echo ... __/src/logic/GameBoard.s
 	@echo ... __/src/logic/Move.obj
 	@echo ... __/src/logic/Move.i
 	@echo ... __/src/logic/Move.s

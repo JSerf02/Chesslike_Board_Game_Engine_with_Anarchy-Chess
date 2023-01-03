@@ -139,4 +139,18 @@ test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj: \
  C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/istream.tcc \
  C:/Users/jserf/DOCUME~1/ANARCH~1/test/doctest.h \
  C:/Users/jserf/DOCUME~1/ANARCH~1/include/logic/Move.h \
- C:/Users/jserf/DOCUME~1/ANARCH~1/include/logic/GameBoard.h
+ C:/Users/jserf/DOCUME~1/ANARCH~1/include/logic/GameBoard.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/unordered_map \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/aligned_buffer.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/hashtable.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/hashtable_policy.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tuple \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/array \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/uses_allocator.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/invoke.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/node_handle.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/optional \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/enable_special_members.h \
+ C:/MinGW/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/unordered_map.h \
+ C:/Users/jserf/DOCUME~1/ANARCH~1/include/logic/Piece.h \
+ C:/Users/jserf/DOCUME~1/ANARCH~1/include/logic/Move.h

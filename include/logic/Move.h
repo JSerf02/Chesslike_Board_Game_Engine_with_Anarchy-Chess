@@ -8,11 +8,19 @@
 
 class GameBoard;
 class Move {
+    /*
+     * A data structure object for a list of similar moves for a given piece
+     * Similar moves are moves that:
+     * - Have the same priority
+     * - Have the same special behavior when moved (which is controlled here 
+     *   through the onMove() callback function)
+    */
     public:
         /*
          * A position on the game board
         */
         using position = std::pair<int, int>;
+
     private:
         /*
          * The positions this move allows
@@ -30,14 +38,14 @@ class Move {
          * A callback function that is called whenever a player uses one of these moves
          * -- If null, will be ignored
         */
-        void (*onMove)(GameBoard&){nullptr};
+        void (*onMove)(GameBoard&){ nullptr };
 
     public:
         /*
          * Constructor: Initialize priority and onMove() callback function
         */
         Move(int movePriority = 0, void (*onMoveCallback)(GameBoard&) = nullptr) : 
-            priority{movePriority}, onMove{onMoveCallback}{ }
+            priority{movePriority}, onMove{onMoveCallback}{}
         
         /*
          * Allow printing of moves for debugging

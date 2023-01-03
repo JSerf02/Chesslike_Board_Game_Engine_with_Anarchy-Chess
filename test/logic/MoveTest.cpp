@@ -84,7 +84,7 @@ TEST_CASE("Move: Positions") {
         testMove.addPosition(std::make_pair(0, 0));
         CHECK(testMove.findPositionIdx(std::make_pair(0, 0)) == 0);
         CHECK(testMove.containsPosition(std::make_pair(0, 0)));
-
+        
         // Ensure proper results when the position is not in the list
         CHECK(testMove.findPositionIdx(std::make_pair(1, 1)) == -1);
         CHECK(testMove.containsPosition(std::make_pair(1, 1)) == false); 
@@ -97,8 +97,6 @@ TEST_CASE("Move: Positions") {
         CHECK(testMove.findPositionIdx(std::make_pair(3, 3)) == 3);
         CHECK(testMove.containsPosition(std::make_pair(5, 5))); 
         CHECK(testMove.findPositionIdx(std::make_pair(20, 20)) == -1);
-
-        std::cout << testMove;
     }
 
     SUBCASE("Move: Remove positions"){

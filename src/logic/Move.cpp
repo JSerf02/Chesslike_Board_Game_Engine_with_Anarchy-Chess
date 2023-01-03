@@ -9,7 +9,8 @@
 using position = Move::position;
 
 // See Move.h
-std::ostream& operator<<(std::ostream& os, const Move& move){
+std::ostream& operator<<(std::ostream& os, const Move& move)
+{
     os << "{";
     for(position curPos : move.positions) {
         os << "(" << curPos.first << ", " << curPos.second << ")";

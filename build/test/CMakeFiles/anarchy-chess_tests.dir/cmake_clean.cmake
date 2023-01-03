@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.obj"
+  "CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.obj.d"
   "CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Move.cpp.obj"
   "CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Move.cpp.obj.d"
   "CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Piece.cpp.obj"
