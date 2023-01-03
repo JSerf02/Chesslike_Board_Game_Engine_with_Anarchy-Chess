@@ -4,50 +4,51 @@
 #include "Piece.h"
 
 using Player = Piece::Player;
+
 // See Piece.h
-bool getPlayerAccess(Player player)
+bool Piece::getPlayerAccess(Player player)
 {
     return true;
 }
 
 // See Piece.h
-void addPlayer(Player newPlayer)
+void Piece::addPlayer(Player newPlayer)
 {
     return;
 }
 
 // See Piece.h
-void removePlayer(Player player)
+void Piece::removePlayer(Player player)
 {
     return;
 }
 
 // See Piece.h
-Move::position getPosition()
+Move::position Piece::getPosition()
 {
     return { };
 }
 
 // See Piece.h
-bool changePosition(const GameBoard& gameBoard, int newX, int newY)
+bool Piece::changePosition(const GameBoard& gameBoard, int newX, int newY)
 {
     return true;
 }
 
 // See Piece.h
-bool changePosition(const GameBoard& gameBoard, Move::position newPosition)
+bool Piece::changePosition(const GameBoard& gameBoard, Move::position newPosition)
 {
     return changePosition(gameBoard, newPosition);
 }
 
 // See Piece.h
-int getValue()
+int Piece::getValue()
 {
     return 0;
 }
 
 // See Piece.h
-void setValue(int newValue)
+void Piece::setValue(int newValue)
 {
     return;
 }

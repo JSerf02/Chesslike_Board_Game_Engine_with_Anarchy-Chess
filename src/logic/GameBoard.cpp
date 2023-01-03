@@ -39,43 +39,43 @@ Piece* GameBoard::getPiece(int x, int y)
 }
 
 // See GameBoard.h
-Piece* GameBoard:: getPiece(Move::position position)
+Piece* GameBoard::getPiece(Move::position position)
 {
     return getPiece(position.first, position.second);
 }
 
 // See GameBoard.h
-bool removePiece(int x, int y)
+bool GameBoard::removePiece(int x, int y)
 {
     return true;
 }
 
 // See GameBoard.h
-bool removePiece(Move::position position)
+bool GameBoard::removePiece(Move::position position)
 {
     return removePiece(position.first, position.second);
 }
 
 // See GameBoard.h
-bool capturePiece(int x, int y)
+bool GameBoard::capturePiece(int x, int y)
 {
     return true;
 }
 
 // See GameBoard.h
-bool capturePieece(Move::position position)
+bool GameBoard::capturePiece(Move::position position)
 {
     return capturePiece(position.first, position.second);
 }
 
 // See GameBoard.h
-const std::vector<Piece*>& getPlayerCaptures(Piece::Player player)
+const std::vector<Piece*>& GameBoard::getPlayerCaptures(Piece::Player player)
 {
     return {};
 }
 
 // See GameBoard.h
-int getPlayerScore(Piece::Player player)
+int GameBoard::getPlayerScore(Piece::Player player)
 {
     return 0;
 }
