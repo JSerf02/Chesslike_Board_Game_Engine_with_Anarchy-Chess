@@ -1,1 +1,3 @@
 .vscode/
+build/test/anarchy-chess_tests.exe
+build/src/anarchy-chess_build.exe
