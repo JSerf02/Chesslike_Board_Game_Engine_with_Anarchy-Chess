@@ -1,0 +1,37 @@
+[
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\test.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\test\\test.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/test/test.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\__\\src\\logic\\Move.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\Move.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/Move.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\__\\src\\logic\\Piece.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\Piece.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/Piece.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\logic\\MoveTest.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\test\\logic\\MoveTest.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/test/logic/MoveTest.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\helloworld.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\helloworld.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/helloworld.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\logic\\Move.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\Move.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/Move.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\logic\\Piece.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\Piece.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/Piece.cpp"
+}
+]

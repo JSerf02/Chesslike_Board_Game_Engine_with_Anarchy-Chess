@@ -1,0 +1,8 @@
+C:/Users/jserf/Documents/Anarchy Chess/build/CMakeFiles/edit_cache.dir
+C:/Users/jserf/Documents/Anarchy Chess/build/CMakeFiles/rebuild_cache.dir
+C:/Users/jserf/Documents/Anarchy Chess/build/test/CMakeFiles/anarchy-chess_tests.dir
+C:/Users/jserf/Documents/Anarchy Chess/build/test/CMakeFiles/edit_cache.dir
+C:/Users/jserf/Documents/Anarchy Chess/build/test/CMakeFiles/rebuild_cache.dir
+C:/Users/jserf/Documents/Anarchy Chess/build/src/CMakeFiles/anarchy-chess_build.dir
+C:/Users/jserf/Documents/Anarchy Chess/build/src/CMakeFiles/edit_cache.dir
+C:/Users/jserf/Documents/Anarchy Chess/build/src/CMakeFiles/rebuild_cache.dir
