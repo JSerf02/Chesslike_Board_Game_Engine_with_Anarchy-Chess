@@ -6,4 +6,4 @@ Currently, only a single module is complete which is not nearly enough to play a
 A full, detailed list of features will appear here once the project is complete (MVP).
 
 To run, build the project with CMake and run ./build/src/anarchy-chess_build.exe
-To run tests, build the project with CMake and run ./build/test/anarchy-chess_test.exe
+To run tests, build the project with CMake and run ./build/test/anarchy-chess_tests.exe
