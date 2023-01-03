@@ -1,5 +1,5 @@
 # Anarchy-Chess
-A simple chess engine that supports the anarchy chess rules and provides an clean interface for the addition of new complex pieces.
+A simple chess engine that supports the anarchy chess rules and provides a clean interface for the addition of new complex pieces.
 
 Note: This project is still in the early stages of development and is far from complete. 
 Currently, only a single module is complete which is not nearly enough to play a game, so running anarchy-chess_build.exe will not do anything usefull.
