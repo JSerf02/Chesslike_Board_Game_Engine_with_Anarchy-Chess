@@ -8,19 +8,19 @@ using Player = Piece::Player;
 // See Piece.h
 bool Piece::getPlayerAccess(Player player)
 {
-    return true;
+    return players[player];
 }
 
 // See Piece.h
 void Piece::addPlayer(Player newPlayer)
 {
-    return;
+    players[newPlayer] = true;
 }
 
 // See Piece.h
 void Piece::removePlayer(Player player)
 {
-    return;
+    players[player] = false;
 }
 
 // See Piece.h
