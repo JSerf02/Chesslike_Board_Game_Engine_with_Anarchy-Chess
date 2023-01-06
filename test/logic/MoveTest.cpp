@@ -26,11 +26,13 @@ TEST_CASE("Move: Get and set priority")
  *   modifying the board because the board module is not written yet
 */
 static bool testCallbackCalled = false;
-void testCallback(GameBoard& board) {
+void testCallback(GameBoard& board) 
+{
     testCallbackCalled = true;
 }
 
-TEST_CASE("Move: Set and call onMove() callback") {
+TEST_CASE("Move: Set and call onMove() callback") 
+{
     // Create a Move object
     Move testMove{};
 
@@ -50,7 +52,8 @@ TEST_CASE("Move: Set and call onMove() callback") {
 }
 
 using position = Move::position;
-TEST_CASE("Move: Positions") {
+TEST_CASE("Move: Positions") 
+{
     // Create a Move object
     Move testMove{};
 
@@ -58,7 +61,8 @@ TEST_CASE("Move: Positions") {
     const std::vector<position>& positions = testMove.getPositions();
     REQUIRE(positions.size() == 0);
 
-    SUBCASE("Move: Add and get positions") {
+    SUBCASE("Move: Add and get positions") 
+    {
         // Add a new position
         testMove.addPosition(std::make_pair(0, 0));
 
@@ -77,7 +81,8 @@ TEST_CASE("Move: Positions") {
         CHECK(positions[2] == std::make_pair(2, 2));
     }
 
-    SUBCASE("Move: Find and Contains position") {
+    SUBCASE("Move: Find and Contains position") 
+    {
         // Make sure false is returned when the position isn't in the move
         CHECK(testMove.containsPosition(std::make_pair(0, 0)) == false);
 
@@ -100,7 +105,8 @@ TEST_CASE("Move: Positions") {
         CHECK(testMove.findPositionIdx(std::make_pair(20, 20)) == -1);
     }
 
-    SUBCASE("Move: Remove positions"){
+    SUBCASE("Move: Remove positions")
+    {
         // Add 10 positions and ensure the adding worked properly
         for(int i = 0; i < 10; i++) {
             testMove.addPosition(std::make_pair(i, i));
@@ -124,7 +130,8 @@ TEST_CASE("Move: Positions") {
         CHECK(testMove.removePosition(std::make_pair(20, 20)) == false);
     }
 
-    SUBCASE("Move: Clear positions") {
+    SUBCASE("Move: Clear positions") 
+    {
         // Add 10 positions and ensure the adding worked properly
         for(int i = 0; i < 10; i++) {
             testMove.addPosition(std::make_pair(i, i));

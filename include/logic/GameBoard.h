@@ -8,7 +8,8 @@
 #include "Piece.h"
 #include "Move.h"
 
-class GameBoard {
+class GameBoard 
+{
     /*
      * The data structure for the game's board
     */
@@ -52,8 +53,10 @@ class GameBoard {
          *   whether that position is occupied
          * - false if the position is not on the board
          * 
+         * Default:
+         * - Infinite board, always returns true
         */
-        virtual bool onBoard(int x, int y) { return false; };
+        virtual bool onBoard(int x, int y) { return true; };
         bool onBoard(Move::position position);
 
         /*
@@ -119,6 +122,24 @@ class GameBoard {
         */
         bool capturePiece(int x, int y);
         bool capturePiece(Move::position position);
+
+        /*
+         * Moves a piece to a new position
+         * 
+         * Parameters:
+         * - The starting position of the piece, used to identify which piece to move
+         * - The new position of the peice
+         * 
+         * Returns:
+         * - True if the piece was successfully moved
+         * - False if the piece was not moved. This can happen if:
+         *   - The new space is occupied
+         *   - The new space is not on the board
+        */
+        bool movePiece(int prevX, int prevY, int newX, int newY);
+        bool movePiece(int prevX, int prevY, Move::position newPosition);
+        bool movePiece(Move::position prevPosition, int newX, int newY);
+        bool movePiece(Move::position prevPosition, Move::position newPosition);
         
         /*
          * Returns a reference to the vector containing the player's captured pieces

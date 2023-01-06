@@ -7,7 +7,8 @@
 #include <iostream>
 
 class GameBoard;
-class Move {
+class Move 
+{
     /*
      * A data structure object for a list of similar moves for a given piece
      * Similar moves are moves that:

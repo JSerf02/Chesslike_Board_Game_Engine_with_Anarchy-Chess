@@ -26,19 +26,19 @@ void Piece::removePlayer(Player player)
 // See Piece.h
 Move::position Piece::getPosition()
 {
-    return { };
+    return piecePosition;
 }
 
 // See Piece.h
-bool Piece::changePosition(const GameBoard& gameBoard, int newX, int newY)
+void Piece::changePosition(int newX, int newY)
 {
-    return true;
+    return;
 }
 
 // See Piece.h
-bool Piece::changePosition(const GameBoard& gameBoard, Move::position newPosition)
+void Piece::changePosition(Move::position newPosition)
 {
-    return changePosition(gameBoard, newPosition);
+    changePosition(newPosition);
 }
 
 // See Piece.h

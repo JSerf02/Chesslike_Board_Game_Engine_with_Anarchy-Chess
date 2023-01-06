@@ -50,7 +50,7 @@ class Piece
         /*
          * Constructor: Set piecePosition
         */
-        Piece(Move::position startPos, int pieceValue) 
+        Piece(Move::position startPos = std::make_pair(0, 0), int pieceValue = 0) 
             : piecePosition{ startPos }, value{ pieceValue } {}
         
         /*
@@ -75,14 +75,10 @@ class Piece
         Move::position getPosition();
 
         /*
-         * Updates the piece's location to a new location on the game board
-         *
-         * Returns:
-         * - true if the location was successfully updated
-         * - false if the location was invalid
+         * Updates the piece's internal location
         */
-        bool changePosition(const GameBoard& gameBoard, int newX, int newY);
-        bool changePosition(const GameBoard& gameBoard, Move::position newPosition);
+        void changePosition(int newX, int newY);
+        void changePosition(Move::position newPosition);
 
         /*
          * Returns a vector containing all of this piece's valid moves given the 
