@@ -32,23 +32,24 @@ Move::position Piece::getPosition()
 // See Piece.h
 void Piece::changePosition(int newX, int newY)
 {
-    return;
+    piecePosition.first = newX;
+    piecePosition.second = newY;
 }
 
 // See Piece.h
 void Piece::changePosition(Move::position newPosition)
 {
-    changePosition(newPosition);
+    changePosition(newPosition.first, newPosition.second);
 }
 
 // See Piece.h
 int Piece::getValue()
 {
-    return 0;
+    return value;
 }
 
 // See Piece.h
 void Piece::setValue(int newValue)
 {
-    return;
+    value = newValue;
 }
