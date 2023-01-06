@@ -90,14 +90,16 @@ class Piece
          * 
          * - Implementation is specific to each type of piece
         */
-        virtual std::vector<Move> GenerateMoves(const GameBoard& gameBoard) = 0;
+        // Default initialization for testing only
+        virtual std::vector<Move> GenerateMoves(const GameBoard& gameBoard) { return {}; } 
 
         /*
          * Returns a vector containing every position this piece is attacking
          *
          * - Implementation is specific to each type of piece
         */
-        virtual std::vector<Move::position> GenerateAttackingSpaces(const GameBoard& gameBoard) = 0;
+        // Default initialization for testing
+        virtual std::vector<Move::position> GenerateAttackingSpaces(const GameBoard& gameBoard) { return {}; }
 
         /*
          * Returns the piece's value

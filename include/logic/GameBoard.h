@@ -118,7 +118,7 @@ class GameBoard {
          * - false if something went wrong and no piece was removed
         */
         bool capturePiece(int x, int y);
-        bool capturePieece(Move::position position);
+        bool capturePiece(Move::position position);
         
         /*
          * Returns a reference to the vector containing the player's captured pieces

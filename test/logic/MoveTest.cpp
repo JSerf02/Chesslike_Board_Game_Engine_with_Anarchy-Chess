@@ -18,6 +18,7 @@ TEST_CASE("Move: Get and set priority")
     testMove.setPriority(10);
     CHECK(testMove.getPriority() == 10);
 }
+
 /*
  * A callback function to test the move's onMove functionality
  *

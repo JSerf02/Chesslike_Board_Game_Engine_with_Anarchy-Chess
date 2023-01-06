@@ -201,6 +201,30 @@ __/src/logic/Piece.cpp.s:
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Piece.cpp.s
 .PHONY : __/src/logic/Piece.cpp.s
 
+logic/GameBoardTest.obj: logic/GameBoardTest.cpp.obj
+.PHONY : logic/GameBoardTest.obj
+
+# target to build an object file
+logic/GameBoardTest.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.obj
+.PHONY : logic/GameBoardTest.cpp.obj
+
+logic/GameBoardTest.i: logic/GameBoardTest.cpp.i
+.PHONY : logic/GameBoardTest.i
+
+# target to preprocess a source file
+logic/GameBoardTest.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.i
+.PHONY : logic/GameBoardTest.cpp.i
+
+logic/GameBoardTest.s: logic/GameBoardTest.cpp.s
+.PHONY : logic/GameBoardTest.s
+
+# target to generate assembly for a file
+logic/GameBoardTest.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.s
+.PHONY : logic/GameBoardTest.cpp.s
+
 logic/MoveTest.obj: logic/MoveTest.cpp.obj
 .PHONY : logic/MoveTest.obj
 
@@ -224,6 +248,30 @@ logic/MoveTest.s: logic/MoveTest.cpp.s
 logic/MoveTest.cpp.s:
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.s
 .PHONY : logic/MoveTest.cpp.s
+
+logic/PieceTest.obj: logic/PieceTest.cpp.obj
+.PHONY : logic/PieceTest.obj
+
+# target to build an object file
+logic/PieceTest.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.obj
+.PHONY : logic/PieceTest.cpp.obj
+
+logic/PieceTest.i: logic/PieceTest.cpp.i
+.PHONY : logic/PieceTest.i
+
+# target to preprocess a source file
+logic/PieceTest.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.i
+.PHONY : logic/PieceTest.cpp.i
+
+logic/PieceTest.s: logic/PieceTest.cpp.s
+.PHONY : logic/PieceTest.s
+
+# target to generate assembly for a file
+logic/PieceTest.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.s
+.PHONY : logic/PieceTest.cpp.s
 
 test.obj: test.cpp.obj
 .PHONY : test.obj
@@ -267,9 +315,15 @@ help:
 	@echo ... __/src/logic/Piece.obj
 	@echo ... __/src/logic/Piece.i
 	@echo ... __/src/logic/Piece.s
+	@echo ... logic/GameBoardTest.obj
+	@echo ... logic/GameBoardTest.i
+	@echo ... logic/GameBoardTest.s
 	@echo ... logic/MoveTest.obj
 	@echo ... logic/MoveTest.i
 	@echo ... logic/MoveTest.s
+	@echo ... logic/PieceTest.obj
+	@echo ... logic/PieceTest.i
+	@echo ... logic/PieceTest.s
 	@echo ... test.obj
 	@echo ... test.i
 	@echo ... test.s
