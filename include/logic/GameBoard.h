@@ -26,7 +26,7 @@ class GameBoard
         /*
          * All of the pieces that have been captured so far
         */
-        std::unordered_map<Piece::Player, std::vector<Piece*>> capturedPieces{};
+        std::unordered_map<Piece::Player, std::vector<Piece*>&> capturedPieces{};
 
         /*
          * Adds starting pieces to the board
@@ -111,7 +111,7 @@ class GameBoard
 
         /*
          * Captures a piece by removing it from the board and adding it to the 
-         * captured pieces structure
+         * captured pieces structure for each player that doesn't control the piece.
          * 
          * Parameters:
          * - The board position of the piece
@@ -131,8 +131,9 @@ class GameBoard
          * - The new position of the peice
          * 
          * Returns:
-         * - True if the piece was successfully moved
-         * - False if the piece was not moved. This can happen if:
+         * - true if the piece was successfully moved
+         * - false if the piece was not moved. This can happen if:
+         *   - The prev position inputted does not contain a piece
          *   - The new space is occupied
          *   - The new space is not on the board
         */

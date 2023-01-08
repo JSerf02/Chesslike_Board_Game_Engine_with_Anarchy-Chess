@@ -69,25 +69,25 @@ bool GameBoard::capturePiece(Move::position position)
 }
 
 // See GameBoard.h
-bool movePiece(int prevX, int prevY, int newX, int newY)
+bool GameBoard::movePiece(int prevX, int prevY, int newX, int newY)
 {
     return true;
 }
 
 // See GameBoard.h
-bool movePiece(int prevX, int prevY, Move::position newPosition) 
+bool GameBoard::movePiece(int prevX, int prevY, Move::position newPosition) 
 {
     return movePiece(prevX, prevY, newPosition.first, newPosition.second);
 }
 
 // See GameBoard.h
-bool movePiece(Move::position prevPosition, int newX, int newY)
+bool GameBoard::movePiece(Move::position prevPosition, int newX, int newY)
 {
     return movePiece(prevPosition.first, prevPosition.second, newX, newY);
 }
 
 // See GameBoard.h
-bool movePiece(Move::position prevPosition, Move::position newPosition)
+bool GameBoard::movePiece(Move::position prevPosition, Move::position newPosition)
 {
     return movePiece(prevPosition.first, prevPosition.second, newPosition.first, 
         newPosition.second);
