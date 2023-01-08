@@ -12,6 +12,12 @@ bool Piece::getPlayerAccess(Player player)
 }
 
 // See Piece.h
+const std::unordered_map<Player, bool>& Piece::getAllPlayersAccess()
+{
+    return players;
+}
+
+// See Piece.h
 void Piece::addPlayer(Player newPlayer)
 {
     players[newPlayer] = true;
@@ -43,13 +49,13 @@ void Piece::changePosition(Move::position newPosition)
 }
 
 // See Piece.h
-int Piece::getValue()
+double Piece::getValue()
 {
     return value;
 }
 
 // See Piece.h
-void Piece::setValue(int newValue)
+void Piece::setValue(double newValue)
 {
     value = newValue;
 }

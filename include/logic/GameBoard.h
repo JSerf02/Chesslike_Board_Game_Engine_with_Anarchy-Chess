@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 
+#include "HashPair.h"
 #include "Piece.h"
 #include "Move.h"
 
@@ -17,17 +18,26 @@ class GameBoard
         /*
          * The board, which uses an unordered_map for O(1) access times for a 
          * given position
-         * - The string key is meant to be a pair, but pairs keys are not supported
+         * - hash_tuple::pair_hash is necessary in the template becase by default,
+         *   C++ does not support the hashing of pairs. That struct contains a 
+         *   hash function definition that works for all pairs to work around this
          * 
          * A null piece means that space is unoccupied
+         * All pieces MUST be on the heap
         */
-        std::unordered_map<std::string, Piece*> board{};
+        std::unordered_map<Move::position, Piece*, hash_tuple::pair_hash> board{};
 
         /*
          * All of the pieces that have been captured so far
         */
         std::unordered_map<Piece::Player, std::vector<Piece*>*> capturedPieces{};
-
+        
+        /*
+         * Stores every piece associated with the board, even if the piece has 
+         * been removed or captured
+         * - Necessary for memory management
+        */
+        std::vector<Piece*> allPieces{};
         /*
          * Adds starting pieces to the board
          * - Called only on initial startup
@@ -36,12 +46,12 @@ class GameBoard
 
     public:
         /*
-         * Constructor: Initialize captured pieces on heap and sets up the board 
+         * Constructor: Initialize captured piece vectors and set up the board 
         */
-        GameBoard();
+        GameBoard(std::vector<Piece::Player> players  = {});
 
         /*
-         * Destructor: Frees captured pieces
+         * Destructor: Frees all pieces and captured piece vectors
         */
         ~GameBoard();
 
@@ -71,12 +81,30 @@ class GameBoard
          * - The position on the board
          * 
          * Returns:
-         * - true if the position is unoccupied
-         * - false if the position is occupied or not on the board
+         * - true if the position is occupied
+         * - false if the position is unoccupied or not on the board
          * 
         */
         bool occupiedOnBoard(int x, int y);
         bool occupiedOnBoard(Move::position position);
+
+        /*
+         * Determines whether or not a position is unoccupied and on the board
+         * 
+         * Parameters:
+         * - The position on the board
+         * 
+         * Returns:
+         * - true if the position is unoccupied
+         * - false if the position is occupied or not on the board
+         * 
+         * Note:
+         * - This will return the opposite of occupiedOnBoard() if the position
+         *   is on the board and the same as occupiedOnBoard() if the position
+         *   is not on the board
+        */
+        bool unoccupiedOnBoard(int x, int y);
+        bool unoccupiedOnBoard(Move::position position);
 
         /*
          * Adds a piece to the board
@@ -102,7 +130,7 @@ class GameBoard
         Piece* getPiece(Move::position position);
 
         /*
-         * Removes a piece from a position, freeing it afterwards
+         * Removes a piece from the board without freeing it
          * 
          * Parameters:
          * - The board position of the piece
@@ -155,7 +183,7 @@ class GameBoard
         /*
          * Returns the player's current score
         */
-        int getPlayerScore(Piece::Player player);
+        double getPlayerScore(Piece::Player player);
 };
 
 #endif

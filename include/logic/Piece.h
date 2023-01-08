@@ -37,7 +37,7 @@ class Piece
          * - Using an unordered map to store the player will allow pieces to belong
          *   to any number of people.
          * 
-         * True means the player can move the piece, False means they cannot
+         * true means the player can move the piece, false means they cannot
          *   
         */
         std::unordered_map<Player, bool> players{};
@@ -45,19 +45,24 @@ class Piece
         /*
          * The value of the piece, used to calculate each player's score
         */
-        int value{};
+        double value{};
 
     public:
         /*
          * Constructor: Set piecePosition
         */
-        Piece(Move::position startPos = std::make_pair(0, 0), int pieceValue = 0) 
+        Piece(Move::position startPos = std::make_pair(0, 0), double pieceValue = 0) 
             : piecePosition{ startPos }, value{ pieceValue } {}
         
         /*
          * Returns true if the player can move this piece and false otherwise
         */
         bool getPlayerAccess(Player player);
+        
+        /*
+         * Returns the entire player access map
+        */
+        const std::unordered_map<Player, bool>& getAllPlayersAccess();
 
         /*
          * Adds a player to the piece, meaning that player can now control the piece
@@ -101,12 +106,12 @@ class Piece
         /*
          * Returns the piece's value
         */
-        int getValue();
+        double getValue();
 
         /*
          * Sets the piece's value to the new value
         */
-        void setValue(int newValue);
+        void setValue(double newValue);
 };
 
 #endif
