@@ -26,7 +26,7 @@ class GameBoard
         /*
          * All of the pieces that have been captured so far
         */
-        std::unordered_map<Piece::Player, std::vector<Piece*>&> capturedPieces{};
+        std::unordered_map<Piece::Player, std::vector<Piece*>*> capturedPieces{};
 
         /*
          * Adds starting pieces to the board
@@ -36,9 +36,14 @@ class GameBoard
 
     public:
         /*
-         * Constructor: Sets up the board
+         * Constructor: Initialize captured pieces on heap and sets up the board 
         */
         GameBoard();
+
+        /*
+         * Destructor: Frees captured pieces
+        */
+        ~GameBoard();
 
         /*
          * Determines whether or not a location is on the board
@@ -143,9 +148,9 @@ class GameBoard
         bool movePiece(Move::position prevPosition, Move::position newPosition);
         
         /*
-         * Returns a reference to the vector containing the player's captured pieces
+         * Returns a pointer to the vector containing the player's captured pieces
         */
-        const std::vector<Piece*>& getPlayerCaptures(Piece::Player player);
+        const std::vector<Piece*>* getPlayerCaptures(Piece::Player player);
 
         /*
          * Returns the player's current score

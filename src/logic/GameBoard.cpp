@@ -8,6 +8,16 @@ GameBoard::GameBoard()
     setup();
 }
 
+//See GameBoard.h
+GameBoard::~GameBoard() {
+    // Delete the captured pieces vectors of each player 
+    for(int i = 0; i < static_cast<int>(Piece::Player::last); i++) {
+        if(capturedPieces[static_cast<Piece::Player>(i)] != nullptr) {
+            delete capturedPieces[static_cast<Piece::Player>(i)];
+        }
+    }
+}
+
 // See GameBoard.h
 bool GameBoard::onBoard(Move::position position) 
 {
@@ -94,9 +104,9 @@ bool GameBoard::movePiece(Move::position prevPosition, Move::position newPositio
 }
 
 // See GameBoard.h
-const std::vector<Piece*>& GameBoard::getPlayerCaptures(Piece::Player player)
+const std::vector<Piece*>* GameBoard::getPlayerCaptures(Piece::Player player)
 {
-    return {};
+    return nullptr;
 }
 
 // See GameBoard.h

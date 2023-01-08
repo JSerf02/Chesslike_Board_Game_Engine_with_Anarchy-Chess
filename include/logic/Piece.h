@@ -17,10 +17,11 @@ class Piece
         */
         enum class Player
         {
-            white,
+            white = 0,
             black,
             silver,
-            gold
+            gold,
+            last // Here for iteration, do not use as a player!!
         };
     
     private:
