@@ -41,7 +41,7 @@ TEST_CASE("Game State: Get player - direct player assignment")
 {
     // Create a GameState with 3 players: black, gold, and silver
     std::vector<Player> players = { Player::black, Player::gold, Player::silver };
-    GameState gameState{{}, players};
+    GameState gameState{nullptr, players};
 
     // Make sure the first player is black, the second gold, and the third silver
     CHECK(gameState.getPlayer(0) == Player::black);
@@ -50,11 +50,27 @@ TEST_CASE("Game State: Get player - direct player assignment")
     CHECK(gameState.getPlayer(2) == Player::silver);
 }
 
+TEST_CASE("Game State: Get player - edge cases")
+{
+    // Create a GameState with 0 players
+    std::vector<Player> noPlayers{};
+    GameState gameState{nullptr, noPlayers};
+
+    // Make sure last is returned when trying to get player
+    CHECK(gameState.getPlayer(0) == Player::last);
+    CHECK(gameState.getCrntPlayer() == Player::last);
+
+    // Make sure attempts to change the player fail
+    CHECK(gameState.setCrntPlayer(0) == false);
+    CHECK(gameState.setCrntPlayer(1) == false);
+    CHECK(gameState.setNextPlayer() == false);
+}
+
 TEST_CASE("Game State: Set crnt and next players")
 {
     // Create a GameState with 3 players: black, gold, and silver
     std::vector<Player> players = { Player::black, Player::gold, Player::silver };
-    GameState gameState{{}, players};
+    GameState gameState{ nullptr, players };
 
     // Move 1 player after the current player and ensure values update properly
     CHECK(gameState.setCrntPlayer(1));

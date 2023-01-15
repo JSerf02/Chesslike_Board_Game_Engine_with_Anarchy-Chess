@@ -3,7 +3,19 @@
 using Player = Piece::Player;
 
 // See GameState.h
-GameState:: ~GameState() {
+GameState::GameState(GameBoard *board, std::vector<Player> players) : 
+    gameBoard{ board }, allPlayers{ players }
+{
+    if(allPlayers.size() > 0) {
+        crntPlayer = allPlayers[0];
+    }
+    else {
+        crntPlayer = Player::last;
+    }
+}
+
+// See GameState.h
+GameState::~GameState() {
     if(gameBoard != nullptr){
         delete gameBoard;
     }
@@ -12,19 +24,39 @@ GameState:: ~GameState() {
 // See GameState.h
 Player GameState::getPlayer(int idxOffset)
 {
-    return Player::last;
+    // Make sure there is at least 1 player
+    if(allPlayers.size() == 0) {
+        return Player::last;
+    }
+
+    // Return the requested player
+    return allPlayers[(crntPlayerIdx + idxOffset) % allPlayers.size()];
+}
+
+// See GameState.h
+Player GameState::getCrntPlayer()
+{
+    return crntPlayer;
 }
 
 // See GameState.h
 bool GameState::setCrntPlayer(int idxOffset)
 {
+    // Make sure there is at least 1 player
+    if(allPlayers.size() == 0) {
+        return false;
+    }
+
+    // Move to the requested player and set crntPlayer
+    crntPlayerIdx = (crntPlayerIdx + idxOffset) % allPlayers.size();
+    crntPlayer = allPlayers[crntPlayerIdx];
     return true;
 }
 
 // See GameState.h
 GameBoard* GameState::getBoard()
 {
-    return {};
+    return gameBoard;
 }
 
 // See GameState.h

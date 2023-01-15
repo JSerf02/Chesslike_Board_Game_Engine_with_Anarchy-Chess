@@ -53,13 +53,7 @@ class GameState
          * Constructor: Assigns gameBoard to pre-initialized board object and sets 
          * player information
         */
-        GameState(GameBoard *board = nullptr, std::vector<Player> players = { Player::white }) : 
-            gameBoard{ board }, allPlayers{ players }
-        {
-            if(allPlayers.size() > 0) {
-                crntPlayer = allPlayers[0];
-            }
-        }
+        GameState(GameBoard *board = nullptr, std::vector<Player> players = { Player::white });
 
         /*
          * Destructor: Frees gameBoard
@@ -75,7 +69,7 @@ class GameState
         /*
          * Returns the current player
         */
-        Player getCrntPlayer() { return getPlayer(0); }
+        Player getCrntPlayer();
 
         /*
          * Sets the current player to the player idxOffset spots away from the current
