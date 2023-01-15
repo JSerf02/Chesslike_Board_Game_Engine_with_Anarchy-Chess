@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Piece.cpp.obj.d"
   "CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.obj"
   "CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.obj.d"
+  "CMakeFiles/anarchy-chess_tests.dir/logic/GameStateTest.cpp.obj"
+  "CMakeFiles/anarchy-chess_tests.dir/logic/GameStateTest.cpp.obj.d"
   "CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj"
   "CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj.d"
   "CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.obj"

@@ -3,7 +3,14 @@
 using Player = Piece::Player;
 
 // See GameState.h
-Player getPlayer(int idxOffset)
+GameState:: ~GameState() {
+    if(gameBoard != nullptr){
+        delete gameBoard;
+    }
+}
+
+// See GameState.h
+Player GameState::getPlayer(int idxOffset)
 {
     return Player::last;
 }
@@ -15,7 +22,7 @@ bool GameState::setCrntPlayer(int idxOffset)
 }
 
 // See GameState.h
-const GameBoard& GameState::getBoard()
+GameBoard* GameState::getBoard()
 {
     return {};
 }

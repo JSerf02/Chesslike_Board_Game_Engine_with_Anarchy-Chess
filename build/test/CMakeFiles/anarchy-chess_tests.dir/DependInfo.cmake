@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/jserf/Documents/Anarchy Chess/src/logic/Move.cpp" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Move.cpp.obj" "gcc" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Move.cpp.obj.d"
   "C:/Users/jserf/Documents/Anarchy Chess/src/logic/Piece.cpp" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Piece.cpp.obj" "gcc" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Piece.cpp.obj.d"
   "C:/Users/jserf/Documents/Anarchy Chess/test/logic/GameBoardTest.cpp" "test/CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.obj" "gcc" "test/CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.obj.d"
+  "C:/Users/jserf/Documents/Anarchy Chess/test/logic/GameStateTest.cpp" "test/CMakeFiles/anarchy-chess_tests.dir/logic/GameStateTest.cpp.obj" "gcc" "test/CMakeFiles/anarchy-chess_tests.dir/logic/GameStateTest.cpp.obj.d"
   "C:/Users/jserf/Documents/Anarchy Chess/test/logic/MoveTest.cpp" "test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj" "gcc" "test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj.d"
   "C:/Users/jserf/Documents/Anarchy Chess/test/logic/PieceTest.cpp" "test/CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.obj" "gcc" "test/CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.obj.d"
   "C:/Users/jserf/Documents/Anarchy Chess/test/test.cpp" "test/CMakeFiles/anarchy-chess_tests.dir/test.cpp.obj" "gcc" "test/CMakeFiles/anarchy-chess_tests.dir/test.cpp.obj.d"

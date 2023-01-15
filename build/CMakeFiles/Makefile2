@@ -113,12 +113,12 @@ test/clean: test/CMakeFiles/anarchy-chess_tests.dir/clean
 test/CMakeFiles/anarchy-chess_tests.dir/all:
 	$(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/depend
 	$(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=7,8,9,10,11,12,13,14,15 "Built target anarchy-chess_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=7,8,9,10,11,12,13,14,15,16 "Built target anarchy-chess_tests"
 .PHONY : test/CMakeFiles/anarchy-chess_tests.dir/all
 
 # Build rule for subdir invocation for target.
 test/CMakeFiles/anarchy-chess_tests.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" 9
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 test/CMakeFiles/anarchy-chess_tests.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" 0
 .PHONY : test/CMakeFiles/anarchy-chess_tests.dir/rule

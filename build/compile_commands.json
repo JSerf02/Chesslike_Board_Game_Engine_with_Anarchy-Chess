@@ -40,6 +40,11 @@
   "file": "C:/Users/jserf/Documents/Anarchy Chess/test/logic/GameBoardTest.cpp"
 },
 {
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\logic\\GameStateTest.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\test\\logic\\GameStateTest.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/test/logic/GameStateTest.cpp"
+},
+{
   "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
   "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\helloworld.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\helloworld.cpp\"",
   "file": "C:/Users/jserf/Documents/Anarchy Chess/src/helloworld.cpp"

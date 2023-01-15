@@ -22,19 +22,21 @@ class GameState
     private:
         /*
          * The board representing the current game
+         * - Memory for this board is managed by this class, so it MUST be established
+         *   on the heap via new
         */
-        GameBoard gameBoard {};
+        GameBoard *gameBoard{ nullptr };
 
         /*
          * A list of all of the possible players in the game in the order they will
          * play
         */
-        std::vector<Player> allPlayers {};
+        std::vector<Player> allPlayers{};
 
         /*
          * The current player
         */
-        Player crntPlayer {};
+        Player crntPlayer{};
 
         /*
          * The index of the current player in allPlayers
@@ -51,13 +53,18 @@ class GameState
          * Constructor: Assigns gameBoard to pre-initialized board object and sets 
          * player information
         */
-        GameState(GameBoard *board, std::vector<Player> players = { Player::white }) : 
-            gameBoard{ *board }, allPlayers{ players }
+        GameState(GameBoard *board = nullptr, std::vector<Player> players = { Player::white }) : 
+            gameBoard{ board }, allPlayers{ players }
         {
             if(allPlayers.size() > 0) {
                 crntPlayer = allPlayers[0];
             }
         }
+
+        /*
+         * Destructor: Frees gameBoard
+        */
+        ~GameState();
 
         /*
          * Returns the player idxOffset away from the current player
@@ -93,7 +100,7 @@ class GameState
         /*
          * Returns a reference to the gameboard
         */
-        const GameBoard& getBoard();
+        GameBoard* getBoard();
 
         /*
          * Returns the board positions of all of the pieces controlled by a given player

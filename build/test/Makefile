@@ -249,6 +249,30 @@ logic/GameBoardTest.cpp.s:
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.s
 .PHONY : logic/GameBoardTest.cpp.s
 
+logic/GameStateTest.obj: logic/GameStateTest.cpp.obj
+.PHONY : logic/GameStateTest.obj
+
+# target to build an object file
+logic/GameStateTest.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/logic/GameStateTest.cpp.obj
+.PHONY : logic/GameStateTest.cpp.obj
+
+logic/GameStateTest.i: logic/GameStateTest.cpp.i
+.PHONY : logic/GameStateTest.i
+
+# target to preprocess a source file
+logic/GameStateTest.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/logic/GameStateTest.cpp.i
+.PHONY : logic/GameStateTest.cpp.i
+
+logic/GameStateTest.s: logic/GameStateTest.cpp.s
+.PHONY : logic/GameStateTest.s
+
+# target to generate assembly for a file
+logic/GameStateTest.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/logic/GameStateTest.cpp.s
+.PHONY : logic/GameStateTest.cpp.s
+
 logic/MoveTest.obj: logic/MoveTest.cpp.obj
 .PHONY : logic/MoveTest.obj
 
@@ -345,6 +369,9 @@ help:
 	@echo ... logic/GameBoardTest.obj
 	@echo ... logic/GameBoardTest.i
 	@echo ... logic/GameBoardTest.s
+	@echo ... logic/GameStateTest.obj
+	@echo ... logic/GameStateTest.i
+	@echo ... logic/GameStateTest.s
 	@echo ... logic/MoveTest.obj
 	@echo ... logic/MoveTest.i
 	@echo ... logic/MoveTest.s
