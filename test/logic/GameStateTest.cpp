@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <algorithm>
 
 #include "doctest.h"
 #include "Move.h"
@@ -86,3 +87,36 @@ TEST_CASE("Game State: Set current and next players")
     CHECK(gameState.getCrntPlayer() == Player::gold);
 }
 
+TEST_CASE("Game State: Get pieces controlled by player")
+{
+    // Create a gameBoard
+    GameBoard* gameBoard = new GameBoard{};
+
+    // Add 3 white pieces and 2 black piecces to the board
+    Piece* whitePiece1 = new Piece{Player::white};
+    Piece* whitePiece2 = new Piece{Player::white, std::make_pair(1, 0)};
+    Piece* whitePiece3 = new Piece{Player::white, std::make_pair(2, 0)};
+    Piece* blackPiece1 = new Piece{Player::black, std::make_pair(0, 1)};
+    Piece* blackPiece2 = new Piece{Player::black, std::make_pair(0, 2)};
+    CHECK(gameBoard->addPieces({ whitePiece1, whitePiece2, whitePiece3, blackPiece1, blackPiece2 }));
+
+    // Create a GameState with 2 players: white and black
+    GameState gameState{ gameBoard, { Player::white, Player::black } };
+
+    // Get the white and black pieces and also get the pieces of the current player (should be white)
+    std::vector<Move::position> whitePieces = gameState.getPiecesOfPlayer(Player::white);
+    std::vector<Move::position> crntPlayerPieces = gameState.getPiecesOfCrntPlayer();
+    std::vector<Move::position> blackPieces = gameState.getPiecesOfPlayer(Player::black);
+
+    // Make sure pieces were properly returned
+    for(int i = 0; i <=2; i++) { // (0, 0), (1, 0), and (2, 0) are in whitePieces and crntPlayerPieces
+        CHECK(std::find(whitePieces.begin(), whitePieces.end(), std::make_pair(i, 0)) != whitePieces.end());
+        CHECK(std::find(crntPlayerPieces.begin(), crntPlayerPieces.end(), std::make_pair(i, 0)) != crntPlayerPieces.end());
+        CHECK(std::find(blackPieces.begin(), blackPieces.end(), std::make_pair(i, 0)) == blackPieces.end());
+    }
+    for(int j = 1; j <= 2; j++) { // (0, 1), (0, 2) are in blackPieces
+        CHECK(std::find(whitePieces.begin(), whitePieces.end(), std::make_pair(0, j)) == whitePieces.end());
+        CHECK(std::find(crntPlayerPieces.begin(), crntPlayerPieces.end(), std::make_pair(0, j)) == crntPlayerPieces.end());
+        CHECK(std::find(blackPieces.begin(), blackPieces.end(), std::make_pair(0, j)) != blackPieces.end());
+    }
+}

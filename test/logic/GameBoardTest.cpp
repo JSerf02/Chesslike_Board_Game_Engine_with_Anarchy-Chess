@@ -99,24 +99,42 @@ TEST_CASE("Game Board: Get piece")
 TEST_CASE("Game Board: Add Pieces")
 {
     // Create a board
-    GameBoard board{};
+    PositiveXBoard xBoard{};
 
     // Add 2 pieces to the board
     Piece* piece1 = new Piece{};
     Piece* piece2 = new Piece{std::make_pair(1, 0)};
     std::vector<Piece*> pieces {piece1, piece2};
-    CHECK(board.addPieces(pieces));
+    CHECK(xBoard.addPieces(pieces));
 
     // Make sure both pieces are properly returned
-    CHECK(board.getPiece(0, 0) == piece1);
-    CHECK(board.getPiece(std::make_pair(0, 0)) == piece1);
-    CHECK(board.getPiece(1, 0) == piece2);
-    CHECK(board.getPiece(std::make_pair(1, 0)) == piece2);
+    CHECK(xBoard.getPiece(0, 0) == piece1);
+    CHECK(xBoard.getPiece(std::make_pair(0, 0)) == piece1);
+    CHECK(xBoard.getPiece(1, 0) == piece2);
+    CHECK(xBoard.getPiece(std::make_pair(1, 0)) == piece2);
 
     // Make sure other positions still have no pieces
-    CHECK(board.getPiece(2, 0) == nullptr);
-    CHECK(board.getPiece(std::make_pair(2, 0)) == nullptr);
+    CHECK(xBoard.getPiece(2, 0) == nullptr);
+    CHECK(xBoard.getPiece(std::make_pair(2, 0)) == nullptr);
 
+    // Make sure adding 2 pieces to the same position fails and adds only the first one
+    Piece* samePiece1 = new Piece{std::make_pair(3, 0)};
+    Piece* samePiece2 = new Piece{std::make_pair(3, 0)};
+    CHECK(xBoard.addPieces( {samePiece1, samePiece2} ) == false);
+    CHECK(xBoard.getPiece(3, 0) == samePiece1);
+
+    // Make sure adding a piece that's not on the board fails and that adding stops after
+    // a single add fails
+    Piece* legalPiece1 = new Piece{std::make_pair(4, 0)};
+    Piece* illegalPiece = new Piece{std::make_pair(-1, 0)};
+    Piece* legalPiece2 = new Piece{std::make_pair(5, 0)};
+    CHECK(xBoard.addPieces({ legalPiece1, illegalPiece, legalPiece2 }) == false);
+    CHECK(xBoard.getPiece(4, 0) == legalPiece1);
+    CHECK(xBoard.getPiece(5, 0) == nullptr);
+
+    delete samePiece2;
+    delete illegalPiece;
+    delete legalPiece2;
 }
 
 TEST_CASE("Game Board: Remove piece") {
