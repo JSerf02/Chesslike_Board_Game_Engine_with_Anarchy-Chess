@@ -51,8 +51,9 @@ class Piece
         /*
          * Constructor: Set piecePosition
         */
-        Piece(Move::position startPos = std::make_pair(0, 0), double pieceValue = 0) 
-            : piecePosition{ startPos }, value{ pieceValue } {}
+        Piece(Move::position startPos = std::make_pair(0, 0), double pieceValue = 0); 
+        Piece(std::vector<Player> newPlayers, Move::position startPos = std::make_pair(0, 0), double pieceValue = 0);
+        Piece(Player newPlayer, Move::position startPos = std::make_pair(0, 0), double pieceValue = 0); 
         
         /*
          * Returns true if the player can move this piece and false otherwise

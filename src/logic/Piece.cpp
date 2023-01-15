@@ -6,6 +6,20 @@
 using Player = Piece::Player;
 
 // See Piece.h
+Piece::Piece(Move::position startPos, double pieceValue) 
+    : piecePosition{ startPos }, value{ pieceValue } { }
+Piece::Piece(std::vector<Player> newPlayers, Move::position startPos, double pieceValue) 
+    : piecePosition{ startPos }, value{ pieceValue } 
+{
+    addPlayers(newPlayers);
+}
+Piece::Piece(Player newPlayer, Move::position startPos, double pieceValue) 
+    : piecePosition{ startPos }, value{ pieceValue } 
+{
+    addPlayer(newPlayer);
+}
+
+// See Piece.h
 bool Piece::getPlayerAccess(Player player)
 {
     return players[player];

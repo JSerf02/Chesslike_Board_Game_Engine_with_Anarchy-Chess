@@ -47,8 +47,28 @@ TEST_CASE("Piece: Add multiple players")
     CHECK(testPiece.getPlayerAccess(Player::white));
     CHECK(testPiece.getPlayerAccess(Player::black));
     CHECK(testPiece.getPlayerAccess(Player::silver) == false);
-    CHECK(testPiece.getPlayerAccess(Player::gold) == false);
-    
+    CHECK(testPiece.getPlayerAccess(Player::gold) == false); 
+}
+
+TEST_CASE("Piece: Add players through constructor")
+{
+    // Create a new piece with 2 players
+    Piece testPiece{ { Player::white, Player::black } };
+
+    // Check that access was given to both players and no one else
+    CHECK(testPiece.getPlayerAccess(Player::white));
+    CHECK(testPiece.getPlayerAccess(Player::black));
+    CHECK(testPiece.getPlayerAccess(Player::silver) == false);
+    CHECK(testPiece.getPlayerAccess(Player::gold) == false); 
+
+    // Create a new piece with 1 player
+    Piece testPiece2{ Player::white };
+
+    // Check that access was given only to the intended players
+    CHECK(testPiece2.getPlayerAccess(Player::white));
+    CHECK(testPiece2.getPlayerAccess(Player::black) == false);
+    CHECK(testPiece2.getPlayerAccess(Player::silver) == false);
+    CHECK(testPiece2.getPlayerAccess(Player::gold) == false); 
 }
 
 TEST_CASE("Piece: Get all players access") 
