@@ -24,6 +24,14 @@ void Piece::addPlayer(Player newPlayer)
 }
 
 // See Piece.h
+void Piece::addPlayers(std::vector<Player> newPlayers) 
+{
+    for(Player player : newPlayers) {
+        addPlayer(player);
+    }
+}
+
+// See Piece.h
 void Piece::removePlayer(Player player)
 {
     players[player] = false;

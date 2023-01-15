@@ -7,7 +7,7 @@
 #include "Piece.h"
 #include "TestBoard.h"
 
-TEST_CASE("Game board: On board for GameBoard and PositiveXBoard classes") 
+TEST_CASE("Game Board: On board for GameBoard and PositiveXBoard classes") 
 {
     // Create positions for testing
     Move::position correctPosition = std::make_pair(5, 5); 
@@ -32,14 +32,14 @@ TEST_CASE("Game board: On board for GameBoard and PositiveXBoard classes")
     */
 }
 
-TEST_CASE("Game board: Add piece - proper return values")
+TEST_CASE("Game Board: Add piece - proper return values")
 {
     // Create an xBoard so there is a possibility of pieces not being on the board
     PositiveXBoard xBoard{};
 
     // Create a piece on the board and a piece that cannot be on the board
-    Piece *correctPiece = new Piece{};
-    Piece *incorrectPiece = new Piece{std::make_pair(-5, 1)};
+    Piece* correctPiece = new Piece{};
+    Piece* incorrectPiece = new Piece{std::make_pair(-5, 1)};
     REQUIRE(correctPiece != nullptr);
     REQUIRE(incorrectPiece != nullptr);
 
@@ -52,7 +52,7 @@ TEST_CASE("Game board: Add piece - proper return values")
     
 }
 
-TEST_CASE("Game board: Occupied on board, unoccupied on board, and add piece updating internal structures")
+TEST_CASE("Game Board: Occupied on board, unoccupied on board, and add piece updating internal structures")
 {
     // Create an xBoard so there is a possibility of pieces not being on the board
     PositiveXBoard xBoard{};
@@ -68,7 +68,7 @@ TEST_CASE("Game board: Occupied on board, unoccupied on board, and add piece upd
     CHECK(xBoard.unoccupiedOnBoard(std::make_pair(2, 7)));
     
     // Add a piece to the board
-    Piece *piece = new Piece{};
+    Piece* piece = new Piece{};
     CHECK(xBoard.addPiece(piece));
 
     // Make sure the piece is reported as on the board
@@ -78,22 +78,49 @@ TEST_CASE("Game board: Occupied on board, unoccupied on board, and add piece upd
     CHECK(xBoard.unoccupiedOnBoard(std::make_pair(0, 0)) == false);
 }
 
-TEST_CASE("Game board: Get piece")
+TEST_CASE("Game Board: Get piece")
 {
-    // Create an xBoard so there is a possibility of pieces not being on the board
+    // Create a board
     GameBoard board{};
     
     // Add a piece to the board
-    Piece *piece = new Piece{};
+    Piece* piece = new Piece{};
     CHECK(board.addPiece(piece));
 
     // Make sure the piece is properly returned
     CHECK(board.getPiece(0, 0) == piece);
     CHECK(board.getPiece(std::make_pair(0, 0)) == piece);
+
+    // Make sure other positions still have no pieces
+    CHECK(board.getPiece(1, 0) == nullptr);
+    CHECK(board.getPiece(std::make_pair(1, 0)) == nullptr);
 }
 
-TEST_CASE("Game board: Remove piece") {
+TEST_CASE("Game Board: Add Pieces")
+{
     // Create a board
+    GameBoard board{};
+
+    // Add 2 pieces to the board
+    Piece* piece1 = new Piece{};
+    Piece* piece2 = new Piece{std::make_pair(1, 0)};
+    std::vector<Piece*> pieces {piece1, piece2};
+    CHECK(board.addPieces(pieces));
+
+    // Make sure both pieces are properly returned
+    CHECK(board.getPiece(0, 0) == piece1);
+    CHECK(board.getPiece(std::make_pair(0, 0)) == piece1);
+    CHECK(board.getPiece(1, 0) == piece2);
+    CHECK(board.getPiece(std::make_pair(1, 0)) == piece2);
+
+    // Make sure other positions still have no pieces
+    CHECK(board.getPiece(2, 0) == nullptr);
+    CHECK(board.getPiece(std::make_pair(2, 0)) == nullptr);
+
+}
+
+TEST_CASE("Game Board: Remove piece") {
+    // Create an xBoard so there is a possibility of pieces not being on the board
     PositiveXBoard xBoard{};
 
     // Check that edge cases where nothing is removed correctly return false
@@ -101,8 +128,8 @@ TEST_CASE("Game board: Remove piece") {
     CHECK(xBoard.removePiece(std::make_pair(-5, 1)) == false);
 
     // Add pieces to the board and make sure they are properly added
-    Piece *piece1 = new Piece{};
-    Piece *piece2 = new Piece{std::make_pair(1, 1)};
+    Piece* piece1 = new Piece{};
+    Piece* piece2 = new Piece{std::make_pair(1, 1)};
     CHECK(xBoard.addPiece(piece1));
     CHECK(xBoard.addPiece(piece2));
     CHECK(xBoard.occupiedOnBoard(0, 0));
@@ -116,13 +143,13 @@ TEST_CASE("Game board: Remove piece") {
     CHECK(xBoard.occupiedOnBoard(1, 1) == false);
 }
 
-TEST_CASE("Game board: Move pieces - default usage") 
+TEST_CASE("Game Board: Move pieces - default usage") 
 {
     // Create an xBoard so there is a possibility of pieces not being on the board
     PositiveXBoard xBoard{};
 
     // Add a new piece to the board at (0, 0)
-    Piece *piece = new Piece{};
+    Piece* piece = new Piece{};
     xBoard.addPiece(piece);
     CHECK(piece->getPosition() == std::make_pair(0, 0));
     CHECK(xBoard.occupiedOnBoard(0, 0));
@@ -149,7 +176,7 @@ TEST_CASE("Game board: Move pieces - default usage")
     }
 }
 
-TEST_CASE("Game board: Move pieces - error conditions")
+TEST_CASE("Game Board: Move pieces - error conditions")
 {
     // Create an xBoard so there is a possibility of pieces not being on the board
     PositiveXBoard xBoard{};
@@ -161,8 +188,8 @@ TEST_CASE("Game board: Move pieces - error conditions")
     CHECK(xBoard.movePiece(std::make_pair(2, 2), std::make_pair(2, 2)) == false);
 
     // Add two more pieces to the board
-    Piece *piece1 = new Piece{};
-    Piece *piece2 = new Piece{std::make_pair(1, 1)};
+    Piece* piece1 = new Piece{};
+    Piece* piece2 = new Piece{std::make_pair(1, 1)};
     xBoard.addPiece(piece1);
     xBoard.addPiece(piece2);
 
@@ -180,7 +207,7 @@ TEST_CASE("Game board: Move pieces - error conditions")
 }
 
 using Player = Piece::Player;
-TEST_CASE("Game board: Get default player captures")
+TEST_CASE("Game Board: Get default player captures")
 {
     // Create a new GameBoard object
     GameBoard board{{Player::white, Player::silver, Player::gold}};
@@ -197,7 +224,7 @@ TEST_CASE("Game board: Get default player captures")
     CHECK(board.getPlayerCaptures(Player::gold)->size() == 0);
 }
 
-TEST_CASE("Game board: Capture pieces and get updated player captures")
+TEST_CASE("Game Board: Capture pieces and get updated player captures")
 {
     // Create an xBoard so there is a possibility of pieces not being on the board
     PositiveXBoard xBoard{{Player::white, Player::black, Player::silver, Player::gold}};
@@ -207,8 +234,8 @@ TEST_CASE("Game board: Capture pieces and get updated player captures")
     CHECK(xBoard.capturePiece(std::make_pair(-1, 5)) == false);
 
     // Add 2 pieces to the board
-    Piece *piece1 = new Piece{};
-    Piece *piece2 = new Piece{std::make_pair(1, 1)};
+    Piece* piece1 = new Piece{};
+    Piece* piece2 = new Piece{std::make_pair(1, 1)};
     CHECK(xBoard.addPiece(piece1));
     CHECK(xBoard.addPiece(piece2));
     piece1->addPlayer(Player::white); // piece1 belongs to white
@@ -229,7 +256,7 @@ TEST_CASE("Game board: Capture pieces and get updated player captures")
     CHECK(xBoard.getPlayerCaptures(Player::black)->size() == 2);
 }
 
-TEST_CASE("Game board: Get default player score")
+TEST_CASE("Game Board: Get default player score")
 {
     // Create a new GameBoard object
     GameBoard board{{Player::white, Player::black, Player::silver, Player::gold}};
@@ -241,14 +268,14 @@ TEST_CASE("Game board: Get default player score")
     CHECK(board.getPlayerScore(Player::gold) == 0);
 }
 
-TEST_CASE("Game board: Get updated player score")
+TEST_CASE("Game Board: Get updated player score")
 {
     // Create a new GameBoard object
     GameBoard board{{Player::white, Player::black, Player::silver, Player::gold}};
     
     // Create a white piece and a black piece and capture them both
-    Piece *whitePiece = new Piece{std::make_pair(0, 0), 5};
-    Piece *blackPiece = new Piece{std::make_pair(3, 3), 7};
+    Piece* whitePiece = new Piece{std::make_pair(0, 0), 5};
+    Piece* blackPiece = new Piece{std::make_pair(3, 3), 7};
     CHECK(board.addPiece(whitePiece));
     CHECK(board.addPiece(blackPiece));
     whitePiece->addPlayer(Player::white);

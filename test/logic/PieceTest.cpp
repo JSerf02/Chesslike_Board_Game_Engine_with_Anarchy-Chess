@@ -35,6 +35,22 @@ TEST_CASE("Piece: Get player access with added pieces")
     CHECK(testPiece.getPlayerAccess(Player::gold) == false);
 }
 
+TEST_CASE("Piece: Add multiple players")
+{
+    // Create a new piece
+    Piece testPiece{};
+
+    // Add 2 players to the piece
+    testPiece.addPlayers({ Player::white, Player::black });
+
+    // Check that access was given to both players and no one else
+    CHECK(testPiece.getPlayerAccess(Player::white));
+    CHECK(testPiece.getPlayerAccess(Player::black));
+    CHECK(testPiece.getPlayerAccess(Player::silver) == false);
+    CHECK(testPiece.getPlayerAccess(Player::gold) == false);
+    
+}
+
 TEST_CASE("Piece: Get all players access") 
 {
     // Create a new piece

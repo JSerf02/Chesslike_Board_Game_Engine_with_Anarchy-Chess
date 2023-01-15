@@ -117,6 +117,17 @@ class GameBoard
         bool addPiece(Piece* piece);
 
         /*
+         * Adds all pieces in the inputted vector to the board
+         * - Pieces MUST be on the heap!
+         * - Will stop the moment there is a problem adding any piece
+         * 
+         * Returns:
+         * - true if successfully added
+         * - false if there was an error adding, such as with the piece's position
+        */
+        bool addPieces(std::vector<Piece*> pieces);
+
+        /*
          * Retrieves a piece from a position
          * 
          * Parameters:

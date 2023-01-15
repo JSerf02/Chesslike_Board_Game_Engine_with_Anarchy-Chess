@@ -70,6 +70,11 @@ class Piece
         void addPlayer(Player newPlayer);
 
         /*
+         * Adds all players in the inputted vector to the piece
+        */
+        void addPlayers(std::vector<Player> newPlayers);
+
+        /*
          * Removes a player from the piece, meaning that player can no longer control 
          * the piece
         */

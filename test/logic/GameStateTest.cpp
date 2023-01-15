@@ -66,7 +66,7 @@ TEST_CASE("Game State: Get player - edge cases")
     CHECK(gameState.setNextPlayer() == false);
 }
 
-TEST_CASE("Game State: Set crnt and next players")
+TEST_CASE("Game State: Set current and next players")
 {
     // Create a GameState with 3 players: black, gold, and silver
     std::vector<Player> players = { Player::black, Player::gold, Player::silver };
@@ -85,3 +85,4 @@ TEST_CASE("Game State: Set crnt and next players")
     CHECK(gameState.setNextPlayer());
     CHECK(gameState.getCrntPlayer() == Player::gold);
 }
+

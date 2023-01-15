@@ -82,6 +82,17 @@ bool GameBoard::addPiece(Piece* piece)
 }
 
 // See GameBoard.h
+bool GameBoard::addPieces(std::vector<Piece*> pieces)
+{
+    for(Piece* piece : pieces) {
+        if(!addPiece(piece)){
+            return false;
+        }
+    }
+    return true;
+}
+
+// See GameBoard.h
 Piece* GameBoard::getPiece(int x, int y)
 {
     return getPiece(std::make_pair(x, y));
