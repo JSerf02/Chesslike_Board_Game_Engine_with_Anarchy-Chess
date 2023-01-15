@@ -48,7 +48,7 @@ class GameBoard
         /*
          * Constructor: Initialize captured piece vectors and set up the board 
         */
-        GameBoard(std::vector<Piece::Player> players  = {});
+        GameBoard(std::vector<Piece::Player> players = {});
 
         /*
          * Destructor: Frees all pieces and captured piece vectors

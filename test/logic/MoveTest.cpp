@@ -4,6 +4,7 @@
 #include "doctest.h"
 #include "Move.h"
 #include "GameBoard.h"
+#include "GameState.h"
 
 TEST_CASE("Move: Get and set priority") 
 {
@@ -26,7 +27,7 @@ TEST_CASE("Move: Get and set priority")
  *   modifying the board because the board module is not written yet
 */
 static bool testCallbackCalled = false;
-void testCallback(GameBoard& board) 
+void testCallback(GameState& gameState) 
 {
     testCallbackCalled = true;
 }
@@ -36,18 +37,19 @@ TEST_CASE("Move: Set and call onMove() callback")
     // Create a Move object
     Move testMove{};
 
-    // Create an empty board to use as a parameter for the onMove functions
-    GameBoard testBoard{};
+    // Create an empty GameState to use as a parameter for the onMove functions
+    GameBoard board{};
+    GameState testState{&board};
 
     // Make sure nothing is called, nothing crashes, and false is returned
     // when the default (null) onMove() is called
-    CHECK(testMove.callOnMove(testBoard) == false);
+    CHECK(testMove.callOnMove(testState) == false);
     CHECK(testCallbackCalled == false);
 
     // Set testCallback as the new onMove() and make sure it is called and that 
     // callOnMove() returns true
     testMove.setOnMove(testCallback);
-    CHECK(testMove.callOnMove(testBoard) == true);
+    CHECK(testMove.callOnMove(testState) == true);
     CHECK(testCallbackCalled == true);
 }
 

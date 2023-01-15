@@ -153,6 +153,30 @@ __/src/logic/GameBoard.cpp.s:
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.s
 .PHONY : __/src/logic/GameBoard.cpp.s
 
+__/src/logic/GameState.obj: __/src/logic/GameState.cpp.obj
+.PHONY : __/src/logic/GameState.obj
+
+# target to build an object file
+__/src/logic/GameState.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameState.cpp.obj
+.PHONY : __/src/logic/GameState.cpp.obj
+
+__/src/logic/GameState.i: __/src/logic/GameState.cpp.i
+.PHONY : __/src/logic/GameState.i
+
+# target to preprocess a source file
+__/src/logic/GameState.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameState.cpp.i
+.PHONY : __/src/logic/GameState.cpp.i
+
+__/src/logic/GameState.s: __/src/logic/GameState.cpp.s
+.PHONY : __/src/logic/GameState.s
+
+# target to generate assembly for a file
+__/src/logic/GameState.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameState.cpp.s
+.PHONY : __/src/logic/GameState.cpp.s
+
 __/src/logic/Move.obj: __/src/logic/Move.cpp.obj
 .PHONY : __/src/logic/Move.obj
 
@@ -309,6 +333,9 @@ help:
 	@echo ... __/src/logic/GameBoard.obj
 	@echo ... __/src/logic/GameBoard.i
 	@echo ... __/src/logic/GameBoard.s
+	@echo ... __/src/logic/GameState.obj
+	@echo ... __/src/logic/GameState.i
+	@echo ... __/src/logic/GameState.s
 	@echo ... __/src/logic/Move.obj
 	@echo ... __/src/logic/Move.i
 	@echo ... __/src/logic/Move.s

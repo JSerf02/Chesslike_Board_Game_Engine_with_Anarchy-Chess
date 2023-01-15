@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "Move.h"
-#include "GameBoard.h"
+#include "GameState.h"
 
 using position = Move::position;
 
@@ -34,13 +34,13 @@ void Move::setPriority(int newPriority)
 }
 
 // See Move.h
-void Move::setOnMove(void (*onMoveCallback)(GameBoard&)) 
+void Move::setOnMove(void (*onMoveCallback)(GameState&)) 
 {
     onMove = onMoveCallback;
 }
 
 // See Move.h
-bool Move::callOnMove(GameBoard& board)
+bool Move::callOnMove(GameState& gameState)
 {
     // Return if callback is null
     if(!onMove) {
@@ -48,7 +48,7 @@ bool Move::callOnMove(GameBoard& board)
     }
 
     // Call onMove
-    (*onMove)(board);
+    (*onMove)(gameState);
     return true;
 }
 

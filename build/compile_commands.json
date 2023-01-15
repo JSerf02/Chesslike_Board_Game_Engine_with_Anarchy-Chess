@@ -21,6 +21,11 @@
 },
 {
   "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\__\\src\\logic\\GameState.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\GameState.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/GameState.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
   "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\logic\\MoveTest.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\test\\logic\\MoveTest.cpp\"",
   "file": "C:/Users/jserf/Documents/Anarchy Chess/test/logic/MoveTest.cpp"
 },
@@ -53,5 +58,10 @@
   "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
   "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\logic\\GameBoard.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\GameBoard.cpp\"",
   "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/GameBoard.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\logic\\GameState.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\GameState.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/GameState.cpp"
 }
 ]

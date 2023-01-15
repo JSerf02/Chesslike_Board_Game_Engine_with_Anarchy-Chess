@@ -20,8 +20,8 @@ include_directories(${INCLUDE_LOGIC_DIR})
 include_directories(${LIB_DIR})
 
 set(HEADER_FILES ${INCLUDE_LOGIC_DIR}/Piece.h ${INCLUDE_LOGIC_DIR}/GameBoard.h 
-    ${INCLUDE_LOGIC_DIR}/Move.h ${LIB_DIR}/HashPair.h)
-set(SRC_FILES ${SOURCE_LOGIC_DIR}/Move.cpp ${SOURCE_LOGIC_DIR}/Piece.cpp ${SOURCE_LOGIC_DIR}/GameBoard.cpp)
+    ${INCLUDE_LOGIC_DIR}/Move.h ${INCLUDE_LOGIC_DIR}/GameState.h ${LIB_DIR}/HashPair.h)
+set(SRC_FILES ${SOURCE_LOGIC_DIR}/Move.cpp ${SOURCE_LOGIC_DIR}/Piece.cpp ${SOURCE_LOGIC_DIR}/GameBoard.cpp ${SOURCE_LOGIC_DIR}/GameState.cpp)
 
 set(CMAKE_CXX_STANDARD 20)
 

@@ -1,3 +1,6 @@
+#ifndef HASHPAIR_H
+#define HASHPAIR_H
+
 #include <functional>
 
 // Credit to YoungForest on Stack Overflow for this solution https://stackoverflow.com/a/62035742
@@ -58,3 +61,5 @@ namespace hash_tuple {
         }
     };
 }
+
+#endif

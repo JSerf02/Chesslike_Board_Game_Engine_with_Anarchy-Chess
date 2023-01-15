@@ -5,7 +5,7 @@
 #include <unordered_map>
 
 #include "Move.h"
-class GameBoard;
+class GameState;
 class Piece
 {
     /*
@@ -93,15 +93,22 @@ class Piece
          * - Implementation is specific to each type of piece
         */
         // Default initialization for testing only
-        virtual std::vector<Move> GenerateMoves(const GameBoard& gameBoard) { return {}; } 
+        virtual std::vector<Move> GenerateMoves(const GameState& gameState) { return {}; } 
 
         /*
-         * Returns a vector containing every position this piece is attacking
+         * Returns a vector all of the moves that attack spaces. 
+         * - In Chess, there is an invariant where every position in the move is 
+         *   dependent on all previous positions in the same move. This is necessary
+         *   for calculating check-preventing moves
+         *   - Ex: A rook on (1, 1) may have an attacking Move containing 
+         *         {(1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8)}.
+         *         In this case, if a piece moves to (1, 5), all pieces in the following 
+         *         set are no longer considered attacked: {(1, 6), (1, 7), (1, 8)}
          *
          * - Implementation is specific to each type of piece
         */
-        // Default initialization for testing
-        virtual std::vector<Move::position> GenerateAttackingSpaces(const GameBoard& gameBoard) { return {}; }
+        // Default initialization for testing only
+        virtual std::vector<Move> GenerateAttackingMoves(const GameState& gameState) { return {}; }
 
         /*
          * Returns the piece's value

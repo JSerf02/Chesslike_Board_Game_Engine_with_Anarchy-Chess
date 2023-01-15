@@ -6,7 +6,7 @@
 #include <vector>
 #include <iostream>
 
-class GameBoard;
+class GameState;
 class Move 
 {
     /*
@@ -31,7 +31,9 @@ class Move
         /*
          * The move's priority (higher means better)
          * - Priority 0: Regular moves
-         * - Priority 10: En Pessant
+         * - Priority 10: En Passant, get out of check
+         * 
+         * Must be positive
         */
         int priority{};
 
@@ -39,13 +41,13 @@ class Move
          * A callback function that is called whenever a player uses one of these moves
          * -- If null, will be ignored
         */
-        void (*onMove)(GameBoard&){ nullptr };
+        void (*onMove)(GameState&){ nullptr };
 
     public:
         /*
          * Constructor: Initialize priority and onMove() callback function
         */
-        Move(int movePriority = 0, void (*onMoveCallback)(GameBoard&) = nullptr) : 
+        Move(int movePriority = 0, void (*onMoveCallback)(GameState&) = nullptr) : 
             priority{movePriority}, onMove{onMoveCallback}{}
         
         /*
@@ -66,20 +68,20 @@ class Move
         /*
          * Changes the onMove() callback to a new callback function
         */
-        void setOnMove(void (*onMoveCallback)(GameBoard&));
+        void setOnMove(void (*onMoveCallback)(GameState&));
 
         /*
          * Calls the onMove() callback function if one is defined
          * - Does nothing if the onMove() callback is null
          * 
          * Parameters:
-         * - board: The GameBoard object of the current game
+         * - gameState: The GameState object of the current game
          * 
          * Returns:
          * - True if the function was called
          * - False if onMove() was null and nothing was called
         */
-        bool callOnMove(GameBoard& board);
+        bool callOnMove(GameState& ganeState);
 
         /*
          * Returns a reference to the positions allowed by this move
