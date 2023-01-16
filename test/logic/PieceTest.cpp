@@ -9,6 +9,9 @@
 #include "GameState.h"
 #include "TestPieces.h"
 
+using namespace testing;
+using namespace logic;
+
 using Player = Piece::Player;
 
 TEST_CASE("Piece: Get player access with default values")

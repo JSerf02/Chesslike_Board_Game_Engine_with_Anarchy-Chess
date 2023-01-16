@@ -6,6 +6,8 @@
 #include "GameBoard.h"
 #include "GameState.h"
 
+using namespace logic;
+
 TEST_CASE("Move: Get and set priority") 
 {
     // Create a Move object

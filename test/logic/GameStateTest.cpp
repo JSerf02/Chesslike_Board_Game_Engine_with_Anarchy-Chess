@@ -10,7 +10,11 @@
 #include "TestPieces.h"
 #include "GameState.h"
 
+using namespace testing;
+using namespace logic;
+
 using Player = Piece::Player;
+
 TEST_CASE("Game State: Initialize and Get Board") 
 {
     // Create an xBoard to distinguish from the default board

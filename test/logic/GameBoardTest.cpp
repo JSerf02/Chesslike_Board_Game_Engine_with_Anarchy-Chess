@@ -7,6 +7,9 @@
 #include "Piece.h"
 #include "TestBoard.h"
 
+using namespace testing;
+using namespace logic;
+
 TEST_CASE("Game Board: On board for GameBoard and PositiveXBoard classes") 
 {
     // Create positions for testing
