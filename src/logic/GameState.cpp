@@ -60,117 +60,151 @@ GameBoard* GameState::getBoard()
 }
 
 // See GameState.h
-std::vector<Move::position> GameState::getPiecesOfPlayer(Player player)
-{
-    return {};
-}
-
-// See GameState.h
 std::vector<Move::position> GameState::getPiecesOfCrntPlayer()
 {
-    return {};
+    return gameBoard->getPiecesOfPlayer(crntPlayer);
 }
 
 // See GameState.h
 int GameState::getMaxPriorityOfPlayer(Player player)
 {
-    return 0;
+    // Get the player's pieces
+    std::vector<Move::position> playerPiecePositions = gameBoard->getPiecesOfPlayer(player);
+
+    // Iterate through the positions to find the maxPriority
+    int maxPriority = 0;
+    for(Move::position position : playerPiecePositions) {
+        Piece* piece = gameBoard->getPiece(position);
+        if(!piece) {
+            continue;
+        }
+        int crntMax = piece->getMaxPriorityOfMoves(*this);
+        if(crntMax > maxPriority) {
+            maxPriority = crntMax;
+        }
+    }
+    return maxPriority;
+}
+int GameState::getMaxPriorityOfPlayer() 
+{
+    return getMaxPriorityOfPlayer(crntPlayer);
 }
 
 // See GameState.h
-int getMaxPriorityOfCrntPlayer()
+std::vector<Move> GameState::getMovesOfPiece(Player player, Move::position start, Move::position end)
 {
-    return 0;
-}
+    Piece* piece = gameBoard->getPiece(start);
+    if(!piece || !piece->getPlayerAccess(player))
+    {
+        return {};
+    }
 
-// See GameState.h
-std::vector<Move> GameState::getPlayerMovesOfPiece(Player player, int startX, int startY, int endX, int endY)
-{
-    return {};
-}
-std::vector<Move> GameState::getPlayerMovesOfPiece(Player player, Move::position start, int endX, int endY)
-{
-    return {};
-}
-std::vector<Move> GameState::getPlayerMovesOfPiece(Player player, int startX, int startY, Move::position end)
-{
-    return {};
-}
-std::vector<Move> GameState::getPlayerMovesOfPiece(Player player, Move::position start, Move::position end)
-{
-    return {};
-}
+    int maxPriority = getMaxPriorityOfPlayer(player);
+    std::vector<Move> allPieceMoves = piece->generateMoves(*this);
+    std::vector<Move> movesToPosition{};
 
-// See GameState.h
+    for(Move move : allPieceMoves) {
+        if(move.getPriority() < maxPriority) {
+            continue;
+        }
+        const std::vector<Move::position>& positions = move.getPositions();
+        if(std::find(positions.begin(), positions.end(), end) != positions.end()) {
+            movesToPosition.push_back(move);
+        }
+    }
+    return movesToPosition;
+}
+std::vector<Move> GameState::getMovesOfPiece(Player player, int startX, int startY, int endX, int endY)
+{
+    return getMovesOfPiece(player, std::make_pair(startX, startY), std::make_pair(endX, endY));
+}
+std::vector<Move> GameState::getMovesOfPiece(Player player, Move::position start, int endX, int endY)
+{
+    return getMovesOfPiece(player, start, std::make_pair(endX, endY));
+}
+std::vector<Move> GameState::getMovesOfPiece(Player player, int startX, int startY, Move::position end)
+{
+    return getMovesOfPiece(player, std::make_pair(startX, startY), end);
+}
 std::vector<Move> GameState::getMovesOfPiece(int startX, int startY, int endX, int endY)
 {
-    return {};
+    return getMovesOfPiece(crntPlayer, std::make_pair(startX, startY), std::make_pair(endX, endY));
 }
 std::vector<Move> GameState::getMovesOfPiece(Move::position start, int endX, int endY)
 {
-    return {};
+    return getMovesOfPiece(crntPlayer, start, std::make_pair(endX, endY));
 }
 std::vector<Move> GameState::getMovesOfPiece(int startX, int startY, Move::position end)
 {
-    return {};
+    return getMovesOfPiece(crntPlayer, std::make_pair(startX, startY), end);
 }
 std::vector<Move> GameState::getMovesOfPiece(Move::position start, Move::position end)
 {
-    return {};
+    return getMovesOfPiece(crntPlayer, start, end);
 }
 
-// See GameState.h
-bool GameState::canPlayerMovePiece(Player player, int startX, int startY, int endX, int endY)
-{
-    return true;
-}
-bool GameState::canPlayerMovePiece(Player player, Move::position start, int endX, int endY)
-{
-    return true;
-}
-bool GameState::canPlayerMovePiece(Player player, int startX, int startY, Move::position end)
-{
-    return true;
-}
-bool GameState::canPlayerMovePiece(Player player, Move::position start, Move::position end)
-{
-    return true;
-}
 
 // See GameState.h
+bool GameState::canMovePiece(Player player, Move::position start, Move::position end)
+{
+    return getMovesOfPiece(player, start, end).size() > 0;
+}
+bool GameState::canMovePiece(Player player, int startX, int startY, int endX, int endY)
+{
+    return canMovePiece(player, std::make_pair(startX, startY), std::make_pair(endX, endY));
+}
+bool GameState::canMovePiece(Player player, Move::position start, int endX, int endY)
+{
+    return canMovePiece(player, start, std::make_pair(endX, endY));
+}
+bool GameState::canMovePiece(Player player, int startX, int startY, Move::position end)
+{
+    return canMovePiece(player, std::make_pair(startX, startY), end);
+}
 bool GameState::canMovePiece(int startX, int startY, int endX, int endY)
 {
-    return true;
+    return canMovePiece(crntPlayer, std::make_pair(startX, startY), std::make_pair(endX, endY));
 }
 bool GameState::canMovePiece(Move::position start, int endX, int endY)
 {
-    return true;
+    return canMovePiece(crntPlayer, start, std::make_pair(endX, endY));
 }
 bool GameState::canMovePiece(int startX, int startY, Move::position end)
 {   
-    return true;
+    return canMovePiece(crntPlayer, std::make_pair(startX, startY), end);
 }
 bool GameState::canMovePiece(Move::position start, Move::position end)
 {
-    return true;
+    return canMovePiece(crntPlayer, start, end);
 }
 
 // See GameState.h
+bool GameState::movePiece(Move::position start, Move::position end, int idx)
+{
+    std::vector<Move> movesToEnd = getMovesOfPiece(start, end);
+    if(idx >= movesToEnd.size()) {
+        return false;
+    }
+    Move crntMove = movesToEnd[idx];
+    crntMove.callOnMove(*this);
+    
+    if(!gameBoard->movePiece(start, end)) {
+        return false;
+    }
+    setNextPlayer();
+    return true;
+}
 bool GameState::movePiece(int startX, int startY, int endX, int endY, int idx)
 {
-    return true;
+    return movePiece(std::make_pair(startX, startY), std::make_pair(endX, endY), idx);
 }
 bool GameState::movePiece(Move::position start, int endX, int endY, int idx)
 {
-    return true;
+    return movePiece(start, std::make_pair(endX, endY), idx);
 }
 bool GameState::movePiece(int startX, int startY, Move::position end, int idx)
 {
-    return true;
-}
-bool GameState::movePiece(Move::position start, Move::position end, int idx)
-{
-    return true;
+    return movePiece(std::make_pair(startX, startY), end, idx);
 }
 
 // See GameState.h

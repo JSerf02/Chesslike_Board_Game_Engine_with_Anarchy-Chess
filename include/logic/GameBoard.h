@@ -187,6 +187,11 @@ class GameBoard
         bool movePiece(Move::position prevPosition, Move::position newPosition);
         
         /*
+         * Returns the board positions of all of the pieces controlled by a given player
+        */
+        std::vector<Move::position> getPiecesOfPlayer(Piece::Player player);
+        
+        /*
          * Returns a pointer to the vector containing the player's captured pieces
         */
         const std::vector<Piece*>* getPlayerCaptures(Piece::Player player);

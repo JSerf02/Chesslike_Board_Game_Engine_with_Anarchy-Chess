@@ -71,6 +71,23 @@ void Piece::changePosition(Move::position newPosition)
 }
 
 // See Piece.h
+int Piece::getMaxPriorityOfMoves(GameState& gameState)
+{
+    // Get all of the piece's moves
+    std::vector<Move> moves = generateMoves(gameState);
+
+    // Iterate through the moves to find the max priority
+    int maxPriority = 0;
+    for(Move move : moves) {
+        int curPriority = move.getPriority();
+        if(curPriority > maxPriority) {
+            maxPriority = curPriority;
+        }
+    }
+    return maxPriority;
+}
+
+// See Piece.h
 double Piece::getValue()
 {
     return value;

@@ -59,9 +59,17 @@ const std::vector<position>& Move::getPositions()
 }
 
 // See Move.h
-void Move::addPosition(position newPos) 
+void Move::addPosition(position newPosition) 
 {
-    positions.push_back(newPos);
+    positions.push_back(newPosition);
+}
+
+// See Move.h
+void Move::addPositions(std::vector<position> newPositions)
+{
+    for(position newPosition : newPositions) {
+        addPosition(newPosition);
+    }
 }
 
 // See Move.h

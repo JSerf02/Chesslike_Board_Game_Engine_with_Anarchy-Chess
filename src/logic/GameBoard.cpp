@@ -189,6 +189,21 @@ bool GameBoard::movePiece(Move::position prevPosition, Move::position newPositio
 }
 
 // See GameBoard.h
+std::vector<Move::position> GameBoard::getPiecesOfPlayer(Piece::Player player)
+{
+    std::vector<Move::position> piecePositions{};
+
+    // Iterate through all of the pieces and add the ones that player can access
+    for(Piece* piece : allPieces) {
+        if(piece->getPlayerAccess(player)) {
+            piecePositions.push_back(piece->getPosition());
+        }
+    }
+
+    return piecePositions;
+}
+
+// See GameBoard.h
 const std::vector<Piece*>* GameBoard::getPlayerCaptures(Piece::Player player)
 {
     // Make sure the game is tracking this player's pieces

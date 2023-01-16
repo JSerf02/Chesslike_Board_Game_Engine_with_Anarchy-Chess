@@ -97,11 +97,6 @@ class GameState
         GameBoard* getBoard();
 
         /*
-         * Returns the board positions of all of the pieces controlled by a given player
-        */
-        std::vector<Move::position> getPiecesOfPlayer(Player player);
-
-        /*
          * Returns the board positions of all of the pieces controlled by the current player
         */
         std::vector<Move::position> getPiecesOfCrntPlayer();
@@ -109,60 +104,46 @@ class GameState
         /*
          * Get the max priority of a given player's possible moves
          * - Returns 0 if the player has no moves
+         * - When no player is provided, gets the max priroity of the current player
         */
         int getMaxPriorityOfPlayer(Player player);
-
-        /*
-         * Get the max priority of the current player's possible moves
-         * - Returns 0 if the player has no moves
-        */
-        int getMaxPriorityOfCrntPlayer();
+        int getMaxPriorityOfPlayer();
 
         /*
          * Returns all of the moves a player has that move a piece from start to end
          * - Ex: A pawn on (1, 7) may have multiple moves to (1, 8) for each type of promotion
+         * - Note that moves of priority less than the player's max priority do not count
+         * 
+         * If a player is specefied, only counts moves of that player. Otherwise,
+         * only counts moves of the default player
         */
-        std::vector<Move> getPlayerMovesOfPiece(Player player, int startX, int startY, int endX, int endY);
-        std::vector<Move> getPlayerMovesOfPiece(Player player, Move::position start, int endX, int endY);
-        std::vector<Move> getPlayerMovesOfPiece(Player player, int startX, int startY, Move::position end);
-        std::vector<Move> getPlayerMovesOfPiece(Player player, Move::position start, Move::position end);
-
-        /*
-         * Returns all of the moves tje current player has that move a piece from start to end
-         * - Ex: A pawn on (1, 7) may have multiple moves to (1, 8) for each type of promotion
-        */
+        std::vector<Move> getMovesOfPiece(Player player, int startX, int startY, int endX, int endY);
+        std::vector<Move> getMovesOfPiece(Player player, Move::position start, int endX, int endY);
+        std::vector<Move> getMovesOfPiece(Player player, int startX, int startY, Move::position end);
+        std::vector<Move> getMovesOfPiece(Player player, Move::position start, Move::position end);
         std::vector<Move> getMovesOfPiece(int startX, int startY, int endX, int endY);
         std::vector<Move> getMovesOfPiece(Move::position start, int endX, int endY);
         std::vector<Move> getMovesOfPiece(int startX, int startY, Move::position end);
         std::vector<Move> getMovesOfPiece(Move::position start, Move::position end);
 
         /*
-         * Returns true if the inputed player can move a piece from the start 
-         * position to the end position and false otherwise
-         * - You can move a piece from start to end if:
-         *     - There is a piece at start that is controlled by the inputted player
-         *     - The piece at start has a move in its list of moves that allows 
-         *       it to move to end
-         *     - The priority of the move from start to end is equal to crntMaxPriority
-        */
-        bool canPlayerMovePiece(Player player, int startX, int startY, int endX, int endY);
-        bool canPlayerMovePiece(Player player, Move::position start, int endX, int endY);
-        bool canPlayerMovePiece(Player player, int startX, int startY, Move::position end);
-        bool canPlayerMovePiece(Player player, Move::position start, Move::position end);
-
-        /*
-         * Returns true if the current player can move a piece from the start position 
+         * Returns true if the inputted player can move a piece from the start position 
          * to the end position and false otherwise
          * - You can move a piece from start to end if:
          *     - There is a piece at start that is controlled by the current player
          *     - The piece at start has a move in its list of moves that allows 
          *       it to move to end
          *     - The priority of the move from start to end is equal to crntMaxPriority
+         * - If no player is inputted, the current player is used
         */
         bool canMovePiece(int startX, int startY, int endX, int endY);
         bool canMovePiece(Move::position start, int endX, int endY);
         bool canMovePiece(int startX, int startY, Move::position end);
         bool canMovePiece(Move::position start, Move::position end);
+        bool canMovePiece(Player player, int startX, int startY, int endX, int endY);
+        bool canMovePiece(Player player, Move::position start, int endX, int endY);
+        bool canMovePiece(Player player, int startX, int startY, Move::position end);
+        bool canMovePiece(Player player, Move::position start, Move::position end);
 
 
         /*

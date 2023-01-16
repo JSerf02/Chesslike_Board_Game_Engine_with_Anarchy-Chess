@@ -225,6 +225,35 @@ TEST_CASE("Game Board: Move pieces - error conditions")
 }
 
 using Player = Piece::Player;
+
+TEST_CASE("Game Board: Get pieces controlled by player")
+{
+    // Create a gameBoard with 2 players
+    GameBoard gameBoard{ { Player::white, Player::black } };
+
+    // Add 3 white pieces and 2 black piecces to the board
+    Piece* whitePiece1 = new Piece{Player::white};
+    Piece* whitePiece2 = new Piece{Player::white, std::make_pair(1, 0)};
+    Piece* whitePiece3 = new Piece{Player::white, std::make_pair(2, 0)};
+    Piece* blackPiece1 = new Piece{Player::black, std::make_pair(0, 1)};
+    Piece* blackPiece2 = new Piece{Player::black, std::make_pair(0, 2)};
+    CHECK(gameBoard.addPieces({ whitePiece1, whitePiece2, whitePiece3, blackPiece1, blackPiece2 }));
+
+    // Get the white and black pieces and also get the pieces of the current player (should be white)
+    std::vector<Move::position> whitePieces = gameBoard.getPiecesOfPlayer(Player::white);
+    std::vector<Move::position> blackPieces = gameBoard.getPiecesOfPlayer(Player::black);
+
+    // Make sure pieces were properly returned
+    for(int i = 0; i <=2; i++) { // (0, 0), (1, 0), and (2, 0) are in whitePieces and not blackPieces
+        CHECK(std::find(whitePieces.begin(), whitePieces.end(), std::make_pair(i, 0)) != whitePieces.end());
+        CHECK(std::find(blackPieces.begin(), blackPieces.end(), std::make_pair(i, 0)) == blackPieces.end());
+    }
+    for(int j = 1; j <= 2; j++) { // (0, 1), (0, 2) are in blackPieces and not whitePieces
+        CHECK(std::find(whitePieces.begin(), whitePieces.end(), std::make_pair(0, j)) == whitePieces.end());
+        CHECK(std::find(blackPieces.begin(), blackPieces.end(), std::make_pair(0, j)) != blackPieces.end());
+    }
+}
+
 TEST_CASE("Game Board: Get default player captures")
 {
     // Create a new GameBoard object

@@ -5,6 +5,8 @@
 #include "doctest.h"
 #include "Piece.h"
 #include "Move.h"
+#include "GameBoard.h"
+#include "GameState.h"
 
 using Player = Piece::Player;
 
@@ -126,6 +128,40 @@ TEST_CASE("Piece: Change Position")
     Move::position newPosition = std::make_pair(3, 4);
     testPiece.changePosition(newPosition);
     CHECK(testPiece.getPosition() == newPosition);
+}
+
+// A class for testing max piece priority
+class Max5Piece : public Piece
+{
+    public:
+        std::vector<Move> generateMoves(GameState& gameState) override
+        {
+            return {{0}, {1}, {5}};
+        } 
+};
+
+// A class for testing piece priority when there are no moves
+class NoMovesPiece : public Piece 
+{
+    public:
+        std::vector<Move> generateMoves(GameState& gameState) override
+        {
+            return {};
+        } 
+};
+
+TEST_CASE("Piece: Get maximum priority of all moves")
+{
+    // Create a gameState and a testPiece
+    GameState gameState{};
+    Max5Piece max5Piece{};
+    NoMovesPiece noMovesPiece{};
+
+    // Make sure the max priority of max5Piece's moves is 5
+    CHECK(max5Piece.getMaxPriorityOfMoves(gameState) == 5);
+    
+    // Make sure the max priority of noMovesPIece is 0
+    CHECK(noMovesPiece.getMaxPriorityOfMoves(gameState) == 0);
 }
 
 TEST_CASE("Piece: Value initialization and get value")

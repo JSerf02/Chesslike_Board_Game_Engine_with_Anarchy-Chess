@@ -49,6 +49,8 @@ class Move
         */
         Move(int movePriority = 0, void (*onMoveCallback)(GameState&) = nullptr) : 
             priority{movePriority}, onMove{onMoveCallback}{}
+        Move(std::vector<position> newPositions, int movePriority = 0, void (*onMoveCallback)(GameState&) = nullptr) : 
+            positions{newPositions}, priority{movePriority}, onMove{onMoveCallback}{}
         
         /*
          * Allow printing of moves for debugging
@@ -91,7 +93,12 @@ class Move
         /* 
          * Adds a position to the move
         */
-        void addPosition(position newPos);
+        void addPosition(position newPosition);
+
+        /*
+         * Adds multiple positions to the move
+        */
+        void addPositions(std::vector<position> newPositions);
 
         /*
          * Searches the move's positions for the provided positions using a linear

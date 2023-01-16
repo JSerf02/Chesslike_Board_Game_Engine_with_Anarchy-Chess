@@ -7,6 +7,7 @@
 #include "Piece.h"
 #include "GameBoard.h"
 #include "TestBoard.h"
+#include "TestPieces.h"
 #include "GameState.h"
 
 using Player = Piece::Player;
@@ -87,10 +88,10 @@ TEST_CASE("Game State: Set current and next players")
     CHECK(gameState.getCrntPlayer() == Player::gold);
 }
 
-TEST_CASE("Game State: Get pieces controlled by player")
+TEST_CASE("Game State: Get pieces controlled by current player")
 {
     // Create a gameBoard
-    GameBoard* gameBoard = new GameBoard{};
+    GameBoard* gameBoard = new GameBoard{{ Player::white, Player::black }};
 
     // Add 3 white pieces and 2 black piecces to the board
     Piece* whitePiece1 = new Piece{Player::white};
@@ -103,20 +104,198 @@ TEST_CASE("Game State: Get pieces controlled by player")
     // Create a GameState with 2 players: white and black
     GameState gameState{ gameBoard, { Player::white, Player::black } };
 
-    // Get the white and black pieces and also get the pieces of the current player (should be white)
-    std::vector<Move::position> whitePieces = gameState.getPiecesOfPlayer(Player::white);
+    // Make sure the current player is white
+    CHECK(gameState.getCrntPlayer() == Player::white);
+
+    // Get the pieces of the current player
     std::vector<Move::position> crntPlayerPieces = gameState.getPiecesOfCrntPlayer();
-    std::vector<Move::position> blackPieces = gameState.getPiecesOfPlayer(Player::black);
 
     // Make sure pieces were properly returned
-    for(int i = 0; i <=2; i++) { // (0, 0), (1, 0), and (2, 0) are in whitePieces and crntPlayerPieces
-        CHECK(std::find(whitePieces.begin(), whitePieces.end(), std::make_pair(i, 0)) != whitePieces.end());
+    for(int i = 0; i <=2; i++) { // (0, 0), (1, 0), and (2, 0) are in crntPlayerPieces
         CHECK(std::find(crntPlayerPieces.begin(), crntPlayerPieces.end(), std::make_pair(i, 0)) != crntPlayerPieces.end());
-        CHECK(std::find(blackPieces.begin(), blackPieces.end(), std::make_pair(i, 0)) == blackPieces.end());
     }
-    for(int j = 1; j <= 2; j++) { // (0, 1), (0, 2) are in blackPieces
-        CHECK(std::find(whitePieces.begin(), whitePieces.end(), std::make_pair(0, j)) == whitePieces.end());
+    for(int j = 1; j <= 2; j++) { // (0, 1), (0, 2) are not in crntPlayerPieces
         CHECK(std::find(crntPlayerPieces.begin(), crntPlayerPieces.end(), std::make_pair(0, j)) == crntPlayerPieces.end());
-        CHECK(std::find(blackPieces.begin(), blackPieces.end(), std::make_pair(0, j)) != blackPieces.end());
     }
+}
+
+TEST_CASE("Game State: Get maximum priority of player's moves")
+{
+    // Create a gameBoard
+    GameBoard* gameBoard = new GameBoard{{ Player::white, Player::black }};
+
+    // Add 3 white pieces and 2 black piecces to the board with increasing priorities
+    Priority1Piece* whitePiece1 = new Priority1Piece{ Player::white };
+    Priority2Piece* whitePiece2 = new Priority2Piece{ Player::white, std::make_pair(1, 0) };
+    Priority3Piece* whitePiece3 = new Priority3Piece{ Player::white, std::make_pair(2, 0) };
+    Priority4Piece* blackPiece4 = new Priority4Piece{ Player::black, std::make_pair(0, 1) };
+    Priority5Piece* blackPiece5 = new Priority5Piece{ Player::black, std::make_pair(0, 2) };
+    CHECK(gameBoard->addPieces({ whitePiece1, whitePiece2, whitePiece3, blackPiece4, blackPiece5 }));
+
+    // Create a GameState with 2 players: white and black
+    GameState gameState{ gameBoard, { Player::white, Player::black } };
+
+    CHECK(gameState.getMaxPriorityOfPlayer(Player::white) == 3);
+    CHECK(gameState.getMaxPriorityOfPlayer() == 3);
+    CHECK(gameState.getMaxPriorityOfPlayer(Player::black) == 5);
+}
+
+TEST_CASE("Game State: Get moves of piece")
+{
+    // Create a gameBoard
+    GameBoard* gameBoard = new GameBoard{{ Player::white, Player::black }};
+
+    // Create 3 testing pieces and add them to the board
+    FiveFivesOneOnePiece* manyPiece = new FiveFivesOneOnePiece{ Player::white }; // 5 5-priority moves to (1, 1) and 1 1-priority move to (1, 1)
+    Priority3Piece* white3Piece = new Priority3Piece{ Player::white, std::make_pair(1, 0) };
+    Priority3Piece* black3Piece = new Priority3Piece{ Player::black, std::make_pair(2, 0) };
+    CHECK(gameBoard->addPieces({ manyPiece, white3Piece, black3Piece }));
+
+    // Create a GameState with 2 players: white and black
+    GameState gameState{ gameBoard, { Player::white, Player::black } };
+    CHECK(gameState.getCrntPlayer() == Player::white);
+
+    // Make sure 5 out of the 6 moves of manyPiece are returned (all but the priority 1 move)
+    CHECK(gameState.getMovesOfPiece(manyPiece->getPosition(), std::make_pair(1, 1)).size() == 5);
+    CHECK(gameState.getMovesOfPiece(0, 0, std::make_pair(1, 1)).size() == 5);
+    CHECK(gameState.getMovesOfPiece(manyPiece->getPosition(), 1, 1).size() == 5);
+    CHECK(gameState.getMovesOfPiece(0, 0, 1, 1).size() == 5);
+
+    // Make sure the move of white3Piece is not returned because its priority is too low
+    CHECK(gameState.getMovesOfPiece(white3Piece->getPosition(), std::make_pair(3, 3)).size() == 0);
+    CHECK(gameState.getMovesOfPiece(1, 0, std::make_pair(3, 3)).size() == 0);
+    CHECK(gameState.getMovesOfPiece(white3Piece->getPosition(), 3, 3).size() == 0);
+    CHECK(gameState.getMovesOfPiece(1, 0, 3, 3).size() == 0);
+
+    // Make sure black3Piece returns no moves because white doesn't control it
+    CHECK(gameState.getMovesOfPiece(black3Piece->getPosition(), std::make_pair(3, 3)).size() == 0);
+    CHECK(gameState.getMovesOfPiece(2, 0, std::make_pair(3, 3)).size() == 0);
+    CHECK(gameState.getMovesOfPiece(black3Piece->getPosition(), 3, 3).size() == 0);
+    CHECK(gameState.getMovesOfPiece(2, 0, 3, 3).size() == 0);
+
+    // Make sure black3Piece returns its move when checked for moves black has for that piece
+    CHECK(gameState.getMovesOfPiece(Player::black, black3Piece->getPosition(), std::make_pair(3, 3)).size() == 1);
+    CHECK(gameState.getMovesOfPiece(Player::black, 2, 0, std::make_pair(3, 3)).size() == 1);
+    CHECK(gameState.getMovesOfPiece(Player::black, black3Piece->getPosition(), 3, 3).size() == 1);
+    CHECK(gameState.getMovesOfPiece(Player::black, 2, 0, 3, 3).size() == 1);
+
+    // Make sure explicitly checking for white's moves doesn't change anything
+    CHECK(gameState.getMovesOfPiece(Player::white, black3Piece->getPosition(), std::make_pair(3, 3)).size() == 0);
+    CHECK(gameState.getMovesOfPiece(Player::white, 2, 0, std::make_pair(3, 3)).size() == 0);
+    CHECK(gameState.getMovesOfPiece(Player::white, black3Piece->getPosition(), 3, 3).size() == 0);
+    CHECK(gameState.getMovesOfPiece(Player::white, 2, 0, 3, 3).size() == 0);
+}
+
+
+TEST_CASE("Game State: Can move piece")
+{
+    // Create a gameBoard
+    GameBoard* gameBoard = new GameBoard{{ Player::white, Player::black }};
+
+    // Create 3 testing pieces and add them to the board
+    FiveFivesOneOnePiece* manyPiece = new FiveFivesOneOnePiece{ Player::white }; // 5 5-priority moves to (1, 1) and 1 1-priority move to (1, 1)
+    Priority3Piece* white3Piece = new Priority3Piece{ Player::white, std::make_pair(1, 0) };
+    Priority3Piece* black3Piece = new Priority3Piece{ Player::black, std::make_pair(2, 0) };
+    CHECK(gameBoard->addPieces({ manyPiece, white3Piece, black3Piece }));
+
+    // Create a GameState with 2 players: white and black
+    GameState gameState{ gameBoard, { Player::white, Player::black } };
+    CHECK(gameState.getCrntPlayer() == Player::white);
+
+    // Make sure you can move manyPiece
+    CHECK(gameState.canMovePiece(manyPiece->getPosition(), std::make_pair(1, 1)));
+    CHECK(gameState.canMovePiece(0, 0, std::make_pair(1, 1)));
+    CHECK(gameState.canMovePiece(manyPiece->getPosition(), 1, 1));
+    CHECK(gameState.canMovePiece(0, 0, 1, 1));
+
+    // Make sure you can't move white3Piece
+    CHECK(gameState.canMovePiece(white3Piece->getPosition(), std::make_pair(3, 3)) == false);
+    CHECK(gameState.canMovePiece(1, 0, std::make_pair(3, 3)) == false);
+    CHECK(gameState.canMovePiece(white3Piece->getPosition(), 3, 3) == false);
+    CHECK(gameState.canMovePiece(1, 0, 3, 3) == false);
+
+    // Make sure you can't move black3Piece
+    CHECK(gameState.canMovePiece(black3Piece->getPosition(), std::make_pair(3, 3)) == false);
+    CHECK(gameState.canMovePiece(2, 0, std::make_pair(3, 3)) == false);
+    CHECK(gameState.canMovePiece(black3Piece->getPosition(), 3, 3) == false);
+    CHECK(gameState.canMovePiece(2, 0, 3, 3) == false);
+
+    // Make sure black3Piece returns its move when checked for moves black has for that piece
+    CHECK(gameState.canMovePiece(Player::black, black3Piece->getPosition(), std::make_pair(3, 3)));
+    CHECK(gameState.canMovePiece(Player::black, 2, 0, std::make_pair(3, 3)));
+    CHECK(gameState.canMovePiece(Player::black, black3Piece->getPosition(), 3, 3));
+    CHECK(gameState.canMovePiece(Player::black, 2, 0, 3, 3));
+
+    // Make sure explicitly checking for white's moves doesn't change anything
+    CHECK(gameState.canMovePiece(Player::white, black3Piece->getPosition(), std::make_pair(3, 3)) == false);
+    CHECK(gameState.canMovePiece(Player::white, 2, 0, std::make_pair(3, 3)) == false);
+    CHECK(gameState.canMovePiece(Player::white, black3Piece->getPosition(), 3, 3) == false);
+    CHECK(gameState.canMovePiece(Player::white, 2, 0, 3, 3) == false);
+}
+
+TEST_CASE("Game State: Move Piece")
+{
+    // Create a gameBoard
+    GameBoard* gameBoard = new GameBoard{{ Player::white, Player::black }};
+
+    // Create 4 testing pieces and add them to the board
+    FiveFivesOneOnePiece* manyPiece = new FiveFivesOneOnePiece{ Player::white }; // 5 5-priority moves to (1, 1) and 1 1-priority move to (1, 1)
+    FiveDifferentPositionsPiece* diffPiece = new FiveDifferentPositionsPiece{ Player::white, std::make_pair(10, 10) };
+    Priority3Piece* white3Piece = new Priority3Piece{ Player::white, std::make_pair(1, 0) };
+    Priority3Piece* black3Piece = new Priority3Piece{ Player::black, std::make_pair(2, 0) };
+    CHECK(gameBoard->addPieces({ manyPiece, diffPiece, white3Piece, black3Piece }));
+
+    // Create a GameState with 2 players: white and black
+    GameState gameState{ gameBoard, { Player::white, Player::black } };
+    CHECK(gameState.getCrntPlayer() == Player::white);
+
+    /* Check all correct uses of movePiece */
+
+    // Move diffPiece to (11, 11)
+    CHECK(gameState.movePiece(diffPiece->getPosition(), std::make_pair(11, 11)));
+    CHECK(gameBoard->getPiece(11, 11) == diffPiece);
+
+    // Move black3Piece to (3, 3)
+    CHECK(gameState.movePiece(2, 0, std::make_pair(3, 3)));
+    CHECK(gameBoard->getPiece(3, 3) == black3Piece);
+
+    // Move diffPiece to (12, 12)
+    CHECK(gameState.movePiece(diffPiece->getPosition(), 12, 12));
+    CHECK(gameBoard->getPiece(12, 12) == diffPiece);
+
+    // Skip black's turn
+    gameState.setNextPlayer();
+
+    // Move diffPiece to (13, 13)
+    CHECK(gameState.movePiece(12, 12, 13, 13));
+    CHECK(gameBoard->getPiece(13, 13) == diffPiece);
+
+    // Skip black's turn
+    gameState.setNextPlayer();
+
+    // Check that indexes works properly by moving manyPiece to (1, 1)
+    CHECK(gameState.movePiece(manyPiece->getPosition(), 1, 1, 4));
+    CHECK(gameBoard->getPiece(1, 1) == manyPiece);
+
+    // Skip black's turn
+    gameState.setNextPlayer();
+
+    /* Check all edge cases*/
+
+    // Manually move black3Piece back to (2, 0) then try to move it to (3, 3)
+    // This should fail because it isn't black's turn
+    gameBoard->movePiece(black3Piece->getPosition(), 2, 0);
+    CHECK(gameState.movePiece(black3Piece->getPosition(), 3, 3) == false);
+    CHECK(gameState.getCrntPlayer() == Player::white);
+
+    // Try to move white3Piece to (2, 0)
+    // This should fail because white3Piece has too low priority
+    CHECK(gameState.movePiece(white3Piece->getPosition(), 2, 0) == false);
+    CHECK(gameState.getCrntPlayer() == Player::white);
+
+    // Try to move diffPiece from (13, 13) to (13, 13)
+    // This should fail because there is a piece at (13, 13), itself!
+    // - This logic jump is okay because pieces shouldn't be moving to their own positions
+    CHECK(gameState.movePiece(diffPiece->getPosition(), diffPiece->getPosition()) == false);
+    CHECK(gameState.getCrntPlayer() == Player::white);
 }

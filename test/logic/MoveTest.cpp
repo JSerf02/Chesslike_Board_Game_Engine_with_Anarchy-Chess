@@ -73,8 +73,7 @@ TEST_CASE("Move: Positions")
         CHECK(positions[0] == std::make_pair(0, 0));
 
         // Add two more positions
-        testMove.addPosition(std::make_pair(1, 1));
-        testMove.addPosition(std::make_pair(2, 2));
+        testMove.addPositions({std::make_pair(1, 1), std::make_pair(2, 2)});
 
         // Make sure the positions were added properly into the right locations
         CHECK(positions.size() == 3);
