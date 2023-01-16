@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
+#include <tuple>
 
 #include "HashPair.h"
 #include "Piece.h"
@@ -14,6 +15,16 @@ class GameBoard
     /*
      * The data structure for the game's board
     */
+    public:
+        /* 
+         * All possible moves that can be simulated
+        */
+        enum class SimulatedMove
+        {
+            movePiece = 0,
+            removePiece,
+            addPiece
+        };
     private:
         /*
          * The board, which uses an unordered_map for O(1) access times for a 
@@ -38,6 +49,27 @@ class GameBoard
          * - Necessary for memory management
         */
         std::vector<Piece*> allPieces{};
+
+        /*
+         * A struct that stores a single simulated move and the necessary information
+         * to undo the move
+        */
+        struct SimulatedData {
+            SimulatedMove move;
+            Piece* piece;
+            Move::position position;
+        };
+        
+        /*
+         * A stack used to keep track of all simulated moves so they can be undone.
+         * - Whenever a move is simulated, it is added to the back of this vector
+         *   (stack invariant)
+         * - To restore the original state after simulations, SimulatedMoves are 
+         *   popped one by one from the back of the stack and reverted in the reverse
+         *   order in which they were inserted
+        */
+        std::vector<SimulatedData> simulation{};
+
         /*
          * Adds starting pieces to the board
          * - Called only on initial startup
@@ -172,7 +204,7 @@ class GameBoard
          * 
          * Parameters:
          * - The starting position of the piece, used to identify which piece to move
-         * - The new position of the peice
+         * - The new position of the piece
          * 
          * Returns:
          * - true if the piece was successfully moved
@@ -200,6 +232,83 @@ class GameBoard
          * Returns the player's current score
         */
         double getPlayerScore(Piece::Player player);
+
+        void addToSimulation(SimulatedMove simulatedMove, Piece* piece, Move::position position);
+        /*
+         * Simulates moving a piece to a new position
+         * - Simulating entails actually performing the action and adding a log
+         *   of the action to the simulation stack
+         * 
+         * Returns:
+         * - true if the piece was successfully moved
+         * - false if the piece was not moved. This can happen if:
+         *   - The prev position inputted does not contain a piece
+         *   - The new space is occupied
+         *   - The new space is not on the board
+        */
+        bool simulateMovePiece(int prevX, int prevY, int newX, int newY);
+        bool simulateMovePiece(int prevX, int prevY, Move::position newPosition);
+        bool simulateMovePiece(Move::position prevPosition, int newX, int newY);
+        bool simulateMovePiece(Move::position prevPosition, Move::position newPosition);
+
+        /*
+         * Simulates removing a piece from the board without freeing it
+         * - Simulating entails actually performing the action and adding a log
+         *   of the action to the simulation stack
+         * Parameters:
+         * - The board position of the piece
+         * 
+         * Returns:
+         * - true if the piece was successfully removed
+         * - false if something went wrong and no piece was removed
+        */
+        bool simulateRemovePiece(int x, int y);
+        bool simulateRemovePiece(Move::position position);
+
+        /*
+         * Simulates adding a piece to the board at a position
+         * - Simulating entails actually performing the action and adding a log
+         *   of the action to the simulation stack
+        */
+        bool simulateAddPiece(Piece* piece);
+
+        /*
+         * Moves a piece that was moved through a simulated move back to where it
+         * started
+        */
+        bool undoSimulatedMovePiece(Piece* piece, Move::position originalStart);
+
+        /*
+         * Returns a piece that was removed through a simulated remove back to the
+         * board
+        */
+        bool undoSimulatedRemovePiece(Piece* piece, Move::position originalPosition);
+
+        /*
+         * Removes and frees the piece that was added through the simulation add function
+        */
+        bool undoSimulatedAddPiece(Piece* piece, Move::position addedPosition);
+
+        /*
+         * Undoes the most recent simulated move
+         * 
+         * Returns:
+         * - true if move is successfully reverted
+         * - false if the revert goes wrong. This can happen if non-simulated moves
+         *   are made before all simulated moves are reverted.
+        */
+        bool revertSimulatedMove();
+
+        /*
+         * Undoes all simulated moves
+         *
+         * Returns:
+         * - true if all simulated moves are successfully reverted or if there are 
+         *   no simulated moves to revert
+         * - false if a revert goes wrong and is not reverted. If this happens,
+         *   all reverts after that move will not be attempted
+        */
+        bool revertSimulation();
 };
 
 #endif

@@ -170,15 +170,10 @@ class GameState
         bool movePiece(Move::position start, int endX, int endY, int idx = 0);
         bool movePiece(int startX, int startY, Move::position end, int idx = 0);
         bool movePiece(Move::position start, Move::position end, int idx = 0);
-
-        /*
-         * Returns a vector containing all of the spaces the inputted piece attacks
-        */
-        std::vector<Move::position> getSpacesAttackedByPiece(int x, int y);
-        std::vector<Move::position> getSpacesAttackedByPiece(Move::position position);
         
         /*
          * Returns a vector containing all of the spaces the inputted player attacks
+         * - If no player is inputted, defaults to the current player
         */
         std::vector<Move::position> getSpacesAttackedByPlayer(Player player);
 
@@ -204,38 +199,6 @@ class GameState
         */
         bool isAttacked(int x, int y);
         bool isAttacked(Move::position);
-
-        /*
-         * Returns a vector containing the positions of all of the pieces an opponent
-         * controls that are attacking a given space
-        */
-        std::vector<Move::position> getPiecesAttackingSpace(int x, int y);
-        std::vector<Move::position> getPiecesAttackingSpace(Move::position position);
-
-        /*
-         * Returns a vector containing all of the moves of the pieces an opponent
-         * controls that are attacking a given space
-        */
-        std::vector<Move> getMovesAttackingSpace(int x, int y);
-        std::vector<Move> getMovesAttackingSpace(Move::position position);
-
-        /*
-         * Returns a vector of unoccupied positions which, if moved to, will stop the 
-         * inputted space from being attacked
-         * 
-         * If the inputted position is not being attacked, returns an empty vector
-        */
-        std::vector<Move::position> getBlocksProtectingSpace(int x, int y);
-        std::vector<Move::position> getBlocksProtectingSpace(Move::position position);
-
-        /*
-         * Returns a vector of positions which, if moved to, will stop the 
-         * inputted space from being attacked
-         * 
-         * If the inputted position is not being attacked, returns an empty vector
-        */
-        std::vector<Move::position> getSpacesProtectingSpace(int x, int y);
-        std::vector<Move::position> getSpacesProtectingSpace(Move::position position);
 };
 
 #endif

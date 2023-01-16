@@ -7,6 +7,7 @@
 #include "Move.h"
 #include "GameBoard.h"
 #include "GameState.h"
+#include "TestPieces.h"
 
 using Player = Piece::Player;
 
@@ -164,6 +165,19 @@ TEST_CASE("Piece: Get maximum priority of all moves")
     CHECK(noMovesPiece.getMaxPriorityOfMoves(gameState) == 0);
 }
 
+TEST_CASE("Piece: Get Attacked Spaces")
+{
+    // Create a GameState for testing
+    GameState gameState{};
+
+    // Create two pieces for attacking
+    OneTwoTwoThreeAttack attackPiece{}; // {{(1,1)}, {(2, 2)}, {(2, 2), (3, 3)}}
+    Piece regularPiece{}; // {}
+    
+    CHECK(attackPiece.getAttackedSpaces(gameState).size() == 3);
+    CHECK(regularPiece.getAttackedSpaces(gameState).size() == 0);
+}
+
 TEST_CASE("Piece: Value initialization and get value")
 {
     // Check the default value is properly set to 0
@@ -183,5 +197,21 @@ TEST_CASE("Piece: Set value and get non-default value")
     // Change the piece's value and ensure it properly adjusted
     testPiece.setValue(7);
     CHECK(testPiece.getValue() == 7);
+}
 
+TEST_CASE("Piece: Manage on-board")
+{
+    // Create a Piece for testing
+    Piece piece{};
+
+    // Make sure the piece is not on a board by default
+    CHECK(piece.getOnBoard() == false);
+
+    // Set onBoard to true and make sure it updates properly
+    piece.setOnBoard(true);
+    CHECK(piece.getOnBoard());
+
+    // Set onBoard to false and make sure it updates properly
+    piece.setOnBoard(false);
+    CHECK(piece.getOnBoard() == false);
 }

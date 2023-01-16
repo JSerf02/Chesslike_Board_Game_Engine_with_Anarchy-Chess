@@ -83,7 +83,7 @@ class Move
          * - True if the function was called
          * - False if onMove() was null and nothing was called
         */
-        bool callOnMove(GameState& ganeState);
+        bool callOnMove(GameState& gameState);
 
         /*
          * Returns a reference to the positions allowed by this move

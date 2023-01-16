@@ -38,8 +38,8 @@ TEST_CASE("Move: Set and call onMove() callback")
     Move testMove{};
 
     // Create an empty GameState to use as a parameter for the onMove functions
-    GameBoard board{};
-    GameState testState{&board};
+    GameBoard* board = new GameBoard{};
+    GameState testState{board};
 
     // Make sure nothing is called, nothing crashes, and false is returned
     // when the default (null) onMove() is called

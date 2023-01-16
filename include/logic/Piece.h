@@ -47,6 +47,14 @@ class Piece
         */
         double value{};
 
+        /*
+         * Stores whether or not the piece is currently on a board.
+         * 
+         * It is possible for a piece to be managed by a board object but not be 
+         * on the board
+        */
+        bool onBoard{ false };
+
     public:
         /*
          * Constructor: Set piecePosition
@@ -121,6 +129,12 @@ class Piece
         */
         int getMaxPriorityOfMoves(GameState& gameState);
 
+
+        /*
+         * Returns a vector containing all of the spaces this piece is attacking
+        */
+        std::vector<Move::position> getAttackedSpaces(GameState& gameState);
+
         /*
          * Returns the piece's value
         */
@@ -130,6 +144,17 @@ class Piece
          * Sets the piece's value to the new value
         */
         void setValue(double newValue);
+
+        /*
+         * Returns whether or not this piece is on a board
+        */
+        bool getOnBoard();
+
+        /*
+         * Sets whether or not this piece is on a board
+        */
+        void setOnBoard(bool newValue);
+
 };
 
 #endif

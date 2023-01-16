@@ -60,6 +60,18 @@ namespace hash_tuple {
             return hash_val(p.first, p.second);
         }
     };
+
+    // https://stackoverflow.com/a/24847480
+    struct enum_class_hash
+    {
+        template <typename T>
+        std::size_t operator()(T t) const
+        {
+            return static_cast<std::size_t>(t);
+        }
+    };
 }
+
+
 
 #endif

@@ -208,16 +208,6 @@ bool GameState::movePiece(int startX, int startY, Move::position end, int idx)
 }
 
 // See GameState.h
-std::vector<Move::position> GameState::getSpacesAttackedByPiece(int x, int y)
-{
-    return {};
-}
-std::vector<Move::position> GameState::getSpacesAttackedByPiece(Move::position position)
-{
-    return {};
-}
-
-// See GameState.h
 std::vector<Move::position> GameState::getSpacesAttackedByPlayer(Player player)
 {
     return {};
@@ -249,44 +239,4 @@ bool GameState::isAttacked(int x, int y)
 bool GameState::isAttacked(Move::position)
 {
     return true;
-}
-
-// See GameState.h
-std::vector<Move::position> GameState::getPiecesAttackingSpace(int x, int y)
-{
-    return {};
-}
-std::vector<Move::position> GameState::getPiecesAttackingSpace(Move::position position)
-{
-    return {};
-}
-
-// See GameState.h
-std::vector<Move> GameState::getMovesAttackingSpace(int x, int y)
-{
-    return {};
-}
-std::vector<Move> GameState::getMovesAttackingSpace(Move::position position)
-{
-    return {};
-}
-
-// See GameState.h
-std::vector<Move::position> GameState::getBlocksProtectingSpace(int x, int y)
-{
-    return {};
-}
-std::vector<Move::position> GameState::getBlocksProtectingSpace(Move::position position)
-{
-    return {};
-}
-
-// See GameState.h
-std::vector<Move::position> GameState::getSpacesProtectingSpace(int x, int y)
-{
-    return {};
-}
-std::vector<Move::position> GameState::getSpacesProtectingSpace(Move::position position)
-{
-    return {};
 }

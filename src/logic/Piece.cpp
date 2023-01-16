@@ -1,5 +1,6 @@
 #include <iostream>
 #include <utility>
+#include <set>
 
 #include "Piece.h"
 
@@ -88,6 +89,25 @@ int Piece::getMaxPriorityOfMoves(GameState& gameState)
 }
 
 // See Piece.h
+std::vector<Move::position> Piece::getAttackedSpaces(GameState& gameState)
+{
+    std::vector<Move> attackMoves = generateAttackingMoves(gameState);
+    if(attackMoves.size() == 0) {
+        return {};
+    }
+
+    std::set<Move::position> attackPositionsSet{};
+    for(Move attackMove : attackMoves) {
+        const std::vector<Move::position>& curAttackPositions  = attackMove.getPositions();
+        for(Move::position position : curAttackPositions) {
+            attackPositionsSet.insert(position);
+        }
+    }
+
+    return {attackPositionsSet.begin(), attackPositionsSet.end()};
+}
+
+// See Piece.h
 double Piece::getValue()
 {
     return value;
@@ -98,3 +118,16 @@ void Piece::setValue(double newValue)
 {
     value = newValue;
 }
+
+// See Piece.h
+bool Piece::getOnBoard() 
+{
+    return onBoard;
+}
+
+// See Piece.h
+void Piece::setOnBoard(bool newValue)
+{
+    onBoard = newValue;
+}
+

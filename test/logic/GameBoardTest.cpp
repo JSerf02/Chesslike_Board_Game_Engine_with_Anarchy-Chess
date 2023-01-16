@@ -45,6 +45,7 @@ TEST_CASE("Game Board: Add piece - proper return values")
 
     // Make sure the piece on the board is properly added
     CHECK(xBoard.addPiece(correctPiece));
+    CHECK(correctPiece->getOnBoard());
 
     // Make sure error conditions are properly handled
     CHECK(xBoard.addPiece(incorrectPiece) == false);
@@ -159,6 +160,8 @@ TEST_CASE("Game Board: Remove piece") {
     CHECK(xBoard.occupiedOnBoard(1, 1));
     CHECK(xBoard.removePiece(std::make_pair(1, 1)));
     CHECK(xBoard.occupiedOnBoard(1, 1) == false);
+    CHECK(piece1->getOnBoard() == false);
+    CHECK(piece2->getOnBoard() == false);
 }
 
 TEST_CASE("Game Board: Move pieces - default usage") 
@@ -252,6 +255,10 @@ TEST_CASE("Game Board: Get pieces controlled by player")
         CHECK(std::find(whitePieces.begin(), whitePieces.end(), std::make_pair(0, j)) == whitePieces.end());
         CHECK(std::find(blackPieces.begin(), blackPieces.end(), std::make_pair(0, j)) != blackPieces.end());
     }
+
+    gameBoard.removePiece(0, 0);
+    std::vector<Move::position> newWhitePieces = gameBoard.getPiecesOfPlayer(Player::white);
+    CHECK(std::find(newWhitePieces.begin(), newWhitePieces.end(), std::make_pair(0, 0)) == newWhitePieces.end());
 }
 
 TEST_CASE("Game Board: Get default player captures")
@@ -295,6 +302,8 @@ TEST_CASE("Game Board: Capture pieces and get updated player captures")
     CHECK(xBoard.occupiedOnBoard(0, 0) == false);
     CHECK(xBoard.occupiedOnBoard(1, 1) == false);
     CHECK(xBoard.capturePiece(0, 0) == false);
+    CHECK(piece1->getOnBoard() == false);
+    CHECK(piece2->getOnBoard() == false);
     // Make sure the player's captures are properly initialized
     REQUIRE(xBoard.getPlayerCaptures(Player::white) != nullptr);
     // piece1 belongs to white so it should not get added to white's captured pieces
@@ -318,7 +327,7 @@ TEST_CASE("Game Board: Get default player score")
 TEST_CASE("Game Board: Get updated player score")
 {
     // Create a new GameBoard object
-    GameBoard board{{Player::white, Player::black, Player::silver, Player::gold}};
+    GameBoard board{ { Player::white, Player::black, Player::silver, Player::gold } };
     
     // Create a white piece and a black piece and capture them both
     Piece* whitePiece = new Piece{std::make_pair(0, 0), 5};
@@ -335,4 +344,91 @@ TEST_CASE("Game Board: Get updated player score")
     CHECK(board.getPlayerScore(Player::black) == 5); // Black doesn't gain 7 from blackPiece
     CHECK(board.getPlayerScore(Player::silver) == 12); // Silver gains points from both captures
     CHECK(board.getPlayerScore(Player::gold) == 12); // Gold gains points from both captures
+}
+
+TEST_CASE("Game Board: Simulations") 
+{
+    // Create an xBoard so there is a possibility of pieces not being on the board
+    PositiveXBoard xBoard{ { Player::white, Player::black } };
+
+    // Create a white piece and a black piece 
+    Piece* whitePiece = new Piece{Player::white};
+    Piece* blackPiece = new Piece{Player::black, std::make_pair(3, 3)};
+    xBoard.addPieces({ whitePiece, blackPiece });
+    CHECK(whitePiece->getOnBoard());
+    CHECK(blackPiece->getOnBoard());
+
+    // Simulate moving from (0, 0) to (1, 1)
+    CHECK(xBoard.simulateMovePiece(std::make_pair(0, 0), std::make_pair(1, 1)));
+    CHECK(xBoard.getPiece(0, 0) == nullptr);
+    CHECK(xBoard.getPiece(1, 1) == whitePiece);
+
+    // Simulate moving from (1, 1) to (2, 2)
+    CHECK(xBoard.simulateMovePiece(std::make_pair(1, 1), 2, 2));
+    CHECK(xBoard.getPiece(1, 1) == nullptr);
+    CHECK(xBoard.getPiece(2, 2) == whitePiece);
+
+    // Simulate moving from (2, 2) to (4, 4)
+    CHECK(xBoard.simulateMovePiece(2, 2, std::make_pair(4, 4)));
+    CHECK(xBoard.getPiece(2, 2) == nullptr);
+    CHECK(xBoard.getPiece(4, 4) == whitePiece);
+
+    // Simulate moving from (4, 4) to (5, 5)
+    CHECK(xBoard.simulateMovePiece(4, 4, 5, 5));
+    CHECK(xBoard.getPiece(4, 4) == nullptr);
+    CHECK(xBoard.getPiece(5, 5) == whitePiece);
+
+    // Simulate move fail cases
+    CHECK(xBoard.simulateMovePiece(5, 5, 3, 3) == false); // Moving to an occupied position
+    CHECK(xBoard.simulateMovePiece(5, 5, -1, 0) == false); // Moving to a position not on the board
+    CHECK(xBoard.getPiece(5, 5) == whitePiece); // Make sure nothing changed
+
+    // Simulate adding a piece at (100, 100)
+    // Custom scope to prevent null reference when piece is eventually removed
+    {
+        Piece* addedPiece = new Piece{Player::white, std::make_pair(100, 100)};
+        CHECK(xBoard.simulateAddPiece(addedPiece));
+        CHECK(xBoard.getPiece(100, 100) == addedPiece);
+
+        // Simulate add fail cases
+        Piece* notOnBoard = new Piece{ Player::white, std::make_pair(-1, 0) }; // Adding to a position not on the board
+        Piece* overlap = new Piece{ Player::white, std::make_pair(3, 3) }; // Adding to an occupied position
+        CHECK(xBoard.simulateAddPiece(notOnBoard) == false);
+        CHECK(xBoard.simulateAddPiece(overlap) == false);
+        delete notOnBoard;
+        delete overlap;
+    }
+    
+    // Simulate removing the piece at (3, 3)
+    CHECK(xBoard.simulateRemovePiece(std::make_pair(3, 3)));
+    CHECK(xBoard.getPiece(3, 3) == nullptr);
+    CHECK(blackPiece->getOnBoard() == false);
+    
+    // Simulate removing the piece at (5, 5)
+    CHECK(xBoard.simulateRemovePiece(5, 5));
+    CHECK(xBoard.getPiece(5, 5) == nullptr);
+    CHECK(whitePiece->getOnBoard() == false);
+
+    // Simulate remove fail cases
+    CHECK(xBoard.simulateRemovePiece(7, 7) == false); // Removing an unoccupied position
+    CHECK(xBoard.simulateRemovePiece(-1, 0) == false); // Removing a position not on the board
+
+    // Revert the removal of the piece at (5, 5) by adding it back
+    CHECK(xBoard.revertSimulatedMove());
+    CHECK(xBoard.getPiece(5, 5) == whitePiece);
+
+    // Revert all simulated moves and make sure everything restored properly
+    CHECK(xBoard.revertSimulation());
+    CHECK(xBoard.getPiece(0, 0) == whitePiece);
+    CHECK(xBoard.getPiece(3, 3) == blackPiece);
+    CHECK(xBoard.getPiece(100, 100) == nullptr);
+    CHECK(whitePiece->getOnBoard());
+    CHECK(blackPiece->getOnBoard());
+
+    // Break the simulation by using real moves before reverting
+    CHECK(xBoard.simulateMovePiece(0, 0, 5, 5));
+    CHECK(xBoard.getPiece(5, 5) == whitePiece);
+    xBoard.movePiece(3, 3, 0, 0); // Block the position whitePiece came from before it can go back
+    CHECK(xBoard.revertSimulatedMove() == false);
+    CHECK(xBoard.revertSimulation() == false);
 }
