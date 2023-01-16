@@ -299,3 +299,91 @@ TEST_CASE("Game State: Move Piece")
     CHECK(gameState.movePiece(diffPiece->getPosition(), diffPiece->getPosition()) == false);
     CHECK(gameState.getCrntPlayer() == Player::white);
 }
+
+TEST_CASE("Game State: Get spaces attacked by player")
+{
+    // Create a gameBoard
+    GameBoard* gameBoard = new GameBoard{{ Player::white, Player::black }};
+
+    // Create 3 testing pieces and add them to the board
+    OneTwoTwoThreeAttack* whitePiece1 = new OneTwoTwoThreeAttack{ Player::white };
+    OneTwoAttack* whitePiece2 = new OneTwoAttack{ Player::white, std::make_pair(0, 1) };
+    OneTwoTwoThreeAttack* whitePiece3 = new OneTwoTwoThreeAttack{ Player::white, std::make_pair(0, 2) };
+    OneTwoAttack* blackPiece = new OneTwoAttack{ Player::black, std::make_pair(1, 0) };
+    CHECK(gameBoard->addPieces({ whitePiece1, whitePiece2, whitePiece3, blackPiece }));
+
+    // Create a GameState with 2 players: white and black
+    GameState gameState{ gameBoard, { Player::white, Player::black } };
+
+    // Get all of the spaces attacked by each player
+    std::vector<Move::position> whiteAttacks = gameState.getSpacesAttackedByPlayer(Player::white);
+    std::vector<Move::position> blackAttacks = gameState.getSpacesAttackedByPlayer(Player::black);
+    std::vector<Move::position> defaultAttacks = gameState.getSpacesAttackedByPlayer();
+
+    // Ensure the correct number of spaces were returned (no duplicates and not too few)
+    CHECK(whiteAttacks.size() == 4);
+    CHECK(blackAttacks.size() == 1);
+    CHECK(defaultAttacks.size() == 4);
+
+    // Make sure the vefctors contain the correct spaces
+    for(int i = 1; i <= 3; i++) {
+        CHECK(std::find(whiteAttacks.begin(), whiteAttacks.end(), std::make_pair(i, i)) != whiteAttacks.end());
+        CHECK(std::find(defaultAttacks.begin(), defaultAttacks.end(), std::make_pair(i, i)) != defaultAttacks.end());
+    }
+    CHECK(std::find(whiteAttacks.begin(), whiteAttacks.end(), std::make_pair(1, 2)) != whiteAttacks.end());
+    CHECK(std::find(defaultAttacks.begin(), defaultAttacks.end(), std::make_pair(1, 2)) != defaultAttacks.end());
+    CHECK(std::find(blackAttacks.begin(), blackAttacks.end(), std::make_pair(1, 2)) != blackAttacks.end());
+}
+
+TEST_CASE("Game State: Get spaces attacked by players")
+{
+    // Create a gameBoard
+    GameBoard* gameBoard = new GameBoard{{ Player::white, Player::black }};
+
+    // Create 3 testing pieces and add them to the board
+    OneTwoTwoThreeAttack* whitePiece1 = new OneTwoTwoThreeAttack{ Player::white };
+    OneTwoAttack* whitePiece2 = new OneTwoAttack{ Player::white, std::make_pair(0, 1) };
+    OneTwoTwoThreeAttack* blackPiece1 = new OneTwoTwoThreeAttack{ Player::black, std::make_pair(0, 2) };
+    OneTwoAttack* blackPiece2 = new OneTwoAttack{ Player::black, std::make_pair(1, 0) };
+    OneThreeAttack* silverPiece = new OneThreeAttack{ Player::silver, std::make_pair(10, 10) };
+    CHECK(gameBoard->addPieces({ whitePiece1, whitePiece2, blackPiece1, blackPiece2, silverPiece }));
+
+    // Create a GameState with 2 players: white and black
+    GameState gameState{ gameBoard, { Player::white, Player::black, Player::silver} };
+
+    // Get all spaces attacked by white+black and by black+silver
+    std::vector<Move::position> whiteBlackAttacks = gameState.getSpacesAttackedByPlayers({ Player::white, Player::black });
+    std::vector<Move::position> blackSilverAttacks = gameState.getSpacesAttackedByPlayers({ Player::black, Player::silver });
+    std::vector<Move::position> attackingSilver = gameState.getAttackedSpaces(Player::silver);
+    std::vector<Move::position> attackingDefault = gameState.getAttackedSpaces();
+
+    // Ensure the correct number of spaces were returned (no duplicates and not too few)
+    CHECK(whiteBlackAttacks.size() == 4);
+    CHECK(blackSilverAttacks.size() == 5);
+    CHECK(attackingSilver.size() == 4);
+    CHECK(attackingDefault.size() == 5);
+
+    // Make sure the vefctors contain the correct spaces
+    for(int i = 1; i <= 3; i++) {
+        CHECK(std::find(whiteBlackAttacks.begin(), whiteBlackAttacks.end(), std::make_pair(i, i)) != whiteBlackAttacks.end());
+        CHECK(std::find(blackSilverAttacks.begin(), blackSilverAttacks.end(), std::make_pair(i, i)) != blackSilverAttacks.end());
+        CHECK(std::find(attackingSilver.begin(), attackingSilver.end(), std::make_pair(i, i)) != attackingSilver.end());
+        CHECK(std::find(attackingDefault.begin(), attackingDefault.end(), std::make_pair(i, i)) != attackingDefault.end());
+    }
+    CHECK(std::find(whiteBlackAttacks.begin(), whiteBlackAttacks.end(), std::make_pair(1, 2)) != whiteBlackAttacks.end());
+    CHECK(std::find(blackSilverAttacks.begin(), blackSilverAttacks.end(), std::make_pair(1, 2)) != blackSilverAttacks.end());
+    CHECK(std::find(attackingSilver.begin(), attackingSilver.end(), std::make_pair(1, 2)) != attackingSilver.end());
+    CHECK(std::find(attackingDefault.begin(), attackingDefault.end(), std::make_pair(1, 2)) != attackingDefault.end());
+    CHECK(std::find(whiteBlackAttacks.begin(), whiteBlackAttacks.end(), std::make_pair(1, 3)) == whiteBlackAttacks.end());
+    CHECK(std::find(blackSilverAttacks.begin(), blackSilverAttacks.end(), std::make_pair(1, 3)) != blackSilverAttacks.end());
+    CHECK(std::find(attackingSilver.begin(), attackingSilver.end(), std::make_pair(1, 3)) == attackingSilver.end());
+    CHECK(std::find(attackingDefault.begin(), attackingDefault.end(), std::make_pair(1, 3)) != attackingDefault.end());
+    
+    // Check isAttacked()
+    CHECK(gameState.isAttacked(Player::silver, 1, 2));
+    CHECK(gameState.isAttacked(Player::silver, std::make_pair(1, 3)) == false);
+    CHECK(gameState.isAttacked(1, 2));
+    CHECK(gameState.isAttacked(std::make_pair(1, 3)));
+    CHECK(gameState.isAttacked(5, 5) == false);
+
+}

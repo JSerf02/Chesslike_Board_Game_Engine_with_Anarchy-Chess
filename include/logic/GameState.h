@@ -176,11 +176,7 @@ class GameState
          * - If no player is inputted, defaults to the current player
         */
         std::vector<Move::position> getSpacesAttackedByPlayer(Player player);
-
-        /*
-         * Returns a vector containing all of the spaces the current player attacks
-        */
-        std::vector<Move::position> getSpacesAttackedByCrntPlayer();
+        std::vector<Move::position> getSpacesAttackedByPlayer();     
 
         /*
          * Returns a vector containing all of the spaces attacked by at least one of
@@ -190,15 +186,21 @@ class GameState
 
         /*
          * Returns a vector containing all of the spaces that are currently under 
-         * attack by the opponents (all players besides the current player)
+         * attack by the opponents of the inputted player (all players besides them)
+         * - If no player is inputted, defaults to the current player
         */
+        std::vector<Move::position> getAttackedSpaces(Player player);
         std::vector<Move::position> getAttackedSpaces();
 
         /*
-         * Returns true if the inputted position is under attack and false otherwise
+         * Returns true if the inputted position is under attack by the inputted
+         * player's opponents and false if not
+         * - If no player is inputted, defaults to the current player
         */
+        bool isAttacked(Player player, int x, int y);
+        bool isAttacked(Player player, Move::position position);
         bool isAttacked(int x, int y);
-        bool isAttacked(Move::position);
+        bool isAttacked(Move::position position);
 };
 
 #endif

@@ -104,7 +104,7 @@ std::vector<Move::position> Piece::getAttackedSpaces(GameState& gameState)
         }
     }
 
-    return {attackPositionsSet.begin(), attackPositionsSet.end()};
+    return { attackPositionsSet.begin(), attackPositionsSet.end() };
 }
 
 // See Piece.h
