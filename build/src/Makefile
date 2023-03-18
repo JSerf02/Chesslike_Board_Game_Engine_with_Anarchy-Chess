@@ -129,6 +129,78 @@ anarchy-chess_build/fast:
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/build
 .PHONY : anarchy-chess_build/fast
 
+games/chess/ChessBoard.obj: games/chess/ChessBoard.cpp.obj
+.PHONY : games/chess/ChessBoard.obj
+
+# target to build an object file
+games/chess/ChessBoard.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessBoard.cpp.obj
+.PHONY : games/chess/ChessBoard.cpp.obj
+
+games/chess/ChessBoard.i: games/chess/ChessBoard.cpp.i
+.PHONY : games/chess/ChessBoard.i
+
+# target to preprocess a source file
+games/chess/ChessBoard.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessBoard.cpp.i
+.PHONY : games/chess/ChessBoard.cpp.i
+
+games/chess/ChessBoard.s: games/chess/ChessBoard.cpp.s
+.PHONY : games/chess/ChessBoard.s
+
+# target to generate assembly for a file
+games/chess/ChessBoard.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessBoard.cpp.s
+.PHONY : games/chess/ChessBoard.cpp.s
+
+games/chess/ChessGameState.obj: games/chess/ChessGameState.cpp.obj
+.PHONY : games/chess/ChessGameState.obj
+
+# target to build an object file
+games/chess/ChessGameState.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessGameState.cpp.obj
+.PHONY : games/chess/ChessGameState.cpp.obj
+
+games/chess/ChessGameState.i: games/chess/ChessGameState.cpp.i
+.PHONY : games/chess/ChessGameState.i
+
+# target to preprocess a source file
+games/chess/ChessGameState.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessGameState.cpp.i
+.PHONY : games/chess/ChessGameState.cpp.i
+
+games/chess/ChessGameState.s: games/chess/ChessGameState.cpp.s
+.PHONY : games/chess/ChessGameState.s
+
+# target to generate assembly for a file
+games/chess/ChessGameState.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessGameState.cpp.s
+.PHONY : games/chess/ChessGameState.cpp.s
+
+games/chess/ChessPiece.obj: games/chess/ChessPiece.cpp.obj
+.PHONY : games/chess/ChessPiece.obj
+
+# target to build an object file
+games/chess/ChessPiece.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessPiece.cpp.obj
+.PHONY : games/chess/ChessPiece.cpp.obj
+
+games/chess/ChessPiece.i: games/chess/ChessPiece.cpp.i
+.PHONY : games/chess/ChessPiece.i
+
+# target to preprocess a source file
+games/chess/ChessPiece.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessPiece.cpp.i
+.PHONY : games/chess/ChessPiece.cpp.i
+
+games/chess/ChessPiece.s: games/chess/ChessPiece.cpp.s
+.PHONY : games/chess/ChessPiece.s
+
+# target to generate assembly for a file
+games/chess/ChessPiece.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessPiece.cpp.s
+.PHONY : games/chess/ChessPiece.cpp.s
+
 helloworld.obj: helloworld.cpp.obj
 .PHONY : helloworld.obj
 
@@ -258,6 +330,15 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... anarchy-chess_build
+	@echo ... games/chess/ChessBoard.obj
+	@echo ... games/chess/ChessBoard.i
+	@echo ... games/chess/ChessBoard.s
+	@echo ... games/chess/ChessGameState.obj
+	@echo ... games/chess/ChessGameState.i
+	@echo ... games/chess/ChessGameState.s
+	@echo ... games/chess/ChessPiece.obj
+	@echo ... games/chess/ChessPiece.i
+	@echo ... games/chess/ChessPiece.s
 	@echo ... helloworld.obj
 	@echo ... helloworld.i
 	@echo ... helloworld.s

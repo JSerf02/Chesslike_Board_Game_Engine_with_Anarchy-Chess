@@ -19,6 +19,11 @@ namespace logic {
         else {
             crntPlayer = Player::last;
         }
+        
+        // Make sure gameBoard is never null because that could be really annoying
+        if(!gameBoard) {
+            gameBoard = new GameBoard(players);
+        }
     }
 
     // See GameState.h
@@ -192,12 +197,17 @@ namespace logic {
         if(idx >= movesToEnd.size()) {
             return false;
         }
-        Move crntMove = movesToEnd[idx];
-        crntMove.callOnMove(*this);
         
+        // Move the piece
         if(!gameBoard->movePiece(start, end)) {
             return false;
         }
+
+        // Call the onMove callback function
+        Move crntMove = movesToEnd[idx];
+        crntMove.callOnMove(*this);
+
+        // Set the next player
         setNextPlayer();
         return true;
     }

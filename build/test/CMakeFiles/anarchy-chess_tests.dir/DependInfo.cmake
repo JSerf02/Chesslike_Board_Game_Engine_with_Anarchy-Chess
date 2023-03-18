@@ -8,6 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/ChessBoard.cpp" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessBoard.cpp.obj" "gcc" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessBoard.cpp.obj.d"
+  "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/ChessGameState.cpp" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessGameState.cpp.obj" "gcc" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessGameState.cpp.obj.d"
+  "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/ChessPiece.cpp" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessPiece.cpp.obj" "gcc" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessPiece.cpp.obj.d"
   "C:/Users/jserf/Documents/Anarchy Chess/src/logic/GameBoard.cpp" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.obj" "gcc" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameBoard.cpp.obj.d"
   "C:/Users/jserf/Documents/Anarchy Chess/src/logic/GameState.cpp" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameState.cpp.obj" "gcc" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/GameState.cpp.obj.d"
   "C:/Users/jserf/Documents/Anarchy Chess/src/logic/Move.cpp" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Move.cpp.obj" "gcc" "test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Move.cpp.obj.d"

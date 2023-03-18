@@ -8,6 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/ChessBoard.cpp" "src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessBoard.cpp.obj" "gcc" "src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessBoard.cpp.obj.d"
+  "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/ChessGameState.cpp" "src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessGameState.cpp.obj" "gcc" "src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessGameState.cpp.obj.d"
+  "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/ChessPiece.cpp" "src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessPiece.cpp.obj" "gcc" "src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessPiece.cpp.obj.d"
   "C:/Users/jserf/Documents/Anarchy Chess/src/helloworld.cpp" "src/CMakeFiles/anarchy-chess_build.dir/helloworld.cpp.obj" "gcc" "src/CMakeFiles/anarchy-chess_build.dir/helloworld.cpp.obj.d"
   "C:/Users/jserf/Documents/Anarchy Chess/src/logic/GameBoard.cpp" "src/CMakeFiles/anarchy-chess_build.dir/logic/GameBoard.cpp.obj" "gcc" "src/CMakeFiles/anarchy-chess_build.dir/logic/GameBoard.cpp.obj.d"
   "C:/Users/jserf/Documents/Anarchy Chess/src/logic/GameState.cpp" "src/CMakeFiles/anarchy-chess_build.dir/logic/GameState.cpp.obj" "gcc" "src/CMakeFiles/anarchy-chess_build.dir/logic/GameState.cpp.obj.d"

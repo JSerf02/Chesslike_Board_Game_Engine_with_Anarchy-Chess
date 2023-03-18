@@ -5,6 +5,7 @@
 #include <unordered_map>
 
 #include "Move.h"
+
 namespace logic {
     class GameState;
     class Piece

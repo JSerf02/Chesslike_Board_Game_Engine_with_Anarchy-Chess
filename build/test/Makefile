@@ -129,6 +129,78 @@ anarchy-chess_tests/fast:
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/build
 .PHONY : anarchy-chess_tests/fast
 
+__/src/games/chess/ChessBoard.obj: __/src/games/chess/ChessBoard.cpp.obj
+.PHONY : __/src/games/chess/ChessBoard.obj
+
+# target to build an object file
+__/src/games/chess/ChessBoard.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessBoard.cpp.obj
+.PHONY : __/src/games/chess/ChessBoard.cpp.obj
+
+__/src/games/chess/ChessBoard.i: __/src/games/chess/ChessBoard.cpp.i
+.PHONY : __/src/games/chess/ChessBoard.i
+
+# target to preprocess a source file
+__/src/games/chess/ChessBoard.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessBoard.cpp.i
+.PHONY : __/src/games/chess/ChessBoard.cpp.i
+
+__/src/games/chess/ChessBoard.s: __/src/games/chess/ChessBoard.cpp.s
+.PHONY : __/src/games/chess/ChessBoard.s
+
+# target to generate assembly for a file
+__/src/games/chess/ChessBoard.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessBoard.cpp.s
+.PHONY : __/src/games/chess/ChessBoard.cpp.s
+
+__/src/games/chess/ChessGameState.obj: __/src/games/chess/ChessGameState.cpp.obj
+.PHONY : __/src/games/chess/ChessGameState.obj
+
+# target to build an object file
+__/src/games/chess/ChessGameState.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessGameState.cpp.obj
+.PHONY : __/src/games/chess/ChessGameState.cpp.obj
+
+__/src/games/chess/ChessGameState.i: __/src/games/chess/ChessGameState.cpp.i
+.PHONY : __/src/games/chess/ChessGameState.i
+
+# target to preprocess a source file
+__/src/games/chess/ChessGameState.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessGameState.cpp.i
+.PHONY : __/src/games/chess/ChessGameState.cpp.i
+
+__/src/games/chess/ChessGameState.s: __/src/games/chess/ChessGameState.cpp.s
+.PHONY : __/src/games/chess/ChessGameState.s
+
+# target to generate assembly for a file
+__/src/games/chess/ChessGameState.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessGameState.cpp.s
+.PHONY : __/src/games/chess/ChessGameState.cpp.s
+
+__/src/games/chess/ChessPiece.obj: __/src/games/chess/ChessPiece.cpp.obj
+.PHONY : __/src/games/chess/ChessPiece.obj
+
+# target to build an object file
+__/src/games/chess/ChessPiece.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessPiece.cpp.obj
+.PHONY : __/src/games/chess/ChessPiece.cpp.obj
+
+__/src/games/chess/ChessPiece.i: __/src/games/chess/ChessPiece.cpp.i
+.PHONY : __/src/games/chess/ChessPiece.i
+
+# target to preprocess a source file
+__/src/games/chess/ChessPiece.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessPiece.cpp.i
+.PHONY : __/src/games/chess/ChessPiece.cpp.i
+
+__/src/games/chess/ChessPiece.s: __/src/games/chess/ChessPiece.cpp.s
+.PHONY : __/src/games/chess/ChessPiece.s
+
+# target to generate assembly for a file
+__/src/games/chess/ChessPiece.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessPiece.cpp.s
+.PHONY : __/src/games/chess/ChessPiece.cpp.s
+
 __/src/logic/GameBoard.obj: __/src/logic/GameBoard.cpp.obj
 .PHONY : __/src/logic/GameBoard.obj
 
@@ -354,6 +426,15 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... anarchy-chess_tests
+	@echo ... __/src/games/chess/ChessBoard.obj
+	@echo ... __/src/games/chess/ChessBoard.i
+	@echo ... __/src/games/chess/ChessBoard.s
+	@echo ... __/src/games/chess/ChessGameState.obj
+	@echo ... __/src/games/chess/ChessGameState.i
+	@echo ... __/src/games/chess/ChessGameState.s
+	@echo ... __/src/games/chess/ChessPiece.obj
+	@echo ... __/src/games/chess/ChessPiece.i
+	@echo ... __/src/games/chess/ChessPiece.s
 	@echo ... __/src/logic/GameBoard.obj
 	@echo ... __/src/logic/GameBoard.i
 	@echo ... __/src/logic/GameBoard.s

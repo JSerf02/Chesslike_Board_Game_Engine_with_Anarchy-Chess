@@ -1,4 +1,10 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/anarchy-chess_build.dir/games/chess/ChessBoard.cpp.obj"
+  "CMakeFiles/anarchy-chess_build.dir/games/chess/ChessBoard.cpp.obj.d"
+  "CMakeFiles/anarchy-chess_build.dir/games/chess/ChessGameState.cpp.obj"
+  "CMakeFiles/anarchy-chess_build.dir/games/chess/ChessGameState.cpp.obj.d"
+  "CMakeFiles/anarchy-chess_build.dir/games/chess/ChessPiece.cpp.obj"
+  "CMakeFiles/anarchy-chess_build.dir/games/chess/ChessPiece.cpp.obj.d"
   "CMakeFiles/anarchy-chess_build.dir/helloworld.cpp.obj"
   "CMakeFiles/anarchy-chess_build.dir/helloworld.cpp.obj.d"
   "CMakeFiles/anarchy-chess_build.dir/logic/GameBoard.cpp.obj"

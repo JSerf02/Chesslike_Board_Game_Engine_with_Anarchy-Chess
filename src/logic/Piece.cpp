@@ -8,6 +8,10 @@ namespace logic {
     
     using Player = Piece::Player;
 
+    class GameState {
+        public: 
+            int getMaxPriorityOfPlayer();
+    };
     // See Piece.h
     Piece::Piece(Move::position startPos, double pieceValue) 
         : piecePosition{ startPos }, value{ pieceValue } { }
@@ -98,8 +102,15 @@ namespace logic {
             return {};
         }
 
+        int maxPriority = gameState.getMaxPriorityOfPlayer();
+
         std::set<Move::position> attackPositionsSet{};
         for(Move attackMove : attackMoves) {
+            // Only add attacks with the correct priority
+            if(attackMove.getPriority() < maxPriority) {
+                continue;
+            }
+
             const std::vector<Move::position>& curAttackPositions  = attackMove.getPositions();
             for(Move::position position : curAttackPositions) {
                 attackPositionsSet.insert(position);
