@@ -12,7 +12,7 @@ namespace chess {
     class ChessGameState : public GameState
     {
         private:
-            std::unordered_map<Player, Piece&> kings{};
+            std::unordered_map<Player, Piece*> kings{};
 
         public:
             /*
@@ -21,6 +21,12 @@ namespace chess {
              * king
             */
             ChessGameState();
+
+
+            /*
+             * Returns a reference to the inputted player's king
+            */
+            Piece* getKing(Player player);
 
             /*
              * Returns true if the inputted player is in check or false if they are not

@@ -15,6 +15,11 @@ namespace chess {
     }
 
     // See ChessGameState.h
+    Piece* ChessGameState::getKing(Player player) {
+        return kings[player];
+    }
+
+    // See ChessGameState.h
     bool ChessGameState::isInCheck(Player player)
     {
         return true;

@@ -60,6 +60,21 @@
   "file": "C:/Users/jserf/Documents/Anarchy Chess/test/logic/GameStateTest.cpp"
 },
 {
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\games\\chess\\ChessBoardTest.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\test\\games\\chess\\ChessBoardTest.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/test/games/chess/ChessBoardTest.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\games\\chess\\ChessGameStateTest.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\test\\games\\chess\\ChessGameStateTest.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/test/games/chess/ChessGameStateTest.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\games\\chess\\ChessPieceTest.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\test\\games\\chess\\ChessPieceTest.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/test/games/chess/ChessPieceTest.cpp"
+},
+{
   "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
   "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\helloworld.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\helloworld.cpp\"",
   "file": "C:/Users/jserf/Documents/Anarchy Chess/src/helloworld.cpp"
