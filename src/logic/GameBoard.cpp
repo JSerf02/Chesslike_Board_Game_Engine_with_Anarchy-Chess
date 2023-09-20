@@ -12,7 +12,6 @@ namespace logic {
         for(Player player : players) {
             capturedPieces[player] = new std::vector<Piece*>{};
         }
-        setup();
     }
 
     //See GameBoard.h

@@ -11,6 +11,8 @@ namespace chess {
         /*
          * TODO: Define Pawn class
         */
+        public:
+            using ChessPiece::ChessPiece;
     };
 
 }

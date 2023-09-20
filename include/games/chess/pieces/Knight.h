@@ -11,6 +11,8 @@ namespace chess {
         /*
          * TODO: Define knight class
         */
+        public:
+            using ChessPiece::ChessPiece;
     };
 
 }

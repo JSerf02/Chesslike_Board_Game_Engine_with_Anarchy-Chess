@@ -11,6 +11,8 @@ namespace chess {
         /*
          * TODO: Define King class
         */
+        public:
+            using ChessPiece::ChessPiece;
     };
 
 }

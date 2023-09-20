@@ -11,6 +11,8 @@ namespace chess {
         /*
          * TODO: Define Queen class
         */
+        public:
+            using ChessPiece::ChessPiece;
     };
 
 }

@@ -11,6 +11,8 @@ namespace chess {
         /*
          * TODO: Define Bishop class
         */
+        public:
+            using ChessPiece::ChessPiece;
     };
 
 }

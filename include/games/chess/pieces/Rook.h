@@ -11,6 +11,8 @@ namespace chess {
         /*
          * TODO: Define Rook class
         */
+        public:
+            using ChessPiece::ChessPiece;
     };
 
 }

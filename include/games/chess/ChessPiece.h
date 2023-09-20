@@ -12,6 +12,9 @@ namespace chess {
     class ChessPiece : public Piece
     {
         public:
+            /* Inherit the constructure */
+            using Piece::Piece;
+            
             /*
              * Checks if moving to the position will put the current player into 
              * check and, if it does not, adds the position to the move

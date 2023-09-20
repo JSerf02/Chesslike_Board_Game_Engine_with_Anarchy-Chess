@@ -71,12 +71,6 @@ namespace logic{
             */
             std::vector<SimulatedData> simulation{};
 
-            /*
-            * Adds starting pieces to the board
-            * - Called only on initial startup
-            */
-            virtual void setup() {};
-
         public:
             /*
             * Constructor: Initialize captured piece vectors and set up the board 
