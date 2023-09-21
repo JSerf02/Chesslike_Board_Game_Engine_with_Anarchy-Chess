@@ -42,8 +42,8 @@ TEST_CASE("Chess Game State: Initialize object")
     Piece* blackKing = chessState.getKing(Player::black);
     REQUIRE(whiteKing != nullptr);
     REQUIRE(blackKing != nullptr);
-    CHECK(whiteKing->getPosition() == std::make_pair(1, 5));
-    CHECK(blackKing->getPosition() == std::make_pair(8, 5));
+    CHECK(whiteKing->getPosition() == std::make_pair(5, 1));
+    CHECK(blackKing->getPosition() == std::make_pair(5, 8));
 }
 
 TEST_CASE("Chess Game State - Check")

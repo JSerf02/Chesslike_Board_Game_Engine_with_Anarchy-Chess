@@ -4,6 +4,7 @@
 #include <unordered_map>
 
 #include "GameState.h"
+#include "ChessBoard.h"
 
 namespace chess {
     using namespace logic;
@@ -20,13 +21,18 @@ namespace chess {
              * sets the players to White and Black, and stores references to each player's
              * king
             */
-            ChessGameState();
+            ChessGameState() : GameState(new ChessBoard(), {Player::white, Player::black}) {
+                kings[Player::white] = getBoard()->getPiece(std::make_pair(5, 1));
+                kings[Player::black] = getBoard()->getPiece(std::make_pair(5, 8));
+            }
 
 
             /*
              * Returns a reference to the inputted player's king
+             * - Defaults to the current player when no player is provided
             */
             Piece* getKing(Player player);
+            Piece* getKing();
 
             /*
              * Returns true if the inputted player is in check or false if they are not

@@ -7,54 +7,60 @@ namespace chess {
     using namespace logic;
     using Player = Piece::Player;
 
-
-    // See ChessGameState.h
-    ChessGameState::ChessGameState()
-    {
-        return;
-    }
-
     // See ChessGameState.h
     Piece* ChessGameState::getKing(Player player) {
         return kings[player];
+    }
+    Piece* ChessGameState::getKing() {
+        return getKing(getCrntPlayer());
     }
 
     // See ChessGameState.h
     bool ChessGameState::isInCheck(Player player)
     {
-        return true;
+        return isAttacked(kings[player]->getPosition());
     }
     bool ChessGameState::isInCheck()
     {
-        return true;
+        return isInCheck(getCrntPlayer());
     }
 
     // See ChessGameState.h
     bool ChessGameState::willMoveCauseCheck(int startX, int startY, int endX, int endY)
     {
-        return true;
+        return willMoveCauseCheck(std::make_pair(startX, startY), std::make_pair(endX, endY));
     }
     bool ChessGameState::willMoveCauseCheck(Move::position start, int endX, int endY)
     {
-        return true;
+        return willMoveCauseCheck(start, std::make_pair(endX, endY));
     }
     bool ChessGameState::willMoveCauseCheck(int startX, int startY, Move::position end)
     {
-        return true;
+        return willMoveCauseCheck(std::make_pair(startX, startY), end);
     }
     bool ChessGameState::willMoveCauseCheck(Move::position start, Move::position end)
     {
-        return true;
+        // Get a reference to the board
+        GameBoard* board = getBoard();
+
+        // Simulate moving the piece and check if the move will cause check
+        board->simulateMovePiece(start, end);
+        bool result = isInCheck();
+
+        // Undo the simulated move and return the result
+        board->revertSimulation();
+        return result;
     }
 
     // See ChessGameState.h
     bool ChessGameState::isInCheckmate(Player player)
     {
-        return true;
+        // Every move has priority of at least 1, so 0 priority means no possible moves
+        return getMaxPriorityOfPlayer(player) == 0; 
     }
     bool ChessGameState::isInCheckmate()
     {
-        return true;
+        return isInCheckmate(getCrntPlayer());
     }
 
 }

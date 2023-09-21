@@ -20,7 +20,7 @@ namespace chess {
         
         public:
             /* Create a ChessBoard with all of the correct pieces */
-            ChessBoard(std::vector<Piece::Player> players = {}) : GameBoard(players) {
+            ChessBoard() : GameBoard({Player::white, Player::black}) {
                 setup();
             }
             
