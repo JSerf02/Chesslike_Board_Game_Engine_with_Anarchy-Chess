@@ -50,3 +50,15 @@ TEST_CASE("Chess Board - Setup")
         CHECK(chessBoard.occupiedOnBoard(i, 8));
     }
 }
+
+TEST_CASE("Chess Board - Boundaries")
+{
+    // Initialize the Chess Board
+    ChessBoard chessBoard{};
+
+    // Ensure the boundaries are correctly set
+    CHECK(chessBoard.minX() == 1);
+    CHECK(chessBoard.maxX() == 8);
+    CHECK(chessBoard.minY() == 1);
+    CHECK(chessBoard.maxY() == 8);
+}

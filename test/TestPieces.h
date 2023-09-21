@@ -6,7 +6,7 @@ namespace testing {
     // A piece that has moves with 1 priority
     class Priority1Piece : public logic::Piece
     {
-        public:
+        private:
             using logic::Piece::Piece;
             std::vector<logic::Move> generateMoves(logic::GameState& gameState) override
             {
@@ -17,7 +17,7 @@ namespace testing {
     // A piece that has moves with 2 priority
     class Priority2Piece : public logic::Piece
     {
-        public:
+        private:
             using logic::Piece::Piece;
             std::vector<logic::Move> generateMoves(logic::GameState& gameState) override
             {
@@ -28,7 +28,7 @@ namespace testing {
     // A piece that has moves with 3 priority
     class Priority3Piece : public logic::Piece
     {
-        public:
+        private:
             using logic::Piece::Piece;
             std::vector<logic::Move> generateMoves(logic::GameState& gameState) override
             {
@@ -39,7 +39,7 @@ namespace testing {
     // A piece that has moves with 4 priority
     class Priority4Piece : public logic::Piece
     {
-        public:
+        private:
             using logic::Piece::Piece;
             std::vector<logic::Move> generateMoves(logic::GameState& gameState) override
             {
@@ -50,7 +50,7 @@ namespace testing {
     // A piece that has moves with 5 priority
     class Priority5Piece : public logic::Piece
     {
-        public:
+        private:
             using logic::Piece::Piece;
             std::vector<logic::Move> generateMoves(logic::GameState& gameState) override
             {
@@ -61,7 +61,7 @@ namespace testing {
     // A piece that has 5 moves with priority 5 and 1 move of priority 1
     class FiveFivesOneOnePiece : public logic::Piece
     {
-        public:
+        private:
             using logic::Piece::Piece;
             std::vector<logic::Move> generateMoves(logic::GameState& gameState) override
             {
@@ -72,7 +72,7 @@ namespace testing {
     // A piece that has 5 moves to different positions =
     class FiveDifferentPositionsPiece : public logic::Piece
     {
-        public:
+        private:
             using logic::Piece::Piece;
             std::vector<logic::Move> generateMoves(logic::GameState& gameState) override
             {
@@ -82,7 +82,7 @@ namespace testing {
 
     class OneTwoTwoThreeAttack : public logic::Piece
     {
-        public:
+        private:
             using logic::Piece::Piece;
             std::vector<logic::Move> generateMoves(logic::GameState& gameState) override
             {
@@ -96,7 +96,7 @@ namespace testing {
 
     class OneTwoAttack : public logic::Piece
     {
-        public:
+        private:
             using logic::Piece::Piece;
             std::vector<logic::Move> generateMoves(logic::GameState& gameState) override
             {
@@ -110,7 +110,7 @@ namespace testing {
 
     class OneThreeAttack : public logic::Piece
     {
-        public:
+        private:
             using logic::Piece::Piece;
             std::vector<logic::Move> generateMoves(logic::GameState& gameState) override
             {
@@ -120,6 +120,25 @@ namespace testing {
             {
                 return {{{std::make_pair(1, 3)}}};
             } 
+    };
+
+    class BigPriority : public logic::Piece
+    {
+        private:
+            using logic::Piece::Piece;
+            std::vector<logic::Move> generateMoves(logic::GameState& gameState) override
+            {
+                return {{{std::make_pair(1, 1)}}};
+            }
+            std::vector<logic::Move> generateAttackingMoves(logic::GameState& gameState) override
+            {
+                return {{{std::make_pair(1, 1)}}};
+            } 
+        public:
+            int getMinPriority(logic::GameState& gameState) override
+            {
+                return 5001; // It's over 5000!
+            }
     };
 }
 #endif

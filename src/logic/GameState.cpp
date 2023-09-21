@@ -24,6 +24,7 @@ namespace logic {
         if(!gameBoard) {
             gameBoard = new GameBoard(players);
         }
+        nextTurn();
     }
 
     // See GameState.h
@@ -66,6 +67,16 @@ namespace logic {
     }
 
     // See GameState.h
+    bool GameState::setNextPlayer() 
+    { 
+        bool result = setCrntPlayer(1); 
+        if(result) {
+            nextTurn();
+        }
+        return result;
+    }
+
+    // See GameState.h
     GameBoard* GameState::getBoard()
     {
         return gameBoard;
@@ -78,10 +89,19 @@ namespace logic {
     }
 
     // See GameState.h
-    int GameState::getMaxPriorityOfPlayer(Player player)
+    int GameState::getPriorityOfPlayer(Player player)
     {
         // Get the player's pieces
         std::vector<Move::position> playerPiecePositions = gameBoard->getPiecesOfPlayer(player);
+        
+        // Priorities below this boundary are not allowed
+        int bound;
+        if(player == crntPlayer) {
+            bound = minPriority;
+        }
+        else {
+            bound = getMinPriority(player);
+        }
 
         // Iterate through the positions to find the maxPriority
         int maxPriority = 0;
@@ -91,15 +111,17 @@ namespace logic {
                 continue;
             }
             int crntMax = piece->getMaxPriorityOfMoves(*this);
-            if(crntMax > maxPriority) {
+            if(crntMax > maxPriority && crntMax >= bound) {
                 maxPriority = crntMax;
             }
         }
         return maxPriority;
     }
-    int GameState::getMaxPriorityOfPlayer() 
+
+    // See GameState.h
+    int GameState::getPriority() 
     {
-        return getMaxPriorityOfPlayer(crntPlayer);
+        return getPriorityOfPlayer(crntPlayer);
     }
 
     // See GameState.h
@@ -111,8 +133,22 @@ namespace logic {
             return {};
         }
 
-        int maxPriority = getMaxPriorityOfPlayer(player);
-        std::vector<Move> allPieceMoves = piece->generateMoves(*this);
+        int maxPriority = getPriorityOfPlayer(player);
+
+        // If the player's move priority is below the minimum allowed priority,
+        // then the player has no possible moves
+        int bound;
+        if(player == crntPlayer) {
+            bound = minPriority;
+        }
+        else {
+            bound = getMinPriority(player);
+        }
+        if(maxPriority < bound) {
+            return {};
+        }
+
+        std::vector<Move>& allPieceMoves = piece->getMoves(*this);
         std::vector<Move> movesToPosition{};
 
         for(Move move : allPieceMoves) {
@@ -324,4 +360,36 @@ namespace logic {
         return isAttacked(crntPlayer, position);
     }
 
+    // See GameState.h
+    int GameState::getTurn() 
+    {
+        return curTurn;
+    }
+
+    // See GameState.h
+    void GameState::nextTurn() 
+    {
+        curTurn++;
+        updateMinPriority();
+    }
+
+    // See GameState.h
+    int GameState::getMinPriority(Player player) 
+    {
+        // Get the current player's pieces
+        std::vector<Move::position> playerPiecePositions = gameBoard->getPiecesOfPlayer(player);
+
+        // Set minPriority to the maximum of each piece's minimum priorities
+        int result = 0;
+        for(Move::position piecePosition : playerPiecePositions) {
+            result = std::max(result, gameBoard->getPiece(piecePosition)->getMinPriority(*this));
+        }
+        return result;
+    }
+
+    // See GameState.h
+    void GameState::updateMinPriority() 
+    {
+        minPriority = getMinPriority(crntPlayer);
+    }
 }

@@ -21,10 +21,7 @@ namespace chess {
              * sets the players to White and Black, and stores references to each player's
              * king
             */
-            ChessGameState() : GameState(new ChessBoard(), {Player::white, Player::black}) {
-                kings[Player::white] = getBoard()->getPiece(std::make_pair(5, 1));
-                kings[Player::black] = getBoard()->getPiece(std::make_pair(5, 8));
-            }
+            ChessGameState();
 
 
             /*

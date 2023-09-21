@@ -49,6 +49,16 @@ namespace logic {
             */
             int crntMaxPriority{};
 
+            /*
+            * The current turn in the game, incremented whenever a move is made
+            */
+            int curTurn{0};
+
+            /*
+            * The minimum priority for any move on the current turn
+            */
+            int minPriority {0};
+
         public:
             /*
             * Constructor: Assigns gameBoard to pre-initialized board object and sets 
@@ -80,17 +90,20 @@ namespace logic {
             * - True if the next player is properly set, even if it is set to the same player
             * - False if there are 0 players and attempt to set the players is made
             */
-            bool setCrntPlayer(int idxOffset = 0);
+            bool setCrntPlayer(int idxOffset = 1);
 
             /*
             * Sets crntPlayer and crntPlayerIdx to their corresponding values for the
             * next player in the game as determined by the player order of allPlayers
             * 
+            * Also increments the turn counter when called. To set the next player
+            * without incrementing the turn counter, use setCrntPlayer.
+            * 
             * Returns:
             * - True if the next player is properly set
             * - False if there are 0 players and nothing is changed
             */
-            bool setNextPlayer() { return setCrntPlayer(1); }
+            bool setNextPlayer();
 
             /*
             * Returns a reference to the gameboard
@@ -103,12 +116,16 @@ namespace logic {
             std::vector<Move::position> getPiecesOfCrntPlayer();
 
             /*
-            * Get the max priority of a given player's possible moves
+            * Get the priority of a given player's possible moves
             * - Returns 0 if the player has no moves
-            * - When no player is provided, gets the max priroity of the current player
             */
-            int getMaxPriorityOfPlayer(Player player);
-            int getMaxPriorityOfPlayer();
+            int getPriorityOfPlayer(Player player);
+
+            /*
+            * Get the priority of the current player's possible moves
+            * - Returns 0 if the player has no moves
+            */
+            int getPriority();
 
             /*
             * Returns all of the moves a player has that move a piece from start to end
@@ -202,6 +219,32 @@ namespace logic {
             bool isAttacked(Player player, Move::position position);
             bool isAttacked(int x, int y);
             bool isAttacked(Move::position position);
+
+            /*
+            * Returns the current turn in the game
+            */
+            int getTurn();
+
+            /*
+             * Increments the turn count and updates the minimum priority for the current turn
+             * - Note: The function is called automatically by setNextPlayer()
+             *         so you will not need to call this in regular circumstances
+            */
+            void nextTurn();
+
+        private:
+            /* 
+            * Returns the minimum priority of all moves for the inputted player
+            */
+            int getMinPriority(Player player);
+
+            /* 
+            * Updates the minimum priority based on current player
+            * - Note: Called automatically in most circumstances, but make sure
+            *         to call this whenever pieces are added in the middle of a turn,
+            *         which should hopefully happen rarely if at all.
+            */
+            void updateMinPriority();
     };
 }
 #endif

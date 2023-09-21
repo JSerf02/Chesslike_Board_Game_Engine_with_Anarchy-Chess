@@ -8,10 +8,13 @@ namespace logic {
     
     using Player = Piece::Player;
 
+    // Let the compiler know that these functions exist
     class GameState {
         public: 
-            int getMaxPriorityOfPlayer();
+            int getPriority();
+            int getTurn();
     };
+
     // See Piece.h
     Piece::Piece(Move::position startPos, double pieceValue) 
         : piecePosition{ startPos }, value{ pieceValue } { }
@@ -78,6 +81,28 @@ namespace logic {
     }
 
     // See Piece.h
+    std::vector<Move>& Piece::getMoves(GameState& gameState) 
+    {
+        int curTurn = gameState.getTurn();
+        if(moveCacheUpdateTurn != curTurn) {
+            moveCache = generateMoves(gameState);
+            moveCacheUpdateTurn = curTurn;
+        }
+        return moveCache;
+    }
+
+    // See Piece.h
+    std::vector<Move>& Piece::getAttackingMoves(GameState& gameState) 
+    {
+        int curTurn = gameState.getTurn();
+        if(attackMoveCacheUpdateTurn != curTurn) {
+            attackMoveCache = generateAttackingMoves(gameState);
+            attackMoveCacheUpdateTurn = curTurn;
+        }
+        return attackMoveCache;
+    }
+
+    // See Piece.h
     int Piece::getMaxPriorityOfMoves(GameState& gameState)
     {
         // Get all of the piece's moves
@@ -102,7 +127,7 @@ namespace logic {
             return {};
         }
 
-        int maxPriority = gameState.getMaxPriorityOfPlayer();
+        int maxPriority = gameState.getPriority();
 
         std::set<Move::position> attackPositionsSet{};
         for(Move attackMove : attackMoves) {

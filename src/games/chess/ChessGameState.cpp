@@ -6,6 +6,12 @@
 namespace chess {
     using namespace logic;
     using Player = Piece::Player;
+    
+    // See ChessGameState.h
+    ChessGameState::ChessGameState() : GameState(new ChessBoard(), {Player::white, Player::black}) {
+        kings[Player::white] = getBoard()->getPiece(std::make_pair(5, 1));
+        kings[Player::black] = getBoard()->getPiece(std::make_pair(5, 8));
+    }
 
     // See ChessGameState.h
     Piece* ChessGameState::getKing(Player player) {
@@ -58,7 +64,7 @@ namespace chess {
     bool ChessGameState::isInCheckmate(Player player)
     {
         // Every move has priority of at least 1, so 0 priority means no possible moves
-        return getMaxPriorityOfPlayer(player) == 0; 
+        return getPriorityOfPlayer(player) == 0; 
     }
     bool ChessGameState::isInCheckmate()
     {

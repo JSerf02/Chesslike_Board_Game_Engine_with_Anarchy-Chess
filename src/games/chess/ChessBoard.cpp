@@ -14,28 +14,29 @@ namespace chess {
     using Player = Piece::Player;
 
     // See ChessBoard.h
-    void ChessBoard::setup() {
+    ChessBoard::ChessBoard() : GameBoard({Player::white, Player::black}) 
+    {
         // White strong pieces
-        Piece* whiteLeftRook    = new Rook(  Player::white, std::make_pair(1, 1));
+        Piece* whiteLeftRook    = new Rook  (Player::white, std::make_pair(1, 1));
         Piece* whiteLeftKnight  = new Knight(Player::white, std::make_pair(2, 1));
         Piece* whiteLeftBishop  = new Bishop(Player::white, std::make_pair(3, 1));
-        Piece* whiteQueen       = new Queen( Player::white, std::make_pair(4, 1));
-        Piece* whiteKing        = new King(  Player::white, std::make_pair(5, 1));
+        Piece* whiteQueen       = new Queen (Player::white, std::make_pair(4, 1));
+        Piece* whiteKing        = new King  (Player::white, std::make_pair(5, 1));
         Piece* whiteRightBishop = new Bishop(Player::white, std::make_pair(6, 1));
         Piece* whiteRightKnight = new Knight(Player::white, std::make_pair(7, 1));
-        Piece* whiteRightRook   = new Rook(  Player::white, std::make_pair(8, 1));
+        Piece* whiteRightRook   = new Rook  (Player::white, std::make_pair(8, 1));
 
         // Black strong pieces
-        Piece* blackLeftRook    = new Rook(  Player::black, std::make_pair(1, 8));
+        Piece* blackLeftRook    = new Rook  (Player::black, std::make_pair(1, 8));
         Piece* blackLeftKnight  = new Knight(Player::black, std::make_pair(2, 8));
         Piece* blackLeftBishop  = new Bishop(Player::black, std::make_pair(3, 8));
-        Piece* blackQueen       = new Queen( Player::black, std::make_pair(4, 8));
-        Piece* blackKing        = new King(  Player::black, std::make_pair(5, 8));
+        Piece* blackQueen       = new Queen (Player::black, std::make_pair(4, 8));
+        Piece* blackKing        = new King  (Player::black, std::make_pair(5, 8));
         Piece* blackRightBishop = new Bishop(Player::black, std::make_pair(6, 8));
         Piece* blackRightKnight = new Knight(Player::black, std::make_pair(7, 8));
-        Piece* blackRightRook   = new Rook(  Player::black, std::make_pair(8, 8));
+        Piece* blackRightRook   = new Rook  (Player::black, std::make_pair(8, 8));
 
-        // Add all of the storng pieces to the board
+        // Add all of the strong pieces to the board
         addPieces({
             whiteLeftRook,
             whiteLeftKnight,
@@ -63,8 +64,33 @@ namespace chess {
     }
 
     // See ChessBoard.h
-    bool ChessBoard::onBoard(int x, int y) {
+    bool ChessBoard::onBoard(int x, int y) 
+    {
         return 1 <= x  && x <= 8 && 1 <= y && y <= 8;
+    }
+
+    // See ChessBoard.h
+    int ChessBoard::minX() 
+    {
+        return 1;
+    }
+
+    // See ChessBoard.h
+    int ChessBoard::maxX() 
+    {
+        return boardSize;
+    }
+
+    // See ChessBoard.h
+    int ChessBoard::minY() 
+    {
+        return 1;
+    }
+
+    // See ChessBoard.h
+    int ChessBoard::maxY() 
+    {
+        return boardSize;
     }
 
 }

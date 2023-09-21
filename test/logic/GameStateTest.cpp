@@ -139,9 +139,9 @@ TEST_CASE("Game State: Get maximum priority of player's moves")
     // Create a GameState with 2 players: white and black
     GameState gameState{ gameBoard, { Player::white, Player::black } };
 
-    CHECK(gameState.getMaxPriorityOfPlayer(Player::white) == 3);
-    CHECK(gameState.getMaxPriorityOfPlayer() == 3);
-    CHECK(gameState.getMaxPriorityOfPlayer(Player::black) == 5);
+    CHECK(gameState.getPriorityOfPlayer(Player::white) == 3);
+    CHECK(gameState.getPriority() == 3);
+    CHECK(gameState.getPriorityOfPlayer(Player::black) == 5);
 }
 
 TEST_CASE("Game State: Get moves of piece")
@@ -253,36 +253,48 @@ TEST_CASE("Game State: Move Piece")
     GameState gameState{ gameBoard, { Player::white, Player::black } };
     CHECK(gameState.getCrntPlayer() == Player::white);
 
+    // Check that the initial turn count is 1, since turn is incremented when a
+    // gameState is spanwed
+    CHECK(gameState.getTurn() == 1);
+
     /* Check all correct uses of movePiece */
 
     // Move diffPiece to (11, 11)
     CHECK(gameState.movePiece(diffPiece->getPosition(), std::make_pair(11, 11)));
     CHECK(gameBoard->getPiece(11, 11) == diffPiece);
+    CHECK(gameState.getTurn() == 2);
 
     // Move black3Piece to (3, 3)
     CHECK(gameState.movePiece(2, 0, std::make_pair(3, 3)));
     CHECK(gameBoard->getPiece(3, 3) == black3Piece);
+    CHECK(gameState.getTurn() == 3);
 
     // Move diffPiece to (12, 12)
     CHECK(gameState.movePiece(diffPiece->getPosition(), 12, 12));
     CHECK(gameBoard->getPiece(12, 12) == diffPiece);
+    CHECK(gameState.getTurn() == 4);
 
     // Skip black's turn
     gameState.setNextPlayer();
+    CHECK(gameState.getTurn() == 5);
 
     // Move diffPiece to (13, 13)
     CHECK(gameState.movePiece(12, 12, 13, 13));
     CHECK(gameBoard->getPiece(13, 13) == diffPiece);
+    CHECK(gameState.getTurn() == 6);
 
     // Skip black's turn
     gameState.setNextPlayer();
+    CHECK(gameState.getTurn() == 7);
 
     // Check that indexes works properly by moving manyPiece to (1, 1)
     CHECK(gameState.movePiece(manyPiece->getPosition(), 1, 1, 4));
     CHECK(gameBoard->getPiece(1, 1) == manyPiece);
+    CHECK(gameState.getTurn() == 8);
 
     // Skip black's turn
     gameState.setNextPlayer();
+    CHECK(gameState.getTurn() == 9);
 
     /* Check all edge cases*/
 
@@ -291,17 +303,20 @@ TEST_CASE("Game State: Move Piece")
     gameBoard->movePiece(black3Piece->getPosition(), 2, 0);
     CHECK(gameState.movePiece(black3Piece->getPosition(), 3, 3) == false);
     CHECK(gameState.getCrntPlayer() == Player::white);
+    CHECK(gameState.getTurn() == 9);
 
     // Try to move white3Piece to (2, 0)
     // This should fail because white3Piece has too low priority
     CHECK(gameState.movePiece(white3Piece->getPosition(), 2, 0) == false);
     CHECK(gameState.getCrntPlayer() == Player::white);
+    CHECK(gameState.getTurn() == 9);
 
     // Try to move diffPiece from (13, 13) to (13, 13)
     // This should fail because there is a piece at (13, 13), itself!
     // - This logic jump is okay because pieces shouldn't be moving to their own positions
     CHECK(gameState.movePiece(diffPiece->getPosition(), diffPiece->getPosition()) == false);
     CHECK(gameState.getCrntPlayer() == Player::white);
+    CHECK(gameState.getTurn() == 9);
 }
 
 TEST_CASE("Game State: Get spaces attacked by player")
@@ -389,5 +404,46 @@ TEST_CASE("Game State: Get spaces attacked by players")
     CHECK(gameState.isAttacked(1, 2));
     CHECK(gameState.isAttacked(std::make_pair(1, 3)));
     CHECK(gameState.isAttacked(5, 5) == false);
+}
 
+TEST_CASE("Game State: Min Priority")
+{
+    // Create a gameBoard
+    GameBoard* gameBoard = new GameBoard{{ Player::white, Player::black }};
+
+    // Create a regular white piece, a regular black piece, and a priority blocking white piece
+    // and add them to the board
+    FiveFivesOneOnePiece* whiteNormalPiece = new FiveFivesOneOnePiece{ Player::white }; // 5 5-priority moves to (1, 1) and 1 1-priority move to (1, 1)
+    Priority3Piece* blackNormalPiece = new Priority3Piece{ Player::black, std::make_pair(2, 0) };
+    BigPriority* whitePriorityBlock = new BigPriority { Player::white, std::make_pair(4, 4) };
+    CHECK(gameBoard->addPieces({ whiteNormalPiece, blackNormalPiece, whitePriorityBlock}));
+
+    // Create a GameState with 2 players: white and black
+    GameState gameState{ gameBoard, { Player::white, Player::black } };
+    CHECK(gameState.getCrntPlayer() == Player::white);
+
+    // Make sure white cannot move because of the priority blocker
+    CHECK(gameState.getPriorityOfPlayer(Player::white) == 0);
+    CHECK(gameState.getMovesOfPiece(whiteNormalPiece->getPosition(), std::make_pair(1, 1)).size() == 0);
+    CHECK(gameState.getMovesOfPiece(0, 0, std::make_pair(1, 1)).size() == 0);
+    CHECK(gameState.getMovesOfPiece(whiteNormalPiece->getPosition(), 1, 1).size() == 0);
+    CHECK(gameState.getMovesOfPiece(0, 0, 1, 1).size() == 0);
+
+    // Make sure black can still move
+    CHECK(gameState.getPriorityOfPlayer(Player::black) == 3);
+    CHECK(gameState.getMovesOfPiece(Player::black, blackNormalPiece->getPosition(), std::make_pair(3, 3)).size() == 1);
+    CHECK(gameState.getMovesOfPiece(Player::black, 2, 0, std::make_pair(3, 3)).size() == 1);
+    CHECK(gameState.getMovesOfPiece(Player::black, blackNormalPiece->getPosition(), 3, 3).size() == 1);
+    CHECK(gameState.getMovesOfPiece(Player::black, 2, 0, 3, 3).size() == 1);
+
+    // Add a priority blocking black piece
+    BigPriority* blackPriorityBlock = new BigPriority { Player::black, std::make_pair(6, 6) };
+    CHECK(gameBoard->addPiece(blackPriorityBlock));
+
+    // Make sure black now has no moves
+    CHECK(gameState.getPriorityOfPlayer(Player::black) == 0);
+    CHECK(gameState.getMovesOfPiece(Player::black, blackNormalPiece->getPosition(), std::make_pair(3, 3)).size() == 0);
+    CHECK(gameState.getMovesOfPiece(Player::black, 2, 0, std::make_pair(3, 3)).size() == 0);
+    CHECK(gameState.getMovesOfPiece(Player::black, blackNormalPiece->getPosition(), 3, 3).size() == 0);
+    CHECK(gameState.getMovesOfPiece(Player::black, 2, 0, 3, 3).size() == 0);
 }
