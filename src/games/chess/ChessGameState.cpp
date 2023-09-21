@@ -44,7 +44,9 @@ namespace chess {
         GameBoard* board = getBoard();
 
         // Simulate moving the piece and check if the move will cause check
-        board->simulateMovePiece(start, end);
+        if(!board->simulateMovePiece(start, end)) {
+            return true; // Assume any invalid moves cause check
+        }
         bool result = isInCheck();
 
         // Undo the simulated move and return the result
