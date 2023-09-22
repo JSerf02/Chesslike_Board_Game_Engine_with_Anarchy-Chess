@@ -1,8 +1,12 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <set>
 
 #include "doctest.h"
+#include "TestChessHelpers.h"
+#include "TestPieces.h"
+
 #include "ChessPiece.h"
 #include "ChessBoard.h"
 #include "ChessGameState.h"
@@ -10,135 +14,127 @@
 #include "Piece.h"
 #include "GameBoard.h"
 #include "GameState.h"
+#include "Rook.h"
 
 using namespace logic;
 using namespace chess;
+using namespace testing;
+
 using Player = Piece::Player;
 
 TEST_CASE("Rook: 4-Directional Movement")
 {
-    // Create a ChessBoard
-    ChessBoard* board = new ChessBoard();
+    // Create a ChessBoard without any pieces
+    ChessBoard* board = new ChessBoard(false);
 
-    // Remove the white a pawn so the rook will be able to move upward initially
-    Piece* aPawn = board->getPiece(std::make_pair(1, 2));
-    CHECK(board->removePiece(aPawn->getPosition()));
+    // Add a rook to the board on D4
+    ChessPiece* rook = new Rook(Player::white, std::make_pair(4, 4));
+    board->addPiece(rook);
+
+    // Add 2 kings to the board to prevent errors
+    ChessPiece* whiteKing = new TestKing(Player::white, std::make_pair(8, 1));
+    ChessPiece* blackKing = new TestKing(Player::black, std::make_pair(8, 2));
+    board->addPieces({whiteKing, blackKing});
 
     // Create a ChessGameState
     ChessGameState* chessState = new ChessGameState(board);
 
     // Make sure you cannot move a rook off the board
-    CHECK(!chessState->canMovePiece(std::make_pair(1, 1), std::make_pair(0, 0)));
+    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(4, 0)));
+    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(0, 4)));
+    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(4, 9)));
+    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(9, 4)));
 
-    // Rook to A4 (test upward movement)
-    CHECK(chessState->movePiece(std::make_pair(1, 1), std::make_pair(1, 4)));
+    // Store all valid positions
+    // A position is valid if it is along the horizontal or vertical of the rook
+    std::set<Move::position> validPositions {};
+    for(int i = 1; i <= 8; i++) {
+        if(i == 4) {
+            continue;
+        }
+        validPositions.insert(std::make_pair(4, i));
+        validPositions.insert(std::make_pair(i, 4));
+    }
 
-    // Pawn to H6
-    CHECK(chessState->movePiece(std::make_pair(8, 7), std::make_pair(8, 6)));
-
-    // Rook to H4 (test rightward movement)
-    CHECK(chessState->movePiece(std::make_pair(1, 4), std::make_pair(8, 4)));
-
-    // Pawn to H5
-    CHECK(chessState->movePiece(std::make_pair(8, 6), std::make_pair(8, 5)));
-
-    // Rook to H3 (test downward movement)
-    CHECK(chessState->movePiece(std::make_pair(8, 4), std::make_pair(8, 3)));
-
-    // Pawn to H4
-    CHECK(chessState->movePiece(std::make_pair(8, 5), std::make_pair(8, 4)));
-
-    // Rook to C3 (test leftward movement)
-    CHECK(chessState->movePiece(std::make_pair(8, 3), std::make_pair(3, 3)));
-
-    // Pawn to H3
-    CHECK(chessState->movePiece(std::make_pair(8, 4), std::make_pair(8, 3)));
-
-    // Rook to C5
-    CHECK(chessState->movePiece(std::make_pair(3, 3), std::make_pair(3, 5)));
-
-    // Make sure the rook cannot move to diagonals
-    CHECK(!chessState->canMovePiece(std::make_pair(3, 5), std::make_pair(2, 6))); // B6
-    CHECK(!chessState->canMovePiece(std::make_pair(3, 5), std::make_pair(4, 6))); // D6
-    CHECK(!chessState->canMovePiece(std::make_pair(3, 5), std::make_pair(2, 4))); // B4
-    CHECK(!chessState->canMovePiece(std::make_pair(3, 5), std::make_pair(1, 3))); // A3
-    CHECK(!chessState->canMovePiece(std::make_pair(3, 5), std::make_pair(4, 4))); // D4
-    CHECK(!chessState->canMovePiece(std::make_pair(3, 5), std::make_pair(5, 3))); // E3
-
-    // Make sure the rook cannot move to other random spaces
-    CHECK(!chessState->canMovePiece(std::make_pair(3, 5), std::make_pair(8, 6))); // H6
-    CHECK(!chessState->canMovePiece(std::make_pair(3, 5), std::make_pair(7, 4))); // G4
-    CHECK(!chessState->canMovePiece(std::make_pair(3, 5), std::make_pair(1, 4))); // A4
-    CHECK(!chessState->canMovePiece(std::make_pair(3, 5), std::make_pair(5, 8))); // E8
+    // Make sure the rook can only move to valid positions
+    TestChessHelpers::testPiecePositions(chessState, rook->getPosition(), validPositions);
 }
 
 TEST_CASE("Rook: Blocked Movement")
 {
-    // Create a ChessBoard
-    ChessBoard* board = new ChessBoard();
+    // Create a ChessBoard without any pieces
+    ChessBoard* board = new ChessBoard(false);
 
-    // Arrange the pieces so the Rook is blocked in all directions
-    CHECK(board->movePiece(std::make_pair(1, 1), std::make_pair(4, 4))); // A Rook to D4
-    CHECK(board->movePiece(std::make_pair(3, 2), std::make_pair(3, 4))); // C Pawn to C4
-    CHECK(board->movePiece(std::make_pair(4, 2), std::make_pair(4, 3))); // D Pawn to D3
-    CHECK(board->movePiece(std::make_pair(5, 2), std::make_pair(4, 5))); // E Pawn to D5
-    CHECK(board->movePiece(std::make_pair(6, 2), std::make_pair(6, 4))); // F Pawn to F4
-    
+    // Add a rook to the board on D4 and 4 other rooks on D3, B4, D7, and H4
+    ChessPiece* rook       = new Rook(Player::white, std::make_pair(4, 4));
+    ChessPiece* downBlock  = new Rook(Player::white, std::make_pair(4, 3));
+    ChessPiece* leftBlock  = new Rook(Player::white, std::make_pair(2, 4));
+    ChessPiece* upBlock    = new Rook(Player::white, std::make_pair(4, 7));
+    ChessPiece* rightBlock = new Rook(Player::white, std::make_pair(8, 4));
+    board->addPieces({rook, downBlock, leftBlock, upBlock, rightBlock});
+
+    // Add 2 kings to the board to prevent errors
+    ChessPiece* whiteKing = new TestKing(Player::white, std::make_pair(8, 1));
+    ChessPiece* blackKing = new TestKing(Player::black, std::make_pair(8, 2));
+    board->addPieces({whiteKing, blackKing});
 
     // Create a ChessGameState
     ChessGameState* chessState = new ChessGameState(board);
 
-    // Ensure that the Rook cannot move onto another piece of the same color
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(3, 4))); // C4 
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(4, 3))); // D3
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(4, 5))); // D5
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(6, 4))); // F4
+    // Store all valid positions
+    // A position is valid if it is horizontal or vertical and it is not blocked
+    // by another rook
+    std::set<Move::position> validPositions {
+        std::make_pair(3, 4),
+        std::make_pair(4, 5),
+        std::make_pair(4, 6),
+        std::make_pair(5, 4),
+        std::make_pair(6, 4),
+        std::make_pair(7, 4),
+    };
 
-    // Ensure that the rook cannot jump over its own pieces
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(2, 4))); // B4
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(4, 2))); // D2
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(4, 6))); // D6
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(7, 4))); // G4
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(8, 4))); // H4
-
-    // Make sure unblocked moves still work
-    CHECK(chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(5, 4))); // E4
+    // Make sure the rook can only move to valid positions
+    TestChessHelpers::testPiecePositions(chessState, rook->getPosition(), validPositions);
 }
 
 TEST_CASE("Rook: Attack")
 {
-    // Create a ChessBoard
-    ChessBoard* board = new ChessBoard();
+    // Create a ChessBoard without any pieces
+    ChessBoard* board = new ChessBoard(false);
 
-    // Arrange the pieces so the Rook is blocked in all directions
-    CHECK(board->movePiece(std::make_pair(1, 1), std::make_pair(4, 4))); // A Rook to D4
-    CHECK(board->movePiece(std::make_pair(3, 7), std::make_pair(3, 4))); // C Pawn to C4
-    CHECK(board->movePiece(std::make_pair(5, 7), std::make_pair(4, 5))); // E Pawn to D5
-    CHECK(board->movePiece(std::make_pair(6, 7), std::make_pair(6, 4))); // F Pawn to F4
-    
+    // Add a rook to the board on D4 and 5 other rooks on D3, D2, B4, D7, and H4
+    ChessPiece* rook             = new Rook(Player::white, std::make_pair(4, 4));
+    ChessPiece* downEnemy        = new Rook(Player::black, std::make_pair(4, 3));
+    ChessPiece* downBlockedEnemy = new Rook(Player::black, std::make_pair(4, 2));
+    ChessPiece* leftEnemy        = new Rook(Player::black, std::make_pair(2, 4));
+    ChessPiece* upBlock          = new Rook(Player::white, std::make_pair(4, 7));
+    ChessPiece* rightBlock       = new Rook(Player::white, std::make_pair(8, 4));
+    board->addPieces({rook, downEnemy, downBlockedEnemy, leftEnemy, upBlock, rightBlock});
+
+    // Add 2 kings to the board to prevent errors
+    ChessPiece* whiteKing = new TestKing(Player::white, std::make_pair(8, 1));
+    ChessPiece* blackKing = new TestKing(Player::black, std::make_pair(8, 2));
+    board->addPieces({whiteKing, blackKing});
 
     // Create a ChessGameState
     ChessGameState* chessState = new ChessGameState(board);
 
-    // Ensure that the Rook is attacking the correct spaces
-    CHECK(chessState->isAttacked(Player::black, std::make_pair(3, 4))); // C4 
-    CHECK(chessState->isAttacked(Player::black, std::make_pair(4, 5))); // D5
-    CHECK(chessState->isAttacked(Player::black, std::make_pair(5, 4))); // E4
+    // Store all attacked positions
+    // A position is attacked if it is horizontal or vertical, it does not contain
+    // a piece of the same color, and it is not blocked by another piece
+    std::set<Move::position> attackPositions {
+        std::make_pair(4, 3),
+        std::make_pair(3, 4),
+        std::make_pair(2, 4),
+        std::make_pair(4, 5),
+        std::make_pair(4, 6),
+        std::make_pair(5, 4),
+        std::make_pair(6, 4),
+        std::make_pair(7, 4),
+    };
 
-    // Ensure that the rook is not attacking spaces due to blocks
-    CHECK(!chessState->isAttacked(Player::black, std::make_pair(2, 4))); // B4
-    CHECK(!chessState->isAttacked(Player::black, std::make_pair(4, 6))); // D6
-    CHECK(!chessState->isAttacked(Player::black, std::make_pair(7, 4))); // G4
-    CHECK(!chessState->isAttacked(Player::black, std::make_pair(8, 4))); // H4
-
-    // Ensure that the rook is not attacking its own color's piece
-    CHECK(!chessState->isAttacked(Player::black, std::make_pair(4, 2))); // D2
-
-    // Ensure that the rook is not attacking random other spaces
-    CHECK(!chessState->isAttacked(Player::black, std::make_pair(8, 6))); // H6
-    CHECK(!chessState->isAttacked(Player::black, std::make_pair(7, 5))); // G5
-    CHECK(!chessState->isAttacked(Player::black, std::make_pair(1, 5))); // A5
-    CHECK(!chessState->isAttacked(Player::black, std::make_pair(5, 8))); // E8
+    // Make sure the rook attacks only the valid attack positions
+    TestChessHelpers::testPieceAttacks(chessState, Player::black, attackPositions);
 }
 
 TEST_CASE("Rook: Value")

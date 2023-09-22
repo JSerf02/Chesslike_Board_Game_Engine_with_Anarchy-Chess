@@ -1,6 +1,8 @@
 #ifndef TESTPIECES_H
 #define TESTPIECES_H
 
+#include "ChessPiece.h"
+
 namespace testing {
 
     // A piece that has moves with 1 priority
@@ -138,6 +140,16 @@ namespace testing {
             int getMinPriority(logic::GameState& gameState) override
             {
                 return 5001; // It's over 5000!
+            }
+    };
+
+    class TestKing : public chess::ChessPiece
+    {
+        public:
+            using chess::ChessPiece::ChessPiece;
+            bool isKing() override 
+            {
+                return true;
             }
     };
 }
