@@ -65,12 +65,12 @@ TEST_CASE("Rook: Blocked Movement")
     // Create a ChessBoard without any pieces
     ChessBoard* board = new ChessBoard(false);
 
-    // Add a rook to the board on D4 and 4 other rooks on D3, B4, D7, and H4
-    ChessPiece* rook       = new Rook(Player::white, std::make_pair(4, 4));
-    ChessPiece* downBlock  = new Rook(Player::white, std::make_pair(4, 3));
-    ChessPiece* leftBlock  = new Rook(Player::white, std::make_pair(2, 4));
-    ChessPiece* upBlock    = new Rook(Player::white, std::make_pair(4, 7));
-    ChessPiece* rightBlock = new Rook(Player::white, std::make_pair(8, 4));
+    // Add a rook to the board on D4 and 4 other test pieces on D3, B4, D7, and H4
+    ChessPiece* rook       = new Rook(          Player::white, std::make_pair(4, 4));
+    ChessPiece* downBlock  = new TestChessPiece(Player::white, std::make_pair(4, 3));
+    ChessPiece* leftBlock  = new TestChessPiece(Player::white, std::make_pair(2, 4));
+    ChessPiece* upBlock    = new TestChessPiece(Player::white, std::make_pair(4, 7));
+    ChessPiece* rightBlock = new TestChessPiece(Player::white, std::make_pair(8, 4));
     board->addPieces({rook, downBlock, leftBlock, upBlock, rightBlock});
 
     // Add 2 kings to the board to prevent errors
@@ -83,14 +83,14 @@ TEST_CASE("Rook: Blocked Movement")
 
     // Store all valid positions
     // A position is valid if it is horizontal or vertical and it is not blocked
-    // by another rook
+    // by another piece
     std::set<Move::position> validPositions {
         std::make_pair(3, 4),
         std::make_pair(4, 5),
         std::make_pair(4, 6),
         std::make_pair(5, 4),
         std::make_pair(6, 4),
-        std::make_pair(7, 4),
+        std::make_pair(7, 4)
     };
 
     // Make sure the rook can only move to valid positions
@@ -102,13 +102,13 @@ TEST_CASE("Rook: Attack")
     // Create a ChessBoard without any pieces
     ChessBoard* board = new ChessBoard(false);
 
-    // Add a rook to the board on D4 and 5 other rooks on D3, D2, B4, D7, and H4
-    ChessPiece* rook             = new Rook(Player::white, std::make_pair(4, 4));
-    ChessPiece* downEnemy        = new Rook(Player::black, std::make_pair(4, 3));
-    ChessPiece* downBlockedEnemy = new Rook(Player::black, std::make_pair(4, 2));
-    ChessPiece* leftEnemy        = new Rook(Player::black, std::make_pair(2, 4));
-    ChessPiece* upBlock          = new Rook(Player::white, std::make_pair(4, 7));
-    ChessPiece* rightBlock       = new Rook(Player::white, std::make_pair(8, 4));
+    // Add a rook to the board on D4 and 5 other test pieces on D3, D2, B4, D7, and H4
+    ChessPiece* rook             = new Rook(          Player::white, std::make_pair(4, 4));
+    ChessPiece* downEnemy        = new TestChessPiece(Player::black, std::make_pair(4, 3));
+    ChessPiece* downBlockedEnemy = new TestChessPiece(Player::black, std::make_pair(4, 2));
+    ChessPiece* leftEnemy        = new TestChessPiece(Player::black, std::make_pair(2, 4));
+    ChessPiece* upBlock          = new TestChessPiece(Player::white, std::make_pair(4, 7));
+    ChessPiece* rightBlock       = new TestChessPiece(Player::white, std::make_pair(8, 4));
     board->addPieces({rook, downEnemy, downBlockedEnemy, leftEnemy, upBlock, rightBlock});
 
     // Add 2 kings to the board to prevent errors
@@ -130,7 +130,7 @@ TEST_CASE("Rook: Attack")
         std::make_pair(4, 6),
         std::make_pair(5, 4),
         std::make_pair(6, 4),
-        std::make_pair(7, 4),
+        std::make_pair(7, 4)
     };
 
     // Make sure the rook attacks only the valid attack positions

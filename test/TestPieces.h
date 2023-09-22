@@ -152,5 +152,11 @@ namespace testing {
                 return true;
             }
     };
+
+    class TestChessPiece : public chess::ChessPiece
+    {
+        public:
+            using chess::ChessPiece::ChessPiece;
+    };
 }
 #endif
