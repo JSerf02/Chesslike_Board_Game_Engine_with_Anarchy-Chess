@@ -16,15 +16,15 @@ namespace logic {
     };
 
     // See Piece.h
-    Piece::Piece(Move::position startPos, double pieceValue) 
-        : piecePosition{ startPos }, value{ pieceValue } { }
-    Piece::Piece(std::vector<Player> newPlayers, Move::position startPos, double pieceValue) 
-        : piecePosition{ startPos }, value{ pieceValue } 
+    Piece::Piece(Move::position startPos) : piecePosition{ startPos } 
+    { 
+        return;
+    }
+    Piece::Piece(std::vector<Player> newPlayers, Move::position startPos) : piecePosition{ startPos }
     {
         addPlayers(newPlayers);
     }
-    Piece::Piece(Player newPlayer, Move::position startPos, double pieceValue) 
-        : piecePosition{ startPos }, value{ pieceValue } 
+    Piece::Piece(Player newPlayer, Move::position startPos) : piecePosition{ startPos }
     {
         addPlayer(newPlayer);
     }
@@ -143,18 +143,6 @@ namespace logic {
         }
 
         return { attackPositionsSet.begin(), attackPositionsSet.end() };
-    }
-
-    // See Piece.h
-    double Piece::getValue()
-    {
-        return value;
-    }
-
-    // See Piece.h
-    void Piece::setValue(double newValue)
-    {
-        value = newValue;
     }
 
     // See Piece.h

@@ -6,6 +6,7 @@
 #include "Move.h"
 #include "Piece.h"
 #include "TestBoard.h"
+#include "TestPieces.h"
 
 using namespace testing;
 using namespace logic;
@@ -333,8 +334,8 @@ TEST_CASE("Game Board: Get updated player score")
     GameBoard board{ { Player::white, Player::black, Player::silver, Player::gold } };
     
     // Create a white piece and a black piece and capture them both
-    Piece* whitePiece = new Piece{std::make_pair(0, 0), 5};
-    Piece* blackPiece = new Piece{std::make_pair(3, 3), 7};
+    Piece* whitePiece = new Priority1Piece{std::make_pair(0, 0)};
+    Piece* blackPiece = new Priority2Piece{std::make_pair(3, 3)};
     CHECK(board.addPiece(whitePiece));
     CHECK(board.addPiece(blackPiece));
     whitePiece->addPlayer(Player::white);
@@ -343,10 +344,10 @@ TEST_CASE("Game Board: Get updated player score")
     CHECK(board.capturePiece(3, 3));
 
     // Make sure scores updated properly
-    CHECK(board.getPlayerScore(Player::white) == 7); // White doesn't gain 5 from whitePiece
-    CHECK(board.getPlayerScore(Player::black) == 5); // Black doesn't gain 7 from blackPiece
-    CHECK(board.getPlayerScore(Player::silver) == 12); // Silver gains points from both captures
-    CHECK(board.getPlayerScore(Player::gold) == 12); // Gold gains points from both captures
+    CHECK(board.getPlayerScore(Player::white) == 2); // White doesn't gain 5 from whitePiece
+    CHECK(board.getPlayerScore(Player::black) == 1); // Black doesn't gain 7 from blackPiece
+    CHECK(board.getPlayerScore(Player::silver) == 3); // Silver gains points from both captures
+    CHECK(board.getPlayerScore(Player::gold) == 3); // Gold gains points from both captures
 }
 
 TEST_CASE("Game Board: Simulations") 

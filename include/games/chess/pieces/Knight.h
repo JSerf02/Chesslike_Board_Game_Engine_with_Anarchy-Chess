@@ -6,13 +6,30 @@
 namespace chess {
     using namespace logic;
 
+    /* A chess piece with a value of 3.0 that moves along L-shaped paths */
     class Knight : public ChessPiece
     {
-        /*
-         * TODO: Define knight class
-        */
         public:
+            /* 
+            * Inherit the ChessPiece constructors 
+            */
             using ChessPiece::ChessPiece;
+
+            /*
+            * Returns the value of the piece, 3.0
+            */
+            double getValue() override;
+
+        private:
+            /*
+            * Returns moves along L-shaped paths that are not blocked
+            */
+            std::vector<Move> generateMoves(GameState& gameState) override;
+
+            /*
+            * Returns moves along L-shaped paths that are not blocked
+            */
+            std::vector<Move> generateAttackingMoves(GameState& gameState) override;
     };
 
 }

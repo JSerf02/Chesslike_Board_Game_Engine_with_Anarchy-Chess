@@ -201,6 +201,150 @@ games/chess/ChessPiece.cpp.s:
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/ChessPiece.cpp.s
 .PHONY : games/chess/ChessPiece.cpp.s
 
+games/chess/pieces/Bishop.obj: games/chess/pieces/Bishop.cpp.obj
+.PHONY : games/chess/pieces/Bishop.obj
+
+# target to build an object file
+games/chess/pieces/Bishop.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Bishop.cpp.obj
+.PHONY : games/chess/pieces/Bishop.cpp.obj
+
+games/chess/pieces/Bishop.i: games/chess/pieces/Bishop.cpp.i
+.PHONY : games/chess/pieces/Bishop.i
+
+# target to preprocess a source file
+games/chess/pieces/Bishop.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Bishop.cpp.i
+.PHONY : games/chess/pieces/Bishop.cpp.i
+
+games/chess/pieces/Bishop.s: games/chess/pieces/Bishop.cpp.s
+.PHONY : games/chess/pieces/Bishop.s
+
+# target to generate assembly for a file
+games/chess/pieces/Bishop.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Bishop.cpp.s
+.PHONY : games/chess/pieces/Bishop.cpp.s
+
+games/chess/pieces/King.obj: games/chess/pieces/King.cpp.obj
+.PHONY : games/chess/pieces/King.obj
+
+# target to build an object file
+games/chess/pieces/King.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/King.cpp.obj
+.PHONY : games/chess/pieces/King.cpp.obj
+
+games/chess/pieces/King.i: games/chess/pieces/King.cpp.i
+.PHONY : games/chess/pieces/King.i
+
+# target to preprocess a source file
+games/chess/pieces/King.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/King.cpp.i
+.PHONY : games/chess/pieces/King.cpp.i
+
+games/chess/pieces/King.s: games/chess/pieces/King.cpp.s
+.PHONY : games/chess/pieces/King.s
+
+# target to generate assembly for a file
+games/chess/pieces/King.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/King.cpp.s
+.PHONY : games/chess/pieces/King.cpp.s
+
+games/chess/pieces/Knight.obj: games/chess/pieces/Knight.cpp.obj
+.PHONY : games/chess/pieces/Knight.obj
+
+# target to build an object file
+games/chess/pieces/Knight.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Knight.cpp.obj
+.PHONY : games/chess/pieces/Knight.cpp.obj
+
+games/chess/pieces/Knight.i: games/chess/pieces/Knight.cpp.i
+.PHONY : games/chess/pieces/Knight.i
+
+# target to preprocess a source file
+games/chess/pieces/Knight.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Knight.cpp.i
+.PHONY : games/chess/pieces/Knight.cpp.i
+
+games/chess/pieces/Knight.s: games/chess/pieces/Knight.cpp.s
+.PHONY : games/chess/pieces/Knight.s
+
+# target to generate assembly for a file
+games/chess/pieces/Knight.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Knight.cpp.s
+.PHONY : games/chess/pieces/Knight.cpp.s
+
+games/chess/pieces/Pawn.obj: games/chess/pieces/Pawn.cpp.obj
+.PHONY : games/chess/pieces/Pawn.obj
+
+# target to build an object file
+games/chess/pieces/Pawn.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Pawn.cpp.obj
+.PHONY : games/chess/pieces/Pawn.cpp.obj
+
+games/chess/pieces/Pawn.i: games/chess/pieces/Pawn.cpp.i
+.PHONY : games/chess/pieces/Pawn.i
+
+# target to preprocess a source file
+games/chess/pieces/Pawn.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Pawn.cpp.i
+.PHONY : games/chess/pieces/Pawn.cpp.i
+
+games/chess/pieces/Pawn.s: games/chess/pieces/Pawn.cpp.s
+.PHONY : games/chess/pieces/Pawn.s
+
+# target to generate assembly for a file
+games/chess/pieces/Pawn.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Pawn.cpp.s
+.PHONY : games/chess/pieces/Pawn.cpp.s
+
+games/chess/pieces/Queen.obj: games/chess/pieces/Queen.cpp.obj
+.PHONY : games/chess/pieces/Queen.obj
+
+# target to build an object file
+games/chess/pieces/Queen.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Queen.cpp.obj
+.PHONY : games/chess/pieces/Queen.cpp.obj
+
+games/chess/pieces/Queen.i: games/chess/pieces/Queen.cpp.i
+.PHONY : games/chess/pieces/Queen.i
+
+# target to preprocess a source file
+games/chess/pieces/Queen.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Queen.cpp.i
+.PHONY : games/chess/pieces/Queen.cpp.i
+
+games/chess/pieces/Queen.s: games/chess/pieces/Queen.cpp.s
+.PHONY : games/chess/pieces/Queen.s
+
+# target to generate assembly for a file
+games/chess/pieces/Queen.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Queen.cpp.s
+.PHONY : games/chess/pieces/Queen.cpp.s
+
+games/chess/pieces/Rook.obj: games/chess/pieces/Rook.cpp.obj
+.PHONY : games/chess/pieces/Rook.obj
+
+# target to build an object file
+games/chess/pieces/Rook.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Rook.cpp.obj
+.PHONY : games/chess/pieces/Rook.cpp.obj
+
+games/chess/pieces/Rook.i: games/chess/pieces/Rook.cpp.i
+.PHONY : games/chess/pieces/Rook.i
+
+# target to preprocess a source file
+games/chess/pieces/Rook.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Rook.cpp.i
+.PHONY : games/chess/pieces/Rook.cpp.i
+
+games/chess/pieces/Rook.s: games/chess/pieces/Rook.cpp.s
+.PHONY : games/chess/pieces/Rook.s
+
+# target to generate assembly for a file
+games/chess/pieces/Rook.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Rook.cpp.s
+.PHONY : games/chess/pieces/Rook.cpp.s
+
 helloworld.obj: helloworld.cpp.obj
 .PHONY : helloworld.obj
 
@@ -339,6 +483,24 @@ help:
 	@echo ... games/chess/ChessPiece.obj
 	@echo ... games/chess/ChessPiece.i
 	@echo ... games/chess/ChessPiece.s
+	@echo ... games/chess/pieces/Bishop.obj
+	@echo ... games/chess/pieces/Bishop.i
+	@echo ... games/chess/pieces/Bishop.s
+	@echo ... games/chess/pieces/King.obj
+	@echo ... games/chess/pieces/King.i
+	@echo ... games/chess/pieces/King.s
+	@echo ... games/chess/pieces/Knight.obj
+	@echo ... games/chess/pieces/Knight.i
+	@echo ... games/chess/pieces/Knight.s
+	@echo ... games/chess/pieces/Pawn.obj
+	@echo ... games/chess/pieces/Pawn.i
+	@echo ... games/chess/pieces/Pawn.s
+	@echo ... games/chess/pieces/Queen.obj
+	@echo ... games/chess/pieces/Queen.i
+	@echo ... games/chess/pieces/Queen.s
+	@echo ... games/chess/pieces/Rook.obj
+	@echo ... games/chess/pieces/Rook.i
+	@echo ... games/chess/pieces/Rook.s
 	@echo ... helloworld.obj
 	@echo ... helloworld.i
 	@echo ... helloworld.s

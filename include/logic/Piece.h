@@ -45,11 +45,6 @@ namespace logic {
             std::unordered_map<Player, bool> players{};
 
             /*
-            * The value of the piece, used to calculate each player's score
-            */
-            double value{};
-
-            /*
             * Stores whether or not the piece is currently on a board
             * 
             * It is possible for a piece to be managed by a board object but not be 
@@ -81,9 +76,9 @@ namespace logic {
             /*
             * Constructor: Set piecePosition
             */
-            Piece(Move::position startPos = std::make_pair(0, 0), double pieceValue = 0); 
-            Piece(std::vector<Player> newPlayers, Move::position startPos = std::make_pair(0, 0), double pieceValue = 0);
-            Piece(Player newPlayer, Move::position startPos = std::make_pair(0, 0), double pieceValue = 0); 
+            Piece(Move::position startPos = std::make_pair(0, 0)); 
+            Piece(std::vector<Player> newPlayers, Move::position startPos = std::make_pair(0, 0));
+            Piece(Player newPlayer, Move::position startPos = std::make_pair(0, 0)); 
             
             /*
             * Returns true if the player can move this piece and false otherwise
@@ -175,12 +170,7 @@ namespace logic {
             /*
             * Returns the piece's value
             */
-            double getValue();
-
-            /*
-            * Sets the piece's value to the new value
-            */
-            void setValue(double newValue);
+            virtual double getValue() { return 0.0; }
 
             /*
             * Returns whether or not this piece is on a board

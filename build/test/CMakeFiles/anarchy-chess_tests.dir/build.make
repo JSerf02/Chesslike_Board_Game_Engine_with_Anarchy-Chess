@@ -188,11 +188,101 @@ test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessPiece.cpp.s: cma
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessPiece.cpp.s"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\ChessPiece.cpp" -o CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\ChessPiece.cpp.s
 
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Bishop.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/flags.make
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Bishop.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Bishop.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/src/games/chess/pieces/Bishop.cpp
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Bishop.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Bishop.cpp.obj"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Bishop.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Bishop.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Bishop.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\Bishop.cpp"
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Bishop.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Bishop.cpp.i"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\Bishop.cpp" > CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Bishop.cpp.i
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Bishop.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Bishop.cpp.s"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\Bishop.cpp" -o CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Bishop.cpp.s
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/King.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/flags.make
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/King.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/King.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/src/games/chess/pieces/King.cpp
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/King.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/King.cpp.obj"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/King.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\King.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\King.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\King.cpp"
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/King.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/King.cpp.i"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\King.cpp" > CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\King.cpp.i
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/King.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/King.cpp.s"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\King.cpp" -o CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\King.cpp.s
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knight.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/flags.make
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knight.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knight.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/src/games/chess/pieces/Knight.cpp
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knight.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knight.cpp.obj"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knight.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Knight.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Knight.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\Knight.cpp"
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knight.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knight.cpp.i"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\Knight.cpp" > CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Knight.cpp.i
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knight.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knight.cpp.s"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\Knight.cpp" -o CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Knight.cpp.s
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Pawn.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/flags.make
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Pawn.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Pawn.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/src/games/chess/pieces/Pawn.cpp
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Pawn.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Pawn.cpp.obj"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Pawn.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Pawn.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Pawn.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\Pawn.cpp"
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Pawn.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Pawn.cpp.i"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\Pawn.cpp" > CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Pawn.cpp.i
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Pawn.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Pawn.cpp.s"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\Pawn.cpp" -o CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Pawn.cpp.s
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Queen.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/flags.make
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Queen.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Queen.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/src/games/chess/pieces/Queen.cpp
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Queen.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Queen.cpp.obj"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Queen.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Queen.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Queen.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\Queen.cpp"
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Queen.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Queen.cpp.i"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\Queen.cpp" > CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Queen.cpp.i
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Queen.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Queen.cpp.s"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\Queen.cpp" -o CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Queen.cpp.s
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Rook.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/flags.make
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Rook.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Rook.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/src/games/chess/pieces/Rook.cpp
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Rook.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Rook.cpp.obj"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Rook.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Rook.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Rook.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\Rook.cpp"
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Rook.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Rook.cpp.i"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\Rook.cpp" > CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Rook.cpp.i
+
+test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Rook.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Rook.cpp.s"
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\jserf\Documents\Anarchy Chess\src\games\chess\pieces\Rook.cpp" -o CMakeFiles\anarchy-chess_tests.dir\__\src\games\chess\pieces\Rook.cpp.s
+
 test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/flags.make
 test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
 test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/test/logic/MoveTest.cpp
 test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\logic\MoveTest.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\logic\MoveTest.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\test\logic\MoveTest.cpp"
 
 test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.i: cmake_force
@@ -207,7 +297,7 @@ test/CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.obj: test/CMakeFiles
 test/CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
 test/CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/test/logic/PieceTest.cpp
 test/CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.obj"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\logic\PieceTest.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\logic\PieceTest.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\test\logic\PieceTest.cpp"
 
 test/CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.i: cmake_force
@@ -222,7 +312,7 @@ test/CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.obj: test/CMakeF
 test/CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
 test/CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/test/logic/GameBoardTest.cpp
 test/CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.obj"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\logic\GameBoardTest.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\logic\GameBoardTest.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\test\logic\GameBoardTest.cpp"
 
 test/CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.i: cmake_force
@@ -237,7 +327,7 @@ test/CMakeFiles/anarchy-chess_tests.dir/logic/GameStateTest.cpp.obj: test/CMakeF
 test/CMakeFiles/anarchy-chess_tests.dir/logic/GameStateTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
 test/CMakeFiles/anarchy-chess_tests.dir/logic/GameStateTest.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/test/logic/GameStateTest.cpp
 test/CMakeFiles/anarchy-chess_tests.dir/logic/GameStateTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/logic/GameStateTest.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/logic/GameStateTest.cpp.obj"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/logic/GameStateTest.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\logic\GameStateTest.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\logic\GameStateTest.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\test\logic\GameStateTest.cpp"
 
 test/CMakeFiles/anarchy-chess_tests.dir/logic/GameStateTest.cpp.i: cmake_force
@@ -252,7 +342,7 @@ test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessBoardTest.cpp.obj: test
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessBoardTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessBoardTest.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/test/games/chess/ChessBoardTest.cpp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessBoardTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessBoardTest.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessBoardTest.cpp.obj"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessBoardTest.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\games\chess\ChessBoardTest.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\games\chess\ChessBoardTest.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\test\games\chess\ChessBoardTest.cpp"
 
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessBoardTest.cpp.i: cmake_force
@@ -267,7 +357,7 @@ test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessGameStateTest.cpp.obj: 
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessGameStateTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessGameStateTest.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/test/games/chess/ChessGameStateTest.cpp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessGameStateTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessGameStateTest.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessGameStateTest.cpp.obj"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessGameStateTest.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\games\chess\ChessGameStateTest.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\games\chess\ChessGameStateTest.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\test\games\chess\ChessGameStateTest.cpp"
 
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessGameStateTest.cpp.i: cmake_force
@@ -282,7 +372,7 @@ test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessPieceTest.cpp.obj: test
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessPieceTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessPieceTest.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/test/games/chess/ChessPieceTest.cpp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessPieceTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessPieceTest.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessPieceTest.cpp.obj"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessPieceTest.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\games\chess\ChessPieceTest.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\games\chess\ChessPieceTest.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\test\games\chess\ChessPieceTest.cpp"
 
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/ChessPieceTest.cpp.i: cmake_force
@@ -297,7 +387,7 @@ test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/BishopTest.cpp.obj: t
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/BishopTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/BishopTest.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/test/games/chess/pieces/BishopTest.cpp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/BishopTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/BishopTest.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/BishopTest.cpp.obj"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/BishopTest.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\games\chess\pieces\BishopTest.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\games\chess\pieces\BishopTest.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\test\games\chess\pieces\BishopTest.cpp"
 
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/BishopTest.cpp.i: cmake_force
@@ -312,7 +402,7 @@ test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KingTest.cpp.obj: tes
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KingTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KingTest.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/test/games/chess/pieces/KingTest.cpp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KingTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KingTest.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KingTest.cpp.obj"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KingTest.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\games\chess\pieces\KingTest.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\games\chess\pieces\KingTest.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\test\games\chess\pieces\KingTest.cpp"
 
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KingTest.cpp.i: cmake_force
@@ -327,7 +417,7 @@ test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KnightTest.cpp.obj: t
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KnightTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KnightTest.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/test/games/chess/pieces/KnightTest.cpp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KnightTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KnightTest.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KnightTest.cpp.obj"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KnightTest.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\games\chess\pieces\KnightTest.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\games\chess\pieces\KnightTest.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\test\games\chess\pieces\KnightTest.cpp"
 
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KnightTest.cpp.i: cmake_force
@@ -342,7 +432,7 @@ test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/PawnTest.cpp.obj: tes
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/PawnTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/PawnTest.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/test/games/chess/pieces/PawnTest.cpp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/PawnTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/PawnTest.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/PawnTest.cpp.obj"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/PawnTest.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\games\chess\pieces\PawnTest.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\games\chess\pieces\PawnTest.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\test\games\chess\pieces\PawnTest.cpp"
 
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/PawnTest.cpp.i: cmake_force
@@ -357,7 +447,7 @@ test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/QueenTest.cpp.obj: te
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/QueenTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/QueenTest.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/test/games/chess/pieces/QueenTest.cpp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/QueenTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/QueenTest.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/QueenTest.cpp.obj"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/QueenTest.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\games\chess\pieces\QueenTest.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\games\chess\pieces\QueenTest.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\test\games\chess\pieces\QueenTest.cpp"
 
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/QueenTest.cpp.i: cmake_force
@@ -372,7 +462,7 @@ test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/RookTest.cpp.obj: tes
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/RookTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/RookTest.cpp.obj: C:/Users/jserf/Documents/Anarchy\ Chess/test/games/chess/pieces/RookTest.cpp
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/RookTest.cpp.obj: test/CMakeFiles/anarchy-chess_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/RookTest.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/RookTest.cpp.obj"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/RookTest.cpp.obj -MF CMakeFiles\anarchy-chess_tests.dir\games\chess\pieces\RookTest.cpp.obj.d -o CMakeFiles\anarchy-chess_tests.dir\games\chess\pieces\RookTest.cpp.obj -c "C:\Users\jserf\Documents\Anarchy Chess\test\games\chess\pieces\RookTest.cpp"
 
 test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/RookTest.cpp.i: cmake_force
@@ -393,6 +483,12 @@ anarchy__chess_tests_OBJECTS = \
 "CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessBoard.cpp.obj" \
 "CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessGameState.cpp.obj" \
 "CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessPiece.cpp.obj" \
+"CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Bishop.cpp.obj" \
+"CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/King.cpp.obj" \
+"CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knight.cpp.obj" \
+"CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Pawn.cpp.obj" \
+"CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Queen.cpp.obj" \
+"CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Rook.cpp.obj" \
 "CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj" \
 "CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.obj" \
 "CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.obj" \
@@ -418,6 +514,12 @@ test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/__/src/log
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessBoard.cpp.obj
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessGameState.cpp.obj
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/ChessPiece.cpp.obj
+test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Bishop.cpp.obj
+test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/King.cpp.obj
+test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knight.cpp.obj
+test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Pawn.cpp.obj
+test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Queen.cpp.obj
+test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Rook.cpp.obj
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/logic/MoveTest.cpp.obj
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/logic/PieceTest.cpp.obj
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/logic/GameBoardTest.cpp.obj
@@ -435,7 +537,7 @@ test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/build.make
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/linkLibs.rsp
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/objects1
 test/anarchy-chess_tests.exe: test/CMakeFiles/anarchy-chess_tests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_22) "Linking CXX executable anarchy-chess_tests.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\jserf\Documents\Anarchy Chess\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_28) "Linking CXX executable anarchy-chess_tests.exe"
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build\test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\anarchy-chess_tests.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

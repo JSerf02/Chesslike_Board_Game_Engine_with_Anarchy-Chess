@@ -14,6 +14,12 @@ namespace testing {
             {
                 return {{{std::make_pair(1, 1)}, 1}};
             } 
+        
+        public:
+            double getValue() override 
+            {
+                return 1.0;
+            }
     };
 
     // A piece that has moves with 2 priority
@@ -25,6 +31,12 @@ namespace testing {
             {
                 return {{{std::make_pair(2, 2)}, 2}};
             } 
+        
+        public:
+            double getValue() override 
+            {
+                return 2.0;
+            }
     };
 
     // A piece that has moves with 3 priority

@@ -181,27 +181,6 @@ TEST_CASE("Piece: Get Attacked Spaces")
     CHECK(regularPiece.getAttackedSpaces(gameState).size() == 0);
 }
 
-TEST_CASE("Piece: Value initialization and get value")
-{
-    // Check the default value is properly set to 0
-    Piece testPiece{};
-    CHECK(testPiece.getValue() == 0);
-
-    // Check the value is properly initialized
-    Piece testPiece2{std::make_pair(0, 0), 5};
-    CHECK(testPiece2.getValue() == 5);
-}
-
-TEST_CASE("Piece: Set value and get non-default value")
-{
-    // Create a Piece for testing
-    Piece testPiece{};
-
-    // Change the piece's value and ensure it properly adjusted
-    testPiece.setValue(7);
-    CHECK(testPiece.getValue() == 7);
-}
-
 TEST_CASE("Piece: Manage on-board")
 {
     // Create a Piece for testing

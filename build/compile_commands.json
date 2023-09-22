@@ -41,6 +41,36 @@
 },
 {
   "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\__\\src\\games\\chess\\pieces\\Bishop.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\games\\chess\\pieces\\Bishop.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/pieces/Bishop.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\__\\src\\games\\chess\\pieces\\King.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\games\\chess\\pieces\\King.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/pieces/King.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\__\\src\\games\\chess\\pieces\\Knight.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\games\\chess\\pieces\\Knight.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/pieces/Knight.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\__\\src\\games\\chess\\pieces\\Pawn.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\games\\chess\\pieces\\Pawn.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/pieces/Pawn.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\__\\src\\games\\chess\\pieces\\Queen.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\games\\chess\\pieces\\Queen.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/pieces/Queen.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\__\\src\\games\\chess\\pieces\\Rook.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\games\\chess\\pieces\\Rook.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/pieces/Rook.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
   "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\logic\\MoveTest.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\test\\logic\\MoveTest.cpp\"",
   "file": "C:/Users/jserf/Documents/Anarchy Chess/test/logic/MoveTest.cpp"
 },
@@ -143,5 +173,35 @@
   "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
   "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\games\\chess\\ChessPiece.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\games\\chess\\ChessPiece.cpp\"",
   "file": "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/ChessPiece.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\games\\chess\\pieces\\Bishop.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\games\\chess\\pieces\\Bishop.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/pieces/Bishop.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\games\\chess\\pieces\\King.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\games\\chess\\pieces\\King.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/pieces/King.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\games\\chess\\pieces\\Knight.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\games\\chess\\pieces\\Knight.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/pieces/Knight.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\games\\chess\\pieces\\Pawn.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\games\\chess\\pieces\\Pawn.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/pieces/Pawn.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\games\\chess\\pieces\\Queen.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\games\\chess\\pieces\\Queen.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/pieces/Queen.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\games\\chess\\pieces\\Rook.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\games\\chess\\pieces\\Rook.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/pieces/Rook.cpp"
 }
 ]
