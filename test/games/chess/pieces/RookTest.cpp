@@ -22,7 +22,7 @@ using namespace testing;
 
 using Player = Piece::Player;
 
-TEST_CASE("Rook: 4-Directional Movement")
+TEST_CASE("Rook: Horizontal and Vertical Movement")
 {
     // Create a ChessBoard without any pieces
     ChessBoard* board = new ChessBoard(false);

@@ -82,7 +82,7 @@ TEST_CASE("Bishop: Blocked Movement")
     ChessGameState* chessState = new ChessGameState(board);
 
     // Store all valid positions
-    // A position is valid if it is alonga diagonal and it is not blocked
+    // A position is valid if it is along a diagonal and it is not blocked
     // by another piece
     std::set<Move::position> validPositions {
         std::make_pair(3, 5),
