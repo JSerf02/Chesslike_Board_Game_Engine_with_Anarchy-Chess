@@ -24,6 +24,12 @@ namespace chess {
              * - false if the position was not added to the move
             */
             bool chessAddToMove(Move::position position, Move& move, ChessGameState& chessState);
+
+            /*
+             * Returns whether or not this piece is the king. Note that each player
+             * must have exactly one king in order for the game to function!
+            */
+            virtual bool isKing() { return false; }
     };
 
 }

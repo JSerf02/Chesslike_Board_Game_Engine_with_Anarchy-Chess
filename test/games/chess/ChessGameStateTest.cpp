@@ -54,13 +54,13 @@ TEST_CASE("Chess Game State - Check")
     CHECK(!chessState.isInCheck(Player::black));
     
     // Perform the legendary 2-move checkmate
-    CHECK(chessState.movePiece(std::make_pair(2, 6), std::make_pair(3, 6))); // Pawn to F3
+    CHECK(chessState.movePiece(std::make_pair(6, 2), std::make_pair(6, 3))); // Pawn to F3
     CHECK(!chessState.isInCheck());
-    CHECK(chessState.movePiece(std::make_pair(7, 5), std::make_pair(5, 5))); // Pawn to E5
+    CHECK(chessState.movePiece(std::make_pair(5, 7), std::make_pair(5, 5))); // Pawn to E5
     CHECK(!chessState.isInCheck());
-    CHECK(chessState.movePiece(std::make_pair(2, 7), std::make_pair(4, 7))); // Pawn to G4
+    CHECK(chessState.movePiece(std::make_pair(7, 2), std::make_pair(7, 4))); // Pawn to G4
     CHECK(!chessState.isInCheck());
-    CHECK(chessState.movePiece(std::make_pair(8, 4), std::make_pair(4, 8))); // Queen to H4
+    CHECK(chessState.movePiece(std::make_pair(4, 8), std::make_pair(8, 4))); // Queen to H4
     CHECK(!chessState.isInCheck());
 
     // Make sure white is actually in check after this brilliant sequence of moves
@@ -75,22 +75,22 @@ TEST_CASE("Chess Game State - Will Move Cause Check")
 
     // Make moves to create a position where white will be in check if white plays Pawn to G4
     // Make sure none of these moves will cause check 
-    CHECK(!chessState.willMoveCauseCheck(std::make_pair(2, 6), std::make_pair(3, 6)));
-    CHECK(chessState.movePiece(std::make_pair(2, 6), std::make_pair(3, 6))); // Pawn to F3
+    CHECK(!chessState.willMoveCauseCheck(std::make_pair(6, 2), std::make_pair(6, 3)));
+    CHECK(chessState.movePiece(std::make_pair(6, 2), std::make_pair(6, 3))); // Pawn to F3
 
-    CHECK(!chessState.willMoveCauseCheck(std::make_pair(7, 5), std::make_pair(5, 5)));
-    CHECK(chessState.movePiece(std::make_pair(7, 5), std::make_pair(5, 5))); // Pawn to E5
+    CHECK(!chessState.willMoveCauseCheck(std::make_pair(5, 7), std::make_pair(5, 5)));
+    CHECK(chessState.movePiece(std::make_pair(5, 7), std::make_pair(5, 5))); // Pawn to E5
 
-    CHECK(!chessState.willMoveCauseCheck(std::make_pair(2, 1), std::make_pair(3, 1)));
-    CHECK(chessState.movePiece(std::make_pair(2, 1), std::make_pair(3, 1))); // Pawn to A3
+    CHECK(!chessState.willMoveCauseCheck(std::make_pair(1, 2), std::make_pair(1, 3)));
+    CHECK(chessState.movePiece(std::make_pair(1, 2), std::make_pair(1, 3))); // Pawn to A3
 
-    CHECK(!chessState.willMoveCauseCheck(std::make_pair(2, 6), std::make_pair(3, 6)));
-    CHECK(chessState.movePiece(std::make_pair(8, 4), std::make_pair(4, 8))); // Queen to H4
+    CHECK(!chessState.willMoveCauseCheck(std::make_pair(6, 2), std::make_pair(6, 3)));
+    CHECK(chessState.movePiece(std::make_pair(4, 8), std::make_pair(8, 4))); // Queen to H4
 
     // Make sure chessState returns that playing Pawn to G4 will put white into check
     // and make moving the piece does not work
-    CHECK(chessState.willMoveCauseCheck(std::make_pair(2, 7), std::make_pair(4, 7)));
-    CHECK(!chessState.movePiece(std::make_pair(2, 7), std::make_pair(4, 7))); // Pawn to G4
+    CHECK(chessState.willMoveCauseCheck(std::make_pair(7, 2), std::make_pair(7, 4)));
+    CHECK(!chessState.movePiece(std::make_pair(7, 2), std::make_pair(7, 4))); // Pawn to G4
 }
 
 TEST_CASE("Chess Game State - Checkmate")
@@ -100,15 +100,43 @@ TEST_CASE("Chess Game State - Checkmate")
     CHECK(!chessState.isInCheckmate());
     
     // Perform the legendary 2-move checkmate
-    CHECK(chessState.movePiece(std::make_pair(2, 6), std::make_pair(3, 6))); // Pawn to F3
-    CHECK(!chessState.isInCheckmate());
-    CHECK(chessState.movePiece(std::make_pair(7, 5), std::make_pair(5, 5))); // Pawn to E5
-    CHECK(!chessState.isInCheckmate());
-    CHECK(chessState.movePiece(std::make_pair(2, 7), std::make_pair(4, 7))); // Pawn to G4
-    CHECK(!chessState.isInCheckmate());
-    CHECK(chessState.movePiece(std::make_pair(8, 4), std::make_pair(4, 8))); // Queen to H4
+    CHECK(chessState.movePiece(std::make_pair(6, 2), std::make_pair(6, 3))); // Pawn to F3
+    CHECK(!chessState.isInCheck());
+    CHECK(chessState.movePiece(std::make_pair(5, 7), std::make_pair(5, 5))); // Pawn to E5
+    CHECK(!chessState.isInCheck());
+    CHECK(chessState.movePiece(std::make_pair(7, 2), std::make_pair(7, 4))); // Pawn to G4
+    CHECK(!chessState.isInCheck());
+    CHECK(chessState.movePiece(std::make_pair(4, 8), std::make_pair(8, 4))); // Queen to H4
+    CHECK(!chessState.isInCheck());
 
     // Make sure white is actually in checkmate after this brilliant sequence of moves
     CHECK(chessState.isInCheckmate());
 }
 
+TEST_CASE("Chess GameState: Initialize Object With Imported Board")
+{
+    // Initialize a ChessBoard object
+    ChessBoard* board = new ChessBoard();
+
+    // Put the white king in checkmate 
+    board->movePiece(std::make_pair(6, 2), std::make_pair(6, 3)); // Pawn to F3
+    board->movePiece(std::make_pair(7, 2), std::make_pair(7, 4)); // Pawn to G4
+    board->movePiece(std::make_pair(4, 8), std::make_pair(8, 4)); // Queen to H4
+
+    // Initialize a chess game state using the preexisting board
+    ChessGameState* chessState = new ChessGameState(board);
+    
+    // Make sure the board is set to the correct reference
+    CHECK(chessState->getBoard() == board);
+
+    // Ensure the kings are set and returned properly
+    Piece* whiteKing = chessState->getKing(Player::white);
+    Piece* blackKing = chessState->getKing(Player::black);
+    REQUIRE(whiteKing != nullptr);
+    REQUIRE(blackKing != nullptr);
+    CHECK(whiteKing->getPosition() == std::make_pair(5, 1));
+    CHECK(blackKing->getPosition() == std::make_pair(5, 8));
+
+    // Make sure checkmate is properly detected
+    CHECK(chessState->isInCheckmate(Player::white));
+}

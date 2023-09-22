@@ -34,6 +34,17 @@ TEST_CASE("Chess Board - On Board")
     CHECK(chessBoard.onBoard(9, 2) == false);
 }
 
+TEST_CASE("Chess Board - No Setup")
+{
+    // Initialize the Chess Board
+    ChessBoard* chessBoard = new ChessBoard(false);
+    for(int i = 1; i <= 8; i++) {
+        for(int j = 1; j <= 8; j++) {
+            CHECK(chessBoard->unoccupiedOnBoard(i, j));
+        }
+    }
+}
+
 TEST_CASE("Chess Board - Setup") 
 {
     // Initialize the Chess Board

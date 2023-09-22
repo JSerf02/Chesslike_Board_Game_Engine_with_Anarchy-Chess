@@ -13,6 +13,7 @@ namespace chess {
         */
         public:
             using ChessPiece::ChessPiece;
+            bool isKing() override { return true; }
     };
 
 }

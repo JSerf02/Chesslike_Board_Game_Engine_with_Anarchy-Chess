@@ -133,7 +133,7 @@ namespace logic {
             return {};
         }
 
-        int maxPriority = getPriorityOfPlayer(player);
+        int priority = getPriorityOfPlayer(player);
 
         // If the player's move priority is below the minimum allowed priority,
         // then the player has no possible moves
@@ -144,7 +144,7 @@ namespace logic {
         else {
             bound = getMinPriority(player);
         }
-        if(maxPriority < bound) {
+        if(priority < bound) {
             return {};
         }
 
@@ -152,7 +152,7 @@ namespace logic {
         std::vector<Move> movesToPosition{};
 
         for(Move move : allPieceMoves) {
-            if(move.getPriority() < maxPriority) {
+            if(move.getPriority() < priority) {
                 continue;
             }
             const std::vector<Move::position>& positions = move.getPositions();

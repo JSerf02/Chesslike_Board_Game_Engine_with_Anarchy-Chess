@@ -15,12 +15,17 @@ namespace chess {
     class ChessBoard : public GameBoard
     {
         private:
-            /* The length of each side of the board */
+            /* 
+            * The length of each side of the board 
+            */
             const int boardSize = 8;
         
         public:
-            /* Create a ChessBoard with all of the correct pieces */
-            ChessBoard();
+            /* 
+             * Create a ChessBoard object and add all of the correct pieces if
+             * the setup flag is enabled
+            */
+            ChessBoard(bool setup = true);
             
             /*
              * Returns true if the input is in the square chess board (all coordinates are in the interval [1, 8])

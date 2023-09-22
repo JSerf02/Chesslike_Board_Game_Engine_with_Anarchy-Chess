@@ -23,6 +23,13 @@ namespace chess {
             */
             ChessGameState();
 
+            /* 
+             * Initializes the GameState class' gameBoard* pointer to a preexisting
+             * ChessBoard, sets the players to White and Black, and stores references to each player's
+             * king
+            */
+            ChessGameState(ChessBoard* board);
+
 
             /*
              * Returns a reference to the inputted player's king

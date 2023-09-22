@@ -14,8 +14,13 @@ namespace chess {
     using Player = Piece::Player;
 
     // See ChessBoard.h
-    ChessBoard::ChessBoard() : GameBoard({Player::white, Player::black}) 
+    ChessBoard::ChessBoard(bool setup) : GameBoard({Player::white, Player::black}) 
     {
+        // Don't add pieces if the setup flag is not enabled
+        if(!setup) {
+            return;
+        }
+        
         // White strong pieces
         Piece* whiteLeftRook    = new Rook  (Player::white, std::make_pair(1, 1));
         Piece* whiteLeftKnight  = new Knight(Player::white, std::make_pair(2, 1));
