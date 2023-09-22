@@ -124,7 +124,6 @@ namespace logic {
             * 
             * - Implementation is specific to each type of piece
             */
-            // Default initialization for testing only
             virtual std::vector<Move> generateMoves(GameState& gameState) { return {}; } 
 
             /*
