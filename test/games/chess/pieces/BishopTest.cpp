@@ -40,10 +40,10 @@ TEST_CASE("Bishop: Diagonal Movement")
     ChessGameState* chessState = new ChessGameState(board);
 
     // Make sure you cannot move a bishop off the board
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(4, 0)));
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(0, 4)));
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(4, 9)));
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(9, 4)));
+    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(0, 0)));
+    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(9, 9)));
+    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(0, 8)));
+    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(8, 0)));
 
     // Store all valid positions
     // A position is valid if it is along either diagonal

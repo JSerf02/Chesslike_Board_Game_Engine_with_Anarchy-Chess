@@ -22,42 +22,41 @@ using namespace testing;
 
 using Player = Piece::Player;
 
-TEST_CASE("King: Diagonal Movement")
+TEST_CASE("King: Omnidirectional Movement")
 {
     // Create a ChessBoard without any pieces
     ChessBoard* board = new ChessBoard(false);
 
-    // Add a king to the board on D4
-    ChessPiece* king = new King(Player::white, std::make_pair(4, 4));
-    board->addPiece(king);
-
-    // Add 2 kings to the board to prevent errors
-    ChessPiece* whiteKing = new TestKing(Player::white, std::make_pair(8, 1));
-    ChessPiece* blackKing = new TestKing(Player::black, std::make_pair(8, 2));
+    // Add kings to the board on A1 and D4
+    ChessPiece* whiteKing = new King(Player::white, std::make_pair(1, 1));
+    ChessPiece* blackKing = new King(Player::black, std::make_pair(4, 4));
     board->addPieces({whiteKing, blackKing});
 
     // Create a ChessGameState
     ChessGameState* chessState = new ChessGameState(board);
 
     // Make sure you cannot move a king off the board
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(4, 0)));
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(0, 4)));
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(4, 9)));
-    CHECK(!chessState->canMovePiece(std::make_pair(4, 4), std::make_pair(9, 4)));
+    CHECK(!chessState->canMovePiece(std::make_pair(1, 1), std::make_pair(1, 0)));
+    CHECK(!chessState->canMovePiece(std::make_pair(1, 1), std::make_pair(0, 1)));
+
+    // Move the white king so it is black's turn
+    CHECK(chessState->movePiece(std::make_pair(1, 1), std::make_pair(1, 2)));
 
     // Store all valid positions
-    // A position is valid if it is along either diagonal
-    std::set<Move::position> validPositions {};
-    for(int i = 1; i <= 8; i++) {
-        if(i == 4) {
-            continue;
-        }
-        validPositions.insert(std::make_pair(i, i));
-        validPositions.insert(std::make_pair(i, 8 - i));
-    }
+    // A position is valid if it is within one space of the king (the black king in this case)
+    std::set<Move::position> validPositions {
+        std::make_pair(3, 4),
+        std::make_pair(3, 5),
+        std::make_pair(4, 5),
+        std::make_pair(5, 5),
+        std::make_pair(5, 4),
+        std::make_pair(5, 3),
+        std::make_pair(4, 3),
+        std::make_pair(3, 3)
+    };
 
-    // Make sure the king can only move to valid positions
-    TestChessHelpers::testPiecePositions(chessState, king->getPosition(), validPositions);
+    // Make sure the black king can only move to valid positions
+    TestChessHelpers::testPiecePositions(chessState, blackKing->getPosition(), validPositions);
 }
 
 TEST_CASE("King: Blocked Movement")
@@ -65,36 +64,30 @@ TEST_CASE("King: Blocked Movement")
     // Create a ChessBoard without any pieces
     ChessBoard* board = new ChessBoard(false);
 
-    // Add a king to the board on D4 and 4 test pieces on C3, B6, H8, and G1
-    ChessPiece* king     = new King(        Player::white, std::make_pair(4, 4));
-    ChessPiece* downBlock  = new TestChessPiece(Player::white, std::make_pair(3, 3));
-    ChessPiece* leftBlock  = new TestChessPiece(Player::white, std::make_pair(2, 6));
-    ChessPiece* upBlock    = new TestChessPiece(Player::white, std::make_pair(8, 8));
-    ChessPiece* rightBlock = new TestChessPiece(Player::white, std::make_pair(7, 1));
-    board->addPieces({king, downBlock, leftBlock, upBlock, rightBlock});
-
-    // Add 2 kings to the board to prevent errors
-    ChessPiece* whiteKing = new TestKing(Player::white, std::make_pair(8, 1));
-    ChessPiece* blackKing = new TestKing(Player::black, std::make_pair(8, 2));
-    board->addPieces({whiteKing, blackKing});
+    // Add kings to the board on D4 and H8 and test pieces to every space around 
+    // the D4 king except 1 space
+    ChessPiece* whiteKing  = new King(          Player::white, std::make_pair(4, 4));
+    ChessPiece* blackKing  = new King(          Player::black, std::make_pair(8, 8));
+    ChessPiece* block1     = new TestChessPiece(Player::white, std::make_pair(3, 4));
+    ChessPiece* block2     = new TestChessPiece(Player::white, std::make_pair(3, 5));
+    ChessPiece* block3     = new TestChessPiece(Player::white, std::make_pair(4, 5));
+    ChessPiece* block4     = new TestChessPiece(Player::white, std::make_pair(5, 5));
+    ChessPiece* block5     = new TestChessPiece(Player::white, std::make_pair(5, 4));
+    ChessPiece* block6     = new TestChessPiece(Player::white, std::make_pair(5, 3));
+    ChessPiece* block7     = new TestChessPiece(Player::white, std::make_pair(4, 3));
+    board->addPieces({whiteKing, blackKing, block1, block2, block3, block4, block5, block6, block7});
 
     // Create a ChessGameState
     ChessGameState* chessState = new ChessGameState(board);
 
     // Store all valid positions
-    // A position is valid if it is alonga diagonal and it is not blocked
-    // by another piece
+    // In this case, the only valid move is the only space not blocked
     std::set<Move::position> validPositions {
-        std::make_pair(3, 5),
-        std::make_pair(5, 5),
-        std::make_pair(6, 6),
-        std::make_pair(7, 7),
-        std::make_pair(5, 3),
-        std::make_pair(6, 2)
+        std::make_pair(3, 3)
     };
 
     // Make sure the king can only move to valid positions
-    TestChessHelpers::testPiecePositions(chessState, king->getPosition(), validPositions);
+    TestChessHelpers::testPiecePositions(chessState, whiteKing->getPosition(), validPositions);
 }
 
 TEST_CASE("King: Attack")
@@ -102,35 +95,29 @@ TEST_CASE("King: Attack")
     // Create a ChessBoard without any pieces
     ChessBoard* board = new ChessBoard(false);
 
-    // Add a king to the board on D4 and 5 test pieces on C3, B6, H8, and G1
-    ChessPiece* king           = new King(Player::white, std::make_pair(4, 4));
-    ChessPiece* downEnemy        = new TestChessPiece(Player::black, std::make_pair(3, 3));
-    ChessPiece* downBlockedEnemy = new TestChessPiece(Player::black, std::make_pair(2, 2));
-    ChessPiece* leftEnemy        = new TestChessPiece(Player::black, std::make_pair(2, 6));
-    ChessPiece* upBlock          = new TestChessPiece(Player::white, std::make_pair(8, 8));
-    ChessPiece* rightBlock       = new TestChessPiece(Player::white, std::make_pair(7, 1));
-    board->addPieces({king, downEnemy, downBlockedEnemy, leftEnemy, upBlock, rightBlock});
-
-    // Add 2 kings to the board to prevent errors
-    ChessPiece* whiteKing = new TestKing(Player::white, std::make_pair(8, 1));
-    ChessPiece* blackKing = new TestKing(Player::black, std::make_pair(8, 2));
-    board->addPieces({whiteKing, blackKing});
+    // Add kings to the board on D4 and H8 and test pieces to every space around
+    // the D4 king except for D5 and E5
+    ChessPiece* whiteKing  = new King(          Player::white, std::make_pair(4, 4));
+    ChessPiece* blackKing  = new King(          Player::black, std::make_pair(8, 8));
+    ChessPiece* enemy1     = new TestChessPiece(Player::black, std::make_pair(3, 4));
+    ChessPiece* enemy2     = new TestChessPiece(Player::black, std::make_pair(3, 5));
+    ChessPiece* block1     = new TestChessPiece(Player::white, std::make_pair(5, 4));
+    ChessPiece* block2     = new TestChessPiece(Player::white, std::make_pair(5, 3));
+    ChessPiece* block3     = new TestChessPiece(Player::white, std::make_pair(4, 3));
+    ChessPiece* block4     = new TestChessPiece(Player::white, std::make_pair(3, 3));
+    board->addPieces({whiteKing, blackKing, enemy1, enemy2, block1, block2, block3, block4});
 
     // Create a ChessGameState
     ChessGameState* chessState = new ChessGameState(board);
 
     // Store all attacked positions
-    // A position is attacked if it is along a diagonal, it does not contain
-    // a piece of the same color, and it is not blocked by another piece
+    // The attacked positions are the pieces that are within one space of the 
+    // king and that do not contain pieces of the same color
     std::set<Move::position> attackPositions {
-        std::make_pair(3, 3),
+        std::make_pair(3, 4),
         std::make_pair(3, 5),
-        std::make_pair(2, 6),
-        std::make_pair(5, 5),
-        std::make_pair(6, 6),
-        std::make_pair(7, 7),
-        std::make_pair(5, 3),
-        std::make_pair(6, 2)
+        std::make_pair(4, 5),
+        std::make_pair(5, 5)
     };
 
     // Make sure the king attacks only the valid attack positions
@@ -143,8 +130,8 @@ TEST_CASE("King: Value")
     ChessBoard* board = new ChessBoard();
 
     // Get a king from the chess board
-    Piece* king = board->getPiece(3, 1);
+    Piece* king = board->getPiece(5, 1);
 
-    // Make sure the king's value is 3.0
-    CHECK(king->getValue() == 3.0);
+    // Make sure the king's value is 100.0
+    CHECK(king->getValue() == 100.0);
 }
