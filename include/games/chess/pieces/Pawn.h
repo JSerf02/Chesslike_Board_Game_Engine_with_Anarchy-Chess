@@ -23,6 +23,11 @@ namespace chess {
             double getValue() override;
 
             /*
+            * Returns the pawn's ID
+            */
+            ID getID() override;
+
+            /*
             * Whether the pawn has already moved this game
             */
             bool alreadyMoved{};

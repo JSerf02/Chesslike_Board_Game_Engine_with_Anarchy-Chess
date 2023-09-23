@@ -163,4 +163,7 @@ TEST_CASE("Knight: Value")
 
     // Make sure the knight's value is 3.0
     CHECK(knight->getValue() == 3.0);
+
+    // Make sure the knight's ID is correctly set
+    CHECK(knight->getID() == KNIGHT_ID);
 }

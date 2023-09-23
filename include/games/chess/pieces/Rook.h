@@ -20,6 +20,11 @@ namespace chess {
             */
             double getValue() override;
 
+            /*
+            * Returns the rook's ID
+            */
+            ID getID() override;
+
         private:
             /*
             * Returns moves along the horizontal and vertical that are not blocked

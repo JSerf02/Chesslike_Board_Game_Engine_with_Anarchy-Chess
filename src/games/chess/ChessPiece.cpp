@@ -8,6 +8,12 @@ namespace chess {
     using Player = Piece::Player;
     
     // See ChessPiece.h
+    bool ChessPiece::isKing()
+    {
+        return getID() == KING_ID;
+    }
+    
+    // See ChessPiece.h
     bool ChessPiece::controlledByPlayer(GameState& gameState)
     {
         Player player = gameState.getCrntPlayer();

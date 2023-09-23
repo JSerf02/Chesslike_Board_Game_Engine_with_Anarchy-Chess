@@ -23,9 +23,9 @@ namespace chess {
             double getValue() override;
 
             /*
-            * Returns true since this is the king!
+            * Returns the king's ID
             */
-            bool isKing() override;
+            ID getID() override;
 
         private:
             /*

@@ -204,6 +204,9 @@ TEST_CASE("Pawn: Value")
 
     // Make sure the pawn's value is 1.0
     CHECK(pawn->getValue() == 1.0);
+
+    // Make sure the pawn's ID is correctly set
+    CHECK(pawn->getID() == PAWN_ID);
 }
 
 TEST_CASE("Pawn: En Passant")

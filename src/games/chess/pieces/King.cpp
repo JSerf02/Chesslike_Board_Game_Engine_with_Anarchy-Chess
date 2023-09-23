@@ -8,6 +8,7 @@
 namespace chess {
     using namespace logic;
     using Player = Piece::Player;
+    using ID = Piece::ID;
 
     // See King.h
     double King::getValue() 
@@ -16,9 +17,9 @@ namespace chess {
     }
 
     // See King.h
-    bool King::isKing()
+    ID King::getID()
     {
-        return true;
+        return KING_ID;
     }
 
     // See King.h

@@ -127,7 +127,7 @@ TEST_CASE("King: Attack")
     CHECK(chessState->movePiece(std::make_pair(4, 4), std::make_pair(3, 4)));
 }
 
-TEST_CASE("King: Value")
+TEST_CASE("King: Value and ID")
 {
     // Create a ChessBoard
     ChessBoard* board = new ChessBoard();
@@ -137,4 +137,10 @@ TEST_CASE("King: Value")
 
     // Make sure the king's value is 100.0
     CHECK(king->getValue() == 100.0);
+
+    // Make sure the king's ID is correctly set
+    CHECK(king->getID() == KING_ID);
+
+    // Make sure the king is detected as a king
+    CHECK(static_cast<ChessPiece*>(king)->isKing());
 }

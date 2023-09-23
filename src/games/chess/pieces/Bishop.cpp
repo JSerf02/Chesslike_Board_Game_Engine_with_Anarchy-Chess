@@ -8,11 +8,18 @@
 namespace chess {
     using namespace logic;
     using Player = Piece::Player;
+    using ID = Piece::ID;
 
     // See Bishop.h
     double Bishop::getValue() 
     {
         return 3.0;
+    }
+
+    // See Bishop.h
+    ID Bishop::getID()
+    {
+        return BISHOP_ID;
     }
 
     // See Bishop.h

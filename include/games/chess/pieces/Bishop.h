@@ -20,6 +20,11 @@ namespace chess {
             */
             double getValue() override;
 
+            /*
+            * Returns the bishop's ID
+            */
+            ID getID() override;
+
         private:
             /*
             * Returns moves along diagonals that are not blocked

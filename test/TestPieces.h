@@ -159,9 +159,9 @@ namespace testing {
     {
         public:
             using chess::ChessPiece::ChessPiece;
-            bool isKing() override 
+            ID getID() override 
             {
-                return true;
+                return KING_ID;
             }
     };
 

@@ -8,11 +8,18 @@
 namespace chess {
     using namespace logic;
     using Player = Piece::Player;
+    using ID = Piece::ID;
 
     // See Rook.h
     double Rook::getValue() 
     {
         return 5.0;
+    }
+
+    // See Rook.h
+    ID Rook::getID()
+    {
+        return ROOK_ID;
     }
 
     // See Rook.h

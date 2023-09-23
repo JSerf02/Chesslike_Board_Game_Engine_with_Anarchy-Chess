@@ -8,6 +8,7 @@
 namespace chess {
     using namespace logic;
     using Player = Piece::Player;
+    using ID = Piece::ID;
 
     // See Pawn.h
     double Pawn::getValue() 
@@ -16,9 +17,15 @@ namespace chess {
     }
 
     // See Pawn.h
+    ID Pawn::getID()
+    {
+        return PAWN_ID;
+    }
+
+    // See Pawn.h
     bool Pawn::canBoost()
     {
-        return false;
+        return !alreadyMoved;
     }
 
     // See Pawn.h

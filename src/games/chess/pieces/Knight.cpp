@@ -8,11 +8,18 @@
 namespace chess {
     using namespace logic;
     using Player = Piece::Player;
+    using ID = Piece::ID;
 
     // See Knight.h
     double Knight::getValue() 
     {
         return 3.0;
+    }
+
+    // See Knight.h
+    ID Knight::getID()
+    {
+        return KNIGHT_ID;
     }
 
     // See Knight.h

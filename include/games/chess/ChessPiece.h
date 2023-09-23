@@ -5,6 +5,15 @@
 #include "Piece.h"
 #include "Move.h"
 
+/*
+* IDs for each piece type
+*/
+#define KING_ID 1
+#define BISHOP_ID 2
+#define KNIGHT_ID 3
+#define PAWN_ID 4
+#define QUEEN_ID 5
+#define ROOK_ID 6
 namespace chess {
     using namespace logic;
     using Player = Piece::Player;
@@ -16,11 +25,9 @@ namespace chess {
             using Piece::Piece;
 
             /*
-             * Returns whether or not this piece is the king. Note that each player
-             * must have exactly one king in order for the game to function!
-             * - Note: Defaults to false
+            * Returns whether this piece is a king
             */
-            virtual bool isKing() { return false; }
+            bool isKing();
 
             /*
             * Returns whether the current player controls this piece

@@ -14,6 +14,8 @@ namespace logic {
         * A data structure for a piece on the board
         */
         public:
+            using ID = int;
+            
             /* 
             * The possible players (update as needed)
             */
@@ -142,6 +144,12 @@ namespace logic {
             virtual std::vector<Move> generateAttackingMoves(GameState& gameState) { return {}; }
 
         public:
+            /*
+             * Returns the ID of the piece
+            */
+            // Default implementation for testing purposes
+            virtual ID getID() { return 0; }
+
             /* 
             * Updates the move cache if necessary and then returns a reference
             * to the move cache which contains the current possible moves

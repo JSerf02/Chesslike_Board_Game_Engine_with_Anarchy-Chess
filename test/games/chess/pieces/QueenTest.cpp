@@ -260,4 +260,7 @@ TEST_CASE("Queen: Value")
 
     // Make sure the queen's value is 9.0
     CHECK(queen->getValue() == 9.0);
+
+    // Make sure the queen's ID is correctly set
+    CHECK(queen->getID() == QUEEN_ID);
 }

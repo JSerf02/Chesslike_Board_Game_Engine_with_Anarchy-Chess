@@ -20,6 +20,11 @@ namespace chess {
             */
             double getValue() override;
 
+            /*
+            * Returns the queen's ID
+            */
+            ID getID() override;
+
         private:
             /*
             * Returns moves along cardinal directions that are not blocked

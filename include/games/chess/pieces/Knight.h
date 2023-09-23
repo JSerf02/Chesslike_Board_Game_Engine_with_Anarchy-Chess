@@ -20,6 +20,11 @@ namespace chess {
             */
             double getValue() override;
 
+            /*
+            * Returns the knight's ID
+            */
+            ID getID() override;
+
         private:
             /*
             * Returns moves along L-shaped paths that are not blocked

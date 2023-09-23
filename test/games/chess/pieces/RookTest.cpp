@@ -150,4 +150,7 @@ TEST_CASE("Rook: Value")
 
     // Make sure the rook's value is 5.0
     CHECK(rook->getValue() == 5.0);
+
+    // Make sure the rook's ID is correctly set
+    CHECK(rook->getID() == ROOK_ID);
 }

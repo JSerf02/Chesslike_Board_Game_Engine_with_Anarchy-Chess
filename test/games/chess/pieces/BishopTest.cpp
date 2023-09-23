@@ -150,4 +150,7 @@ TEST_CASE("Bishop: Value")
 
     // Make sure the bishop's value is 3.0
     CHECK(bishop->getValue() == 3.0);
+
+    // Make sure the bishop's ID is correctly set
+    CHECK(bishop->getID() == BISHOP_ID);
 }
