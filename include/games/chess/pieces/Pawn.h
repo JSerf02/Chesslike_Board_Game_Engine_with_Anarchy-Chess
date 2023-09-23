@@ -43,6 +43,11 @@ namespace chess {
             */
             void changeMovedFlag();
 
+            /*
+            * Override priority to 10 if En Passant is a possibility
+            */
+            int getMinPriority(GameState& gameState) override;
+
         private:
             /*
             * Whether the pawn has already moved this game

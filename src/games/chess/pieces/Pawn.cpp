@@ -41,6 +41,49 @@ namespace chess {
     }
 
     // See Pawn.h
+    int Pawn::getMinPriority(GameState& gameState)
+    {
+        // Store values for later use
+        GameBoard* board = gameState.getBoard();
+        Move::position curPosition = getPosition();
+        Player curPlayer = getPlayerAccess(Player::white) ? Player::white : Player::black;
+        int direction = getPlayerAccess(Player::white) ? 1 : -1;
+
+        // The positions to check for enemies
+        std::vector<Move::position> enemyDeltas {
+            std::make_pair(1, 0),
+            std::make_pair(-1, 0)
+        };
+
+        // Override the priority if En Passant is a possibility
+        for(Move::position enemyDelta : enemyDeltas) {
+            Move::position checkPosition = std::make_pair(enemyDelta.first + curPosition.first, curPosition.second);
+
+            // Make sure there's a piece on the board
+            if(!(board->occupiedOnBoard(checkPosition))) {
+                continue;
+            }
+            Piece* piece = board->getPiece(checkPosition);
+
+            // Make sure the piece is a pawn
+            if(piece->getID() != PAWN_ID || piece->getPlayerAccess(curPlayer)) {
+                continue;
+            }
+            Pawn* pawn = static_cast<Pawn*>(piece); // Will always work as long as IDs are configured correctly
+
+            // Make sure the pawn just boosted
+            if(!(pawn->justBoosted(gameState))) {
+                continue;
+            }
+
+            // If all previous conditions hold, En Passant is a possibility and 
+            // the priority needs to be overridden
+            return 10;
+        }
+        return 0;
+    }
+
+    // See Pawn.h
     std::vector<Move> Pawn::generateMoves(GameState& gameState)
     {
         std::vector<Move> moves{};
