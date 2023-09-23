@@ -4,6 +4,27 @@
 #include "ChessPiece.h"
 
 namespace testing {
+    // A class for testing max piece priority
+    class Max5Piece : public logic::Piece
+    {
+        public:
+            using logic::Piece::Piece;
+            std::vector<logic::Move> generateMoves(logic::GameState& gameState) override
+            {
+                return {{0}, {1}, {5}};
+            } 
+    };
+
+    // A class for testing piece priority when there are no moves
+    class NoMovesPiece : public logic::Piece 
+    {
+        public:
+            using logic::Piece::Piece;
+            std::vector<logic::Move> generateMoves(logic::GameState& gameState) override
+            {
+                return {};
+            } 
+    };
 
     // A piece that has moves with 1 priority
     class Priority1Piece : public logic::Piece

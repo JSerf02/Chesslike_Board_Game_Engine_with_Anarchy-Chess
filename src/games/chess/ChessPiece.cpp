@@ -12,22 +12,17 @@ namespace chess {
     {
         return getID() == KING_ID;
     }
-    
-    // See ChessPiece.h
-    bool ChessPiece::controlledByPlayer(GameState& gameState)
-    {
-        Player player = gameState.getCrntPlayer();
-        return getPlayerAccess(player);
-    }
 
     // See ChessPiece.h
     bool ChessPiece::addToMove(Move::position position, Move& move, ChessGameState& chessState)
-    {
-        // Do not add moves if the current player does not control the piece
+    {    
+        // If this piece is not controlled by the current player, bypass Checkmate checks
+        // to prevent infinite loops
         if(!controlledByPlayer(chessState)) {
-            return false;
+            move.addPosition(position);
+            return true;
         }
-        
+
         // Get a reference to the game board
         GameBoard* board = chessState.getBoard();
 
@@ -59,16 +54,14 @@ namespace chess {
     }
     bool ChessPiece::addPosition(Move::position position, std::vector<Move>& moves, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&))
     {
-        // Cannot add if the player doesn't currently control the piece
-        if(!controlledByPlayer(chessState)) {
-            return false;
-        }
-
-        // Cannot add if the space isn't on the board or is occupied
+        // Store values for later
         const Move::position curPosition = getPosition();
         GameBoard* board = chessState.getBoard();
+        Player crntPlayer = getPlayerAccess(Player::white) ? Player::white : Player::black;
+
+        // Cannot add if the space isn't on the board or is occupied
         if(!(board->onBoard(position))
-        || (board->occupiedOnBoard(position) && board->getPiece(position)->getPlayerAccess(chessState.getCrntPlayer()))) {
+        || (board->occupiedOnBoard(position) && board->getPiece(position)->getPlayerAccess(crntPlayer))) {
             return false;
         }
         
@@ -90,20 +83,16 @@ namespace chess {
     }
     void ChessPiece::addUnrelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&))
     {
-        // Cannot add if the player doesn't currently control the piece
-        if(!controlledByPlayer(chessState)) {
-            return;
-        }
-        
         // Store values for later
         const Move::position curPosition = getPosition();
         GameBoard* board = chessState.getBoard();
+        Player crntPlayer = getPlayerAccess(Player::white) ? Player::white : Player::black;
 
         // Iterate through all of the possible positions
         for(Move::position position : positions) {
             // Cannot add if the space isn't on the board or is occupied
             if(!(board->onBoard(position))
-            || (board->occupiedOnBoard(position) && board->getPiece(position)->getPlayerAccess(chessState.getCrntPlayer()))) {
+            || (board->occupiedOnBoard(position) && board->getPiece(position)->getPlayerAccess(crntPlayer))) {
                 continue;
             }
 
@@ -124,14 +113,10 @@ namespace chess {
     }
     void ChessPiece::addRelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&))
     {
-        // Cannot add if the player doesn't currently control the piece
-        if(!controlledByPlayer(chessState)) {
-            return;
-        }
-        
         // Store values for later
         const Move::position curPosition = getPosition();
         GameBoard* board = chessState.getBoard();
+        Player crntPlayer = getPlayerAccess(Player::white) ? Player::white : Player::black;
 
         // Create a new move to store the positions
         Move newMove = Move({}, priority, onMoveCallback);
@@ -149,7 +134,7 @@ namespace chess {
 
             // Occupied spaces can only be added if they are controlled by the enemy
             bool occupied = board->occupiedOnBoard(position);
-            if (occupied && board->getPiece(position)->getPlayerAccess(chessState.getCrntPlayer())) {
+            if (occupied && board->getPiece(position)->getPlayerAccess(crntPlayer)) {
                 break;
             }
             
@@ -229,9 +214,13 @@ namespace chess {
             return;
         }
 
+        // Get the current player
+        Piece* curPiece = board->getPiece(start);
+        Player curPlayer = curPiece->getPlayerAccess(Player::white) ? Player::white : Player::black;
+        
         // Do not capture if the piece is controlled by the current player
         Piece* piece = board->getPiece(end);
-        if(piece->getPlayerAccess(gameState.getCrntPlayer())) {
+        if(piece->getPlayerAccess(curPlayer)) {
             return;
         }
         

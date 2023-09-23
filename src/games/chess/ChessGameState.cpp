@@ -55,7 +55,7 @@ namespace chess {
     // See ChessGameState.h
     bool ChessGameState::isInCheck(Player player)
     {
-        return isAttacked(kings[player]->getPosition());
+        return isAttacked(player, kings[player]->getPosition());
     }
     bool ChessGameState::isInCheck()
     {

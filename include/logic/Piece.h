@@ -15,7 +15,7 @@ namespace logic {
         */
         public:
             using ID = int;
-            
+
             /* 
             * The possible players (update as needed)
             */
@@ -74,6 +74,12 @@ namespace logic {
             */
             int attackMoveCacheUpdateTurn{-1};
 
+            /*
+            * An empty list of moves for when a piece is not controlled by the 
+            * current player
+            */
+            std::vector<Move> emptyMoves{};
+
         public:
             /*
             * Constructor: Set piecePosition
@@ -108,6 +114,11 @@ namespace logic {
             */
             void removePlayer(Player player);
 
+            /*
+            * Returns whether the current player controls this piece
+            */
+            bool controlledByPlayer(GameState& gameState);
+            
             /*
             * Returns the position of the piece
             */

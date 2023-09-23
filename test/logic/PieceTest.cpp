@@ -109,6 +109,24 @@ TEST_CASE("Piece: Remove player access")
     CHECK(testPiece.getPlayerAccess(Player::gold) == false);
 }
 
+TEST_CASE("Piece: Controlled By Player")
+{
+    // Create a ChessBoard without any pieces
+    GameBoard* board = new GameBoard({Player::white, Player::black});
+
+    // Add a bishop to the board on D4 and 5 test pieces on C3, B6, H8, and G1
+    Piece* whitePiece = new Piece(Player::white, std::make_pair(2, 2));
+    Piece* blackPiece = new Piece(Player::black, std::make_pair(2, 5));
+    board->addPieces({whitePiece, blackPiece});
+
+    // Create a GameState
+    GameState* gameState = new GameState(board, {Player::white, Player::black});
+
+    // Check if the pieces are controlled as expected
+    CHECK(whitePiece->controlledByPlayer(*gameState));
+    CHECK(blackPiece->controlledByPlayer(*gameState) == false);
+}
+
 TEST_CASE("Piece: Get position") 
 {
     // Initialize a piece to an arbitrary position
@@ -134,38 +152,18 @@ TEST_CASE("Piece: Change Position")
     CHECK(testPiece.getPosition() == newPosition);
 }
 
-// A class for testing max piece priority
-class Max5Piece : public Piece
-{
-    public:
-        std::vector<Move> generateMoves(GameState& gameState) override
-        {
-            return {{0}, {1}, {5}};
-        } 
-};
-
-// A class for testing piece priority when there are no moves
-class NoMovesPiece : public Piece 
-{
-    public:
-        std::vector<Move> generateMoves(GameState& gameState) override
-        {
-            return {};
-        } 
-};
-
 TEST_CASE("Piece: Get maximum priority of all moves")
 {
     // Create a gameState and a testPiece
     GameState gameState{};
-    Max5Piece max5Piece{};
-    NoMovesPiece noMovesPiece{};
+    Max5Piece* max5Piece = new Max5Piece(Player::white);
+    NoMovesPiece* noMovesPiece = new NoMovesPiece(Player::white);
 
     // Make sure the max priority of max5Piece's moves is 5
-    CHECK(max5Piece.getMaxPriorityOfMoves(gameState) == 5);
+    CHECK(max5Piece->getMaxPriorityOfMoves(gameState) == 5);
     
     // Make sure the max priority of noMovesPIece is 0
-    CHECK(noMovesPiece.getMaxPriorityOfMoves(gameState) == 0);
+    CHECK(noMovesPiece->getMaxPriorityOfMoves(gameState) == 0);
 }
 
 TEST_CASE("Piece: Get Attacked Spaces")

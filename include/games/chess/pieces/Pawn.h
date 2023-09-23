@@ -28,6 +28,23 @@ namespace chess {
             ID getID() override;
 
             /*
+            * Returns whether the pawn can boost
+            * - The pawn can boost if it has not moved previously
+            */
+            bool canBoost();
+
+            /*
+            * Sets the boost turn to the current turn
+            */
+            void setBoostTurn(GameState& gameState);
+
+            /*
+            * Changes the internal alreadyMoved flag to indicate that the pawn has moved
+            */
+            void changeMovedFlag();
+
+        private:
+            /*
             * Whether the pawn has already moved this game
             */
             bool alreadyMoved{};
@@ -38,13 +55,6 @@ namespace chess {
             */
             int boostTurn{};
 
-            /*
-            * Returns whether the pawn can boost
-            * - The pawn can boost if it has not moved previously
-            */
-            bool canBoost();
-
-        private:
             /*
             * Returns moves that are one space ahead, diagonal when the space contains
             * an enemy piece, and two spaces ahead if the pawn has not yet moved
@@ -58,9 +68,33 @@ namespace chess {
             std::vector<Move> generateAttackingMoves(GameState& gameState) override;
 
             /*
-            * Returns whether the pawn boosted on the previoius turn
+            * Returns whether the pawn boosted on the previous turn
             */
-            bool justBoosted();
+            bool justBoosted(GameState& gameState);
+
+            /*
+            * Adds moves to the move list to allow the pawn to move forward once
+            * or twice if the pawn can boost
+            */
+            void addForwardMoves(std::vector<Move>& moves, ChessGameState& chessState);
+
+            /*
+            * Adds moves to the move list to allow the pawn to attack on diagonals
+            * - When attackOnly is not enabled, moves will only be allowed if they 
+            *   are explicitly attacking a piece (pawns can only move to attacked 
+            *   spaces if they are explicitly capturing a piece)
+            */
+            void addStandardAttacks(std::vector<Move>& moves, ChessGameState& chessState, bool attackOnly = false);
+
+            /*
+            * Adds moves to the move list to allow the pawn to En Passant, meaning
+            * the pawn can attack the space an enemy pawn just boosted past if the
+            * enemy boosted on the previous turn
+            * - En passant has a priority of 10, essentially making it forced
+            * - When attackOnly is enabled, the enemy piecce positions will be
+            *   returned instead of the uninhabited En Passant positions
+            */
+            void addEnPassant(std::vector<Move>& moves, ChessGameState& chessState, bool attackOnly = false);
     };
 }
 #endif

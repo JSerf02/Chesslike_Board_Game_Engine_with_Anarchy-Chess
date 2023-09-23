@@ -21,15 +21,18 @@ namespace testing {
         public:
             static void testPiecePositions(ChessGameState* gameState, Move::position piecePosition, std::set<Move::position>& validPositions) 
             {
-                ChessBoard* board = dynamic_cast<ChessBoard*>(gameState->getBoard());
+                ChessBoard* board = static_cast<ChessBoard*>(gameState->getBoard());
+                Piece* piece = board->getPiece(piecePosition);
+                REQUIRE(piece != nullptr);
+                Player player = piece->getPlayerAccess(Player::white) ? Player::white : Player::black;
                 for(int i = board->minX(); i <= board->maxX(); i++) {
                     for(int j = board->minY(); j <= board->maxY(); j++) {
                         Move::position curPosition = std::make_pair(i, j);
                         if(validPositions.find(curPosition) != validPositions.end()) {
-                            CHECK(gameState->canMovePiece(piecePosition, curPosition));
+                            CHECK(gameState->canMovePiece(player, piecePosition, curPosition));
                         }
                         else {
-                            CHECK(gameState->canMovePiece(piecePosition, curPosition) == false);
+                            CHECK(gameState->canMovePiece(player, piecePosition, curPosition) == false);
                         }
                     }
                 }

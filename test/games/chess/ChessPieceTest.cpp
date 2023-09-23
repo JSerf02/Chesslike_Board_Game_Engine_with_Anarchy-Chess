@@ -18,28 +18,6 @@ using namespace chess;
 using namespace testing;
 using Player = Piece::Player;
 
-TEST_CASE("Chess Piece: Controlled By Player")
-{
-    // Create a ChessBoard without any pieces
-    ChessBoard* board = new ChessBoard(false);
-
-    // Add a bishop to the board on D4 and 5 test pieces on C3, B6, H8, and G1
-    ChessPiece* whitePiece = new ChessPiece(Player::white, std::make_pair(2, 2));
-    ChessPiece* blackPiece = new ChessPiece(Player::black, std::make_pair(2, 5));
-    board->addPieces({whitePiece, blackPiece});
-
-    // Add 2 kings to the board to prevent errors
-    ChessPiece* whiteKing = new TestKing(Player::white, std::make_pair(8, 1));
-    ChessPiece* blackKing = new TestKing(Player::black, std::make_pair(8, 2));
-    board->addPieces({whiteKing, blackKing});
-
-    // Create a ChessGameState
-    ChessGameState chessState = ChessGameState(board);
-
-    CHECK(whitePiece->controlledByPlayer(chessState));
-    CHECK(blackPiece->controlledByPlayer(chessState) == false);
-}
-
 TEST_CASE("Chess Piece: Add to Move")
 {
     // Create a ChessGameState
@@ -125,13 +103,13 @@ TEST_CASE("Chess Piece: Add Position")
     CHECK(whitePiece->addPosition(std::make_pair(1, 1), unsuccessfulAdd, chessState) == false);
     CHECK(unsuccessfulAdd.size() == 0);
 
-    // Check if adding a legal position when it is not your turn does not create a new Move
+    // Check if adding a legal position when it is not your turn does create a new Move
     std::vector<Move> opponentAdd = blackPiece->addPosition(std::make_pair(5, 5), chessState);
-    CHECK(opponentAdd.size() == 0);
+    CHECK(opponentAdd.size() == 1);
 
-    // Check if adding a legal position when it is not your turn does not add to an existing Move
-    CHECK(blackPiece->addPosition(std::make_pair(5, 5), opponentAdd, chessState) == false);
-    CHECK(opponentAdd.size() == 0);
+    // Check if adding a legal position when it is not your turn does add to an existing Move
+    CHECK(blackPiece->addPosition(std::make_pair(5, 5), opponentAdd, chessState));
+    CHECK(opponentAdd.size() == 2);
 }
 
 TEST_CASE("Chess Piece: Add Unrelated Positions")
@@ -184,9 +162,9 @@ TEST_CASE("Chess Piece: Add Unrelated Positions")
         CHECK(horizontalAdd[i].getPositions()[0] == horizontalPositions[i + (i > 0 ? 1 : 0)]);
     }
 
-    // Check if adding legal positions for a piece you do not control does not work
+    // Check if adding legal positions for a piece you do not control does work
     std::vector<Move> opponentAdd = blackPiece->addUnrelatedPositions(horizontalPositions, chessState);
-    CHECK(opponentAdd.size() == 0);
+    CHECK(opponentAdd.size() == 6);
 }
 
 TEST_CASE("Chess Piece: Add Related Positions")
@@ -239,9 +217,9 @@ TEST_CASE("Chess Piece: Add Related Positions")
     REQUIRE(horizontalAdd[0].getPositions().size() == 1); // The white piece is not captured and blocking does occur
     CHECK(horizontalAdd[0].getPositions()[0] == horizontalPositions[0]);
 
-    // Check if adding legal positions for a piece you do not control does not work
+    // Check if adding legal positions for a piece you do not control does work
     std::vector<Move> opponentAdd = blackPiece->addRelatedPositions(horizontalPositions, chessState);
-    CHECK(opponentAdd.size() == 0);
+    CHECK(opponentAdd.size() == 1);
 }
 
 TEST_CASE("Chess Piece: Add Unrelated Positions With Deltas")
@@ -310,9 +288,9 @@ TEST_CASE("Chess Piece: Add Unrelated Positions With Deltas")
         CHECK(horizontalAdd[i].getPositions()[0] == horizontalPositions[i + (i > 0 ? 1 : 0)]);
     }
 
-    // Check if adding legal positions for a piece you do not control does not work
+    // Check if adding legal positions for a piece you do not control does work
     std::vector<Move> opponentAdd = blackPiece->addUnrelatedPositionsDeltas(horizontalDeltas, chessState);
-    CHECK(opponentAdd.size() == 0);
+    CHECK(opponentAdd.size() == 6);
 }
 
 TEST_CASE("Chess Piece: Add Related Positions")
@@ -381,7 +359,7 @@ TEST_CASE("Chess Piece: Add Related Positions")
     REQUIRE(horizontalAdd[0].getPositions().size() == 1); // The white piece is not captured and blocking does occur
     CHECK(horizontalAdd[0].getPositions()[0] == horizontalPositions[0]);
 
-    // Check if adding legal positions for a piece you do not control does not work
+    // Check if adding legal positions for a piece you do not control does work
     std::vector<Move> opponentAdd = blackPiece->addRelatedPositionsDeltas(horizontalDeltas, chessState);
-    CHECK(opponentAdd.size() == 0);
+    CHECK(opponentAdd.size() == 1);
 }

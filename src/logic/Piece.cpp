@@ -13,6 +13,8 @@ namespace logic {
         public: 
             int getPriority();
             int getTurn();
+            Player getCrntPlayer();
+            int getPriorityOfPlayer(Player player);
     };
 
     // See Piece.h
@@ -62,6 +64,13 @@ namespace logic {
     }
 
     // See Piece.h
+    bool Piece::controlledByPlayer(GameState& gameState)
+    {
+        Player player = gameState.getCrntPlayer();
+        return getPlayerAccess(player);
+    }
+
+    // See Piece.h
     Move::position Piece::getPosition()
     {
         return piecePosition;
@@ -83,6 +92,9 @@ namespace logic {
     // See Piece.h
     std::vector<Move>& Piece::getMoves(GameState& gameState) 
     {
+        // if(!controlledByPlayer(gameState)) {
+        //     return emptyMoves;
+        // }
         int curTurn = gameState.getTurn();
         if(moveCacheUpdateTurn != curTurn) {
             moveCache = generateMoves(gameState);
@@ -106,7 +118,7 @@ namespace logic {
     int Piece::getMaxPriorityOfMoves(GameState& gameState)
     {
         // Get all of the piece's moves
-        std::vector<Move> moves = generateMoves(gameState);
+        std::vector<Move> moves = getMoves(gameState);
 
         // Iterate through the moves to find the max priority
         int maxPriority = 0;
@@ -122,12 +134,15 @@ namespace logic {
     // See Piece.h
     std::vector<Move::position> Piece::getAttackedSpaces(GameState& gameState)
     {
-        std::vector<Move> attackMoves = generateAttackingMoves(gameState);
+        std::vector<Move> attackMoves = getAttackingMoves(gameState);
         if(attackMoves.size() == 0) {
             return {};
         }
 
-        int maxPriority = gameState.getPriority();
+        int maxPriority = 0;
+        if(controlledByPlayer(gameState)) {
+            maxPriority = gameState.getPriority();
+        }
 
         std::set<Move::position> attackPositionsSet{};
         for(Move attackMove : attackMoves) {

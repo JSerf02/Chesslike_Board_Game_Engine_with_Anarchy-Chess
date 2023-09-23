@@ -30,11 +30,6 @@ namespace chess {
             bool isKing();
 
             /*
-            * Returns whether the current player controls this piece
-            */
-            bool controlledByPlayer(GameState& gameState);
-
-            /*
              * Checks if moving to the position will put the current player into 
              * check and, if it does not, adds the position to the move
              * - Note: If the target position is occupied, this funciton will 

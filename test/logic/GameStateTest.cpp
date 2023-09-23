@@ -428,7 +428,7 @@ TEST_CASE("Game State: Min Priority")
     CHECK(gameState.getMovesOfPiece(0, 0, std::make_pair(1, 1)).size() == 0);
     CHECK(gameState.getMovesOfPiece(whiteNormalPiece->getPosition(), 1, 1).size() == 0);
     CHECK(gameState.getMovesOfPiece(0, 0, 1, 1).size() == 0);
-
+    
     // Make sure black can still move
     CHECK(gameState.getPriorityOfPlayer(Player::black) == 3);
     CHECK(gameState.getMovesOfPiece(Player::black, blackNormalPiece->getPosition(), std::make_pair(3, 3)).size() == 1);
