@@ -24,12 +24,23 @@ namespace chess {
     // See King.h
     std::vector<Move> King::generateMoves(GameState& gameState)
     {
-        return {};
+        // All of the different distances away from the starting position that the king can move to
+        const std::vector<Move::position> deltas {
+            std::make_pair(1, 0),
+            std::make_pair(1, 1),
+            std::make_pair(0, 1),
+            std::make_pair(-1, 1),
+            std::make_pair(-1, 0),
+            std::make_pair(-1, -1),
+            std::make_pair(0, -1),
+            std::make_pair(1, -1)
+        };
+        return addUnrelatedPositionsDeltas(deltas, static_cast<ChessGameState&>(gameState));
     }
 
     // See King.h
     std::vector<Move> King::generateAttackingMoves(GameState& gameState)
     {
-        return {};
+        return generateMoves(gameState);
     }
 }

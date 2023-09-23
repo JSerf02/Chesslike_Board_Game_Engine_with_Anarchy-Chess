@@ -35,13 +35,13 @@ namespace logic {
     }
 
     // See Move.h
-    void Move::setOnMove(void (*onMoveCallback)(GameState&)) 
+    void Move::setOnMove(void (*onMoveCallback)(position, position, GameState&)) 
     {
         onMove = onMoveCallback;
     }
 
     // See Move.h
-    bool Move::callOnMove(GameState& gameState)
+    bool Move::callOnMove(position start, position end, GameState& gameState)
     {
         // Return if callback is null
         if(!onMove) {
@@ -49,7 +49,7 @@ namespace logic {
         }
 
         // Call onMove
-        (*onMove)(gameState);
+        (*onMove)(start, end, gameState);
         return true;
     }
 

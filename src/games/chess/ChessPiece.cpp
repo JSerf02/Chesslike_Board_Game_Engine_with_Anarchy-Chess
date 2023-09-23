@@ -10,17 +10,28 @@ namespace chess {
     // See ChessPiece.h
     bool ChessPiece::controlledByPlayer(GameState& gameState)
     {
-        return false;
+        Player player = gameState.getCrntPlayer();
+        return getPlayerAccess(player);
     }
 
     // See ChessPiece.h
     bool ChessPiece::addToMove(Move::position position, Move& move, ChessGameState& chessState)
     {
+        // Do not add moves if the current player does not control the piece
+        if(!controlledByPlayer(chessState)) {
+            return false;
+        }
+        
         // Get a reference to the game board
         GameBoard* board = chessState.getBoard();
 
+        // Remove the piece at the position if it is controlled by enemies
+        if(board->occupiedOnBoard(position) && !(board->getPiece(position)->getPlayerAccess(chessState.getCrntPlayer()))) {
+            board->simulateRemovePiece(position);
+        }
+
         // Simulate moving the piece and see if it will put the player in check
-        if (board->simulateMovePiece(getPosition(), position)) {
+        if(board->simulateMovePiece(getPosition(), position) == false) {
             return false; // The move is impossible so it cannot be added
         }
         bool isSafe = !chessState.isInCheck();
@@ -34,62 +45,191 @@ namespace chess {
     }
 
     // See ChessPiece.h
-    std::vector<Move> ChessPiece::addPosition(Move::position position, ChessGameState& chessState, void (*onMoveCallback)(GameState&))
+    std::vector<Move> ChessPiece::addPosition(Move::position position, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&))
     {
         std::vector<Move> moves{};
-        addPosition(position, moves, chessState, onMoveCallback);
+        addPosition(position, moves, chessState, priority, onMoveCallback);
         return moves;
     }
-    bool ChessPiece::addPosition(Move::position position, std::vector<Move>& moves, ChessGameState& chessState, void (*onMoveCallback)(GameState&))
+    bool ChessPiece::addPosition(Move::position position, std::vector<Move>& moves, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&))
     {
+        // Cannot add if the player doesn't currently control the piece
+        if(!controlledByPlayer(chessState)) {
+            return false;
+        }
+
+        // Cannot add if the space isn't on the board or is occupied
+        const Move::position curPosition = getPosition();
+        GameBoard* board = chessState.getBoard();
+        if(!(board->onBoard(position))
+        || (board->occupiedOnBoard(position) && board->getPiece(position)->getPlayerAccess(chessState.getCrntPlayer()))) {
+            return false;
+        }
+        
+        // Try to create a new move with the inputted position
+        Move newMove = Move({}, priority, onMoveCallback);
+        if(addToMove(position, newMove, chessState)) {
+            moves.push_back(newMove); // Add the new move if successful
+            return true;
+        }
         return false;
     }
 
     // See ChessPiece.h
-    std::vector<Move> ChessPiece::addUnrelatedPositions(std::vector<Move::position> positions, ChessGameState& chessState, void (*onMoveCallback)(GameState&))
+    std::vector<Move> ChessPiece::addUnrelatedPositions(std::vector<Move::position> positions, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&))
     {
         std::vector<Move> moves{};
-        addUnrelatedPositions(positions, moves, chessState, onMoveCallback);
+        addUnrelatedPositions(positions, moves, chessState, priority, onMoveCallback);
         return moves;
     }
-    void ChessPiece::addUnrelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, void (*onMoveCallback)(GameState&))
+    void ChessPiece::addUnrelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&))
     {
-        return;
+        // Cannot add if the player doesn't currently control the piece
+        if(!controlledByPlayer(chessState)) {
+            return;
+        }
+        
+        // Store values for later
+        const Move::position curPosition = getPosition();
+        GameBoard* board = chessState.getBoard();
+
+        // Iterate through all of the possible positions
+        for(Move::position position : positions) {
+            // Cannot add if the space isn't on the board or is occupied
+            if(!(board->onBoard(position))
+            || (board->occupiedOnBoard(position) && board->getPiece(position)->getPlayerAccess(chessState.getCrntPlayer()))) {
+                continue;
+            }
+
+            // Try to create a new move with the inputted position
+            Move newMove = Move({}, priority, onMoveCallback);
+            if(addToMove(position, newMove, chessState)) {
+                moves.push_back(newMove); // Add the new move if successful
+            }
+        }
     }
 
     // See ChessPiece.h
-    std::vector<Move> ChessPiece::addRelatedPositions(std::vector<Move::position> positions, ChessGameState& chessState, void (*onMoveCallback)(GameState&))
+    std::vector<Move> ChessPiece::addRelatedPositions(std::vector<Move::position> positions, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&))
     {
         std::vector<Move> moves{};
-        addRelatedPositions(positions, moves, chessState, onMoveCallback);
+        addRelatedPositions(positions, moves, chessState, priority, onMoveCallback);
         return moves;
     }
-    void ChessPiece::addRelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, void (*onMoveCallback)(GameState&))
+    void ChessPiece::addRelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&))
     {
-        return;
+        // Cannot add if the player doesn't currently control the piece
+        if(!controlledByPlayer(chessState)) {
+            return;
+        }
+        
+        // Store values for later
+        const Move::position curPosition = getPosition();
+        GameBoard* board = chessState.getBoard();
+
+        // Create a new move to store the positions
+        Move newMove = Move({}, priority, onMoveCallback);
+
+        // Keeps track of whether a valid position has been detected
+        // - Used to prevent adding empty moves to the moves list
+        bool added = false;
+
+        // Iterate through all of the possible positions
+        for(Move::position position : positions) {
+            // Cannot add if the space isn't on the board or is occupied
+            if(!(board->onBoard(position))) {
+                break;
+            }
+
+            // Occupied spaces can only be added if they are controlled by the enemy
+            bool occupied = board->occupiedOnBoard(position);
+            if (occupied && board->getPiece(position)->getPlayerAccess(chessState.getCrntPlayer())) {
+                break;
+            }
+            
+            // Add the position to the move
+            if(addToMove(position, newMove, chessState)) {
+                added = true;
+            }
+            else {
+                break;
+            }
+
+            // Stop if the tile just added is occupied
+            if(occupied) {
+                break;
+            }
+        }
+
+        // Add the new move if it contains at least one valid position
+        if(added) {
+            moves.push_back(newMove);
+        }
     }
 
     // See ChessPiece.h
-    std::vector<Move> ChessPiece::addUnrelatedPositionsDeltas(std::vector<Move::position> deltas, ChessGameState& chessState, void (*onMoveCallback)(GameState&))
+    std::vector<Move> ChessPiece::addUnrelatedPositionsDeltas(std::vector<Move::position> deltas, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&))
     {
         std::vector<Move> moves{};
-        addUnrelatedPositionsDeltas(deltas, moves, chessState, onMoveCallback);
+        addUnrelatedPositionsDeltas(deltas, moves, chessState, priority, onMoveCallback);
         return moves;
     }
-    void ChessPiece::addUnrelatedPositionsDeltas(std::vector<Move::position> deltas, std::vector<Move>& moves, ChessGameState& chessState, void (*onMoveCallback)(GameState&))
+    void ChessPiece::addUnrelatedPositionsDeltas(std::vector<Move::position> deltas, std::vector<Move>& moves, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&))
     {
-        return;
+        // Store the current position
+        Move::position curPosition = getPosition();
+
+        // Create a vector to store the positions found from the deltas
+        std::vector<Move::position> positions{};
+        
+        // Add a position for each delta equal to curPosition + delta
+        for(Move::position delta : deltas) {
+            positions.push_back(std::make_pair(curPosition.first + delta.first, curPosition.second + delta.second));
+        }
+
+        // Having positions reduces this function to addUnrelatedPositions
+        addUnrelatedPositions(positions, moves, chessState, priority, onMoveCallback);
     }
 
     // See ChessPiece.h
-    std::vector<Move> ChessPiece::addRelatedPositionsDeltas(std::vector<Move::position> deltas, ChessGameState& chessState, void (*onMoveCallback)(GameState&))
+    std::vector<Move> ChessPiece::addRelatedPositionsDeltas(std::vector<Move::position> deltas, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&))
     {
         std::vector<Move> moves{};
-        addRelatedPositionsDeltas(deltas, moves, chessState, onMoveCallback);
+        addRelatedPositionsDeltas(deltas, moves, chessState, priority, onMoveCallback);
         return moves;
     }
-    void ChessPiece::addRelatedPositionsDeltas(std::vector<Move::position> deltas, std::vector<Move>& moves, ChessGameState& chessState, void (*onMoveCallback)(GameState&))
+    void ChessPiece::addRelatedPositionsDeltas(std::vector<Move::position> deltas, std::vector<Move>& moves, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&))
     {
-        return;
+        // Store the current position
+        Move::position curPosition = getPosition();
+
+        // Create a vector to store the positions found from the deltas
+        std::vector<Move::position> positions{};
+        
+        // Add a position for each delta equal to curPosition + delta
+        for(Move::position delta : deltas) {
+            positions.push_back(std::make_pair(curPosition.first + delta.first, curPosition.second + delta.second));
+        }
+
+        // Having positions reduces this function to addRelatedPositions
+        addRelatedPositions(positions, moves, chessState, priority, onMoveCallback);
+    }
+
+    void ChessPiece::captureCallback(Move::position start, Move::position end, GameState& gameState)
+    {
+        // Do not capture if there is no piece to capture
+        GameBoard* board = gameState.getBoard();
+        if(board->occupiedOnBoard(end) == false) {
+            return;
+        }
+
+        // Do not capture if the piece is controlled by the current player
+        Piece* piece = board->getPiece(end);
+        if(piece->getPlayerAccess(gameState.getCrntPlayer())) {
+            return;
+        }
+        
+        // Capture the piece
+        board->capturePiece(end);
     }
 }

@@ -135,6 +135,9 @@ TEST_CASE("Rook: Attack")
 
     // Make sure the rook attacks only the valid attack positions
     TestChessHelpers::testPieceAttacks(chessState, Player::black, attackPositions);
+
+    // Make sure capturing works
+    CHECK(chessState->movePiece(std::make_pair(4, 4), std::make_pair(4, 3)));
 }
 
 TEST_CASE("Rook: Value")

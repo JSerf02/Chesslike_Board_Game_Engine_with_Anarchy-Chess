@@ -45,28 +45,37 @@ TEST_CASE("Chess Piece: Add to Move")
     // Create a ChessGameState
     ChessGameState chessState{};
 
-    // Make moves so moving the gPawn to G4 is checkmate and moving the gPawn to G3 is safe
-    CHECK(chessState.movePiece(std::make_pair(2, 6), std::make_pair(3, 6))); // Pawn to F3
-    CHECK(chessState.movePiece(std::make_pair(7, 5), std::make_pair(5, 5))); // Pawn to E5
-    CHECK(chessState.movePiece(std::make_pair(2, 1), std::make_pair(3, 1))); // Pawn to A4
-    CHECK(chessState.movePiece(std::make_pair(8, 4), std::make_pair(4, 8))); // Queen to H4
+    // Make moves so moving the F-Pawn is checkmate
+    CHECK(chessState.movePiece(std::make_pair(7, 2), std::make_pair(7, 4))); // Pawn to G4
+    CHECK(chessState.movePiece(std::make_pair(5, 7), std::make_pair(5, 5))); // Pawn to E5
+    CHECK(chessState.movePiece(std::make_pair(8, 2), std::make_pair(8, 3))); // Pawn to H3
+    CHECK(chessState.movePiece(std::make_pair(4, 8), std::make_pair(8, 4))); // Queen to H4
 
-    // Get the current game board and get the G-Pawn from it
+    // Get the current game board
     GameBoard* board = chessState.getBoard();
     REQUIRE(board != nullptr);
-    ChessPiece* gPawn = static_cast<ChessPiece*>(board->getPiece(2, 7));
-    REQUIRE(gPawn != nullptr);
 
-    // Create a move
-    Move move{};
+    // Get the F-Pawn and create a move for it
+    ChessPiece* fPawn = static_cast<ChessPiece*>(board->getPiece(6, 2));
+    REQUIRE(fPawn != nullptr);
+    Move fMove{};
 
-    // Make sure adding pawn to G4 fails
-    CHECK(gPawn->addToMove(std::make_pair(4, 7), move, chessState) == false);
-    CHECK(move.containsPosition(std::make_pair(3, 7)) == false);
+    // Make sure adding pawn to F3 fails because it should cause checkmate
+    CHECK(fPawn->addToMove(std::make_pair(6, 3), fMove, chessState) == false);
+    CHECK(fMove.containsPosition(std::make_pair(6, 3)) == false);
 
-    // Make sure adding pawn to G3 succeeds
-    CHECK(gPawn->addToMove(std::make_pair(3, 7), move, chessState));
-    CHECK(move.containsPosition(std::make_pair(3, 7)));
+    // Get the H-Pawn and create a move for it
+    ChessPiece* hPawn = static_cast<ChessPiece*>(board->getPiece(8, 3));
+    REQUIRE(hPawn != nullptr);
+    Move hMove{};
+
+    // Make sure adding pawn to G4 fails because there is a white piece there
+    CHECK(hPawn->addToMove(std::make_pair(7, 4), hMove, chessState) == false);
+    CHECK(hMove.containsPosition(std::make_pair(7, 4)) == false);
+
+    // Make sure adding pawn to H4 works despite there being a black piece there
+    CHECK(hPawn->addToMove(std::make_pair(8, 4), hMove, chessState));
+    CHECK(hMove.containsPosition(std::make_pair(8, 4)));
 }
 
 TEST_CASE("Chess Piece: Add Position")
@@ -100,8 +109,8 @@ TEST_CASE("Chess Piece: Add Position")
 
     // Check if adding a position occupied by an opponent's piece creates a new move
     std::vector<Move> captureAdd = whitePiece->addPosition(std::make_pair(2, 5), chessState);
-    REQUIRE(successfulAdd.size() == 1);
-    CHECK(successfulAdd[0].getPositions()[0] == std::make_pair(2, 5));
+    REQUIRE(captureAdd.size() == 1);
+    CHECK(captureAdd[0].getPositions()[0] == std::make_pair(2, 5));
 
     // Check if adding a position occupied by an opponent's piece adds to an existing Move
     CHECK(whitePiece->addPosition(std::make_pair(2, 5), successfulAdd, chessState));

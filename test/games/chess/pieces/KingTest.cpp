@@ -122,6 +122,9 @@ TEST_CASE("King: Attack")
 
     // Make sure the king attacks only the valid attack positions
     TestChessHelpers::testPieceAttacks(chessState, Player::black, attackPositions);
+
+    // Make sure capturing works
+    CHECK(chessState->movePiece(std::make_pair(4, 4), std::make_pair(3, 4)));
 }
 
 TEST_CASE("King: Value")

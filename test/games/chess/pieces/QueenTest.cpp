@@ -196,6 +196,9 @@ TEST_CASE("Queen: Diagonal Attack")
 
     // Make sure the queen attacks only the valid attack positions
     TestChessHelpers::testPieceAttacks(chessState, Player::black, attackPositions);
+
+    // Make sure capturing works
+    CHECK(chessState->movePiece(std::make_pair(4, 4), std::make_pair(3, 3)));
 }
 
 TEST_CASE("Queen: Horizontal and Vertical Attack")
@@ -242,6 +245,9 @@ TEST_CASE("Queen: Horizontal and Vertical Attack")
 
     // Make sure the queen attacks only the valid attack positions
     TestChessHelpers::testPieceAttacks(chessState, Player::black, attackPositions);
+
+    // Make sure capturing works
+    CHECK(chessState->movePiece(std::make_pair(4, 4), std::make_pair(4, 3)));
 }
 
 TEST_CASE("Queen: Value")

@@ -233,15 +233,15 @@ namespace logic {
         if(idx >= movesToEnd.size()) {
             return false;
         }
+
+        // Call the onMove callback function
+        Move crntMove = movesToEnd[idx];
+        crntMove.callOnMove(start, end, *this);
         
         // Move the piece
         if(!gameBoard->movePiece(start, end)) {
             return false;
         }
-
-        // Call the onMove callback function
-        Move crntMove = movesToEnd[idx];
-        crntMove.callOnMove(*this);
 
         // Set the next player
         setNextPlayer();

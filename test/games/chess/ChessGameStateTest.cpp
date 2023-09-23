@@ -113,7 +113,7 @@ TEST_CASE("Chess Game State - Checkmate")
     CHECK(chessState.isInCheckmate());
 }
 
-TEST_CASE("Chess GameState: Initialize Object With Imported Board")
+TEST_CASE("Chess Game State: Initialize Object With Imported Board")
 {
     // Initialize a ChessBoard object
     ChessBoard* board = new ChessBoard();

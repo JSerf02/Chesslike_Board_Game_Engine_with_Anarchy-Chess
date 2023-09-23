@@ -29,7 +29,7 @@ TEST_CASE("Move: Get and set priority")
  *   modifying the board because the board module is not written yet
 */
 static bool testCallbackCalled = false;
-void testCallback(GameState& gameState) 
+void testCallback(Move::position start, Move::position end, GameState& gameState) 
 {
     testCallbackCalled = true;
 }
@@ -45,13 +45,13 @@ TEST_CASE("Move: Set and call onMove() callback")
 
     // Make sure nothing is called, nothing crashes, and false is returned
     // when the default (null) onMove() is called
-    CHECK(testMove.callOnMove(testState) == false);
+    CHECK(testMove.callOnMove(std::make_pair(0, 0), std::make_pair(1, 1), testState) == false);
     CHECK(testCallbackCalled == false);
 
     // Set testCallback as the new onMove() and make sure it is called and that 
     // callOnMove() returns true
     testMove.setOnMove(testCallback);
-    CHECK(testMove.callOnMove(testState) == true);
+    CHECK(testMove.callOnMove(std::make_pair(0, 0), std::make_pair(1, 1), testState) == true);
     CHECK(testCallbackCalled == true);
 }
 

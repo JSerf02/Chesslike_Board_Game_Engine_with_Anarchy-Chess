@@ -18,12 +18,23 @@ namespace chess {
     // See Knight.h
     std::vector<Move> Knight::generateMoves(GameState& gameState)
     {
-        return {};
+        // All of the different L positions
+        const std::vector<Move::position> deltas {
+            std::make_pair(1, 2),
+            std::make_pair(2, 1),
+            std::make_pair(2, -1),
+            std::make_pair(1, -2),
+            std::make_pair(-1, -2),
+            std::make_pair(-2, -1),
+            std::make_pair(-2, 1),
+            std::make_pair(-1, 2)
+        };
+        return addUnrelatedPositionsDeltas(deltas, static_cast<ChessGameState&>(gameState));
     }
 
     // See Knight.h
     std::vector<Move> Knight::generateAttackingMoves(GameState& gameState)
     {
-        return {};
+        return generateMoves(gameState);
     }
 }

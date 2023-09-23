@@ -124,6 +124,7 @@ TEST_CASE("Knight: Attack")
     int count = 0; // Makes sure the first 3 pieces are black and the rest are white
     for(Move::position delta : positionDeltas) {
         ChessPiece* curBlock = new TestChessPiece(count < 3 ? Player::black : Player::white, std::make_pair(4 + delta.first, 4 + delta.second));
+        count++;
         board->addPiece(curBlock);
     }
 
@@ -147,6 +148,9 @@ TEST_CASE("Knight: Attack")
 
     // Make sure the knight attacks only the valid attack positions
     TestChessHelpers::testPieceAttacks(chessState, Player::black, attackPositions);
+
+    // Make sure capturing works
+    CHECK(chessState->movePiece(std::make_pair(4, 4), std::make_pair(6, 5)));
 }
 
 TEST_CASE("Knight: Value")

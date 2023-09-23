@@ -135,6 +135,9 @@ TEST_CASE("Bishop: Attack")
 
     // Make sure the bishop attacks only the valid attack positions
     TestChessHelpers::testPieceAttacks(chessState, Player::black, attackPositions);
+
+    // Make sure capturing works
+    CHECK(chessState->movePiece(std::make_pair(4, 4), std::make_pair(3, 3)));
 }
 
 TEST_CASE("Bishop: Value")
