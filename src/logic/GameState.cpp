@@ -260,6 +260,27 @@ namespace logic {
         return movePiece(std::make_pair(startX, startY), end, idx);
     }
 
+    //See GameState.h
+    bool GameState::canMove(Player player)
+    {
+        GameBoard* board = getBoard();
+        if(!board) {
+            return false;
+        }
+        for(Move::position position : board->getPiecesOfPlayer(player)) {
+            Piece* piece = board->getPiece(position);
+            if(piece->getMoves(*this).size() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool GameState::canMove()
+    {
+        return canMove(getCrntPlayer());
+    }
+
     // See GameState.h
     std::vector<Move::position> GameState::getSpacesAttackedByPlayer(Player player)
     {

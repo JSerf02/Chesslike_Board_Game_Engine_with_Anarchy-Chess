@@ -13,8 +13,8 @@ TEST_CASE("Move: Get and set priority")
     // Create a Move object
     Move testMove{};
     
-    // Check if the default priority is properly initialized to 0
-    CHECK(testMove.getPriority() == 0);
+    // Check if the default priority is properly initialized to 1
+    CHECK(testMove.getPriority() == 1);
 
     // Check if setPriority() properly sets the priority
     // Only one case is necessary as functionality is identical for all ints

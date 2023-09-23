@@ -228,7 +228,11 @@ namespace logic{
             */
             double getPlayerScore(Piece::Player player);
 
+            /*
+            * Pushes a simulated move type to the simulated move stack
+            */
             void addToSimulation(SimulatedMove simulatedMove, Piece* piece, Move::position position);
+
             /*
             * Simulates moving a piece to a new position
             * - Simulating entails actually performing the action and adding a log
@@ -304,6 +308,11 @@ namespace logic{
             *   all reverts after that move will not be attempted
             */
             bool revertSimulation();
+
+            /*
+            * Returns whether the game is currently in a simulated position
+            */
+            bool inSimulation();
     };
 }
 #endif

@@ -349,4 +349,10 @@ namespace logic {
         return true;
     }
 
+    // See GameBoard.h
+    bool GameBoard::inSimulation()
+    {
+        return simulation.size() > 0;
+    }
+
 }

@@ -125,7 +125,8 @@ namespace testing {
             }
             std::vector<logic::Move> generateAttackingMoves(logic::GameState& gameState) override
             {
-                return {{{std::make_pair(1, 1)}}, {{std::make_pair(3, 3)}}, {{std::make_pair(2, 2), std::make_pair(3, 3)}}};
+                std::vector<logic::Move> temp = {{{std::make_pair(1, 1)}}, {{std::make_pair(3, 3)}}, {{std::make_pair(2, 2), std::make_pair(3, 3)}}};
+                return temp;
             } 
     };
 

@@ -188,6 +188,13 @@ namespace logic {
             bool movePiece(Move::position start, int endX, int endY, int idx = 0);
             bool movePiece(int startX, int startY, Move::position end, int idx = 0);
             bool movePiece(Move::position start, Move::position end, int idx = 0);
+
+            /*
+            * Returns whether or not the inputted player has at least one valid move
+            * - Defaults to the current player when no player is provided
+            */
+            bool canMove(Player player);
+            bool canMove();
             
             /*
             * Returns a vector containing all of the spaces the inputted player attacks

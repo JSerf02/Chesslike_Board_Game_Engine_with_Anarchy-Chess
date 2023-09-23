@@ -48,10 +48,10 @@ namespace logic {
             /*
             * Constructor: Initialize priority and onMove() callback function
             */
-            Move(int movePriority = 0, void (*onMoveCallback)(position, position, GameState&) = nullptr) : 
-                priority{movePriority}, onMove{onMoveCallback}{}
-            Move(std::vector<position> newPositions, int movePriority = 0, void (*onMoveCallback)(position, position, GameState&) = nullptr) : 
-                positions{newPositions}, priority{movePriority}, onMove{onMoveCallback}{}
+            Move(int movePriority = 1, void (*onMoveCallback)(position, position, GameState&) = nullptr) : 
+                priority{std::max(movePriority, 1)}, onMove{onMoveCallback}{}
+            Move(std::vector<position> newPositions, int movePriority = 1, void (*onMoveCallback)(position, position, GameState&) = nullptr) : 
+                positions{newPositions}, priority{std::max(movePriority, 1)}, onMove{onMoveCallback}{}
             
             /*
             * Allow printing of moves for debugging

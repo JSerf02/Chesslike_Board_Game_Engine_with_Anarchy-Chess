@@ -101,5 +101,4 @@ namespace chess {
     {
         return isInCheckmate(getCrntPlayer());
     }
-
 }

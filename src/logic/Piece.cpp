@@ -9,12 +9,18 @@ namespace logic {
     using Player = Piece::Player;
 
     // Let the compiler know that these functions exist
+    class GameBoard {
+        public:
+            bool inSimulation();
+    };
+
     class GameState {
         public: 
             int getPriority();
             int getTurn();
             Player getCrntPlayer();
             int getPriorityOfPlayer(Player player);
+            GameBoard* getBoard();
     };
 
     // See Piece.h
@@ -90,35 +96,87 @@ namespace logic {
     }
 
     // See Piece.h
-    std::vector<Move>& Piece::getMoves(GameState& gameState) 
+    std::vector<Move>& Piece::getMoves(GameState& gameState, bool ignorePriority) 
     {
-        // if(!controlledByPlayer(gameState)) {
-        //     return emptyMoves;
-        // }
+        // Store values for later
         int curTurn = gameState.getTurn();
-        if(moveCacheUpdateTurn != curTurn) {
-            moveCache = generateMoves(gameState);
-            moveCacheUpdateTurn = curTurn;
+        std::vector<Move>* cache;
+        GameBoard* board = gameState.getBoard();
+
+        // Get the simulated cache if you are in a simulation
+        if(board && board->inSimulation()) {
+            cache = &simulatedMoveCache;
+
+            // Always updated the simulated cache
+            *cache = generateMoves(gameState);
         }
-        return moveCache;
+        else { // Get the regular cache otherwise
+            cache = &moveCache;
+
+            // Update the cache if it has not been updated this turn
+            if(moveCacheUpdateTurn != curTurn) {
+                *cache = generateMoves(gameState);
+                moveCacheUpdateTurn = curTurn;
+            }
+        }
+
+        // Do not check priority if the current player does not control the piece
+        // or if ignorePriority is enabled
+        if(!controlledByPlayer(gameState) || ignorePriority) {
+            return *cache;
+        }
+
+        // Filter out moves that don't have high enough priorities
+        std::vector<Move> validMoves{};
+        
+        int priority = gameState.getPriority();
+        if(priority == 0) { // 0 priority means there are no valid moves
+            *cache = validMoves;
+            return *cache;
+        }
+        for(Move move : *cache) {
+            if(move.getPriority() < priority) {
+                continue;
+            }
+            validMoves.push_back(move);
+        }
+        *cache = validMoves;
+        return *cache;
     }
 
     // See Piece.h
-    std::vector<Move>& Piece::getAttackingMoves(GameState& gameState) 
+    std::vector<Move>& Piece::getAttackingMoves(GameState& gameState, bool ignorePriority) 
     {
+        // Store values for later
         int curTurn = gameState.getTurn();
-        if(attackMoveCacheUpdateTurn != curTurn) {
-            attackMoveCache = generateAttackingMoves(gameState);
-            attackMoveCacheUpdateTurn = curTurn;
+        std::vector<Move>* cache;
+        GameBoard* board = gameState.getBoard();
+
+        // Get the simulated cache if you are in a simulation
+        if(board && board->inSimulation()) {
+            cache = &simulatedAttackMoveCache;
+
+            // Always updated the simulated cache
+            *cache = generateAttackingMoves(gameState);
         }
-        return attackMoveCache;
+        else { // Get the regular cache otherwise
+            cache = &attackMoveCache;
+
+            // Update the cache if it has not been updated this turn
+            if(attackMoveCacheUpdateTurn != curTurn) {
+                *cache = generateAttackingMoves(gameState);
+                attackMoveCacheUpdateTurn = curTurn;
+            }
+        }
+
+        return *cache;
     }
 
     // See Piece.h
     int Piece::getMaxPriorityOfMoves(GameState& gameState)
     {
         // Get all of the piece's moves
-        std::vector<Move> moves = getMoves(gameState);
+        std::vector<Move> moves = getMoves(gameState, true);
 
         // Iterate through the moves to find the max priority
         int maxPriority = 0;
@@ -139,19 +197,9 @@ namespace logic {
             return {};
         }
 
-        int maxPriority = 0;
-        if(controlledByPlayer(gameState)) {
-            maxPriority = gameState.getPriority();
-        }
-
         std::set<Move::position> attackPositionsSet{};
         for(Move attackMove : attackMoves) {
-            // Only add attacks with the correct priority
-            if(attackMove.getPriority() < maxPriority) {
-                continue;
-            }
-
-            const std::vector<Move::position>& curAttackPositions  = attackMove.getPositions();
+            const std::vector<Move::position>& curAttackPositions = attackMove.getPositions();
             for(Move::position position : curAttackPositions) {
                 attackPositionsSet.insert(position);
             }

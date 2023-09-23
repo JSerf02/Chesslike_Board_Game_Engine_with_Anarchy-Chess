@@ -319,6 +319,28 @@ TEST_CASE("Game State: Move Piece")
     CHECK(gameState.getTurn() == 9);
 }
 
+TEST_CASE("Game State: Can Move")
+{
+    // Create a gameBoard
+    GameBoard* gameBoard = new GameBoard{{ Player::white, Player::black }};
+
+    // Create 4 testing pieces and add them to the board
+    Piece* whiteRawPiece = new Piece{ Player::white, std::make_pair(1, 1) };
+    Priority5Piece* black5Piece = new Priority5Piece{ Player::black, std::make_pair(5, 5) };
+    CHECK(gameBoard->addPieces({ whiteRawPiece, black5Piece }));
+
+    // Create a GameState with 2 players: white and black
+    GameState gameState{ gameBoard, { Player::white, Player::black } };
+    CHECK(gameState.getCrntPlayer() == Player::white);
+
+    // Make sure white can't move
+    CHECK(!gameState.canMove());
+    CHECK(!gameState.canMove(Player::white));
+
+    // Make sure black can move
+    CHECK(gameState.canMove(Player::black));
+}
+
 TEST_CASE("Game State: Get spaces attacked by player")
 {
     // Create a gameBoard
@@ -354,7 +376,7 @@ TEST_CASE("Game State: Get spaces attacked by player")
     CHECK(std::find(blackAttacks.begin(), blackAttacks.end(), std::make_pair(1, 2)) != blackAttacks.end());
 }
 
-TEST_CASE("Game State: Get spaces attacked by players")
+TEST_CASE("Game State: Get Spaces Attacked By Players")
 {
     // Create a gameBoard
     GameBoard* gameBoard = new GameBoard{{ Player::white, Player::black }};

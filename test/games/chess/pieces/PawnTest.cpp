@@ -15,6 +15,8 @@
 #include "GameBoard.h"
 #include "GameState.h"
 #include "Pawn.h"
+#include "Rook.h"
+#include "King.h"
 
 using namespace logic;
 using namespace chess;
@@ -305,4 +307,35 @@ TEST_CASE("Pawn: En Passant")
         std::make_pair(7, 3)
     };
     TestChessHelpers::testPiecePositions(chessState, blackFailPassant->getPosition(), validPositions7);
+}
+
+// Using regular chess pieces for this test to make it an integration test
+TEST_CASE("Pawn: En Passant Min Priority Override")
+{
+    // Create a ChessBoard without any pieces
+    ChessBoard* board = new ChessBoard(false);
+
+    // Add pieces to create this board state:
+    // https://lichess.org/editor/k7/8/8/8/p7/8/1P6/R6K_w_-_-_0_1?color=white
+    ChessPiece* whiteBoost     = new Pawn(Player::white, std::make_pair(2, 2));
+    ChessPiece* blackEnPassant = new Pawn(Player::black, std::make_pair(1, 4));
+    ChessPiece* whiteAttacker  = new Rook(Player::white, std::make_pair(1, 1));
+    ChessPiece* whiteKing = new King(Player::white, std::make_pair(8, 1));
+    ChessPiece* blackKing = new King(Player::black, std::make_pair(1, 8));
+    board->addPieces({
+        whiteBoost, blackEnPassant, whiteAttacker, whiteKing, blackKing
+    });
+
+    // Create a ChessGameState
+    ChessGameState* chessState = new ChessGameState(board);
+
+    // Make sure black has valid moves
+    CHECK(chessState->canMove(Player::black));
+
+    // Boost the white pawn to make En Passant possible
+    CHECK(chessState->movePiece(std::make_pair(2, 2), std::make_pair(2, 4)));
+
+    // Make sure black can't move since En Passant is impossible (it would put
+    // black into check) but it still applies the priority override
+    CHECK(!chessState->canMove(Player::black));
 }

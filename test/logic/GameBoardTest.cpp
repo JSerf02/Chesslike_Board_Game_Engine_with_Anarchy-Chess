@@ -361,24 +361,31 @@ TEST_CASE("Game Board: Simulations")
     xBoard.addPieces({ whitePiece, blackPiece });
     CHECK(whitePiece->getOnBoard());
     CHECK(blackPiece->getOnBoard());
+    
+    // Make sure you do not start in a simulation
+    CHECK(!xBoard.inSimulation());
 
     // Simulate moving from (0, 0) to (1, 1)
     CHECK(xBoard.simulateMovePiece(std::make_pair(0, 0), std::make_pair(1, 1)));
+    CHECK(xBoard.inSimulation());
     CHECK(xBoard.getPiece(0, 0) == nullptr);
     CHECK(xBoard.getPiece(1, 1) == whitePiece);
 
     // Simulate moving from (1, 1) to (2, 2)
     CHECK(xBoard.simulateMovePiece(std::make_pair(1, 1), 2, 2));
+    CHECK(xBoard.inSimulation());
     CHECK(xBoard.getPiece(1, 1) == nullptr);
     CHECK(xBoard.getPiece(2, 2) == whitePiece);
 
     // Simulate moving from (2, 2) to (4, 4)
     CHECK(xBoard.simulateMovePiece(2, 2, std::make_pair(4, 4)));
+    CHECK(xBoard.inSimulation());
     CHECK(xBoard.getPiece(2, 2) == nullptr);
     CHECK(xBoard.getPiece(4, 4) == whitePiece);
 
     // Simulate moving from (4, 4) to (5, 5)
     CHECK(xBoard.simulateMovePiece(4, 4, 5, 5));
+    CHECK(xBoard.inSimulation());
     CHECK(xBoard.getPiece(4, 4) == nullptr);
     CHECK(xBoard.getPiece(5, 5) == whitePiece);
 
@@ -405,11 +412,13 @@ TEST_CASE("Game Board: Simulations")
     
     // Simulate removing the piece at (3, 3)
     CHECK(xBoard.simulateRemovePiece(std::make_pair(3, 3)));
+    CHECK(xBoard.inSimulation());
     CHECK(xBoard.getPiece(3, 3) == nullptr);
     CHECK(blackPiece->getOnBoard() == false);
     
     // Simulate removing the piece at (5, 5)
     CHECK(xBoard.simulateRemovePiece(5, 5));
+    CHECK(xBoard.inSimulation());
     CHECK(xBoard.getPiece(5, 5) == nullptr);
     CHECK(whitePiece->getOnBoard() == false);
 
@@ -423,6 +432,7 @@ TEST_CASE("Game Board: Simulations")
 
     // Revert all simulated moves and make sure everything restored properly
     CHECK(xBoard.revertSimulation());
+    CHECK(!xBoard.inSimulation());
     CHECK(xBoard.getPiece(0, 0) == whitePiece);
     CHECK(xBoard.getPiece(3, 3) == blackPiece);
     CHECK(xBoard.getPiece(100, 100) == nullptr);
