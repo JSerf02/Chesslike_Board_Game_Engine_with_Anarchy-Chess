@@ -29,7 +29,7 @@ TEST_CASE("Move: Get and set priority")
  *   modifying the board because the board module is not written yet
 */
 static bool testCallbackCalled = false;
-void testCallback(Move::position start, Move::position end, GameState& gameState) 
+void testCallback(Move::position start, Move::position end, GameState& gameState, bool simulation) 
 {
     testCallbackCalled = true;
 }

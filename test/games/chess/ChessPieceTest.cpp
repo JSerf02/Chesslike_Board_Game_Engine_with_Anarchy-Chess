@@ -45,7 +45,7 @@ TEST_CASE("Chess Piece: Add to Move")
     // Get the H-Pawn and create a move for it
     ChessPiece* hPawn = static_cast<ChessPiece*>(board->getPiece(8, 3));
     REQUIRE(hPawn != nullptr);
-    Move hMove{};
+    Move hMove{1, ChessPiece::captureCallback};
 
     // Make sure adding pawn to G4 fails because there is a white piece there
     CHECK(hPawn->addToMove(std::make_pair(7, 4), hMove, chessState) == false);

@@ -42,15 +42,15 @@ namespace logic {
             * A callback function that is called whenever a player uses one of these moves
             * -- If null, will be ignored
             */
-            void (*onMove)(position, position, GameState&){ nullptr };
+            void (*onMove)(position, position, GameState&, bool){ nullptr };
 
         public:
             /*
             * Constructor: Initialize priority and onMove() callback function
             */
-            Move(int movePriority = 1, void (*onMoveCallback)(position, position, GameState&) = nullptr) : 
+            Move(int movePriority = 1, void (*onMoveCallback)(position, position, GameState&, bool) = nullptr) : 
                 priority{std::max(movePriority, 1)}, onMove{onMoveCallback}{}
-            Move(std::vector<position> newPositions, int movePriority = 1, void (*onMoveCallback)(position, position, GameState&) = nullptr) : 
+            Move(std::vector<position> newPositions, int movePriority = 1, void (*onMoveCallback)(position, position, GameState&, bool) = nullptr) : 
                 positions{newPositions}, priority{std::max(movePriority, 1)}, onMove{onMoveCallback}{}
             
             /*
@@ -71,7 +71,7 @@ namespace logic {
             /*
             * Changes the onMove() callback to a new callback function
             */
-            void setOnMove(void (*onMoveCallback)(position, position, GameState&));
+            void setOnMove(void (*onMoveCallback)(position, position, GameState&, bool));
 
             /*
             * Calls the onMove() callback function if one is defined
@@ -84,7 +84,7 @@ namespace logic {
             * - True if the function was called
             * - False if onMove() was null and nothing was called
             */
-            bool callOnMove(position start, position end, GameState& gameState);
+            bool callOnMove(position start, position end, GameState& gameState, bool simulation = false);
 
             /*
             * Returns a reference to the positions allowed by this move

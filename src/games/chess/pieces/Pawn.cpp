@@ -127,7 +127,10 @@ namespace chess {
             return;
         }
         addPosition(oneAhead, moves, chessState, 1, 
-        [](Move::position start, Move::position end, GameState& gameState) {
+        [](Move::position start, Move::position end, GameState& gameState, bool simulation) {
+            if(simulation) {
+                return;
+            }
             Pawn* pawn = static_cast<Pawn*>(gameState.getBoard()->getPiece(start));
             pawn->changeMovedFlag();
         });
@@ -139,7 +142,10 @@ namespace chess {
             return;
         }
         addPosition(twoAhead, moves, chessState, 1, 
-        [](Move::position start, Move::position end, GameState& gameState) {
+        [](Move::position start, Move::position end, GameState& gameState, bool simulation) {
+            if(simulation) {
+                return;
+            }
             Pawn* pawn = static_cast<Pawn*>(gameState.getBoard()->getPiece(start));
             pawn->setBoostTurn(gameState);
             pawn->changeMovedFlag();
@@ -172,10 +178,13 @@ namespace chess {
             }
         }
         addUnrelatedPositions(positions, moves, chessState, 1,
-        [](Move::position start, Move::position end, GameState& gameState) {
+        [](Move::position start, Move::position end, GameState& gameState, bool simulation) {
+            captureCallback(start, end, gameState, simulation);
+            if(simulation) {
+                return;
+            }
             Pawn* pawn = static_cast<Pawn*>(gameState.getBoard()->getPiece(start));
             pawn->changeMovedFlag();
-            captureCallback(start, end, gameState);
         });
     }
 
@@ -221,11 +230,18 @@ namespace chess {
         }
 
         addUnrelatedPositionsDeltas(deltas, moves, chessState, 10,
-        [](Move::position start, Move::position end, GameState& gameState) {
-            Pawn* pawn = static_cast<Pawn*>(gameState.getBoard()->getPiece(start));
-            pawn->changeMovedFlag();
+        [](Move::position start, Move::position end, GameState& gameState, bool simulation) {
+            if(!simulation) {
+                Pawn* pawn = static_cast<Pawn*>(gameState.getBoard()->getPiece(start));
+                pawn->changeMovedFlag();
+            }
             GameBoard* board = gameState.getBoard();
-            board->capturePiece(end.first, start.second);
+            if(simulation) {
+                board->simulateRemovePiece(end.first, start.second);
+            }
+            else {
+                board->capturePiece(end.first, start.second);
+            }
         });
     }
 }
