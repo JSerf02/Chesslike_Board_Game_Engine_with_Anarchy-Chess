@@ -31,7 +31,7 @@ namespace chess {
             * Returns whether the pawn can boost
             * - The pawn can boost if it has not moved previously
             */
-            bool canBoost();
+            bool canBoost(GameState& gameState);
 
             /*
             * Sets the boost turn to the current turn

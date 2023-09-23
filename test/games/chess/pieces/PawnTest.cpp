@@ -215,15 +215,15 @@ TEST_CASE("Pawn: En Passant")
     ChessBoard* board = new ChessBoard(false);
 
     // Add pieces to create this board state:
-    // https://lichess.org/editor/8/3p4/6p1/2P1P3/p1p5/7P/1P5K/7k_w_-_-_0_1?color=white
+    // https://lichess.org/editor/8/3p4/8/2P1P1p1/p1p5/8/1P5P/6Kk_w_-_-_0_1?color=white
     ChessPiece* whiteBoost1      = new Pawn(Player::white, std::make_pair(2, 2));
     ChessPiece* blackEnPassant1  = new Pawn(Player::black, std::make_pair(1, 4));
     ChessPiece* blackEnPassant2  = new Pawn(Player::black, std::make_pair(3, 4));
     ChessPiece* blackBoost       = new Pawn(Player::black, std::make_pair(4, 7));
     ChessPiece* whiteEnPassant1  = new Pawn(Player::white, std::make_pair(3, 5));
     ChessPiece* whiteEnPassant2  = new Pawn(Player::white, std::make_pair(5, 5));
-    ChessPiece* whiteBoost2      = new Pawn(Player::white, std::make_pair(8, 3));
-    ChessPiece* blackFailPassant = new Pawn(Player::black, std::make_pair(7, 6));
+    ChessPiece* whiteBoost2      = new Pawn(Player::white, std::make_pair(8, 2));
+    ChessPiece* blackFailPassant = new Pawn(Player::black, std::make_pair(7, 5));
     board->addPieces({
         whiteBoost1, blackEnPassant1, blackEnPassant2,
         blackBoost,  whiteEnPassant1, whiteEnPassant2,
@@ -232,7 +232,7 @@ TEST_CASE("Pawn: En Passant")
 
     // Add 2 kings to the board to prevent errors
     ChessPiece* whiteKing = new TestKing(Player::white, std::make_pair(8, 1));
-    ChessPiece* blackKing = new TestKing(Player::black, std::make_pair(8, 2));
+    ChessPiece* blackKing = new TestKing(Player::black, std::make_pair(7, 8));
     board->addPieces({whiteKing, blackKing});
 
     // Create a ChessGameState
@@ -240,13 +240,11 @@ TEST_CASE("Pawn: En Passant")
 
     // Make sure the black pieces cannot already En Passant
     std::set<Move::position> validPositions1 {
-        std::make_pair(1, 3),
-        std::make_pair(1, 2) // It hasn't moved yet so it can still boost
+        std::make_pair(1, 3)
     };
     TestChessHelpers::testPiecePositions(chessState, blackEnPassant1->getPosition(), validPositions1);
     std::set<Move::position> validPositions2 {
-        std::make_pair(3, 3),
-        std::make_pair(3, 2) // It hasn't moved yet so it can still boost
+        std::make_pair(3, 3)
     };
     TestChessHelpers::testPiecePositions(chessState, blackEnPassant2->getPosition(), validPositions2);
     
@@ -268,18 +266,16 @@ TEST_CASE("Pawn: En Passant")
 
     // Make sure the white pieces cannot already En Passant
     std::set<Move::position> validPositions4 {
-        std::make_pair(3, 6),
-        std::make_pair(3, 7)
+        std::make_pair(3, 6)
     };
     TestChessHelpers::testPiecePositions(chessState, whiteEnPassant1->getPosition(), validPositions4);
     std::set<Move::position> validPositions5 {
-        std::make_pair(5, 6),
-        std::make_pair(5, 7)
+        std::make_pair(5, 6)
     };
     TestChessHelpers::testPiecePositions(chessState, whiteEnPassant2->getPosition(), validPositions5);
 
-    // Boost the pawn on H3 (this is allowed because it started there)
-    CHECK(chessState->movePiece(std::make_pair(8, 3), std::make_pair(8, 5)));
+    // Boost the pawn on H2 
+    CHECK(chessState->movePiece(std::make_pair(8, 2), std::make_pair(8, 4)));
 
     // Boost the pawn on D7
     CHECK(chessState->movePiece(std::make_pair(4, 7), std::make_pair(4, 5)));
@@ -297,8 +293,8 @@ TEST_CASE("Pawn: En Passant")
     CHECK(chessState->movePiece(std::make_pair(5, 5), std::make_pair(4, 6)));
     CHECK(board->unoccupiedOnBoard(4, 5));
 
-    // Move the pawn from G6 to G5
-    CHECK(chessState->movePiece(std::make_pair(7, 6), std::make_pair(7, 5)));
+    // Move the pawn from G5 to G4
+    CHECK(chessState->movePiece(std::make_pair(7, 5), std::make_pair(7, 4)));
 
     // Random move to stall so black can move again
     CHECK(chessState->movePiece(std::make_pair(4, 6), std::make_pair(4, 7)));
@@ -306,7 +302,7 @@ TEST_CASE("Pawn: En Passant")
     // Make sure black cannot En Passant with the G pawn since a turn has passed 
     // since the H pawn's boost
     std::set<Move::position> validPositions7 {
-        std::make_pair(7, 4)
+        std::make_pair(7, 3)
     };
     TestChessHelpers::testPiecePositions(chessState, blackFailPassant->getPosition(), validPositions7);
 }

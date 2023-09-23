@@ -23,9 +23,12 @@ namespace chess {
     }
 
     // See Pawn.h
-    bool Pawn::canBoost()
+    bool Pawn::canBoost(GameState& gameState)
     {
-        return !alreadyMoved;
+        Player player = getPlayerAccess(Player::white) ? Player::white : Player::black;
+        ChessBoard* board = static_cast<ChessBoard*>(gameState.getBoard());
+        int startY = (player == Player::white) ? board->minY() + 1 : board->maxY() - 1;
+        return !alreadyMoved && getPosition().second == startY;
     }
 
     // See Pawn.h
@@ -132,7 +135,7 @@ namespace chess {
         // Add a move two positions ahead if it is unoccupied and on the board
         // - Give this move a callback that sets this piece's boost turn
         Move::position twoAhead = std::make_pair(curPosition.first, curPosition.second + 2 * direction);
-        if(!(board->unoccupiedOnBoard(twoAhead)) || !canBoost()) {
+        if(!(board->unoccupiedOnBoard(twoAhead)) || !canBoost(chessState)) {
             return;
         }
         addPosition(twoAhead, moves, chessState, 1, 
