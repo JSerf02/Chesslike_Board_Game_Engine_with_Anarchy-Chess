@@ -137,7 +137,7 @@ TEST_CASE("Knight: Attack")
     ChessGameState* chessState = new ChessGameState(board);
 
     // Store all attacked positions
-    // A position is attacked if it is alon and L and not blocked by a piece of
+    // A position is attacked if it is along and L and not blocked by a piece of
     // the same color
     std::set<Move::position> attackPositions {
         std::make_pair(5, 6),

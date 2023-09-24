@@ -16,6 +16,8 @@
 #define PAWN_ID 4
 #define QUEEN_ID 5
 #define ROOK_ID 6
+#define KNOOK_ID 7
+
 namespace chess {
     using namespace logic;
     using Player = Piece::Player;

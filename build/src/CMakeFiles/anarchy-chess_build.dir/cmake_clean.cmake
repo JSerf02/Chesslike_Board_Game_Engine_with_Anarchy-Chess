@@ -11,6 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/King.cpp.obj.d"
   "CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Knight.cpp.obj"
   "CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Knight.cpp.obj.d"
+  "CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Knook.cpp.obj"
+  "CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Knook.cpp.obj.d"
   "CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Pawn.cpp.obj"
   "CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Pawn.cpp.obj.d"
   "CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Queen.cpp.obj"

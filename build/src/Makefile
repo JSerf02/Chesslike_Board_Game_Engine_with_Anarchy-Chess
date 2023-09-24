@@ -273,6 +273,30 @@ games/chess/pieces/Knight.cpp.s:
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Knight.cpp.s
 .PHONY : games/chess/pieces/Knight.cpp.s
 
+games/chess/pieces/Knook.obj: games/chess/pieces/Knook.cpp.obj
+.PHONY : games/chess/pieces/Knook.obj
+
+# target to build an object file
+games/chess/pieces/Knook.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Knook.cpp.obj
+.PHONY : games/chess/pieces/Knook.cpp.obj
+
+games/chess/pieces/Knook.i: games/chess/pieces/Knook.cpp.i
+.PHONY : games/chess/pieces/Knook.i
+
+# target to preprocess a source file
+games/chess/pieces/Knook.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Knook.cpp.i
+.PHONY : games/chess/pieces/Knook.cpp.i
+
+games/chess/pieces/Knook.s: games/chess/pieces/Knook.cpp.s
+.PHONY : games/chess/pieces/Knook.s
+
+# target to generate assembly for a file
+games/chess/pieces/Knook.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/games/chess/pieces/Knook.cpp.s
+.PHONY : games/chess/pieces/Knook.cpp.s
+
 games/chess/pieces/Pawn.obj: games/chess/pieces/Pawn.cpp.obj
 .PHONY : games/chess/pieces/Pawn.obj
 
@@ -492,6 +516,9 @@ help:
 	@echo ... games/chess/pieces/Knight.obj
 	@echo ... games/chess/pieces/Knight.i
 	@echo ... games/chess/pieces/Knight.s
+	@echo ... games/chess/pieces/Knook.obj
+	@echo ... games/chess/pieces/Knook.i
+	@echo ... games/chess/pieces/Knook.s
 	@echo ... games/chess/pieces/Pawn.obj
 	@echo ... games/chess/pieces/Pawn.i
 	@echo ... games/chess/pieces/Pawn.s

@@ -273,6 +273,30 @@ __/src/games/chess/pieces/Knight.cpp.s:
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knight.cpp.s
 .PHONY : __/src/games/chess/pieces/Knight.cpp.s
 
+__/src/games/chess/pieces/Knook.obj: __/src/games/chess/pieces/Knook.cpp.obj
+.PHONY : __/src/games/chess/pieces/Knook.obj
+
+# target to build an object file
+__/src/games/chess/pieces/Knook.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knook.cpp.obj
+.PHONY : __/src/games/chess/pieces/Knook.cpp.obj
+
+__/src/games/chess/pieces/Knook.i: __/src/games/chess/pieces/Knook.cpp.i
+.PHONY : __/src/games/chess/pieces/Knook.i
+
+# target to preprocess a source file
+__/src/games/chess/pieces/Knook.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knook.cpp.i
+.PHONY : __/src/games/chess/pieces/Knook.cpp.i
+
+__/src/games/chess/pieces/Knook.s: __/src/games/chess/pieces/Knook.cpp.s
+.PHONY : __/src/games/chess/pieces/Knook.s
+
+# target to generate assembly for a file
+__/src/games/chess/pieces/Knook.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/games/chess/pieces/Knook.cpp.s
+.PHONY : __/src/games/chess/pieces/Knook.cpp.s
+
 __/src/games/chess/pieces/Pawn.obj: __/src/games/chess/pieces/Pawn.cpp.obj
 .PHONY : __/src/games/chess/pieces/Pawn.obj
 
@@ -585,6 +609,30 @@ games/chess/pieces/KnightTest.cpp.s:
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KnightTest.cpp.s
 .PHONY : games/chess/pieces/KnightTest.cpp.s
 
+games/chess/pieces/KnookTest.obj: games/chess/pieces/KnookTest.cpp.obj
+.PHONY : games/chess/pieces/KnookTest.obj
+
+# target to build an object file
+games/chess/pieces/KnookTest.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KnookTest.cpp.obj
+.PHONY : games/chess/pieces/KnookTest.cpp.obj
+
+games/chess/pieces/KnookTest.i: games/chess/pieces/KnookTest.cpp.i
+.PHONY : games/chess/pieces/KnookTest.i
+
+# target to preprocess a source file
+games/chess/pieces/KnookTest.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KnookTest.cpp.i
+.PHONY : games/chess/pieces/KnookTest.cpp.i
+
+games/chess/pieces/KnookTest.s: games/chess/pieces/KnookTest.cpp.s
+.PHONY : games/chess/pieces/KnookTest.s
+
+# target to generate assembly for a file
+games/chess/pieces/KnookTest.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/KnookTest.cpp.s
+.PHONY : games/chess/pieces/KnookTest.cpp.s
+
 games/chess/pieces/PawnTest.obj: games/chess/pieces/PawnTest.cpp.obj
 .PHONY : games/chess/pieces/PawnTest.obj
 
@@ -804,6 +852,9 @@ help:
 	@echo ... __/src/games/chess/pieces/Knight.obj
 	@echo ... __/src/games/chess/pieces/Knight.i
 	@echo ... __/src/games/chess/pieces/Knight.s
+	@echo ... __/src/games/chess/pieces/Knook.obj
+	@echo ... __/src/games/chess/pieces/Knook.i
+	@echo ... __/src/games/chess/pieces/Knook.s
 	@echo ... __/src/games/chess/pieces/Pawn.obj
 	@echo ... __/src/games/chess/pieces/Pawn.i
 	@echo ... __/src/games/chess/pieces/Pawn.s
@@ -843,6 +894,9 @@ help:
 	@echo ... games/chess/pieces/KnightTest.obj
 	@echo ... games/chess/pieces/KnightTest.i
 	@echo ... games/chess/pieces/KnightTest.s
+	@echo ... games/chess/pieces/KnookTest.obj
+	@echo ... games/chess/pieces/KnookTest.i
+	@echo ... games/chess/pieces/KnookTest.s
 	@echo ... games/chess/pieces/PawnTest.obj
 	@echo ... games/chess/pieces/PawnTest.i
 	@echo ... games/chess/pieces/PawnTest.s

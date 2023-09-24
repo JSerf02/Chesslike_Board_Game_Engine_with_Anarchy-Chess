@@ -27,6 +27,7 @@ namespace chess {
                 knight = 2,
                 rook   = 3,
                 bishop = 4,
+                knook  = 5,
                 length // Stores the size of the enum
             };
 

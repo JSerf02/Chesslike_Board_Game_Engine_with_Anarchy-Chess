@@ -103,7 +103,7 @@ TEST_CASE("Bishop: Attack")
     // Create a ChessBoard without any pieces
     ChessBoard* board = new ChessBoard(false);
 
-    // Add a bishop to the board on D4 and 5 test pieces on C3, B6, H8, and G1
+    // Add a bishop to the board on D4 and 5 test pieces on C3, B2, B6, H8, and G1
     ChessPiece* bishop           = new Bishop(Player::white, std::make_pair(4, 4));
     ChessPiece* downEnemy        = new TestChessPiece(Player::black, std::make_pair(3, 3));
     ChessPiece* downBlockedEnemy = new TestChessPiece(Player::black, std::make_pair(2, 2));

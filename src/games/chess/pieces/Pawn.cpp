@@ -8,6 +8,7 @@
 #include "Knight.h"
 #include "Rook.h"
 #include "Bishop.h"
+#include "Knook.h"
 
 namespace chess {
     using namespace logic;
@@ -275,6 +276,9 @@ namespace chess {
                         break;
                     case PromotionIdx::bishop:
                         newPiece = new Bishop(player, start);
+                        break;
+                    case PromotionIdx::knook:
+                        newPiece = new Knook(player, start);
                         break;
                 }
                 if(!newPiece) {
