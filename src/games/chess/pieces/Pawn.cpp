@@ -281,6 +281,9 @@ namespace chess {
                     return;
                 }
 
+                // Make sure the newPiece doesn't trigger any starting position conditions
+                newPiece->validateMove();
+
                 // Add the new piece at the pawn's current position
                 // - It will move forward one space afterwards
                 if(simulation) {
@@ -329,13 +332,21 @@ namespace chess {
             GameBoard* board = gameState.getBoard();
             Piece* pawn = board->getPiece(start);
             Player player = pawn->getPlayerAccess(Player::white) ? Player::white : Player::black;
+
+            // Create the new knight
+            Piece* newPiece = new Knight(player, start);
+
+            // Make sure the newPiece doesn't trigger any starting position conditions
+            newPiece->validateMove();
+
+            // Replace the pawn with the knight
             if(simulating) {
                 board->simulateRemovePiece(start);
-                board->simulateAddPiece(new Knight(player, start));
+                board->simulateAddPiece(newPiece);
             }
             else {
                 board->removePiece(start);
-                board->addPiece(new Knight(player, start));
+                board->addPiece(newPiece);
             }
             captureCallback(start, end, gameState, simulating);
         });

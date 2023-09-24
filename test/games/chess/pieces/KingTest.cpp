@@ -15,6 +15,7 @@
 #include "GameBoard.h"
 #include "GameState.h"
 #include "King.h"
+#include "Rook.h"
 
 using namespace logic;
 using namespace chess;
@@ -143,4 +144,43 @@ TEST_CASE("King: Value and ID")
 
     // Make sure the king is detected as a king
     CHECK(static_cast<ChessPiece*>(king)->isKing());
+}
+
+TEST_CASE("King: Castling")
+{
+    // Create a ChessBoard without any pieces
+    ChessBoard* board = new ChessBoard(false);
+
+    // Add pieces so white can castle on both sides and black can queen-side castle
+    ChessPiece* whiteKing = new King(Player::white, std::make_pair(5, 1));
+    ChessPiece* whiteRook = new Rook(Player::white, std::make_pair(8, 1));
+    ChessPiece* earlyMove = new Rook(Player::white, std::make_pair(1, 1));
+    ChessPiece* blackKing = new King(Player::black, std::make_pair(5, 8));
+    ChessPiece* blackRook = new Rook(Player::black, std::make_pair(1, 8));
+    board->addPieces({whiteKing, whiteRook, earlyMove, blackKing, blackRook});
+
+    // Create a ChessGameState
+    ChessGameState* chessState = new ChessGameState(board);
+
+    // Make sure that white can castle on both sides and that black can castle queenside
+    CHECK(chessState->canMovePiece(std::make_pair(5, 1), std::make_pair(7, 1)));
+    CHECK(chessState->canMovePiece(std::make_pair(5, 1), std::make_pair(3, 1)));
+    CHECK(chessState->canMovePiece(std::make_pair(5, 8), std::make_pair(3, 8)));
+
+    // Check that castling isn't possible without a rook
+    CHECK(!chessState->canMovePiece(std::make_pair(5, 8), std::make_pair(8, 8)));
+
+    // Tell the A1 rook that it has moved in the past and make sure castling no longer works
+    earlyMove->validateMove();
+    CHECK(!chessState->canMovePiece(std::make_pair(5, 1), std::make_pair(3, 1)));
+
+    // Kingside castle with white and make sure it moved both pieces
+    CHECK(chessState->movePiece(std::make_pair(5, 1), std::make_pair(7, 1)));
+    CHECK(board->occupiedOnBoard(std::make_pair(6, 1)));
+    CHECK(board->unoccupiedOnBoard(std::make_pair(8, 1)));
+
+    // Queenside castle with black and make sure it moved both pieces
+    CHECK(chessState->movePiece(std::make_pair(5, 8), std::make_pair(3, 8)));
+    CHECK(board->occupiedOnBoard(std::make_pair(4, 8)));
+    CHECK(board->unoccupiedOnBoard(std::make_pair(1, 8)));
 }
