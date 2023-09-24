@@ -99,6 +99,7 @@ namespace chess {
         addStandardAttacks(moves, chessState);
         addEnPassant(moves, chessState);
         addPromotion(moves, chessState);
+        addKnightBoost(moves, chessState);
         return moves;
     }
 
@@ -109,6 +110,7 @@ namespace chess {
         ChessGameState& chessState = static_cast<ChessGameState&>(gameState);
         addStandardAttacks(moves, chessState, true);
         addEnPassant(moves, chessState, true);
+        addKnightBoost(moves, chessState);
         return moves;
     }
 
@@ -254,7 +256,7 @@ namespace chess {
     void Pawn::addPromotion(std::vector<Move>& moves, ChessGameState& chessState)
     {
         // Store values for later use
-        GameBoard* board = chessState.getBoard();
+        ChessBoard* board = static_cast<ChessBoard*>(chessState.getBoard());
         Move::position curPosition = getPosition();
         int direction = getPlayerAccess(Player::white) ? 1 : -1;
 
@@ -263,6 +265,12 @@ namespace chess {
         if(!(board->unoccupiedOnBoard(oneAhead))) {
             return;
         }
+
+        // Don't add promotion if the next tile is not the end of the board
+        if(oneAhead.second != board->minY() && oneAhead.second != board->maxY()) {
+            return;
+        }
+
         for(int i = static_cast<int>(PromotionIdx::pawn) + 1; i < static_cast<int>(PromotionIdx::length); i++) {
             addPosition(oneAhead, moves, chessState, 1, 
             [i](Move::position start, Move::position end, GameState& gameState, bool simulation) {
@@ -309,5 +317,53 @@ namespace chess {
                 }
             });
         }
+    }
+
+    // See Pawn.h
+    void Pawn::addKnightBoost(std::vector<Move>& moves, ChessGameState& chessState)
+    {   
+        // Store values for later use
+        ChessBoard* board = static_cast<ChessBoard*>(chessState.getBoard());
+        Move::position curPosition = getPosition();
+        int direction = getPlayerAccess(Player::white) ? 1 : -1;
+
+        // Add a move one position ahead if it is unoccupied and on the board
+        Move::position oneAhead = std::make_pair(curPosition.first, curPosition.second + direction);
+        if(!(board->unoccupiedOnBoard(oneAhead))) {
+            return;
+        }
+
+        // Don't add promotion if the next tile is not the end of the board
+        if(oneAhead.second != board->minY() && oneAhead.second != board->maxY()) {
+            return;
+        }
+
+        // All possible knight moves
+        const std::vector<Move::position> deltas {
+            std::make_pair( 1,  2 + direction),
+            std::make_pair( 2,  1 + direction),
+            std::make_pair( 2, -1 + direction),
+            std::make_pair( 1, -2 + direction),
+            std::make_pair(-1, -2 + direction),
+            std::make_pair(-2, -1 + direction),
+            std::make_pair(-2,  1 + direction),
+            std::make_pair(-1,  2 + direction)
+        };
+        addUnrelatedPositionsDeltas(deltas, moves, chessState, 1, 
+        [](Move::position start, Move::position end, GameState& gameState, bool simulating) {
+            // Get values for later
+            GameBoard* board = gameState.getBoard();
+            Piece* pawn = board->getPiece(start);
+            Player player = pawn->getPlayerAccess(Player::white) ? Player::white : Player::black;
+            if(simulating) {
+                board->simulateRemovePiece(start);
+                board->simulateAddPiece(new Knight(player, start));
+            }
+            else {
+                board->removePiece(start);
+                board->addPiece(new Knight(player, start));
+            }
+            captureCallback(start, end, gameState, simulating);
+        });
     }
 }

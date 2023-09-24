@@ -120,6 +120,11 @@ namespace chess {
             *   the PromotionIdx enum
             */
             void addPromotion(std::vector<Move>& moves, ChessGameState& chessState);
+
+            /*
+            * Allows pawns to take an extra knight move after promoting to a knight
+            */
+            void addKnightBoost(std::vector<Move>& moves, ChessGameState& chessState);
     };
 }
 #endif
