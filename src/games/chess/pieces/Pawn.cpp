@@ -32,19 +32,13 @@ namespace chess {
         Player player = getPlayerAccess(Player::white) ? Player::white : Player::black;
         ChessBoard* board = static_cast<ChessBoard*>(gameState.getBoard());
         int startY = (player == Player::white) ? board->minY() + 1 : board->maxY() - 1;
-        return !alreadyMoved && getPosition().second == startY;
+        return !previouslyMoved() && getPosition().second == startY;
     }
 
     // See Pawn.h
     void Pawn::setBoostTurn(GameState& gameState)
     {
         boostTurn = gameState.getTurn();
-    }
-
-    // See Pawn.h
-    void Pawn::changeMovedFlag()
-    {
-        alreadyMoved = true;
     }
 
     // See Pawn.h
@@ -133,14 +127,7 @@ namespace chess {
         if(!(board->unoccupiedOnBoard(oneAhead))) {
             return;
         }
-        addPosition(oneAhead, moves, chessState, 1, 
-        [](Move::position start, Move::position end, GameState& gameState, bool simulation) {
-            if(simulation) {
-                return;
-            }
-            Pawn* pawn = static_cast<Pawn*>(gameState.getBoard()->getPiece(start));
-            pawn->changeMovedFlag();
-        });
+        addPosition(oneAhead, moves, chessState, 1, nullptr);
 
         // Add a move two positions ahead if it is unoccupied and on the board
         // - Give this move a callback that sets this piece's boost turn
@@ -155,7 +142,6 @@ namespace chess {
             }
             Pawn* pawn = static_cast<Pawn*>(gameState.getBoard()->getPiece(start));
             pawn->setBoostTurn(gameState);
-            pawn->changeMovedFlag();
         });
     }
 
@@ -184,15 +170,7 @@ namespace chess {
                 positions.push_back(newPosition);
             }
         }
-        addUnrelatedPositions(positions, moves, chessState, 1,
-        [](Move::position start, Move::position end, GameState& gameState, bool simulation) {
-            captureCallback(start, end, gameState, simulation);
-            if(simulation) {
-                return;
-            }
-            Pawn* pawn = static_cast<Pawn*>(gameState.getBoard()->getPiece(start));
-            pawn->changeMovedFlag();
-        });
+        addUnrelatedPositions(positions, moves, chessState);
     }
 
     // See Pawn.h
@@ -238,10 +216,6 @@ namespace chess {
 
         addUnrelatedPositionsDeltas(deltas, moves, chessState, 10,
         [](Move::position start, Move::position end, GameState& gameState, bool simulation) {
-            if(!simulation) {
-                Pawn* pawn = static_cast<Pawn*>(gameState.getBoard()->getPiece(start));
-                pawn->changeMovedFlag();
-            }
             GameBoard* board = gameState.getBoard();
             if(simulation) {
                 board->simulateRemovePiece(end.first, start.second);

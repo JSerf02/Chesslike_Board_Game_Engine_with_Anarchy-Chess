@@ -111,7 +111,7 @@ namespace chess {
 
             // Add the swap move with a callback that swaps the bishops and captures the pawns
             Move newMove = Move({}, 3, 
-            [](Move::position start, Move::position end, GameState& gameState, bool simulated) {
+            [](Move::position start, Move::position end, GameState& gameState, bool simulation) {
                 GameBoard* board = gameState.getBoard();
                 Move::position direction = std::make_pair(
                     static_cast<int>((end.first - start.first) / 3), 
@@ -125,7 +125,7 @@ namespace chess {
                     start.first + 2 * direction.first, 
                     start.second + 2 * direction.second
                 );
-                if(simulated) {
+                if(simulation) {
                     board->simulateRemovePiece(pawn1);
                     board->simulateRemovePiece(pawn2);
 

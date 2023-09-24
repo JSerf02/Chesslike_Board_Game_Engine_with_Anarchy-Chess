@@ -94,6 +94,18 @@ namespace logic {
     {
         changePosition(newPosition.first, newPosition.second);
     }
+    
+    // See Piece.h
+    bool Piece::previouslyMoved()
+    {
+        return alreadyMoved;
+    }
+
+    // See Piece.h
+    void Piece::validateMove()
+    {
+        alreadyMoved = true;
+    }
 
     // See Piece.h
     std::vector<Move>& Piece::getMoves(GameState& gameState, bool ignorePriority) 

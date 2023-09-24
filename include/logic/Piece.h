@@ -92,6 +92,11 @@ namespace logic {
             */
             std::vector<Move> emptyMoves{};
 
+            /*
+            * Whether this piece has been moved from its starting location
+            */
+            bool alreadyMoved{false};
+
         public:
             /*
             * Constructor: Set piecePosition
@@ -141,6 +146,17 @@ namespace logic {
             */
             void changePosition(int newX, int newY);
             void changePosition(Move::position newPosition);
+
+            /*
+            * Returns whether this piece has moved this game
+            */
+            bool previouslyMoved();
+
+            /*
+            * Changes the alreadyMoved flag so the piece knows that it has made a
+            * valid move in the past
+            */
+            void validateMove();
 
         private:
             /*

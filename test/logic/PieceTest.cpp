@@ -152,6 +152,21 @@ TEST_CASE("Piece: Change Position")
     CHECK(testPiece.getPosition() == newPosition);
 }
 
+TEST_CASE("Piece: Previously Moved") 
+{
+    // Create a Piece for testing
+    Piece testPiece{};
+
+    // Make sure the piece has not moved in the past
+    CHECK(!testPiece.previouslyMoved());
+
+    // Alert the piece that it has moved
+    testPiece.validateMove();
+
+    // Make sure the piece knows that it has moved
+    CHECK(testPiece.previouslyMoved());
+}
+
 TEST_CASE("Piece: Get maximum priority of all moves")
 {
     // Create a gameState and a testPiece

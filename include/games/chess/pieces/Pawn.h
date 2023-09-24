@@ -52,21 +52,11 @@ namespace chess {
             void setBoostTurn(GameState& gameState);
 
             /*
-            * Changes the internal alreadyMoved flag to indicate that the pawn has moved
-            */
-            void changeMovedFlag();
-
-            /*
             * Override priority to 10 if En Passant is a possibility
             */
             int getMinPriority(GameState& gameState) override;
 
         private:
-            /*
-            * Whether the pawn has already moved this game
-            */
-            bool alreadyMoved{};
-
             /*
             * The turn that the pawn boosted
             * - Used for determining whether En Passant is possible
