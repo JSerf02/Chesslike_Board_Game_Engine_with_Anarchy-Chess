@@ -15,6 +15,7 @@
 #include "GameBoard.h"
 #include "GameState.h"
 #include "Bishop.h"
+#include "Pawn.h"
 
 using namespace logic;
 using namespace chess;
@@ -153,4 +154,48 @@ TEST_CASE("Bishop: Value")
 
     // Make sure the bishop's ID is correctly set
     CHECK(bishop->getID() == BISHOP_ID);
+}
+
+TEST_CASE("Bishop: Il Vaticano Success")
+{
+    // Create a ChessBoard without any pieces
+    ChessBoard* board = new ChessBoard(false);
+
+    // Create the following board state:
+    // https://lichess.org/editor/7K/2B4k/2p5/2p5/2BppB2/8/8/8_w_-_-_0_1?color=white
+    ChessPiece* bishop1 = new Bishop(Player::white, std::make_pair(3, 4));
+    ChessPiece* bishop2 = new Bishop(Player::white, std::make_pair(6, 4));
+    ChessPiece* bishop3 = new Bishop(Player::white, std::make_pair(3, 7));
+    ChessPiece* pawn1   = new Pawn(  Player::black, std::make_pair(4, 4));
+    ChessPiece* pawn2   = new Pawn(  Player::black, std::make_pair(5, 4));
+    ChessPiece* pawn3   = new Pawn(  Player::black, std::make_pair(3, 5));
+    ChessPiece* pawn4   = new Pawn(  Player::black, std::make_pair(3, 6));
+    ChessPiece* whiteKing = new TestKing(Player::white, std::make_pair(8, 8));
+    ChessPiece* blackKing = new TestKing(Player::black, std::make_pair(8, 7));
+    board->addPieces({
+        bishop1, bishop2, bishop3, pawn1, pawn2, pawn3, pawn4, whiteKing, blackKing
+    });
+
+    // Create a ChessGameState
+    ChessGameState* chessState = new ChessGameState(board);
+
+    // Make sure Il Vaticano moves work in all directions
+    CHECK(chessState->canMovePiece(std::make_pair(3, 4), std::make_pair(6, 4)));
+    CHECK(chessState->canMovePiece(std::make_pair(6, 4), std::make_pair(3, 4)));
+    CHECK(chessState->canMovePiece(std::make_pair(3, 4), std::make_pair(3, 7)));
+    CHECK(chessState->canMovePiece(std::make_pair(3, 7), std::make_pair(3, 4)));
+
+    // Make sure the pawns between the bishops are attacked in all scenarios
+    CHECK(chessState->isAttacked(Player::black, std::make_pair(4, 4)));
+    CHECK(chessState->isAttacked(Player::black, std::make_pair(5, 4)));
+    CHECK(chessState->isAttacked(Player::black, std::make_pair(3, 5)));
+    CHECK(chessState->isAttacked(Player::black, std::make_pair(3, 6)));
+
+    // Perform Il Vaticano and make sure the pawns between the bishops are destroyed
+    CHECK(chessState->movePiece(std::make_pair(3, 4), std::make_pair(6, 4)));
+    CHECK(board->unoccupiedOnBoard(std::make_pair(4, 4)));
+    CHECK(board->unoccupiedOnBoard(std::make_pair(5, 4)));
+
+    // Make sure the bishops swapped and didn't get captured somehow
+    CHECK(board->occupiedOnBoard(std::make_pair(3, 4)));
 }
