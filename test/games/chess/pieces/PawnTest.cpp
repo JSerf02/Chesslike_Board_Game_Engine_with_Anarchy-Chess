@@ -378,3 +378,39 @@ TEST_CASE("Pawn: Promotion")
     REQUIRE(chessState->movePiece(std::make_pair(7, 2), std::make_pair(7, 1), static_cast<int>(Pawn::PromotionIdx::bishop)));
     CHECK(board->getPiece(std::make_pair(7, 1))->getID() == BISHOP_ID);
 }
+
+TEST_CASE("Pawn: Knight Boosting")
+{
+    // Create a ChessBoard without any pieces
+    ChessBoard* board = new ChessBoard(false);
+
+    // Add a pawn near the edge of the board
+    ChessPiece* pawn = new Pawn(Player::white, std::make_pair(4, 7));
+    board->addPiece(pawn);
+
+    // Add 2 kings to the board to prevent errors
+    ChessPiece* whiteKing = new TestKing(Player::white, std::make_pair(8, 8));
+    ChessPiece* blackKing = new TestKing(Player::black, std::make_pair(8, 7));
+    board->addPieces({whiteKing, blackKing});
+
+    // Create a ChessGameState
+    ChessGameState* chessState = new ChessGameState(board);
+
+    // Make sure all possible boost positions are present
+    CHECK(chessState->canMovePiece(pawn->getPosition(), std::make_pair(2, 7)));
+    CHECK(chessState->canMovePiece(pawn->getPosition(), std::make_pair(3, 6)));
+    CHECK(chessState->canMovePiece(pawn->getPosition(), std::make_pair(5, 6)));
+    CHECK(chessState->canMovePiece(pawn->getPosition(), std::make_pair(6, 7)));
+
+    // Make sure all possible boost positions are attacked
+    CHECK(chessState->isAttacked(Player::black, std::make_pair(2, 7)));
+    CHECK(chessState->isAttacked(Player::black, std::make_pair(3, 6)));
+    CHECK(chessState->isAttacked(Player::black, std::make_pair(5, 6)));
+    CHECK(chessState->isAttacked(Player::black, std::make_pair(6, 7)));
+
+    // Move the piece and make sure it was promoted into a knight
+    CHECK(chessState->movePiece(pawn->getPosition(), std::make_pair(5, 6)));
+    Piece* piece = board->getPiece(std::make_pair(5, 6));
+    REQUIRE(piece != nullptr);
+    CHECK(piece->getID() == KNIGHT_ID);
+}
