@@ -185,6 +185,9 @@ TEST_CASE("Bishop: Il Vaticano Success")
     CHECK(chessState->canMovePiece(std::make_pair(3, 4), std::make_pair(3, 7)));
     CHECK(chessState->canMovePiece(std::make_pair(3, 7), std::make_pair(3, 4)));
 
+    // Make sure Il Vaticano has a higher priority than regular moves
+    CHECK(!chessState->canMovePiece(std::make_pair(3, 4), std::make_pair(4, 5)));
+    
     // Make sure the pawns between the bishops are attacked in all scenarios
     CHECK(chessState->isAttacked(Player::black, std::make_pair(4, 4)));
     CHECK(chessState->isAttacked(Player::black, std::make_pair(5, 4)));
@@ -198,4 +201,40 @@ TEST_CASE("Bishop: Il Vaticano Success")
 
     // Make sure the bishops swapped and didn't get captured somehow
     CHECK(board->occupiedOnBoard(std::make_pair(3, 4)));
+}
+
+TEST_CASE("Bishop: Il Vaticano Failure")
+{
+    // Create a ChessBoard without any pieces
+    ChessBoard* board = new ChessBoard(false);
+
+    // Create the following board state:
+    // https://lichess.org/editor/7K/2B4k/2p5/2p5/2BppB2/8/8/8_w_-_-_0_1?color=white
+    ChessPiece* bishop1 = new Bishop(Player::white, std::make_pair(3, 4));
+    ChessPiece* bishop2 = new Bishop(Player::white, std::make_pair(6, 4));
+    ChessPiece* bishop3 = new Bishop(Player::white, std::make_pair(3, 7));
+    ChessPiece* pawn  = new Pawn(Player::black, std::make_pair(4, 4));
+    ChessPiece* test1 = new TestChessPiece(Player::black, std::make_pair(5, 4));
+    ChessPiece* test2 = new TestChessPiece(Player::black, std::make_pair(3, 5));
+    ChessPiece* test3 = new TestChessPiece(Player::black, std::make_pair(3, 6));
+    ChessPiece* whiteKing = new TestKing(Player::white, std::make_pair(8, 8));
+    ChessPiece* blackKing = new TestKing(Player::black, std::make_pair(8, 7));
+    board->addPieces({
+        bishop1, bishop2, bishop3, pawn, test1, test2, test3, whiteKing, blackKing
+    });
+
+    // Create a ChessGameState
+    ChessGameState* chessState = new ChessGameState(board);
+
+    // Make sure Il Vaticano moves does not work in all directions
+    CHECK(!chessState->canMovePiece(std::make_pair(3, 4), std::make_pair(6, 4)));
+    CHECK(!chessState->canMovePiece(std::make_pair(6, 4), std::make_pair(3, 4)));
+    CHECK(!chessState->canMovePiece(std::make_pair(3, 4), std::make_pair(3, 7)));
+    CHECK(!chessState->canMovePiece(std::make_pair(3, 7), std::make_pair(3, 4)));
+
+    // Make sure the pieces between the bishops are attacked in all scenarios
+    CHECK(!chessState->isAttacked(Player::black, std::make_pair(4, 4)));
+    CHECK(!chessState->isAttacked(Player::black, std::make_pair(5, 4)));
+    CHECK(!chessState->isAttacked(Player::black, std::make_pair(3, 5)));
+    CHECK(!chessState->isAttacked(Player::black, std::make_pair(3, 6)));
 }

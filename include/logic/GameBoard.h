@@ -50,6 +50,12 @@ namespace logic{
             * - Necessary for memory management
             */
             std::vector<Piece*> allPieces{};
+            
+            /*
+            * A list of position pairs of moves that can be automatically completed
+            * all at once later on
+            */
+            std::vector<std::pair<Move::position, Move::position>> futureMoves{};
 
             /*
             * A struct that stores a single simulated move and the necessary information
@@ -229,6 +235,21 @@ namespace logic{
             double getPlayerScore(Piece::Player player);
 
             /*
+            * Removes all future moves
+            */
+            void clearFutureMoves();
+
+            /*
+            * Adds a move to the queue
+            */
+            void queueFutureMove(Move::position start, Move::position end);
+
+            /*
+            * Make all future moves and clears the queue
+            */
+            void applyFutureMoves();
+
+            /*
             * Pushes a simulated move type to the simulated move stack
             */
             void addToSimulation(SimulatedMove simulatedMove, Piece* piece, Move::position position);
@@ -313,6 +334,11 @@ namespace logic{
             * Returns whether the game is currently in a simulated position
             */
             bool inSimulation();
+
+            /*
+            * Applies all future moves as simulations
+            */
+            void simulateApplyFutureMoves();
     };
 }
 #endif

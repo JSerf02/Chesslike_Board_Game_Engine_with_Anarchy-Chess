@@ -27,14 +27,27 @@ namespace chess {
 
         private:
             /*
-            * Returns moves along diagonals that are not blocked
+            * Adds all of the bishop's moves, which include diagonal movement
+            * and its special move: Il Vaticano
             */
             std::vector<Move> generateMoves(GameState& gameState) override;
 
             /*
-            * Returns moves along diagonals that are not blocked
+            * Adds all of the bishops attacks
             */
             std::vector<Move> generateAttackingMoves(GameState& gameState) override;
+
+            /*
+            * Adds moves along diagonals that are not blocked
+            */
+            void addStandardMoves(std::vector<Move>& moves, ChessGameState& chessState);
+
+            /*
+            * Allows bishops to switch places and destroy pieces in between if the
+            * two bishops have two spaces between them and those spaces are inhabited by
+            * pawns
+            */
+            void addIlVaticano(std::vector<Move>& moves, ChessGameState& chessState, bool attackOnly = false);
     };
 
 }

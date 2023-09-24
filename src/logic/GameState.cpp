@@ -234,6 +234,10 @@ namespace logic {
             return false;
         }
 
+        // Clear all planned moves so they do not have unexpected affects on the
+        // current move
+        gameBoard->clearFutureMoves();
+        
         // Call the onMove callback function
         Move crntMove = movesToEnd[idx];
         crntMove.callOnMove(start, end, *this);
@@ -242,6 +246,9 @@ namespace logic {
         if(!gameBoard->movePiece(start, end)) {
             return false;
         }
+
+        // Apply any planned moves
+        gameBoard->applyFutureMoves();
 
         // Set the next player
         setNextPlayer();

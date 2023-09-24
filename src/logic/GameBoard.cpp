@@ -237,6 +237,27 @@ namespace logic {
     }
 
     //See GameBoard.h
+    void GameBoard::clearFutureMoves()
+    {
+        futureMoves.clear();
+    }
+
+    // See GameBoard.h
+    void GameBoard::queueFutureMove(Move::position start, Move::position end)
+    {
+        futureMoves.push_back(std::make_pair(start, end));
+    }
+
+    // See GameBoard.h
+    void GameBoard::applyFutureMoves()
+    {
+        for(std::pair<Move::position, Move::position> move : futureMoves) {
+            movePiece(move.first, move.second);
+        }
+        clearFutureMoves();
+    }
+
+    //See GameBoard.h
     void GameBoard::addToSimulation(SimulatedMove simulatedMove, Piece* piece, Move::position position)
     {
         simulation.push_back({ simulatedMove, piece, position });
@@ -355,4 +376,12 @@ namespace logic {
         return simulation.size() > 0;
     }
 
+    // See GameBoard.h
+    void GameBoard::simulateApplyFutureMoves()
+    {
+        for(std::pair<Move::position, Move::position> move : futureMoves) {
+            simulateMovePiece(move.first, move.second);
+        }
+        clearFutureMoves();
+    }
 }

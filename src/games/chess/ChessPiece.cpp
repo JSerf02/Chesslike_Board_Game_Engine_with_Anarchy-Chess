@@ -27,9 +27,10 @@ namespace chess {
 
         // Get a reference to the game board
         GameBoard* board = chessState.getBoard();
-
+        
         // Call the onMoveCallback with simulation enabled to simulate everything 
         // that's done before moving the piece
+        board->clearFutureMoves(); // Clear the future moves list so excess moves do not affect this one
         move.callOnMove(getPosition(), position, chessState, true);
 
         // Simulate moving the piece and see if it will put the player in check
@@ -37,6 +38,11 @@ namespace chess {
             board->revertSimulation();
             return false; // The move is impossible so it cannot be added
         }
+
+        // Apply the future moves to allow for unusual beahvior, such as piece swapping
+        board->simulateApplyFutureMoves();
+
+        // Make sure the moves did not cause check
         bool isSafe = !chessState.isInCheck();
         board->revertSimulation();
 
