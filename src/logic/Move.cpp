@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <functional>
 
 #include "Move.h"
 #include "GameState.h"
@@ -35,7 +36,7 @@ namespace logic {
     }
 
     // See Move.h
-    void Move::setOnMove(void (*onMoveCallback)(position, position, GameState&, bool)) 
+    void Move::setOnMove(std::function<void (position, position, GameState&, bool)> onMoveCallback) 
     {
         onMove = onMoveCallback;
     }
@@ -49,7 +50,7 @@ namespace logic {
         }
 
         // Call onMove
-        (*onMove)(start, end, gameState, simulation);
+        onMove(start, end, gameState, simulation);
         return true;
     }
 

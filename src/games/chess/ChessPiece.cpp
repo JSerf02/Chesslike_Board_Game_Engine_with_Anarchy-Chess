@@ -3,6 +3,8 @@
 #include "Piece.h"
 #include "Move.h"
 
+#include <functional>
+
 namespace chess {
     using namespace logic;
     using Player = Piece::Player;
@@ -46,13 +48,13 @@ namespace chess {
     }
 
     // See ChessPiece.h
-    std::vector<Move> ChessPiece::addPosition(Move::position position, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&, bool))
+    std::vector<Move> ChessPiece::addPosition(Move::position position, ChessGameState& chessState, int priority, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback)
     {
         std::vector<Move> moves{};
         addPosition(position, moves, chessState, priority, onMoveCallback);
         return moves;
     }
-    bool ChessPiece::addPosition(Move::position position, std::vector<Move>& moves, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&, bool))
+    bool ChessPiece::addPosition(Move::position position, std::vector<Move>& moves, ChessGameState& chessState, int priority, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback)
     {
         // Store values for later
         const Move::position curPosition = getPosition();
@@ -75,13 +77,13 @@ namespace chess {
     }
 
     // See ChessPiece.h
-    std::vector<Move> ChessPiece::addUnrelatedPositions(std::vector<Move::position> positions, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&, bool))
+    std::vector<Move> ChessPiece::addUnrelatedPositions(std::vector<Move::position> positions, ChessGameState& chessState, int priority, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback)
     {
         std::vector<Move> moves{};
         addUnrelatedPositions(positions, moves, chessState, priority, onMoveCallback);
         return moves;
     }
-    void ChessPiece::addUnrelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&, bool))
+    void ChessPiece::addUnrelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, int priority, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback)
     {
         // Store values for later
         const Move::position curPosition = getPosition();
@@ -105,13 +107,13 @@ namespace chess {
     }
 
     // See ChessPiece.h
-    std::vector<Move> ChessPiece::addRelatedPositions(std::vector<Move::position> positions, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&, bool))
+    std::vector<Move> ChessPiece::addRelatedPositions(std::vector<Move::position> positions, ChessGameState& chessState, int priority, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback)
     {
         std::vector<Move> moves{};
         addRelatedPositions(positions, moves, chessState, priority, onMoveCallback);
         return moves;
     }
-    void ChessPiece::addRelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&, bool))
+    void ChessPiece::addRelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, int priority, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback)
     {
         // Store values for later
         const Move::position curPosition = getPosition();
@@ -159,13 +161,13 @@ namespace chess {
     }
 
     // See ChessPiece.h
-    std::vector<Move> ChessPiece::addUnrelatedPositionsDeltas(std::vector<Move::position> deltas, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&, bool))
+    std::vector<Move> ChessPiece::addUnrelatedPositionsDeltas(std::vector<Move::position> deltas, ChessGameState& chessState, int priority, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback)
     {
         std::vector<Move> moves{};
         addUnrelatedPositionsDeltas(deltas, moves, chessState, priority, onMoveCallback);
         return moves;
     }
-    void ChessPiece::addUnrelatedPositionsDeltas(std::vector<Move::position> deltas, std::vector<Move>& moves, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&, bool))
+    void ChessPiece::addUnrelatedPositionsDeltas(std::vector<Move::position> deltas, std::vector<Move>& moves, ChessGameState& chessState, int priority, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback)
     {
         // Store the current position
         Move::position curPosition = getPosition();
@@ -183,13 +185,13 @@ namespace chess {
     }
 
     // See ChessPiece.h
-    std::vector<Move> ChessPiece::addRelatedPositionsDeltas(std::vector<Move::position> deltas, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&, bool))
+    std::vector<Move> ChessPiece::addRelatedPositionsDeltas(std::vector<Move::position> deltas, ChessGameState& chessState, int priority, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback)
     {
         std::vector<Move> moves{};
         addRelatedPositionsDeltas(deltas, moves, chessState, priority, onMoveCallback);
         return moves;
     }
-    void ChessPiece::addRelatedPositionsDeltas(std::vector<Move::position> deltas, std::vector<Move>& moves, ChessGameState& chessState, int priority, void (*onMoveCallback)(Move::position, Move::position, GameState&, bool))
+    void ChessPiece::addRelatedPositionsDeltas(std::vector<Move::position> deltas, std::vector<Move>& moves, ChessGameState& chessState, int priority, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback)
     {
         // Store the current position
         Move::position curPosition = getPosition();

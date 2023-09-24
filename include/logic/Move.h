@@ -5,6 +5,7 @@
 #include <utility>
 #include <vector>
 #include <iostream>
+#include <functional>
 
 namespace logic {
     class GameState;
@@ -42,15 +43,15 @@ namespace logic {
             * A callback function that is called whenever a player uses one of these moves
             * -- If null, will be ignored
             */
-            void (*onMove)(position, position, GameState&, bool){ nullptr };
+            std::function<void (position, position, GameState&, bool)> onMove{ nullptr };
 
         public:
             /*
             * Constructor: Initialize priority and onMove() callback function
             */
-            Move(int movePriority = 1, void (*onMoveCallback)(position, position, GameState&, bool) = nullptr) : 
+            Move(int movePriority = 1, std::function<void (position, position, GameState&, bool)> onMoveCallback = nullptr) : 
                 priority{std::max(movePriority, 1)}, onMove{onMoveCallback}{}
-            Move(std::vector<position> newPositions, int movePriority = 1, void (*onMoveCallback)(position, position, GameState&, bool) = nullptr) : 
+            Move(std::vector<position> newPositions, int movePriority = 1, std::function<void (position, position, GameState&, bool)> onMoveCallback = nullptr) : 
                 positions{newPositions}, priority{std::max(movePriority, 1)}, onMove{onMoveCallback}{}
             
             /*
@@ -71,7 +72,7 @@ namespace logic {
             /*
             * Changes the onMove() callback to a new callback function
             */
-            void setOnMove(void (*onMoveCallback)(position, position, GameState&, bool));
+            void setOnMove(std::function<void (position, position, GameState&, bool)> onMoveCallback);
 
             /*
             * Calls the onMove() callback function if one is defined

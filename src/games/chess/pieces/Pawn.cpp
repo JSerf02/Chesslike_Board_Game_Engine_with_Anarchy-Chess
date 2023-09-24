@@ -4,6 +4,10 @@
 #include "ChessGameState.h"
 #include "ChessPiece.h"
 #include "Pawn.h"
+#include "Queen.h"
+#include "Knight.h"
+#include "Rook.h"
+#include "Bishop.h"
 
 namespace chess {
     using namespace logic;
@@ -94,6 +98,7 @@ namespace chess {
         addForwardMoves(moves, chessState);
         addStandardAttacks(moves, chessState);
         addEnPassant(moves, chessState);
+        addPromotion(moves, chessState);
         return moves;
     }
 
@@ -243,5 +248,66 @@ namespace chess {
                 board->capturePiece(end.first, start.second);
             }
         });
+    }
+
+    // See Pawn.h
+    void Pawn::addPromotion(std::vector<Move>& moves, ChessGameState& chessState)
+    {
+        // Store values for later use
+        GameBoard* board = chessState.getBoard();
+        Move::position curPosition = getPosition();
+        int direction = getPlayerAccess(Player::white) ? 1 : -1;
+
+        // Add a move one position ahead if it is unoccupied and on the board
+        Move::position oneAhead = std::make_pair(curPosition.first, curPosition.second + direction);
+        if(!(board->unoccupiedOnBoard(oneAhead))) {
+            return;
+        }
+        for(int i = static_cast<int>(PromotionIdx::pawn) + 1; i < static_cast<int>(PromotionIdx::length); i++) {
+            addPosition(oneAhead, moves, chessState, 1, 
+            [i](Move::position start, Move::position end, GameState& gameState, bool simulation) {
+                // Get values for later
+                GameBoard* board = gameState.getBoard();
+                Piece* pawn = board->getPiece(start);
+                Player player = pawn->getPlayerAccess(Player::white) ? Player::white : Player::black;
+
+                // Remove the pawn
+                if(simulation) {
+                    board->simulateRemovePiece(start);
+                }
+                else {
+                    board->removePiece(start);
+                }
+
+                // Figure out which piece to add
+                Piece* newPiece = nullptr;
+                switch(static_cast<PromotionIdx>(i)) {
+                    case PromotionIdx::queen:
+                        newPiece = new Queen(player, start);
+                        break;
+                    case PromotionIdx::knight:
+                        newPiece = new Knight(player, start);
+                        break;
+                    case PromotionIdx::rook:
+                        newPiece = new Rook(player, start);
+                        break;
+                    case PromotionIdx::bishop:
+                        newPiece = new Bishop(player, start);
+                        break;
+                }
+                if(!newPiece) {
+                    return;
+                }
+
+                // Add the new piece at the pawn's current position
+                // - It will move forward one space afterwards
+                if(simulation) {
+                    board->simulateAddPiece(newPiece);
+                }
+                else {
+                    board->addPiece(newPiece);
+                }
+            });
+        }
     }
 }

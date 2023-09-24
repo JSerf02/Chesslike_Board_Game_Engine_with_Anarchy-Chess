@@ -22,10 +22,12 @@ namespace chess {
             */
             enum class PromotionIdx
             {
-                queen  = 1,
+                pawn   = 0,
+                queen  = 1, // Explicitly writing values since tests rely on the order
                 knight = 2,
                 rook   = 3,
-                bishop = 4
+                bishop = 4,
+                length // Stores the size of the enum
             };
 
             /*
@@ -107,10 +109,17 @@ namespace chess {
             * the pawn can attack the space an enemy pawn just boosted past if the
             * enemy boosted on the previous turn
             * - En passant has a priority of 10, essentially making it forced
-            * - When attackOnly is enabled, the enemy piecce positions will be
+            * - When attackOnly is enabled, the enemy piece positions will be
             *   returned instead of the uninhabited En Passant positions
             */
             void addEnPassant(std::vector<Move>& moves, ChessGameState& chessState, bool attackOnly = false);
+
+            /*
+            * Allows pawns to promote if they move to the opposite end of the board
+            * - The order of indices in the move list for promotion is given by 
+            *   the PromotionIdx enum
+            */
+            void addPromotion(std::vector<Move>& moves, ChessGameState& chessState);
     };
 }
 #endif
