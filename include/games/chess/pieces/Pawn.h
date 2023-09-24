@@ -17,6 +17,17 @@ namespace chess {
             */
             using ChessPiece::ChessPiece;
 
+            /* 
+            * The indices of the moves returned when promoting a pawn
+            */
+            enum class PromotionIdx
+            {
+                queen  = 1,
+                knight = 2,
+                rook   = 3,
+                bishop = 4
+            };
+
             /*
             * Returns the value of the piece, 1.0
             */

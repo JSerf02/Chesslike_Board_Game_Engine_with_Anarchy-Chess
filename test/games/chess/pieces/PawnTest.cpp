@@ -339,3 +339,42 @@ TEST_CASE("Pawn: En Passant Min Priority Override")
     // black into check) but it still applies the priority override
     CHECK(!chessState->canMove(Player::black));
 }
+
+TEST_CASE("Pawn: Promotion")
+{
+    // Create a ChessBoard without any pieces
+    ChessBoard* board = new ChessBoard(false);
+
+    // Add 2 pawns of each color near the edges of the board
+    ChessPiece* queenPromote  = new Pawn(Player::white, std::make_pair(1, 7));
+    ChessPiece* knightPromote = new Pawn(Player::black, std::make_pair(3, 2));
+    ChessPiece* rookPromote   = new Pawn(Player::white, std::make_pair(5, 7));
+    ChessPiece* bishopPromote = new Pawn(Player::black, std::make_pair(7, 2));
+    board->addPieces({
+        queenPromote, knightPromote, rookPromote, bishopPromote
+    });
+
+    // Add 2 kings to the board to prevent errors
+    ChessPiece* whiteKing = new TestKing(Player::white, std::make_pair(8, 4));
+    ChessPiece* blackKing = new TestKing(Player::black, std::make_pair(8, 5));
+    board->addPieces({whiteKing, blackKing});
+
+    // Create a ChessGameState
+    ChessGameState* chessState = new ChessGameState(board);
+
+    // Promote to a queen
+    REQUIRE(chessState->movePiece(std::make_pair(1, 7), std::make_pair(1, 8), static_cast<int>(Pawn::PromotionIdx::queen)));
+    CHECK(board->getPiece(std::make_pair(1, 8))->getID() == QUEEN_ID);
+
+    // Promote to a knight
+    REQUIRE(chessState->movePiece(std::make_pair(3, 2), std::make_pair(3, 1), static_cast<int>(Pawn::PromotionIdx::knight)));
+    CHECK(board->getPiece(std::make_pair(3, 1))->getID() == KNIGHT_ID);
+
+    // Promote to a rook
+    REQUIRE(chessState->movePiece(std::make_pair(5, 7), std::make_pair(5, 8), static_cast<int>(Pawn::PromotionIdx::rook)));
+    CHECK(board->getPiece(std::make_pair(5, 8))->getID() == ROOK_ID);
+
+    // Promote to a bishop
+    REQUIRE(chessState->movePiece(std::make_pair(7, 2), std::make_pair(7, 1), static_cast<int>(Pawn::PromotionIdx::bishop)));
+    CHECK(board->getPiece(std::make_pair(7, 1))->getID() == BISHOP_ID);
+}
