@@ -25,6 +25,26 @@ namespace chess {
     // See King.h
     std::vector<Move> King::generateMoves(GameState& gameState)
     {
+        std::vector<Move> moves{};
+        ChessGameState& chessState = static_cast<ChessGameState&>(gameState);
+        addStandardMoves(moves, chessState);
+        addKingsideCastle(moves, chessState);
+        addQueensideCastle(moves, chessState);
+        return moves;
+    }
+
+    // See King.h
+    std::vector<Move> King::generateAttackingMoves(GameState& gameState)
+    {
+        std::vector<Move> moves{};
+        ChessGameState& chessState = static_cast<ChessGameState&>(gameState);
+        addStandardMoves(moves, chessState);
+        return moves;
+    }
+
+    // See King.h
+    void King::addStandardMoves(std::vector<Move>& moves, ChessGameState& chessState)
+    {
         // All of the different distances away from the starting position that the king can move to
         const std::vector<Move::position> deltas {
             std::make_pair(1, 0),
@@ -36,12 +56,101 @@ namespace chess {
             std::make_pair(0, -1),
             std::make_pair(1, -1)
         };
-        return addUnrelatedPositionsDeltas(deltas, static_cast<ChessGameState&>(gameState));
+        addUnrelatedPositionsDeltas(deltas, moves, chessState);
     }
 
     // See King.h
-    std::vector<Move> King::generateAttackingMoves(GameState& gameState)
+    void King::addKingsideCastle(std::vector<Move>& moves, ChessGameState& chessState)
     {
-        return generateMoves(gameState);
+        // A king cannot castly if it has already moved
+        if(previouslyMoved()) {
+            return;
+        }
+
+        // Store values for later use
+        ChessBoard* board = static_cast<ChessBoard*>(chessState.getBoard());
+        Move::position curPosition = getPosition();
+        Player player = getPlayerAccess(Player::white) ? Player::white : Player::black;
+
+        // Make sure the two spaces right of the king are empty and the space after is occupied
+        if(!board->unoccupiedOnBoard(curPosition.first + 1, curPosition.second) 
+        || !board->unoccupiedOnBoard(curPosition.first + 2, curPosition.second)
+        || !board->occupiedOnBoard(curPosition.first + 3, curPosition.second)
+        || chessState.isAttacked(player, std::make_pair(curPosition.first + 1, curPosition.second))) {
+            return;
+        }
+
+        // Make sure the piece 3 spaces right of the king is a rook that hasn't moved
+        Piece* rook = board->getPiece(curPosition.first + 3, curPosition.second);
+        if(rook->previouslyMoved() || rook->getID() != ROOK_ID || !rook->getPlayerAccess(player)) {
+            return;
+        }
+
+        // Add the move with a callback that moves the rook to its correct position
+        addPosition(std::make_pair(curPosition.first + 2, curPosition.second), moves, chessState, 1, 
+        [](Move::position start, Move::position end, GameState& gameState, bool simulation){
+            GameBoard* board = gameState.getBoard();
+            Move::position rookStart = std::make_pair(end.first + 1, end.second);
+            Move::position rookEnd = std::make_pair(start.first + 1, start.second);
+            if(simulation) {
+                board->simulateMovePiece(rookStart, rookEnd);
+            }
+            else {
+                board->movePiece(rookStart, rookEnd);
+                Piece* piece = board->getPiece(rookEnd);
+                if(!piece) {
+                    return;
+                }
+                piece->validateMove();
+            }
+        });
+    }
+
+    // See King.h
+    void King::addQueensideCastle(std::vector<Move>& moves, ChessGameState& chessState)
+    {
+        // A king cannot castly if it has already moved
+        if(previouslyMoved()) {
+            return;
+        }
+
+        // Store values for later use
+        ChessBoard* board = static_cast<ChessBoard*>(chessState.getBoard());
+        Move::position curPosition = getPosition();
+        Player player = getPlayerAccess(Player::white) ? Player::white : Player::black;
+
+        // Make sure the three spaces left of the king are empty and the space after is occupied
+        if(!board->unoccupiedOnBoard(curPosition.first - 1, curPosition.second) 
+        || !board->unoccupiedOnBoard(curPosition.first - 2, curPosition.second)
+        || !board->unoccupiedOnBoard(curPosition.first - 3, curPosition.second)
+        || !board->occupiedOnBoard(curPosition.first - 4, curPosition.second)
+        || chessState.isAttacked(player, std::make_pair(curPosition.first - 1, curPosition.second))) {
+            return;
+        }
+
+        // Make sure the piece 4 spaces left of the king is a rook that hasn't moved
+        Piece* rook = board->getPiece(curPosition.first - 4, curPosition.second);
+        if(rook->previouslyMoved() || rook->getID() != ROOK_ID || !rook->getPlayerAccess(player)) {
+            return;
+        }
+
+        // Add the move with a callback that moves the rook to its correct position
+        addPosition(std::make_pair(curPosition.first - 2, curPosition.second), moves, chessState, 1, 
+        [](Move::position start, Move::position end, GameState& gameState, bool simulation){
+            GameBoard* board = gameState.getBoard();
+            Move::position rookStart = std::make_pair(end.first - 2, end.second);
+            Move::position rookEnd = std::make_pair(start.first - 1, start.second);
+            if(simulation) {
+                board->simulateMovePiece(rookStart, rookEnd);
+            }
+            else {
+                board->movePiece(rookStart, rookEnd);
+                Piece* piece = board->getPiece(rookEnd);
+                if(!piece) {
+                    return;
+                }
+                piece->validateMove();
+            }
+        });
     }
 }

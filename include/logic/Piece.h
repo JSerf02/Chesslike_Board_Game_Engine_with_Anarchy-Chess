@@ -87,12 +87,6 @@ namespace logic {
             std::vector<Move> simulatedAttackMoveCache{};
 
             /*
-            * An empty list of moves for when a piece is not controlled by the 
-            * current player
-            */
-            std::vector<Move> emptyMoves{};
-
-            /*
             * Whether this piece has been moved from its starting location
             */
             bool alreadyMoved{false};

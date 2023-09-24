@@ -162,17 +162,18 @@ TEST_CASE("King: Castling")
     // Create a ChessGameState
     ChessGameState* chessState = new ChessGameState(board);
 
-    // Make sure that white can castle on both sides and that black can castle queenside
+    // Tell the A1 king that it has already moved so white cannot castly queenside
+    earlyMove->validateMove();
+
+    // Make sure that white can castle kingside and that black can castle queenside
     CHECK(chessState->canMovePiece(std::make_pair(5, 1), std::make_pair(7, 1)));
-    CHECK(chessState->canMovePiece(std::make_pair(5, 1), std::make_pair(3, 1)));
-    CHECK(chessState->canMovePiece(std::make_pair(5, 8), std::make_pair(3, 8)));
+    CHECK(chessState->canMovePiece(Player::black, std::make_pair(5, 8), std::make_pair(3, 8)));
+
+    // Check that castling isn't possible if the rook already moved
+    CHECK(!chessState->canMovePiece(std::make_pair(5, 1), std::make_pair(3, 1)));
 
     // Check that castling isn't possible without a rook
-    CHECK(!chessState->canMovePiece(std::make_pair(5, 8), std::make_pair(8, 8)));
-
-    // Tell the A1 rook that it has moved in the past and make sure castling no longer works
-    earlyMove->validateMove();
-    CHECK(!chessState->canMovePiece(std::make_pair(5, 1), std::make_pair(3, 1)));
+    CHECK(!chessState->canMovePiece(Player::black, std::make_pair(5, 8), std::make_pair(8, 8)));
 
     // Kingside castle with white and make sure it moved both pieces
     CHECK(chessState->movePiece(std::make_pair(5, 1), std::make_pair(7, 1)));
@@ -183,4 +184,27 @@ TEST_CASE("King: Castling")
     CHECK(chessState->movePiece(std::make_pair(5, 8), std::make_pair(3, 8)));
     CHECK(board->occupiedOnBoard(std::make_pair(4, 8)));
     CHECK(board->unoccupiedOnBoard(std::make_pair(1, 8)));
+}
+
+TEST_CASE("King: Castling Check")
+{
+    // Create a ChessBoard without any pieces
+    ChessBoard* board = new ChessBoard(false);
+
+    // Add pieces so castling would make white move past check
+    ChessPiece* whiteKing  = new King(Player::white, std::make_pair(5, 1));
+    ChessPiece* whiteRook1 = new Rook(Player::white, std::make_pair(8, 1));
+    ChessPiece* whiteRook2 = new Rook(Player::white, std::make_pair(1, 1));
+    ChessPiece* blackKing  = new King(Player::black, std::make_pair(5, 8));
+    ChessPiece* blackRook1 = new Rook(Player::black, std::make_pair(4, 8));
+    ChessPiece* blackRook2 = new Rook(Player::black, std::make_pair(6, 8));
+    board->addPieces({whiteKing, whiteRook1, whiteRook2, blackKing, blackRook1, blackRook2});
+
+    // Create a ChessGameState
+    ChessGameState* chessState = new ChessGameState(board);
+
+    // Make sure that white can't castle on either side because either side would
+    // involve moving through check
+    CHECK(!chessState->canMovePiece(std::make_pair(5, 1), std::make_pair(7, 1)));
+    CHECK(!chessState->canMovePiece(Player::black, std::make_pair(5, 1), std::make_pair(3, 1)));
 }

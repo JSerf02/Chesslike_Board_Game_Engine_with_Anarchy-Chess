@@ -29,7 +29,8 @@ namespace chess {
 
         private:
             /*
-            * Returns moves that are 1 distance away that are not blocked
+            * Returns moves that are 1 distance away that are not blocked and also 
+            * the king's special move: castling
             */
             std::vector<Move> generateMoves(GameState& gameState) override;
 
@@ -37,6 +38,23 @@ namespace chess {
             * Returns moves that are 1 distance away that are not blocked
             */
             std::vector<Move> generateAttackingMoves(GameState& gameState) override;
+
+            /*
+            * Adds moves that are 1 distance away that are not blocked
+            */
+            void addStandardMoves(std::vector<Move>& moves, ChessGameState& chessState);
+
+            /*
+            * Brings the king and the king's-side rook closer together and swaps 
+            * their positions
+            */
+            void addKingsideCastle(std::vector<Move>& moves, ChessGameState& chessState);
+
+            /*
+            * Brings the king and the queen's-side rook closer together and swaps
+            * their positions
+            */
+            void addQueensideCastle(std::vector<Move>& moves, ChessGameState& chessState);
     };
 
 }
