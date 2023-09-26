@@ -30,7 +30,6 @@ namespace chess {
             */
             ChessGameState(ChessBoard* board);
 
-
             /*
              * Returns a reference to the inputted player's king
              * - Defaults to the current player when no player is provided
@@ -44,14 +43,6 @@ namespace chess {
             */
             bool isInCheck(Player player);
             bool isInCheck();
-
-            /*
-             * Returns whether or not the inputted move will result in a check for the current player
-            */
-            bool willMoveCauseCheck(int startX, int startY, int endX, int endY);
-            bool willMoveCauseCheck(Move::position start, int endX, int endY);
-            bool willMoveCauseCheck(int startX, int startY, Move::position end);
-            bool willMoveCauseCheck(Move::position start, Move::position end);
 
             /*
              * Returns whether or not the inputted player is checkmated

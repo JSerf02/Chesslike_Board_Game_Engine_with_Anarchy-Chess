@@ -1,4 +1,5 @@
 #include <unordered_map>
+#include <memory>
 
 #include "ChessGameState.h"
 #include "ChessPiece.h"
@@ -60,35 +61,6 @@ namespace chess {
     bool ChessGameState::isInCheck()
     {
         return isInCheck(getCrntPlayer());
-    }
-
-    // See ChessGameState.h
-    bool ChessGameState::willMoveCauseCheck(int startX, int startY, int endX, int endY)
-    {
-        return willMoveCauseCheck(std::make_pair(startX, startY), std::make_pair(endX, endY));
-    }
-    bool ChessGameState::willMoveCauseCheck(Move::position start, int endX, int endY)
-    {
-        return willMoveCauseCheck(start, std::make_pair(endX, endY));
-    }
-    bool ChessGameState::willMoveCauseCheck(int startX, int startY, Move::position end)
-    {
-        return willMoveCauseCheck(std::make_pair(startX, startY), end);
-    }
-    bool ChessGameState::willMoveCauseCheck(Move::position start, Move::position end)
-    {
-        // Get a reference to the board
-        GameBoard* board = getBoard();
-
-        // Simulate moving the piece and check if the move will cause check
-        if(!board->simulateMovePiece(start, end)) {
-            return true; // Assume any invalid moves cause check
-        }
-        bool result = isInCheck();
-
-        // Undo the simulated move and return the result
-        board->revertSimulation();
-        return result;
     }
 
     // See ChessGameState.h

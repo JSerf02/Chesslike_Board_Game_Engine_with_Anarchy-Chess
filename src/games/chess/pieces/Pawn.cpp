@@ -1,4 +1,5 @@
 #include <vector>
+#include <memory>
 
 #include "ChessBoard.h"
 #include "ChessGameState.h"
@@ -9,6 +10,10 @@
 #include "Rook.h"
 #include "Bishop.h"
 #include "Knook.h"
+#include "CapturePieceAction.h"
+#include "TryCapturePieceAction.h"
+#include "RemovePieceAction.h"
+#include "AddPieceAction.h"
 
 namespace chess {
     using namespace logic;
@@ -128,7 +133,7 @@ namespace chess {
         if(!(board->unoccupiedOnBoard(oneAhead))) {
             return;
         }
-        addPosition(oneAhead, moves, chessState, 1, nullptr);
+        addPosition(oneAhead, moves, chessState, 1, {});
 
         // Add a move two positions ahead if it is unoccupied and on the board
         // - Give this move a callback that sets this piece's boost turn
@@ -136,13 +141,8 @@ namespace chess {
         if(!(board->unoccupiedOnBoard(twoAhead)) || !canBoost(chessState)) {
             return;
         }
-        addPosition(twoAhead, moves, chessState, 1, 
-        [](Move::position start, Move::position end, GameState& gameState, bool simulation) {
-            if(simulation) {
-                return;
-            }
-            Pawn* pawn = static_cast<Pawn*>(gameState.getBoard()->getPiece(start));
-            pawn->setBoostTurn(gameState);
+        addPosition(twoAhead, moves, chessState, 1, {}, {
+            make_action(new PawnBoostAction(*this, chessState))
         });
     }
 
@@ -180,7 +180,7 @@ namespace chess {
         // Store values for later use
         GameBoard* board = chessState.getBoard();
         Move::position curPosition = getPosition();
-        Player curPlayer = getPlayerAccess(Player::white) ? Player::white : Player::black;
+        Player curPlayer = getPlayer();
         int direction = getPlayerAccess(Player::white) ? 1 : -1;
 
         // The positions to check for enemies
@@ -215,15 +215,8 @@ namespace chess {
             deltas.push_back(std::make_pair(enemyDelta.first, attackOnly ? 0 : direction));
         }
 
-        addUnrelatedPositionsDeltas(deltas, moves, chessState, 10,
-        [](Move::position start, Move::position end, GameState& gameState, bool simulation) {
-            GameBoard* board = gameState.getBoard();
-            if(simulation) {
-                board->simulateRemovePiece(end.first, start.second);
-            }
-            else {
-                board->capturePiece(end.first, start.second);
-            }
+        addUnrelatedPositionsDeltas(deltas, moves, chessState, 10, {
+            make_action(new CapturePieceAction(curPlayer, std::make_pair(0, -direction)))
         });
     }
 
@@ -234,6 +227,7 @@ namespace chess {
         ChessBoard* board = static_cast<ChessBoard*>(chessState.getBoard());
         Move::position curPosition = getPosition();
         int direction = getPlayerAccess(Player::white) ? 1 : -1;
+        Player player = direction == 1 ? Player::white : Player::black;
 
         // Add a move one position ahead if it is unoccupied and on the board
         Move::position oneAhead = std::make_pair(curPosition.first, curPosition.second + direction);
@@ -247,55 +241,23 @@ namespace chess {
         }
 
         for(int i = static_cast<int>(PromotionIdx::pawn) + 1; i < static_cast<int>(PromotionIdx::length); i++) {
-            addPosition(oneAhead, moves, chessState, 1, 
-            [i](Move::position start, Move::position end, GameState& gameState, bool simulation) {
-                // Get values for later
-                GameBoard* board = gameState.getBoard();
-                Piece* pawn = board->getPiece(start);
-                Player player = pawn->getPlayerAccess(Player::white) ? Player::white : Player::black;
-
-                // Remove the pawn
-                if(simulation) {
-                    board->simulateRemovePiece(start);
-                }
-                else {
-                    board->removePiece(start);
-                }
-
-                // Figure out which piece to add
-                Piece* newPiece = nullptr;
-                switch(static_cast<PromotionIdx>(i)) {
-                    case PromotionIdx::queen:
-                        newPiece = new Queen(player, start);
-                        break;
-                    case PromotionIdx::knight:
-                        newPiece = new Knight(player, start);
-                        break;
-                    case PromotionIdx::rook:
-                        newPiece = new Rook(player, start);
-                        break;
-                    case PromotionIdx::bishop:
-                        newPiece = new Bishop(player, start);
-                        break;
-                    case PromotionIdx::knook:
-                        newPiece = new Knook(player, start);
-                        break;
-                }
-                if(!newPiece) {
-                    return;
-                }
-
-                // Make sure the newPiece doesn't trigger any starting position conditions
-                newPiece->validateMove();
-
-                // Add the new piece at the pawn's current position
-                // - It will move forward one space afterwards
-                if(simulation) {
-                    board->simulateAddPiece(newPiece);
-                }
-                else {
-                    board->addPiece(newPiece);
-                }
+            addPosition(oneAhead, moves, chessState, 1, {}, {
+                make_action(new RemovePieceAction()),
+                make_action(new AddPieceAction([i](std::vector<Player> players, Move::position start) {
+                    switch(static_cast<PromotionIdx>(i)) {
+                        case PromotionIdx::queen:
+                            return static_cast<Piece*>(new Queen(players, start));
+                        case PromotionIdx::knight:
+                            return static_cast<Piece*>(new Knight(players, start));
+                        case PromotionIdx::rook:
+                            return static_cast<Piece*>(new Rook(players, start));
+                        case PromotionIdx::bishop:
+                            return static_cast<Piece*>(new Bishop(players, start));
+                        case PromotionIdx::knook:
+                            return static_cast<Piece*>(new Knook(players, start));
+                    }
+                    return static_cast<Piece*>(nullptr);
+                }))
             });
         }
     }
@@ -330,29 +292,17 @@ namespace chess {
             std::make_pair(-2,  1 + direction),
             std::make_pair(-1,  2 + direction)
         };
-        addUnrelatedPositionsDeltas(deltas, moves, chessState, 1, 
-        [](Move::position start, Move::position end, GameState& gameState, bool simulating) {
-            // Get values for later
-            GameBoard* board = gameState.getBoard();
-            Piece* pawn = board->getPiece(start);
-            Player player = pawn->getPlayerAccess(Player::white) ? Player::white : Player::black;
-
-            // Create the new knight
-            Piece* newPiece = new Knight(player, start);
-
-            // Make sure the newPiece doesn't trigger any starting position conditions
-            newPiece->validateMove();
-
-            // Replace the pawn with the knight
-            if(simulating) {
-                board->simulateRemovePiece(start);
-                board->simulateAddPiece(newPiece);
-            }
-            else {
-                board->removePiece(start);
-                board->addPiece(newPiece);
-            }
-            captureCallback(start, end, gameState, simulating);
+        addUnrelatedPositionsDeltas(deltas, moves, chessState, 1, {
+            make_action(new TryCapturePieceAction(getPlayer()))
+        }, {
+            make_action(new RemovePieceAction()),
+            make_action(new AddPieceAction([](std::vector<Player> players, Move::position start){ return new Knight(players, start); }))
         });
+    }
+
+    // See Pawn.h
+    void PawnBoostAction::applySymptomaticEffects(GameBoard* board)
+    {
+        pawn.setBoostTurn(gameState);
     }
 }

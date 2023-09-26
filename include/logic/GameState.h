@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
+#include <memory>
 
 #include "HashPair.h"
 #include "Piece.h"
@@ -165,8 +166,11 @@ namespace logic {
 
 
             /*
-            * Moves a piece from start to end. After moving the piece, calls the move's
-            * onMove() callback function and sets the next player
+            * Moves a piece from start to end, completing all premove actions
+            * before moving the piece and all postmove actions after moving the
+            * piece
+            * - This function is asymptomatic, meaning if the move would fail,
+            *   the board state does not change
             * 
             * Parameters:
             * - The starting position of the move
@@ -238,6 +242,25 @@ namespace logic {
              *         so you will not need to call this in regular circumstances
             */
             void nextTurn();
+
+            /*
+            * Applies the action and adds it to the simulation
+            *
+            * Returns:
+            * - true if the action was successfully applied
+            * - false if the action did not apply
+            */
+            bool callAction(std::shared_ptr<Action> action, Move::position targetPosition);
+
+            /*
+            * Applies all actions in a list of actions and adds them to the simulation
+            *
+            * Returns:
+            * - true if all of the actions were successfully applied
+            * - false if an action did not apply
+            *   - If this occurs, all actions will be reverted before returning
+            */
+            bool callActions(std::vector<std::shared_ptr<Action>>& actions, Move::position targetPosition);
 
         private:
             /* 

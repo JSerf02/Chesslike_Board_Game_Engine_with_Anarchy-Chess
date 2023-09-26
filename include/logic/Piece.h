@@ -100,6 +100,12 @@ namespace logic {
             Piece(Player newPlayer, Move::position startPos = std::make_pair(0, 0)); 
             
             /*
+            * Creates a new piece on the heap
+            * - Used as a default constructor for actions
+            */
+            static Piece* createNew(std::vector<Player> newPlayers, Move::position startPos = std::make_pair(0, 0));
+
+            /*
             * Returns true if the player can move this piece and false otherwise
             */
             bool getPlayerAccess(Player player);
@@ -151,6 +157,12 @@ namespace logic {
             * valid move in the past
             */
             void validateMove();
+
+            /*
+            * Changes the alreadyMoved flag so the piece thinks it has not made a 
+            * valid move in the past
+            */
+            void unValidateMove();
 
         private:
             /*

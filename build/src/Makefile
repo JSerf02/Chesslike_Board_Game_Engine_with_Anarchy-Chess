@@ -489,6 +489,126 @@ logic/Piece.cpp.s:
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/Piece.cpp.s
 .PHONY : logic/Piece.cpp.s
 
+logic/actions/AddPieceAction.obj: logic/actions/AddPieceAction.cpp.obj
+.PHONY : logic/actions/AddPieceAction.obj
+
+# target to build an object file
+logic/actions/AddPieceAction.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/actions/AddPieceAction.cpp.obj
+.PHONY : logic/actions/AddPieceAction.cpp.obj
+
+logic/actions/AddPieceAction.i: logic/actions/AddPieceAction.cpp.i
+.PHONY : logic/actions/AddPieceAction.i
+
+# target to preprocess a source file
+logic/actions/AddPieceAction.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/actions/AddPieceAction.cpp.i
+.PHONY : logic/actions/AddPieceAction.cpp.i
+
+logic/actions/AddPieceAction.s: logic/actions/AddPieceAction.cpp.s
+.PHONY : logic/actions/AddPieceAction.s
+
+# target to generate assembly for a file
+logic/actions/AddPieceAction.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/actions/AddPieceAction.cpp.s
+.PHONY : logic/actions/AddPieceAction.cpp.s
+
+logic/actions/CapturePieceAction.obj: logic/actions/CapturePieceAction.cpp.obj
+.PHONY : logic/actions/CapturePieceAction.obj
+
+# target to build an object file
+logic/actions/CapturePieceAction.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/actions/CapturePieceAction.cpp.obj
+.PHONY : logic/actions/CapturePieceAction.cpp.obj
+
+logic/actions/CapturePieceAction.i: logic/actions/CapturePieceAction.cpp.i
+.PHONY : logic/actions/CapturePieceAction.i
+
+# target to preprocess a source file
+logic/actions/CapturePieceAction.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/actions/CapturePieceAction.cpp.i
+.PHONY : logic/actions/CapturePieceAction.cpp.i
+
+logic/actions/CapturePieceAction.s: logic/actions/CapturePieceAction.cpp.s
+.PHONY : logic/actions/CapturePieceAction.s
+
+# target to generate assembly for a file
+logic/actions/CapturePieceAction.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/actions/CapturePieceAction.cpp.s
+.PHONY : logic/actions/CapturePieceAction.cpp.s
+
+logic/actions/MovePieceAction.obj: logic/actions/MovePieceAction.cpp.obj
+.PHONY : logic/actions/MovePieceAction.obj
+
+# target to build an object file
+logic/actions/MovePieceAction.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/actions/MovePieceAction.cpp.obj
+.PHONY : logic/actions/MovePieceAction.cpp.obj
+
+logic/actions/MovePieceAction.i: logic/actions/MovePieceAction.cpp.i
+.PHONY : logic/actions/MovePieceAction.i
+
+# target to preprocess a source file
+logic/actions/MovePieceAction.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/actions/MovePieceAction.cpp.i
+.PHONY : logic/actions/MovePieceAction.cpp.i
+
+logic/actions/MovePieceAction.s: logic/actions/MovePieceAction.cpp.s
+.PHONY : logic/actions/MovePieceAction.s
+
+# target to generate assembly for a file
+logic/actions/MovePieceAction.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/actions/MovePieceAction.cpp.s
+.PHONY : logic/actions/MovePieceAction.cpp.s
+
+logic/actions/RemovePieceAction.obj: logic/actions/RemovePieceAction.cpp.obj
+.PHONY : logic/actions/RemovePieceAction.obj
+
+# target to build an object file
+logic/actions/RemovePieceAction.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/actions/RemovePieceAction.cpp.obj
+.PHONY : logic/actions/RemovePieceAction.cpp.obj
+
+logic/actions/RemovePieceAction.i: logic/actions/RemovePieceAction.cpp.i
+.PHONY : logic/actions/RemovePieceAction.i
+
+# target to preprocess a source file
+logic/actions/RemovePieceAction.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/actions/RemovePieceAction.cpp.i
+.PHONY : logic/actions/RemovePieceAction.cpp.i
+
+logic/actions/RemovePieceAction.s: logic/actions/RemovePieceAction.cpp.s
+.PHONY : logic/actions/RemovePieceAction.s
+
+# target to generate assembly for a file
+logic/actions/RemovePieceAction.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/actions/RemovePieceAction.cpp.s
+.PHONY : logic/actions/RemovePieceAction.cpp.s
+
+logic/actions/TryCapturePieceAction.obj: logic/actions/TryCapturePieceAction.cpp.obj
+.PHONY : logic/actions/TryCapturePieceAction.obj
+
+# target to build an object file
+logic/actions/TryCapturePieceAction.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/actions/TryCapturePieceAction.cpp.obj
+.PHONY : logic/actions/TryCapturePieceAction.cpp.obj
+
+logic/actions/TryCapturePieceAction.i: logic/actions/TryCapturePieceAction.cpp.i
+.PHONY : logic/actions/TryCapturePieceAction.i
+
+# target to preprocess a source file
+logic/actions/TryCapturePieceAction.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/actions/TryCapturePieceAction.cpp.i
+.PHONY : logic/actions/TryCapturePieceAction.cpp.i
+
+logic/actions/TryCapturePieceAction.s: logic/actions/TryCapturePieceAction.cpp.s
+.PHONY : logic/actions/TryCapturePieceAction.s
+
+# target to generate assembly for a file
+logic/actions/TryCapturePieceAction.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\anarchy-chess_build.dir\build.make src/CMakeFiles/anarchy-chess_build.dir/logic/actions/TryCapturePieceAction.cpp.s
+.PHONY : logic/actions/TryCapturePieceAction.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -543,6 +663,21 @@ help:
 	@echo ... logic/Piece.obj
 	@echo ... logic/Piece.i
 	@echo ... logic/Piece.s
+	@echo ... logic/actions/AddPieceAction.obj
+	@echo ... logic/actions/AddPieceAction.i
+	@echo ... logic/actions/AddPieceAction.s
+	@echo ... logic/actions/CapturePieceAction.obj
+	@echo ... logic/actions/CapturePieceAction.i
+	@echo ... logic/actions/CapturePieceAction.s
+	@echo ... logic/actions/MovePieceAction.obj
+	@echo ... logic/actions/MovePieceAction.i
+	@echo ... logic/actions/MovePieceAction.s
+	@echo ... logic/actions/RemovePieceAction.obj
+	@echo ... logic/actions/RemovePieceAction.i
+	@echo ... logic/actions/RemovePieceAction.s
+	@echo ... logic/actions/TryCapturePieceAction.obj
+	@echo ... logic/actions/TryCapturePieceAction.i
+	@echo ... logic/actions/TryCapturePieceAction.s
 .PHONY : help
 
 

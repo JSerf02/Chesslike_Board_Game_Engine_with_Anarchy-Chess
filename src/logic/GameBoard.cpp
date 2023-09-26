@@ -1,6 +1,9 @@
+#include <memory>
+
 #include "GameBoard.h"
 #include "Piece.h"
 #include "Move.h"
+#include "Action.h"
 
 namespace logic {
 
@@ -136,8 +139,6 @@ namespace logic {
     {
         return capturePiece(std::make_pair(x, y));
     }
-
-    // See GameBoard.h
     bool GameBoard::capturePiece(Move::position position)
     {
         Piece *piece = getPiece(position);
@@ -148,12 +149,58 @@ namespace logic {
             return false;
         }
 
+        // Add the piece to the captured structure
+        return captureRemovedPiece(piece);
+    }
+
+    // See GameBoard.h
+    bool GameBoard::captureRemovedPiece(Piece* piece)
+    {
+        // Fail if the piece is null or if the piece is still in play
+        if(!piece || piece->getOnBoard()) {
+            return false;
+        }
+
         // Loop through all players' captured piece vectors and add the piece accordingly
         for(auto i = capturedPieces.begin(); i != capturedPieces.end(); i++) {
             if(!piece->getPlayerAccess(i->first)) { // Pieces are added for all players who don't control them
                 i->second->push_back(piece);
             }
         }
+        return true;
+    }
+
+    // See GameBoard.h
+    bool GameBoard::unRemovePiece(Piece* piece)
+    {
+        // If the piece is already on the board, this function call is invalid
+        if(piece->getOnBoard()) {
+            return false;
+        }
+
+        // If the original position is unoccupied, add the piece back to the board
+        // at the original position
+        Move::position originalPosition = piece->getPosition();
+        if(!unoccupiedOnBoard(originalPosition)) {
+            return false;
+        }
+        board[originalPosition] = piece;
+        piece->setOnBoard(true);
+        return true;
+    }
+
+    // See GameBoard.h
+    bool GameBoard::permanentlyRemoveMostRecentPiece()
+    {
+        if(allPieces.size() <= 0) {
+            return false;
+        }
+        Piece* piece = allPieces.back();
+        if(!removePiece(piece->getPosition())) {
+            return false;
+        }
+        allPieces.pop_back();
+        delete piece;
         return true;
     }
 
@@ -237,122 +284,16 @@ namespace logic {
     }
 
     //See GameBoard.h
-    void GameBoard::clearFutureMoves()
+    void GameBoard::addToSimulation(std::shared_ptr<Action> action)
     {
-        futureMoves.clear();
-    }
-
-    // See GameBoard.h
-    void GameBoard::queueFutureMove(Move::position start, Move::position end)
-    {
-        futureMoves.push_back(std::make_pair(start, end));
-    }
-
-    // See GameBoard.h
-    void GameBoard::applyFutureMoves()
-    {
-        for(std::pair<Move::position, Move::position> move : futureMoves) {
-            movePiece(move.first, move.second);
-        }
-        clearFutureMoves();
-    }
-
-    //See GameBoard.h
-    void GameBoard::addToSimulation(SimulatedMove simulatedMove, Piece* piece, Move::position position)
-    {
-        simulation.push_back({ simulatedMove, piece, position });
-    }
-
-    // See GameBoard.h
-    bool GameBoard::simulateMovePiece(Move::position prevPosition, Move::position newPosition)
-    {
-        if(!movePiece(prevPosition, newPosition)) {
-            return false;
-        }
-        Piece* piece = getPiece(newPosition);
-        addToSimulation(SimulatedMove::movePiece, piece, prevPosition);
-        return true;
-    }
-    bool GameBoard::simulateMovePiece(int prevX, int prevY, int newX, int newY)
-    {
-        return simulateMovePiece(std::make_pair(prevX, prevY), std::make_pair(newX, newY));
-    }
-    bool GameBoard::simulateMovePiece(int prevX, int prevY, Move::position newPosition)
-    {
-        return simulateMovePiece(std::make_pair(prevX, prevY), newPosition);
-    }
-    bool GameBoard::simulateMovePiece(Move::position prevPosition, int newX, int newY)
-    {
-        return simulateMovePiece(prevPosition, std::make_pair(newX, newY));
-    }
-
-    // See GameBoard.h
-    bool GameBoard::simulateRemovePiece(int x, int y)
-    {
-        return simulateRemovePiece(std::make_pair(x, y));
-    }
-    bool GameBoard::simulateRemovePiece(Move::position position)
-    {
-        Piece* piece = getPiece(position);
-        if(!piece || !removePiece(position)) {
-            return false;
-        }
-        addToSimulation(SimulatedMove::removePiece, piece, position);
-        return true;
-    }
-
-    // See GameBoard.h
-    bool GameBoard::simulateAddPiece(Piece* piece)
-    {
-        if(!addPiece(piece)){
-            return false;
-        }
-        addToSimulation(SimulatedMove::addPiece, piece, piece->getPosition());
-        return true;
-    }
-
-    // See GameBoard.h
-    bool GameBoard::undoSimulatedMovePiece(Piece* piece, Move::position originalStart)
-    {
-        return movePiece(piece->getPosition(), originalStart);
-    }
-
-    bool GameBoard::undoSimulatedRemovePiece(Piece* piece, Move::position originalPosition)
-    {
-        if(!unoccupiedOnBoard(originalPosition)) {
-            return false;
-        }
-        board[originalPosition] = piece;
-        piece->setOnBoard(true);
-        return true;
-    }
-
-    bool GameBoard::undoSimulatedAddPiece(Piece* piece, Move::position addedPosition)
-    {
-        if(!removePiece(addedPosition)) {
-            return false;
-        }
-        allPieces.pop_back();
-        delete piece;
-        return true;
+        simulation.push_back(action);
     }
 
     // See GameBoard.h
     bool GameBoard::revertSimulatedMove()
     {
-        SimulatedData moveData = simulation.back();
-        bool result = false;
-        switch(moveData.move){
-            case SimulatedMove::movePiece:
-                result = undoSimulatedMovePiece(moveData.piece, moveData.position);
-                break;
-            case SimulatedMove::removePiece:
-                result = undoSimulatedRemovePiece(moveData.piece, moveData.position);
-                break;
-            case SimulatedMove::addPiece:
-                result = undoSimulatedAddPiece(moveData.piece, moveData.position);
-                break;
-        }
+        std::shared_ptr<Action> action = simulation.back();
+        bool result = action->reverseAction(this);
         if(result) {
             simulation.pop_back();
         }
@@ -371,17 +312,17 @@ namespace logic {
     }
 
     // See GameBoard.h
-    bool GameBoard::inSimulation()
+    void GameBoard::applySimulation()
     {
-        return simulation.size() > 0;
+        for(std::shared_ptr<Action> action : simulation) {
+            action->applySymptomaticEffects(this);
+        }
+        simulation.clear();
     }
 
     // See GameBoard.h
-    void GameBoard::simulateApplyFutureMoves()
+    bool GameBoard::inSimulation()
     {
-        for(std::pair<Move::position, Move::position> move : futureMoves) {
-            simulateMovePiece(move.first, move.second);
-        }
-        clearFutureMoves();
+        return simulation.size() > 0;
     }
 }

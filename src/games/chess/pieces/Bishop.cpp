@@ -1,9 +1,13 @@
 #include <vector>
+#include <memory>
 
 #include "ChessBoard.h"
 #include "ChessGameState.h"
 #include "ChessPiece.h"
 #include "Bishop.h"
+#include "CapturePieceAction.h"
+#include "MovePieceAction.h"
+#include "Move.h"
 
 namespace chess {
     using namespace logic;
@@ -72,6 +76,7 @@ namespace chess {
         // Store info for later
         GameBoard* board = chessState.getBoard();
         Move::position curPosition = getPosition();
+        Player player = getPlayer();
 
         // Check for Il Vaticano in 4 direction (right, left, up, down)
         std::vector<Move::position> checkDirections {
@@ -110,37 +115,18 @@ namespace chess {
             }
 
             // Add the swap move with a callback that swaps the bishops and captures the pawns
-            Move newMove = Move({}, 3, 
-            [](Move::position start, Move::position end, GameState& gameState, bool simulation) {
-                GameBoard* board = gameState.getBoard();
-                Move::position direction = std::make_pair(
-                    static_cast<int>((end.first - start.first) / 3), 
-                    static_cast<int>((end.second - start.second) / 3)
-                );
-                Move::position pawn1 = std::make_pair(
-                    start.first + direction.first, 
-                    start.second + direction.second
-                );
-                Move::position pawn2 = std::make_pair(
-                    start.first + 2 * direction.first, 
-                    start.second + 2 * direction.second
-                );
-                if(simulation) {
-                    board->simulateRemovePiece(pawn1);
-                    board->simulateRemovePiece(pawn2);
-
-                    // Temporarily put the second bishop at pawn1 so the first bishop can move to end
-                    board->simulateMovePiece(end, pawn1); 
-                }
-                else {
-                    board->capturePiece(pawn1);
-                    board->capturePiece(pawn2);
-                    
-                    // Temporarily put the second bishop at pawn1 so the first bishop can move to end
-                    board->movePiece(end, pawn1);
-                }
-                board->queueFutureMove(pawn1, start);
-            });
+            std::vector<std::shared_ptr<Action>> preMoves = {
+                make_action(new CapturePieceAction(player, std::make_pair(-1 * direction.first, -1 * direction.second))),
+                make_action(new CapturePieceAction(player, std::make_pair(-2 * direction.first, -2 * direction.second))),
+                make_action(new MovePieceAction(std::make_pair(-2 * direction.first, -2 * direction.second)))
+            };
+            std::vector<std::shared_ptr<Action>> postMoves = {
+                make_action(new MovePieceAction(
+                    std::make_pair(-2 * direction.first, -2 * direction.second),
+                    std::make_pair(-3 * direction.first, -3 * direction.second)
+                ))
+            };
+            Move newMove = Move({}, 3, preMoves, postMoves);
             if(addToMove(otherBishop, newMove, chessState)) {
                 moves.push_back(newMove); // Add the new move if successful
             }

@@ -465,6 +465,126 @@ __/src/logic/Piece.cpp.s:
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/Piece.cpp.s
 .PHONY : __/src/logic/Piece.cpp.s
 
+__/src/logic/actions/AddPieceAction.obj: __/src/logic/actions/AddPieceAction.cpp.obj
+.PHONY : __/src/logic/actions/AddPieceAction.obj
+
+# target to build an object file
+__/src/logic/actions/AddPieceAction.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/actions/AddPieceAction.cpp.obj
+.PHONY : __/src/logic/actions/AddPieceAction.cpp.obj
+
+__/src/logic/actions/AddPieceAction.i: __/src/logic/actions/AddPieceAction.cpp.i
+.PHONY : __/src/logic/actions/AddPieceAction.i
+
+# target to preprocess a source file
+__/src/logic/actions/AddPieceAction.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/actions/AddPieceAction.cpp.i
+.PHONY : __/src/logic/actions/AddPieceAction.cpp.i
+
+__/src/logic/actions/AddPieceAction.s: __/src/logic/actions/AddPieceAction.cpp.s
+.PHONY : __/src/logic/actions/AddPieceAction.s
+
+# target to generate assembly for a file
+__/src/logic/actions/AddPieceAction.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/actions/AddPieceAction.cpp.s
+.PHONY : __/src/logic/actions/AddPieceAction.cpp.s
+
+__/src/logic/actions/CapturePieceAction.obj: __/src/logic/actions/CapturePieceAction.cpp.obj
+.PHONY : __/src/logic/actions/CapturePieceAction.obj
+
+# target to build an object file
+__/src/logic/actions/CapturePieceAction.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/actions/CapturePieceAction.cpp.obj
+.PHONY : __/src/logic/actions/CapturePieceAction.cpp.obj
+
+__/src/logic/actions/CapturePieceAction.i: __/src/logic/actions/CapturePieceAction.cpp.i
+.PHONY : __/src/logic/actions/CapturePieceAction.i
+
+# target to preprocess a source file
+__/src/logic/actions/CapturePieceAction.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/actions/CapturePieceAction.cpp.i
+.PHONY : __/src/logic/actions/CapturePieceAction.cpp.i
+
+__/src/logic/actions/CapturePieceAction.s: __/src/logic/actions/CapturePieceAction.cpp.s
+.PHONY : __/src/logic/actions/CapturePieceAction.s
+
+# target to generate assembly for a file
+__/src/logic/actions/CapturePieceAction.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/actions/CapturePieceAction.cpp.s
+.PHONY : __/src/logic/actions/CapturePieceAction.cpp.s
+
+__/src/logic/actions/MovePieceAction.obj: __/src/logic/actions/MovePieceAction.cpp.obj
+.PHONY : __/src/logic/actions/MovePieceAction.obj
+
+# target to build an object file
+__/src/logic/actions/MovePieceAction.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/actions/MovePieceAction.cpp.obj
+.PHONY : __/src/logic/actions/MovePieceAction.cpp.obj
+
+__/src/logic/actions/MovePieceAction.i: __/src/logic/actions/MovePieceAction.cpp.i
+.PHONY : __/src/logic/actions/MovePieceAction.i
+
+# target to preprocess a source file
+__/src/logic/actions/MovePieceAction.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/actions/MovePieceAction.cpp.i
+.PHONY : __/src/logic/actions/MovePieceAction.cpp.i
+
+__/src/logic/actions/MovePieceAction.s: __/src/logic/actions/MovePieceAction.cpp.s
+.PHONY : __/src/logic/actions/MovePieceAction.s
+
+# target to generate assembly for a file
+__/src/logic/actions/MovePieceAction.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/actions/MovePieceAction.cpp.s
+.PHONY : __/src/logic/actions/MovePieceAction.cpp.s
+
+__/src/logic/actions/RemovePieceAction.obj: __/src/logic/actions/RemovePieceAction.cpp.obj
+.PHONY : __/src/logic/actions/RemovePieceAction.obj
+
+# target to build an object file
+__/src/logic/actions/RemovePieceAction.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/actions/RemovePieceAction.cpp.obj
+.PHONY : __/src/logic/actions/RemovePieceAction.cpp.obj
+
+__/src/logic/actions/RemovePieceAction.i: __/src/logic/actions/RemovePieceAction.cpp.i
+.PHONY : __/src/logic/actions/RemovePieceAction.i
+
+# target to preprocess a source file
+__/src/logic/actions/RemovePieceAction.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/actions/RemovePieceAction.cpp.i
+.PHONY : __/src/logic/actions/RemovePieceAction.cpp.i
+
+__/src/logic/actions/RemovePieceAction.s: __/src/logic/actions/RemovePieceAction.cpp.s
+.PHONY : __/src/logic/actions/RemovePieceAction.s
+
+# target to generate assembly for a file
+__/src/logic/actions/RemovePieceAction.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/actions/RemovePieceAction.cpp.s
+.PHONY : __/src/logic/actions/RemovePieceAction.cpp.s
+
+__/src/logic/actions/TryCapturePieceAction.obj: __/src/logic/actions/TryCapturePieceAction.cpp.obj
+.PHONY : __/src/logic/actions/TryCapturePieceAction.obj
+
+# target to build an object file
+__/src/logic/actions/TryCapturePieceAction.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/actions/TryCapturePieceAction.cpp.obj
+.PHONY : __/src/logic/actions/TryCapturePieceAction.cpp.obj
+
+__/src/logic/actions/TryCapturePieceAction.i: __/src/logic/actions/TryCapturePieceAction.cpp.i
+.PHONY : __/src/logic/actions/TryCapturePieceAction.i
+
+# target to preprocess a source file
+__/src/logic/actions/TryCapturePieceAction.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/actions/TryCapturePieceAction.cpp.i
+.PHONY : __/src/logic/actions/TryCapturePieceAction.cpp.i
+
+__/src/logic/actions/TryCapturePieceAction.s: __/src/logic/actions/TryCapturePieceAction.cpp.s
+.PHONY : __/src/logic/actions/TryCapturePieceAction.s
+
+# target to generate assembly for a file
+__/src/logic/actions/TryCapturePieceAction.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/__/src/logic/actions/TryCapturePieceAction.cpp.s
+.PHONY : __/src/logic/actions/TryCapturePieceAction.cpp.s
+
 games/chess/ChessBoardTest.obj: games/chess/ChessBoardTest.cpp.obj
 .PHONY : games/chess/ChessBoardTest.obj
 
@@ -705,6 +825,30 @@ games/chess/pieces/RookTest.cpp.s:
 	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/games/chess/pieces/RookTest.cpp.s
 .PHONY : games/chess/pieces/RookTest.cpp.s
 
+logic/ActionTest.obj: logic/ActionTest.cpp.obj
+.PHONY : logic/ActionTest.obj
+
+# target to build an object file
+logic/ActionTest.cpp.obj:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/logic/ActionTest.cpp.obj
+.PHONY : logic/ActionTest.cpp.obj
+
+logic/ActionTest.i: logic/ActionTest.cpp.i
+.PHONY : logic/ActionTest.i
+
+# target to preprocess a source file
+logic/ActionTest.cpp.i:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/logic/ActionTest.cpp.i
+.PHONY : logic/ActionTest.cpp.i
+
+logic/ActionTest.s: logic/ActionTest.cpp.s
+.PHONY : logic/ActionTest.s
+
+# target to generate assembly for a file
+logic/ActionTest.cpp.s:
+	cd /d C:\Users\jserf\DOCUME~1\ANARCH~1\build && $(MAKE) $(MAKESILENT) -f test\CMakeFiles\anarchy-chess_tests.dir\build.make test/CMakeFiles/anarchy-chess_tests.dir/logic/ActionTest.cpp.s
+.PHONY : logic/ActionTest.cpp.s
+
 logic/GameBoardTest.obj: logic/GameBoardTest.cpp.obj
 .PHONY : logic/GameBoardTest.obj
 
@@ -876,6 +1020,21 @@ help:
 	@echo ... __/src/logic/Piece.obj
 	@echo ... __/src/logic/Piece.i
 	@echo ... __/src/logic/Piece.s
+	@echo ... __/src/logic/actions/AddPieceAction.obj
+	@echo ... __/src/logic/actions/AddPieceAction.i
+	@echo ... __/src/logic/actions/AddPieceAction.s
+	@echo ... __/src/logic/actions/CapturePieceAction.obj
+	@echo ... __/src/logic/actions/CapturePieceAction.i
+	@echo ... __/src/logic/actions/CapturePieceAction.s
+	@echo ... __/src/logic/actions/MovePieceAction.obj
+	@echo ... __/src/logic/actions/MovePieceAction.i
+	@echo ... __/src/logic/actions/MovePieceAction.s
+	@echo ... __/src/logic/actions/RemovePieceAction.obj
+	@echo ... __/src/logic/actions/RemovePieceAction.i
+	@echo ... __/src/logic/actions/RemovePieceAction.s
+	@echo ... __/src/logic/actions/TryCapturePieceAction.obj
+	@echo ... __/src/logic/actions/TryCapturePieceAction.i
+	@echo ... __/src/logic/actions/TryCapturePieceAction.s
 	@echo ... games/chess/ChessBoardTest.obj
 	@echo ... games/chess/ChessBoardTest.i
 	@echo ... games/chess/ChessBoardTest.s
@@ -906,6 +1065,9 @@ help:
 	@echo ... games/chess/pieces/RookTest.obj
 	@echo ... games/chess/pieces/RookTest.i
 	@echo ... games/chess/pieces/RookTest.s
+	@echo ... logic/ActionTest.obj
+	@echo ... logic/ActionTest.i
+	@echo ... logic/ActionTest.s
 	@echo ... logic/GameBoardTest.obj
 	@echo ... logic/GameBoardTest.i
 	@echo ... logic/GameBoardTest.s

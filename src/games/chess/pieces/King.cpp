@@ -1,9 +1,11 @@
 #include <vector>
+#include <memory>
 
 #include "ChessBoard.h"
 #include "ChessGameState.h"
 #include "ChessPiece.h"
 #include "King.h"
+#include "MovePieceAction.h"
 
 namespace chess {
     using namespace logic;
@@ -87,22 +89,11 @@ namespace chess {
         }
 
         // Add the move with a callback that moves the rook to its correct position
-        addPosition(std::make_pair(curPosition.first + 2, curPosition.second), moves, chessState, 1, 
-        [](Move::position start, Move::position end, GameState& gameState, bool simulation){
-            GameBoard* board = gameState.getBoard();
-            Move::position rookStart = std::make_pair(end.first + 1, end.second);
-            Move::position rookEnd = std::make_pair(start.first + 1, start.second);
-            if(simulation) {
-                board->simulateMovePiece(rookStart, rookEnd);
-            }
-            else {
-                board->movePiece(rookStart, rookEnd);
-                Piece* piece = board->getPiece(rookEnd);
-                if(!piece) {
-                    return;
-                }
-                piece->validateMove();
-            }
+        addPosition(std::make_pair(curPosition.first + 2, curPosition.second), moves, chessState, 1, {
+            make_action(new MovePieceAction(
+                std::make_pair(1, 0),
+                std::make_pair(-1, 0)
+            ))
         });
     }
 
@@ -135,22 +126,11 @@ namespace chess {
         }
 
         // Add the move with a callback that moves the rook to its correct position
-        addPosition(std::make_pair(curPosition.first - 2, curPosition.second), moves, chessState, 1, 
-        [](Move::position start, Move::position end, GameState& gameState, bool simulation){
-            GameBoard* board = gameState.getBoard();
-            Move::position rookStart = std::make_pair(end.first - 2, end.second);
-            Move::position rookEnd = std::make_pair(start.first - 1, start.second);
-            if(simulation) {
-                board->simulateMovePiece(rookStart, rookEnd);
-            }
-            else {
-                board->movePiece(rookStart, rookEnd);
-                Piece* piece = board->getPiece(rookEnd);
-                if(!piece) {
-                    return;
-                }
-                piece->validateMove();
-            }
+        addPosition(std::make_pair(curPosition.first - 2, curPosition.second), moves, chessState, 1, {
+            make_action(new MovePieceAction(
+                std::make_pair(-2, 0),
+                std::make_pair(1, 0)
+            ))
         });
     }
 }

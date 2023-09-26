@@ -67,31 +67,6 @@ TEST_CASE("Chess Game State - Check")
     CHECK(!chessState.isInCheck(Player::black));
 }
 
-TEST_CASE("Chess Game State - Will Move Cause Check")
-{
-    // Initialize the ChessGameState
-    ChessGameState chessState{};
-
-    // Make moves to create a position where white will be in check if white plays Pawn to G4
-    // Make sure none of these moves will cause check 
-    CHECK(!chessState.willMoveCauseCheck(std::make_pair(6, 2), std::make_pair(6, 3)));
-    CHECK(chessState.movePiece(std::make_pair(6, 2), std::make_pair(6, 3))); // Pawn to F3
-
-    CHECK(!chessState.willMoveCauseCheck(std::make_pair(5, 7), std::make_pair(5, 5)));
-    CHECK(chessState.movePiece(std::make_pair(5, 7), std::make_pair(5, 5))); // Pawn to E5
-
-    CHECK(!chessState.willMoveCauseCheck(std::make_pair(1, 2), std::make_pair(1, 3)));
-    CHECK(chessState.movePiece(std::make_pair(1, 2), std::make_pair(1, 3))); // Pawn to A3
-
-    CHECK(!chessState.willMoveCauseCheck(std::make_pair(4, 8), std::make_pair(8, 4)));
-    CHECK(chessState.movePiece(std::make_pair(4, 8), std::make_pair(8, 4))); // Queen to H4
-
-    // Make sure chessState returns that playing Pawn to G4 will put white into check
-    // and make moving the piece does not work
-    CHECK(chessState.willMoveCauseCheck(std::make_pair(7, 2), std::make_pair(7, 4)));
-    CHECK(!chessState.movePiece(std::make_pair(7, 2), std::make_pair(7, 4))); // Pawn to G4
-}
-
 TEST_CASE("Chess Game State - Checkmate")
 {
     // Initialize the ChessGameState and make sure it isn't in check by default

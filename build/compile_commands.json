@@ -26,6 +26,31 @@
 },
 {
   "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\__\\src\\logic\\actions\\AddPieceAction.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\actions\\AddPieceAction.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/actions/AddPieceAction.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\__\\src\\logic\\actions\\CapturePieceAction.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\actions\\CapturePieceAction.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/actions/CapturePieceAction.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\__\\src\\logic\\actions\\MovePieceAction.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\actions\\MovePieceAction.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/actions/MovePieceAction.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\__\\src\\logic\\actions\\RemovePieceAction.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\actions\\RemovePieceAction.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/actions/RemovePieceAction.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\__\\src\\logic\\actions\\TryCapturePieceAction.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\actions\\TryCapturePieceAction.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/actions/TryCapturePieceAction.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
   "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\__\\src\\games\\chess\\ChessBoard.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\games\\chess\\ChessBoard.cpp\"",
   "file": "C:/Users/jserf/Documents/Anarchy Chess/src/games/chess/ChessBoard.cpp"
 },
@@ -93,6 +118,11 @@
   "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
   "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\logic\\GameStateTest.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\test\\logic\\GameStateTest.cpp\"",
   "file": "C:/Users/jserf/Documents/Anarchy Chess/test/logic/GameStateTest.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_tests.dir\\logic\\ActionTest.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\test\\logic\\ActionTest.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/test/logic/ActionTest.cpp"
 },
 {
   "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/test",
@@ -168,6 +198,31 @@
   "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
   "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\logic\\GameState.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\GameState.cpp\"",
   "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/GameState.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\logic\\actions\\AddPieceAction.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\actions\\AddPieceAction.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/actions/AddPieceAction.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\logic\\actions\\CapturePieceAction.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\actions\\CapturePieceAction.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/actions/CapturePieceAction.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\logic\\actions\\MovePieceAction.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\actions\\MovePieceAction.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/actions/MovePieceAction.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\logic\\actions\\RemovePieceAction.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\actions\\RemovePieceAction.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/actions/RemovePieceAction.cpp"
+},
+{
+  "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/anarchy-chess_build.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\anarchy-chess_build.dir\\logic\\actions\\TryCapturePieceAction.cpp.obj -c \"C:\\Users\\jserf\\Documents\\Anarchy Chess\\src\\logic\\actions\\TryCapturePieceAction.cpp\"",
+  "file": "C:/Users/jserf/Documents/Anarchy Chess/src/logic/actions/TryCapturePieceAction.cpp"
 },
 {
   "directory": "C:/Users/jserf/Documents/Anarchy Chess/build/src",

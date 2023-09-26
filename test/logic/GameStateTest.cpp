@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <memory>
 
 #include "doctest.h"
 #include "Move.h"
@@ -9,6 +10,13 @@
 #include "TestBoard.h"
 #include "TestPieces.h"
 #include "GameState.h"
+
+#include "Action.h"
+#include "AddPieceAction.h"
+#include "CapturePieceAction.h"
+#include "MovePieceAction.h"
+#include "RemovePieceAction.h"
+#include "TryCapturePieceAction.h"
 
 using namespace testing;
 using namespace logic;
@@ -468,4 +476,24 @@ TEST_CASE("Game State: Min Priority")
     CHECK(gameState.getMovesOfPiece(Player::black, 2, 0, std::make_pair(3, 3)).size() == 0);
     CHECK(gameState.getMovesOfPiece(Player::black, blackNormalPiece->getPosition(), 3, 3).size() == 0);
     CHECK(gameState.getMovesOfPiece(Player::black, 2, 0, 3, 3).size() == 0);
+}
+
+TEST_CASE("Game State: Call Actions")
+{
+    // Create a gameBoard
+    GameBoard* gameBoard = new GameBoard{{ Player::white, Player::black }};
+
+    // Create a GameState
+    GameState gameState{ gameBoard, { Player::white, Player::black } };
+
+    // Create 2 testing actions
+    std::shared_ptr<Action> addPiece = make_action(new AddPieceAction(Player::white));
+    std::shared_ptr<Action> movePiece = make_action(new MovePieceAction(std::make_pair(1, 1)));
+
+    // Call both actions as simulations and make sure the calls were successful
+    std::vector<std::shared_ptr<Action>> actions = {addPiece, movePiece};
+    CHECK(gameState.callActions(actions, std::make_pair(0, 0)));
+    CHECK(gameBoard->occupiedOnBoard(1, 1));
+    gameBoard->revertSimulation();
+    CHECK(!gameBoard->occupiedOnBoard(1, 1));
 }

@@ -5,27 +5,18 @@
 #include <vector>
 #include <string>
 #include <tuple>
+#include <memory>
 
 #include "HashPair.h"
 #include "Piece.h"
 #include "Move.h"
 
 namespace logic{
+    /*
+    * The data structure for the game's board
+    */
     class GameBoard 
     {
-        /*
-        * The data structure for the game's board
-        */
-        public:
-            /* 
-            * All possible moves that can be simulated
-            */
-            enum class SimulatedMove
-            {
-                movePiece = 0,
-                removePiece,
-                addPiece
-            };
         private:
             /*
             * The board, which uses an unordered_map for O(1) access times for a 
@@ -50,32 +41,16 @@ namespace logic{
             * - Necessary for memory management
             */
             std::vector<Piece*> allPieces{};
-            
-            /*
-            * A list of position pairs of moves that can be automatically completed
-            * all at once later on
-            */
-            std::vector<std::pair<Move::position, Move::position>> futureMoves{};
 
             /*
-            * A struct that stores a single simulated move and the necessary information
-            * to undo the move
-            */
-            struct SimulatedData {
-                SimulatedMove move;
-                Piece* piece;
-                Move::position position;
-            };
-
-            /*
-            * A stack used to keep track of all simulated moves so they can be undone.
-            * - Whenever a move is simulated, it is added to the back of this vector
+            * A stack used to keep track of all simulated actions so they can be undone.
+            * - Whenever an action is simulated, it is added to the back of this vector
             *   (stack invariant)
-            * - To restore the original state after simulations, SimulatedMoves are 
+            * - To restore the original state after simulations, Actions are 
             *   popped one by one from the back of the stack and reverted in the reverse
             *   order in which they were inserted
             */
-            std::vector<SimulatedData> simulation{};
+            std::vector<std::shared_ptr<Action>> simulation{};
 
         public:
             /*
@@ -201,6 +176,39 @@ namespace logic{
             bool capturePiece(Move::position position);
 
             /*
+            * Adds a previously removed piece to the captured pieces structure
+            * for each player that doesn't control the piece
+            * 
+            * Parameters:
+            * - The removed piece to capture
+            * 
+            * Returns:
+            * - true if the piece was successfully captured
+            * - false if the piece is still on the board and has not yet been removed
+            */
+            bool captureRemovedPiece(Piece* removedPiece);
+
+            /*
+            * Adds a removed piece back to the board at its original position
+            *
+            * Returns:
+            * - true if the piece was successfully returned
+            * - false if there is another piece in the way and the piece cannot
+            *   return to its original position
+            */
+            bool unRemovePiece(Piece* removedPiece);
+
+            /*
+            * Removes the most recently added piece to the board and frees its
+            * memory
+            * 
+            * Returns:
+            * - true if the piece was successfully removed and deleted
+            * - false if removal did not succeed
+            */
+            bool permanentlyRemoveMostRecentPiece();
+
+            /*
             * Moves a piece to a new position
             * 
             * Parameters:
@@ -235,110 +243,41 @@ namespace logic{
             double getPlayerScore(Piece::Player player);
 
             /*
-            * Removes all future moves
+            * Pushes a simulated action type to the simulated action stack
             */
-            void clearFutureMoves();
+            void addToSimulation(std::shared_ptr<Action> action);
 
             /*
-            * Adds a move to the queue
-            */
-            void queueFutureMove(Move::position start, Move::position end);
-
-            /*
-            * Make all future moves and clears the queue
-            */
-            void applyFutureMoves();
-
-            /*
-            * Pushes a simulated move type to the simulated move stack
-            */
-            void addToSimulation(SimulatedMove simulatedMove, Piece* piece, Move::position position);
-
-            /*
-            * Simulates moving a piece to a new position
-            * - Simulating entails actually performing the action and adding a log
-            *   of the action to the simulation stack
-            * 
-            * Returns:
-            * - true if the piece was successfully moved
-            * - false if the piece was not moved. This can happen if:
-            *   - The prev position inputted does not contain a piece
-            *   - The new space is occupied
-            *   - The new space is not on the board
-            */
-            bool simulateMovePiece(int prevX, int prevY, int newX, int newY);
-            bool simulateMovePiece(int prevX, int prevY, Move::position newPosition);
-            bool simulateMovePiece(Move::position prevPosition, int newX, int newY);
-            bool simulateMovePiece(Move::position prevPosition, Move::position newPosition);
-
-            /*
-            * Simulates removing a piece from the board without freeing it
-            * - Simulating entails actually performing the action and adding a log
-            *   of the action to the simulation stack
-            * Parameters:
-            * - The board position of the piece
-            * 
-            * Returns:
-            * - true if the piece was successfully removed
-            * - false if something went wrong and no piece was removed
-            */
-            bool simulateRemovePiece(int x, int y);
-            bool simulateRemovePiece(Move::position position);
-
-            /*
-            * Simulates adding a piece to the board at a position
-            * - Simulating entails actually performing the action and adding a log
-            *   of the action to the simulation stack
-            */
-            bool simulateAddPiece(Piece* piece);
-
-            /*
-            * Moves a piece that was moved through a simulated move back to where it
-            * started
-            */
-            bool undoSimulatedMovePiece(Piece* piece, Move::position originalStart);
-
-            /*
-            * Returns a piece that was removed through a simulated remove back to the
-            * board
-            */
-            bool undoSimulatedRemovePiece(Piece* piece, Move::position originalPosition);
-
-            /*
-            * Removes and frees the piece that was added through the simulation add function
-            */
-            bool undoSimulatedAddPiece(Piece* piece, Move::position addedPosition);
-
-            /*
-            * Undoes the most recent simulated move
+            * Undoes the most recent simulated action
             * 
             * Returns:
             * - true if move is successfully reverted
-            * - false if the revert goes wrong. This can happen if non-simulated moves
-            *   are made before all simulated moves are reverted.
+            * - false if the revert goes wrong. This can happen if non-simulated actions
+            *   are made before all simulated actions are reverted.
             */
             bool revertSimulatedMove();
 
             /*
-            * Undoes all simulated moves
+            * Undoes all simulated actions
             *
             * Returns:
-            * - true if all simulated moves are successfully reverted or if there are 
-            *   no simulated moves to revert
+            * - true if all simulated actions are successfully reverted or if there are 
+            *   no simulated actions to revert
             * - false if a revert goes wrong and is not reverted. If this happens,
             *   all reverts after that move will not be attempted
             */
             bool revertSimulation();
 
             /*
+            * Applies the symptomatic effects of all of the actions and 
+            * clears the simulated actions stack
+            */
+            void applySimulation();
+
+            /*
             * Returns whether the game is currently in a simulated position
             */
             bool inSimulation();
-
-            /*
-            * Applies all future moves as simulations
-            */
-            void simulateApplyFutureMoves();
     };
 }
 #endif

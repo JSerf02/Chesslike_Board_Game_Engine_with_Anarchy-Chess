@@ -2,9 +2,13 @@
 #define PAWN_H
 
 #include "ChessPiece.h"
+#include "Action.h"
 
 namespace chess {
     using namespace logic;
+
+    /* Forward declaration (actual class later in the file)*/
+    class PawnBoostAction;
 
     /* A chess piece with a value of 1.0 that moves straight, attacks on diagonals,
        can promote to other pieces, and can boost an extra space forwards on its 
@@ -16,6 +20,11 @@ namespace chess {
             * Inherit the ChessPiece constructors 
             */
             using ChessPiece::ChessPiece;
+
+            /*
+            * Give PawnBoostAction access to all methods of Pawn
+            */
+            friend class PawnBoostAction;
 
             /* 
             * The indices of the moves returned when promoting a pawn
@@ -116,6 +125,32 @@ namespace chess {
             * Allows pawns to take an extra knight move after promoting to a knight
             */
             void addKnightBoost(std::vector<Move>& moves, ChessGameState& chessState);
+    };
+
+    /* An action that changes the pawn's justBoosted flag to true */
+    class PawnBoostAction : public Action 
+    {
+        private:
+            /*
+            * The pawn that will boost
+            */
+            Pawn& pawn;
+
+            /*
+            * The GameState object that tracks the current turns of the game
+            */
+            GameState& gameState;
+        public:
+            /*
+            * Create an action of this type that tracks the inputted pawn
+            */
+            PawnBoostAction(Pawn& pawn, GameState& gameState) : 
+                pawn{pawn}, gameState{gameState}{}
+
+            /*
+            * Change the pawn's boost turn
+            */
+            void applySymptomaticEffects(GameBoard* board) override;
     };
 }
 #endif

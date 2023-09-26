@@ -23,6 +23,11 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/jserf/Documents/Anarchy Chess/src/logic/GameState.cpp" "src/CMakeFiles/anarchy-chess_build.dir/logic/GameState.cpp.obj" "gcc" "src/CMakeFiles/anarchy-chess_build.dir/logic/GameState.cpp.obj.d"
   "C:/Users/jserf/Documents/Anarchy Chess/src/logic/Move.cpp" "src/CMakeFiles/anarchy-chess_build.dir/logic/Move.cpp.obj" "gcc" "src/CMakeFiles/anarchy-chess_build.dir/logic/Move.cpp.obj.d"
   "C:/Users/jserf/Documents/Anarchy Chess/src/logic/Piece.cpp" "src/CMakeFiles/anarchy-chess_build.dir/logic/Piece.cpp.obj" "gcc" "src/CMakeFiles/anarchy-chess_build.dir/logic/Piece.cpp.obj.d"
+  "C:/Users/jserf/Documents/Anarchy Chess/src/logic/actions/AddPieceAction.cpp" "src/CMakeFiles/anarchy-chess_build.dir/logic/actions/AddPieceAction.cpp.obj" "gcc" "src/CMakeFiles/anarchy-chess_build.dir/logic/actions/AddPieceAction.cpp.obj.d"
+  "C:/Users/jserf/Documents/Anarchy Chess/src/logic/actions/CapturePieceAction.cpp" "src/CMakeFiles/anarchy-chess_build.dir/logic/actions/CapturePieceAction.cpp.obj" "gcc" "src/CMakeFiles/anarchy-chess_build.dir/logic/actions/CapturePieceAction.cpp.obj.d"
+  "C:/Users/jserf/Documents/Anarchy Chess/src/logic/actions/MovePieceAction.cpp" "src/CMakeFiles/anarchy-chess_build.dir/logic/actions/MovePieceAction.cpp.obj" "gcc" "src/CMakeFiles/anarchy-chess_build.dir/logic/actions/MovePieceAction.cpp.obj.d"
+  "C:/Users/jserf/Documents/Anarchy Chess/src/logic/actions/RemovePieceAction.cpp" "src/CMakeFiles/anarchy-chess_build.dir/logic/actions/RemovePieceAction.cpp.obj" "gcc" "src/CMakeFiles/anarchy-chess_build.dir/logic/actions/RemovePieceAction.cpp.obj.d"
+  "C:/Users/jserf/Documents/Anarchy Chess/src/logic/actions/TryCapturePieceAction.cpp" "src/CMakeFiles/anarchy-chess_build.dir/logic/actions/TryCapturePieceAction.cpp.obj" "gcc" "src/CMakeFiles/anarchy-chess_build.dir/logic/actions/TryCapturePieceAction.cpp.obj.d"
   )
 
 # Targets to which this target links.

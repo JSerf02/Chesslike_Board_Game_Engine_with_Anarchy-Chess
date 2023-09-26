@@ -38,6 +38,12 @@ namespace logic {
     }
 
     // See Piece.h
+    Piece* Piece::createNew(std::vector<Player> newPlayers, Move::position startPos)
+    {
+        return new Piece(newPlayers, startPos);
+    }
+
+    // See Piece.h
     bool Piece::getPlayerAccess(Player player)
     {
         return players[player];
@@ -105,6 +111,12 @@ namespace logic {
     void Piece::validateMove()
     {
         alreadyMoved = true;
+    }
+
+    // See Piece.h
+    void Piece::unValidateMove()
+    {
+        alreadyMoved = false;
     }
 
     // See Piece.h

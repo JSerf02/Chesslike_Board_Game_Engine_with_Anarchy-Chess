@@ -6,9 +6,11 @@
 #include <vector>
 #include <iostream>
 #include <functional>
+#include <memory>
 
 namespace logic {
     class GameState;
+    class Action;
     class Move 
     {
         /*
@@ -40,20 +42,24 @@ namespace logic {
             int priority{};
 
             /*
-            * A callback function that is called whenever a player uses one of these moves
-            * -- If null, will be ignored
+            * A list of actions to apply before moving the piece
             */
-            std::function<void (position, position, GameState&, bool)> onMove{ nullptr };
+            std::vector<std::shared_ptr<Action>> preMoveActions{};
+
+            /*
+            * A list of actions to apply after moving the piece
+            */
+            std::vector<std::shared_ptr<Action>> postMoveActions{};
 
         public:
             /*
             * Constructor: Initialize priority and onMove() callback function
             */
-            Move(int movePriority = 1, std::function<void (position, position, GameState&, bool)> onMoveCallback = nullptr) : 
-                priority{std::max(movePriority, 1)}, onMove{onMoveCallback}{}
-            Move(std::vector<position> newPositions, int movePriority = 1, std::function<void (position, position, GameState&, bool)> onMoveCallback = nullptr) : 
-                positions{newPositions}, priority{std::max(movePriority, 1)}, onMove{onMoveCallback}{}
-            
+            Move(int movePriority = 1, std::vector<std::shared_ptr<Action>> preMoveActions = {}, std::vector<std::shared_ptr<Action>> postMoveActions = {}) : 
+                priority{std::max(movePriority, 1)}, preMoveActions{preMoveActions}, postMoveActions{postMoveActions}{}
+            Move(std::vector<position> newPositions, int movePriority = 1, std::vector<std::shared_ptr<Action>> preMoveActions = {}, std::vector<std::shared_ptr<Action>> postMoveActions = {}) : 
+                positions{newPositions}, priority{std::max(movePriority, 1)}, preMoveActions{preMoveActions}, postMoveActions{postMoveActions}{}
+
             /*
             * Allow printing of moves for debugging
             */
@@ -70,22 +76,14 @@ namespace logic {
             void setPriority(int newPriority);
 
             /*
-            * Changes the onMove() callback to a new callback function
+            * Returns a reference to the vector containing all of the premove actions for this move
             */
-            void setOnMove(std::function<void (position, position, GameState&, bool)> onMoveCallback);
+            std::vector<std::shared_ptr<Action>>& getPreMoveActions();
 
             /*
-            * Calls the onMove() callback function if one is defined
-            * - Does nothing if the onMove() callback is null
-            * 
-            * Parameters:
-            * - gameState: The GameState object of the current game
-            * 
-            * Returns:
-            * - True if the function was called
-            * - False if onMove() was null and nothing was called
+            * Returns a reference to the vector containing all of the postmove actions for this move
             */
-            bool callOnMove(position start, position end, GameState& gameState, bool simulation = false);
+            std::vector<std::shared_ptr<Action>>& getPostMoveActions();
 
             /*
             * Returns a reference to the positions allowed by this move

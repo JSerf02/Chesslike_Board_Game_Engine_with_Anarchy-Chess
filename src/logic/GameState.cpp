@@ -1,9 +1,12 @@
 #include <set>
+#include <memory>
 
 #include "Move.h"
 #include "Piece.h"
 #include "GameBoard.h"
 #include "GameState.h"
+#include "Action.h"
+#include "MovePieceAction.h"
 
 namespace logic {
 
@@ -234,22 +237,30 @@ namespace logic {
             return false;
         }
 
-        // Clear all planned moves so they do not have unexpected affects on the
-        // current move
-        gameBoard->clearFutureMoves();
+        // Store values for later
+        Move move = movesToEnd[idx];
+        GameBoard* board = getBoard();
 
-        // Call the onMove callback function
-        Move crntMove = movesToEnd[idx];
-        crntMove.callOnMove(start, end, *this);
+        // Create an action that, when called, will move the piece from start to end
+        std::shared_ptr<Action> moveAction(new MovePieceAction(std::make_pair(end.first - start.first, end.second - start.second)));
         
-        // Move the piece
-        if(!gameBoard->movePiece(start, end)) {
+        // Simulate all premove actions
+        if(!callActions(move.getPreMoveActions(), end)) {
             return false;
         }
-        gameBoard->getPiece(end)->validateMove();
 
-        // Apply any planned moves
-        gameBoard->applyFutureMoves();
+        // Simulate moving the piece
+        if(!callAction(moveAction, start)) {
+            return false;
+        }
+
+        // Simulate all postmove actions
+        if(!callActions(move.getPostMoveActions(), end)) {
+            return false;
+        }
+
+        // Apply the symptomatic effects of all of the actions
+        gameBoard->applySimulation();
 
         // Set the next player
         setNextPlayer();
@@ -400,6 +411,26 @@ namespace logic {
     {
         curTurn++;
         updateMinPriority();
+    }
+    
+    bool GameState::callAction(std::shared_ptr<Action> action, Move::position targetPosition)
+    {
+        if(action->callAction(targetPosition, gameBoard)) {
+            gameBoard->addToSimulation(action);
+            return true;
+        }
+        return false;
+    }
+    // See GameState.h
+    bool GameState::callActions(std::vector<std::shared_ptr<Action>>& actions, Move::position targetPosition)
+    {
+        for(std::shared_ptr<Action> action : actions) {
+            if(!callAction(action, targetPosition)) {
+                gameBoard->revertSimulation();
+                return false;
+            }
+        }
+        return true;
     }
 
     // See GameState.h

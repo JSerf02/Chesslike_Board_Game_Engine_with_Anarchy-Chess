@@ -12,6 +12,7 @@
 #include "Piece.h"
 #include "GameBoard.h"
 #include "GameState.h"
+#include "TryCapturePieceAction.h"
 
 using namespace logic;
 using namespace chess;
@@ -36,7 +37,9 @@ TEST_CASE("Chess Piece: Add to Move")
     // Get the F-Pawn and create a move for it
     ChessPiece* fPawn = static_cast<ChessPiece*>(board->getPiece(6, 2));
     REQUIRE(fPawn != nullptr);
-    Move fMove{};
+    Move fMove = Move(1, {
+        make_action(new TryCapturePieceAction(Player::white))
+    });
 
     // Make sure adding pawn to F3 fails because it should cause checkmate
     CHECK(fPawn->addToMove(std::make_pair(6, 3), fMove, chessState) == false);
@@ -45,7 +48,9 @@ TEST_CASE("Chess Piece: Add to Move")
     // Get the H-Pawn and create a move for it
     ChessPiece* hPawn = static_cast<ChessPiece*>(board->getPiece(8, 3));
     REQUIRE(hPawn != nullptr);
-    Move hMove{1, ChessPiece::captureCallback};
+    Move hMove{1, {
+        make_action(new TryCapturePieceAction(Player::white))
+    }};
 
     // Make sure adding pawn to G4 fails because there is a white piece there
     CHECK(hPawn->addToMove(std::make_pair(7, 4), hMove, chessState) == false);

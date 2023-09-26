@@ -1,11 +1,14 @@
 #ifndef CHESSPIECE_H
 #define CHESSPIECE_H
 
+#include <functional>
+#include <memory>
+
 #include "ChessGameState.h"
 #include "Piece.h"
 #include "Move.h"
-
-#include <functional>
+#include "Action.h"
+#include "TryCapturePieceAction.h"
 
 /*
 * IDs for each piece type
@@ -63,9 +66,17 @@ namespace chess {
             * - false if the target position is invalid and a move to that position
             *   cannot be added
             */
-            std::vector<Move> addPosition(Move::position position, ChessGameState& chessState, int priority = 1, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback = &captureCallback);
-            bool addPosition(Move::position position, std::vector<Move>& moves, ChessGameState& chessState, int priority = 1, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback = &captureCallback);
-            
+            std::vector<Move> addPosition(Move::position position, ChessGameState& chessState, int priority, 
+                std::vector<std::shared_ptr<Action>> preMoves, std::vector<std::shared_ptr<Action>> postMoves = {});
+            std::vector<Move> addPosition(Move::position position, ChessGameState& chessState, int priority = 1) {
+                return addPosition(position, chessState, priority, {make_action(new TryCapturePieceAction(getPlayer()))}, {});
+            }
+            bool addPosition(Move::position position, std::vector<Move>& moves, ChessGameState& chessState, int priority, 
+                std::vector<std::shared_ptr<Action>> preMoves, std::vector<std::shared_ptr<Action>> postMoves = {});
+            bool addPosition(Move::position position, std::vector<Move>& moves, ChessGameState& chessState, int priority = 1) {
+                return addPosition(position, moves, chessState, priority, {make_action(new TryCapturePieceAction(getPlayer()))}, {});
+            }
+
             /*
             * Adds moves containing each position in the positions vector to the 
             * movelist if the player controls this piece and the position is not 
@@ -79,9 +90,17 @@ namespace chess {
             *   if the target positions are unoccupied and the player controls the piece
             * - An empty vector of moves otherwise
             */
-            std::vector<Move> addUnrelatedPositions(std::vector<Move::position> positions, ChessGameState& chessState, int priority = 1, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback = &captureCallback);
-            void addUnrelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, int priority = 1, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback = &captureCallback);
-            
+            std::vector<Move> addUnrelatedPositions(std::vector<Move::position> positions, ChessGameState& chessState, int priority, 
+                std::vector<std::shared_ptr<Action>> preMoves, std::vector<std::shared_ptr<Action>> postMoves = {});
+            std::vector<Move> addUnrelatedPositions(std::vector<Move::position> positions, ChessGameState& chessState, int priority = 1) {
+                return addUnrelatedPositions(positions, chessState, priority, {make_action(new TryCapturePieceAction(getPlayer()))}, {});
+            }
+            void addUnrelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, int priority, 
+                std::vector<std::shared_ptr<Action>> preMoves, std::vector<std::shared_ptr<Action>> postMoves = {});
+            void addUnrelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, int priority = 1) {
+                addUnrelatedPositions(positions, moves, chessState, priority, {make_action(new TryCapturePieceAction(getPlayer()))}, {});
+            }
+
             /*
             * Adds a move containing all valid positions in the positions vector 
             * to the movelist if the player controls this piece
@@ -99,8 +118,16 @@ namespace chess {
             *   if the target positions are unoccupied and the player controls the piece
             * - An empty vector of moves otherwise
             */
-            std::vector<Move> addRelatedPositions(std::vector<Move::position> positions, ChessGameState& chessState, int priority = 1, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback = &captureCallback);
-            void addRelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, int priority = 1, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback = &captureCallback);
+            std::vector<Move> addRelatedPositions(std::vector<Move::position> positions, ChessGameState& chessState, int priority, 
+                std::vector<std::shared_ptr<Action>> preMoves, std::vector<std::shared_ptr<Action>> postMoves = {});
+            std::vector<Move> addRelatedPositions(std::vector<Move::position> positions, ChessGameState& chessState, int priority = 1) {
+                return addRelatedPositions(positions, chessState, priority, {make_action(new TryCapturePieceAction(getPlayer()))}, {});
+            }
+            void addRelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, int priority, 
+                std::vector<std::shared_ptr<Action>> preMoves, std::vector<std::shared_ptr<Action>> postMoves = {});
+            void addRelatedPositions(std::vector<Move::position> positions, std::vector<Move>& moves, ChessGameState& chessState, int priority = 1) {
+                addRelatedPositions(positions, moves, chessState, priority, {make_action(new TryCapturePieceAction(getPlayer()))}, {});
+            }
 
             /*
             * Finds the target positions by adding all of the deltas in the vector 
@@ -112,8 +139,16 @@ namespace chess {
             *   if the target positions are unoccupied and the player controls the piece
             * - An empty vector of moves otherwise
             */
-            std::vector<Move> addUnrelatedPositionsDeltas(std::vector<Move::position> deltas, ChessGameState& chessState, int priority = 1, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback = &captureCallback);
-            void addUnrelatedPositionsDeltas(std::vector<Move::position> deltas, std::vector<Move>& moves, ChessGameState& chessState, int priority = 1, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback = &captureCallback);
+            std::vector<Move> addUnrelatedPositionsDeltas(std::vector<Move::position> deltas, ChessGameState& chessState, int priority, 
+                std::vector<std::shared_ptr<Action>> preMoves, std::vector<std::shared_ptr<Action>> postMoves = {});
+            std::vector<Move> addUnrelatedPositionsDeltas(std::vector<Move::position> deltas, ChessGameState& chessState, int priority = 1) {
+                return addUnrelatedPositionsDeltas(deltas, chessState, priority, {make_action(new TryCapturePieceAction(getPlayer()))}, {});
+            }
+            void addUnrelatedPositionsDeltas(std::vector<Move::position> deltas, std::vector<Move>& moves, ChessGameState& chessState, int priority, 
+                std::vector<std::shared_ptr<Action>> preMoves, std::vector<std::shared_ptr<Action>> postMoves = {});
+            void addUnrelatedPositionsDeltas(std::vector<Move::position> deltas, std::vector<Move>& moves, ChessGameState& chessState, int priority = 1) {
+                addUnrelatedPositionsDeltas(deltas, moves, chessState, priority, {make_action(new TryCapturePieceAction(getPlayer()))}, {});
+            }
 
             /*
             * Finds the target positions by adding all of the deltas in the vector 
@@ -125,10 +160,21 @@ namespace chess {
             *   if the target positions are unoccupied and the player controls the piece
             * - An empty vector of moves otherwise
             */
-            std::vector<Move> addRelatedPositionsDeltas(std::vector<Move::position> deltas, ChessGameState& chessState, int priority = 1, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback = &captureCallback);
-            void addRelatedPositionsDeltas(std::vector<Move::position> deltas, std::vector<Move>& moves, ChessGameState& chessState, int priority = 1, std::function<void (Move::position, Move::position, GameState&, bool)> onMoveCallback = &captureCallback);
-    
-            static void captureCallback(Move::position start, Move::position end, GameState& gameState, bool simulating);
+            std::vector<Move> addRelatedPositionsDeltas(std::vector<Move::position> deltas, ChessGameState& chessState, int priority, 
+                std::vector<std::shared_ptr<Action>> preMoves, std::vector<std::shared_ptr<Action>> postMoves = {});
+            std::vector<Move> addRelatedPositionsDeltas(std::vector<Move::position> deltas, ChessGameState& chessState, int priority = 1) {
+                return addRelatedPositionsDeltas(deltas, chessState, priority, {make_action(new TryCapturePieceAction(getPlayer()))}, {});
+            }
+            void addRelatedPositionsDeltas(std::vector<Move::position> deltas, std::vector<Move>& moves, ChessGameState& chessState, int priority, 
+                std::vector<std::shared_ptr<Action>> preMoves, std::vector<std::shared_ptr<Action>> postMoves = {});
+            void addRelatedPositionsDeltas(std::vector<Move::position> deltas, std::vector<Move>& moves, ChessGameState& chessState, int priority = 1) {
+                addRelatedPositionsDeltas(deltas, moves, chessState, priority, {make_action(new TryCapturePieceAction(getPlayer()))}, {});
+            }
+            
+            /*
+            * Returns which player between black and white controls this piece
+            */
+            Player getPlayer();
     };
 
 }

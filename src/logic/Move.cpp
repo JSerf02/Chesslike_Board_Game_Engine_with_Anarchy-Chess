@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <functional>
+#include <memory>
 
 #include "Move.h"
 #include "GameState.h"
@@ -19,7 +20,6 @@ namespace logic {
         }
         os << "}, ";
         os << "Priority: " << move.priority << ", ";
-        os << "onMove() is " << ((move.onMove != nullptr) ? "" : "not ") << "set\n";
         return os;
     }
 
@@ -36,22 +36,15 @@ namespace logic {
     }
 
     // See Move.h
-    void Move::setOnMove(std::function<void (position, position, GameState&, bool)> onMoveCallback) 
+    std::vector<std::shared_ptr<Action>>& Move::getPreMoveActions()
     {
-        onMove = onMoveCallback;
+        return preMoveActions;
     }
 
     // See Move.h
-    bool Move::callOnMove(position start, position end, GameState& gameState, bool simulation)
+    std::vector<std::shared_ptr<Action>>& Move::getPostMoveActions()
     {
-        // Return if callback is null
-        if(!onMove) {
-            return false;
-        }
-
-        // Call onMove
-        onMove(start, end, gameState, simulation);
-        return true;
+        return postMoveActions;
     }
 
     // See Move.h
