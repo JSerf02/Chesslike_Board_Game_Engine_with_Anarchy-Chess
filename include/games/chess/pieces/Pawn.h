@@ -122,9 +122,21 @@ namespace chess {
             void addPromotion(std::vector<Move>& moves, ChessGameState& chessState);
 
             /*
+            * Adds promotion moves at promotePosition without performing any validation
+            */
+            void forceAddPromotion(std::vector<Move>& moves, ChessGameState& chessState, 
+                Move::position promotePosition, int priority = 1, std::vector<std::shared_ptr<Action>> extraPreMoves = {});
+
+            /*
             * Allows pawns to take an extra knight move after promoting to a knight
             */
             void addKnightBoost(std::vector<Move>& moves, ChessGameState& chessState);
+
+            /*
+            * Adds knight boost moves at boostPosition without performing any validation
+            */
+            void forceAddKnightBoost(std::vector<Move>& moves, ChessGameState& chessState, 
+                Move::position boostPosition, int priority = 1, std::vector<std::shared_ptr<Action>> extraPreMoves = {});
     };
 
     /* An action that changes the pawn's justBoosted flag to true */
@@ -149,6 +161,54 @@ namespace chess {
 
             /*
             * Change the pawn's boost turn
+            */
+            void applySymptomaticEffects(GameBoard* board) override;
+    };
+
+    /* An action that captures all pieces along a diagonal */
+    class EnPassantCaptureAction : public Action
+    {
+        private:
+            /*
+            * The starting position of the En Passant diagonal
+            */
+            const Move::position captureStart;
+
+            /*
+            * The ending position of the En Passant diagonal
+            */
+            const Move::position captureEnd;
+
+            /*
+            * The pieces that were removed from the board
+            */
+            std::vector<Piece*> removedPieces{};
+
+        public:
+            /* 
+            * Creates a new En Passant Capture Action that captures all pieces
+            * along the diagonal from captureStart to captureEnd
+            */
+            EnPassantCaptureAction(Move::position captureStart, Move::position captureEnd) : 
+                captureStart{captureStart}, captureEnd{captureEnd}{}
+
+            /*
+            * Removes all pieces along the diagonal from captureStart to captureEnd (inclusive)
+            * 
+            * Returns:
+            * - true if all of the pieces were removed successfully
+            * - false if at least one of the removals failed
+            *   - Reverts all removals in this case
+            */
+            bool callAction(Move::position end, GameBoard* board) override;
+
+            /*
+            * Unremoves all previously removed pieces
+            */
+            bool reverseAction(GameBoard* board) override;
+
+            /*
+            * Captures all previously removed pieces
             */
             void applySymptomaticEffects(GameBoard* board) override;
     };

@@ -72,7 +72,8 @@ The most complex feature of Anarchy Chess that is not present in regular Chess i
 
 Below is a list of special moves currently implemented (more coming soon!). Note that some of these are present in regular Chess, but they are still complex and worth mentioning since simpler engines often do not include them.
 - Pawn Boosting: A Pawn can move 2 spaces forwards on its first turn
-- En Passant (forced, priority 100): A Pawn can capture another Pawn that moved 2 spaces forward if it would have been able to capture it if it only moved one space forward
+- En Passant (forced, priority 10): A Pawn can capture another Pawn that moved 2 spaces forward if it would have been able to capture it if it only moved one space forward
+- Super Passant (forced, priority 10): Following an En Passant, a Pawn can continue travelling diagonally and capturing enemy pawns that are behind the travelled positions. A Pawn that Super Passants all the way to the end of the board may also Promote and/or Knight Boost (See Pawn Promotion and Knight Boosting).
 - Castling: If a King and Rook belonging to the same player have not yet moved, they may move past eachother and settle right next to one another at the midpoint between their original positions
 - Pawn Promotion: If a Pawn makes it to the end of the board, it may promote into any piece
 - Knook Promotion: A Pawn may promote to a Knook, a mythical piece that moves like a Rook and a Knight

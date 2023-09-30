@@ -179,6 +179,7 @@ namespace chess {
     {
         // Store values for later use
         GameBoard* board = chessState.getBoard();
+        ChessBoard* chessBoard = static_cast<ChessBoard*>(board);
         Move::position curPosition = getPosition();
         Player curPlayer = getPlayer();
         int direction = getPlayerAccess(Player::white) ? 1 : -1;
@@ -189,13 +190,12 @@ namespace chess {
             std::make_pair(-1, 0)
         };
 
-        // Add deltas based on each position that contains a pawn that just boosted
-        std::vector<Move::position> deltas{};
         for(Move::position enemyDelta : enemyDeltas) {
-            Move::position checkPosition = std::make_pair(enemyDelta.first + curPosition.first, curPosition.second);
+            Move::position startPosition = std::make_pair(enemyDelta.first + curPosition.first, curPosition.second);
+            Move::position checkPosition = std::make_pair(startPosition.first, startPosition.second);
 
             // Make sure there's a piece on the board
-            if(!(board->occupiedOnBoard(checkPosition))) {
+            if(!board->occupiedOnBoard(checkPosition)) {
                 continue;
             }
             Piece* piece = board->getPiece(checkPosition);
@@ -211,13 +211,72 @@ namespace chess {
                 continue;
             }
 
-            // If all previous conditions hold, add the En Passant delta
-            deltas.push_back(std::make_pair(enemyDelta.first, attackOnly ? 0 : direction));
-        }
+            // Add the position
+            if(attackOnly) {
+                std::vector<Move> tempMoves{};
+                bool addResult = addPosition(std::make_pair(checkPosition.first, checkPosition.second + direction), moves, chessState, 10, {
+                    make_action(new EnPassantCaptureAction(startPosition, checkPosition))
+                });
+                if(!addResult) {
+                    return;
+                }
+                addPosition(checkPosition, moves, chessState, 10);
+            }
+            else {
+                bool addResult = addPosition(std::make_pair(checkPosition.first, checkPosition.second + direction), moves, chessState, 10, {
+                    make_action(new EnPassantCaptureAction(startPosition, checkPosition))
+                });
+                if(!addResult) {
+                    return;
+                }
+            }
 
-        addUnrelatedPositionsDeltas(deltas, moves, chessState, 10, {
-            make_action(new CapturePieceAction(curPlayer, std::make_pair(0, -direction)))
-        });
+            // Add long passant positions
+            checkPosition = std::make_pair(checkPosition.first + enemyDelta.first, checkPosition.second + direction);
+            while(board->occupiedOnBoard(checkPosition) && board->unoccupiedOnBoard(std::make_pair(checkPosition.first, checkPosition.second + direction))) {
+                Piece* piece = board->getPiece(checkPosition);
+
+                // Make sure the piece is a pawn
+                if(piece->getID() != PAWN_ID || piece->getPlayerAccess(curPlayer)) {
+                    continue;
+                }
+                
+                // Add the position
+                if(attackOnly) {
+                    std::vector<Move> tempMoves{};
+                    bool addResult = addPosition(std::make_pair(checkPosition.first, checkPosition.second + direction), moves, chessState, 10, {
+                        make_action(new EnPassantCaptureAction(startPosition, checkPosition))
+                    });
+                    if(!addResult) {
+                        return;
+                    }
+                    addPosition(checkPosition, moves, chessState, 10);
+                }
+                else {
+                    bool addResult = addPosition(std::make_pair(checkPosition.first, checkPosition.second + direction), moves, chessState, 10, {
+                        make_action(new EnPassantCaptureAction(startPosition, checkPosition))
+                    });
+                    if(!addResult) {
+                        return;
+                    }
+                }
+
+                // Add promotion and knight boosting
+                if(checkPosition.second == (direction == 1 ? chessBoard->maxY() : chessBoard->minY()) - direction) {
+                    Move::position promotionPosition = std::make_pair(checkPosition.first, checkPosition.second + direction);
+                    if(!attackOnly) {
+                        forceAddPromotion(moves, chessState, promotionPosition, 10, {
+                            make_action(new EnPassantCaptureAction(startPosition, checkPosition))
+                        });
+                    }
+                    forceAddKnightBoost(moves, chessState, promotionPosition, 10, {
+                        make_action(new EnPassantCaptureAction(startPosition, checkPosition))
+                    });
+                    break;
+                }
+                checkPosition = std::make_pair(checkPosition.first + enemyDelta.first, checkPosition.second + direction);
+            }
+        }
     }
 
     // See Pawn.h
@@ -240,8 +299,15 @@ namespace chess {
             return;
         }
 
+        // Add the promotion moves
+        forceAddPromotion(moves, chessState, oneAhead);
+    }
+
+    // See Pawn.h
+    void Pawn::forceAddPromotion(std::vector<Move>& moves, ChessGameState& chessState, Move::position promotePosition, int priority, std::vector<std::shared_ptr<Action>> extraPreMoves)
+    {
         for(int i = static_cast<int>(PromotionIdx::pawn) + 1; i < static_cast<int>(PromotionIdx::length); i++) {
-            addPosition(oneAhead, moves, chessState, 1, {}, {
+            addPosition(promotePosition, moves, chessState, priority, extraPreMoves, {
                 make_action(new RemovePieceAction()),
                 make_action(new AddPieceAction([i](std::vector<Player> players, Move::position start) {
                     switch(static_cast<PromotionIdx>(i)) {
@@ -281,20 +347,30 @@ namespace chess {
             return;
         }
 
+        // Add the knight boost moves
+        forceAddKnightBoost(moves, chessState, oneAhead);
+    }
+
+    // See Pawn.h
+    void Pawn::forceAddKnightBoost(std::vector<Move>& moves, ChessGameState& chessState, Move::position boostPosition, int priority, std::vector<std::shared_ptr<Action>> extraPreMoves)
+    {
         // All possible knight moves
-        const std::vector<Move::position> deltas {
-            std::make_pair( 1,  2 + direction),
-            std::make_pair( 2,  1 + direction),
-            std::make_pair( 2, -1 + direction),
-            std::make_pair( 1, -2 + direction),
-            std::make_pair(-1, -2 + direction),
-            std::make_pair(-2, -1 + direction),
-            std::make_pair(-2,  1 + direction),
-            std::make_pair(-1,  2 + direction)
+        const std::vector<Move::position> positions {
+            std::make_pair( 1 + boostPosition.first,  2 + boostPosition.second),
+            std::make_pair( 2 + boostPosition.first,  1 + boostPosition.second),
+            std::make_pair( 2 + boostPosition.first, -1 + boostPosition.second),
+            std::make_pair( 1 + boostPosition.first, -2 + boostPosition.second),
+            std::make_pair(-1 + boostPosition.first, -2 + boostPosition.second),
+            std::make_pair(-2 + boostPosition.first, -1 + boostPosition.second),
+            std::make_pair(-2 + boostPosition.first,  1 + boostPosition.second),
+            std::make_pair(-1 + boostPosition.first,  2 + boostPosition.second)
         };
-        addUnrelatedPositionsDeltas(deltas, moves, chessState, 1, {
-            make_action(new TryCapturePieceAction(getPlayer()))
-        }, {
+        std::vector<std::shared_ptr<Action>> preMoves{};
+        for(std::shared_ptr<Action> action : extraPreMoves) {
+            preMoves.push_back(action);
+        }
+        preMoves.push_back(make_action(new TryCapturePieceAction(getPlayer())));
+        addUnrelatedPositions(positions, moves, chessState, priority, preMoves, {
             make_action(new RemovePieceAction()),
             make_action(new AddPieceAction([](std::vector<Player> players, Move::position start){ return new Knight(players, start); }))
         });
@@ -304,5 +380,62 @@ namespace chess {
     void PawnBoostAction::applySymptomaticEffects(GameBoard* board)
     {
         pawn.setBoostTurn(gameState);
+    }
+
+    // See Pawn.h
+    bool EnPassantCaptureAction::callAction(Move::position end, GameBoard* board)
+    {
+        // Do nothing if the board is invalid
+        if(!board) {
+            return false;
+        }
+
+        // Find the direction of the diagonal
+        Move::position direction = std::make_pair(
+            captureEnd.first >= captureStart.first ? 1 : -1,
+            captureEnd.second >= captureStart.second ? 1 : -1
+        );
+
+        // Make sure each space on the diagonal is valid before removing anything
+        Move::position curPosition = std::make_pair(captureStart.first, captureStart.second);
+        while(true) {
+            if(!board->occupiedOnBoard(curPosition)) {
+                return false;
+            }
+            if(curPosition == captureEnd) {
+                break;
+            }
+            curPosition = std::make_pair(curPosition.first + direction.first, curPosition.second + direction.second);
+        }
+
+        // Remove all of the pieces
+        curPosition = std::make_pair(captureStart.first, captureStart.second);
+        while(true) {
+            removedPieces.push_back(board->getPiece(curPosition));
+            board->removePiece(curPosition);
+            if(curPosition == captureEnd) {
+                break;
+            }
+            curPosition = std::make_pair(curPosition.first + direction.first, curPosition.second + direction.second);
+        }
+        return true;
+    }
+
+    bool EnPassantCaptureAction::reverseAction(GameBoard* board)
+    {
+        for(Piece* piece : removedPieces) {
+            if(!board->unRemovePiece(piece)) {
+                return false;
+            }
+        }
+        removedPieces.clear();
+        return true;
+    }
+
+    void EnPassantCaptureAction::applySymptomaticEffects(GameBoard* board)
+    {
+        for(Piece* piece : removedPieces) {
+            board->captureRemovedPiece(piece);
+        }
     }
 }
