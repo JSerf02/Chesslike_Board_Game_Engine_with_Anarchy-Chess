@@ -71,14 +71,14 @@ To showcase the capabilities of this engine, I have implemented a Chess backend 
 The most complex feature of Anarchy Chess that is not present in regular Chess is move priority. Move priority allows moves to group themselves based on their importance and to block other moves that are less important. This allows for certain moves to be forced whenever they are available and also for certain moves to be partially forced, meaning they are required when only simpler moves are available but they can still be overridden by more important moves.
 
 Below is a list of special moves currently implemented (more coming soon!). Note that some of these are present in regular Chess, but they are still complex and worth mentioning since simpler engines often do not include them.
-- Pawn Boosting: A Pawn can move 2 spaces forwards on its first turn
-- En Passant (forced, priority 10): A Pawn can capture another Pawn that moved 2 spaces forward if it would have been able to capture it if it only moved one space forward
+- Pawn Boosting: A Pawn can move 2 spaces forwards on its first turn.
+- En Passant (forced, priority 10): A Pawn can capture another Pawn that moved 2 spaces forward if it would have been able to capture it if it only moved one space forward.
 - Super Passant (forced, priority 10): Following an En Passant, a Pawn can continue travelling diagonally and capturing enemy pawns that are behind the travelled positions. A Pawn that Super Passants all the way to the end of the board may also Promote and/or Knight Boost (See Pawn Promotion and Knight Boosting).
-- Castling: If a King and Rook belonging to the same player have not yet moved, they may move past eachother and settle right next to one another at the midpoint between their original positions
-- Pawn Promotion: If a Pawn makes it to the end of the board, it may promote into any piece
-- Knook Promotion: A Pawn may promote to a Knook, a mythical piece that moves like a Rook and a Knight
-- Knight Boosting: If a Pawn promotes to a Knight, it has the option to take an extra move
-- Il Vaticano (partially forced, priority 3): If two Bishops are aligned horizontally or vertically 3 spaces away from each other with 2 Pawns occupying the spaces between them, the Bishops may swap places and capture the Pawns in the process
+- Castling: If a King and Rook belonging to the same player have not yet moved, they may move past eachother and settle right next to one another at the midpoint between their original positions.
+- Pawn Promotion: If a Pawn makes it to the end of the board, it may promote into any piece.
+- Knook Promotion: A Pawn may promote to a Knook, a mythical piece that moves like a Rook and a Knight.
+- Knight Boosting: If a Pawn promotes to a Knight, it has the option to take an extra move.
+- Il Vaticano (partially forced, priority 3): If two Bishops are aligned horizontally or vertically 3 spaces away from each other with 2 Pawns occupying the spaces between them, the Bishops may swap places and capture the Pawns in the process.
 
 Thanks to the power of the engine, implementing these special moves is relatively easy. Check out the `.cpp` files for each of the Chess piece types to see how these special moves are implemented and how easy it is to add more!
 
