@@ -441,3 +441,63 @@ TEST_CASE("Pawn: Knight Boosting")
     REQUIRE(otherPiece != nullptr);
     CHECK(otherPiece->getID() == KNIGHT_ID);
 }
+
+TEST_CASE("Pawn: Super Passant")
+{
+    // Create a ChessBoard without any pieces
+    ChessBoard* board = new ChessBoard(false);
+
+    // Add pieces to setup this board state
+    // https://lichess.org/editor/8/2p1p3/3p4/5P2/8/8/7K/7k_w_-_-_0_1?color=white
+    ChessPiece* whitePawn  = new Pawn(Player::white, std::make_pair(6, 5));
+    ChessPiece* blackPawn1 = new Pawn(Player::black, std::make_pair(5, 7));
+    ChessPiece* blackPawn2 = new Pawn(Player::black, std::make_pair(4, 6));
+    ChessPiece* blackPawn3 = new Pawn(Player::black, std::make_pair(3, 7));
+    ChessPiece* whiteKing = new TestKing(Player::white, std::make_pair(8, 2));
+    ChessPiece* blackKing = new TestKing(Player::black, std::make_pair(8, 1));
+    board->addPieces({whitePawn, blackPawn1, blackPawn2, blackPawn3, whiteKing, blackKing});
+
+    // Create a ChessGameState
+    ChessGameState* chessState = new ChessGameState(board);
+
+    // Make sure the pawn cannot move before the enemy pawn boosts
+    CHECK(!chessState->canMovePiece(std::make_pair(6, 5), std::make_pair(5, 6)));
+
+    // Boost the E7 black pawn
+    CHECK(chessState->setNextPlayer());
+    CHECK(chessState->movePiece(std::make_pair(5, 7), std::make_pair(5, 5)));
+
+    // Make sure the pawn can chain En Passants
+    CHECK(chessState->canMovePiece(std::make_pair(6, 5), std::make_pair(5, 6)));
+    CHECK(chessState->isAttacked(Player::black, std::make_pair(5, 5)));
+    CHECK(chessState->canMovePiece(std::make_pair(6, 5), std::make_pair(4, 7)));
+    CHECK(chessState->isAttacked(Player::black, std::make_pair(4, 6)));
+    CHECK(chessState->canMovePiece(std::make_pair(6, 5), std::make_pair(3, 8)));
+    CHECK(chessState->isAttacked(Player::black, std::make_pair(3, 7)));
+
+    // Make sure the pawn can promote to every possible piece
+    CHECK(chessState->getMovesOfPiece(std::make_pair(6, 5), std::make_pair(3, 8)).size() == static_cast<int>(Pawn::PromotionIdx::length));
+
+    // Make sure the pawn can knight boost after promotion
+    CHECK(chessState->canMovePiece(std::make_pair(6, 5), std::make_pair(1, 7)));
+    CHECK(chessState->isAttacked(Player::black, std::make_pair(1, 7)));
+    CHECK(chessState->canMovePiece(std::make_pair(6, 5), std::make_pair(2, 6)));
+    CHECK(chessState->isAttacked(Player::black, std::make_pair(2, 6)));
+    CHECK(chessState->canMovePiece(std::make_pair(6, 5), std::make_pair(4, 6)));
+    CHECK(chessState->isAttacked(Player::black, std::make_pair(4, 6)));
+    CHECK(chessState->canMovePiece(std::make_pair(6, 5), std::make_pair(5, 7)));
+    CHECK(chessState->isAttacked(Player::black, std::make_pair(5, 7)));
+
+    // Move the pawn to E7 (long passant -> knight boost)
+    CHECK(chessState->movePiece(std::make_pair(6, 5), std::make_pair(5, 7)));
+
+    // Make sure the enemy pawns were all captured
+    CHECK(board->unoccupiedOnBoard(std::make_pair(3, 7)));
+    CHECK(board->unoccupiedOnBoard(std::make_pair(4, 6)));
+    CHECK(board->unoccupiedOnBoard(std::make_pair(5, 5)));
+    
+    // Make sure the pawn promoted into a knight
+    Piece* knight = board->getPiece(std::make_pair(5, 7));
+    REQUIRE(knight != nullptr);
+    CHECK(knight->getID() == KNIGHT_ID);
+}

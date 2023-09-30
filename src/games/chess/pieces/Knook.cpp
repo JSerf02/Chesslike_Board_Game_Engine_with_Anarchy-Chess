@@ -13,7 +13,7 @@ namespace chess {
     // See Knook.h
     double Knook::getValue() 
     {
-        return 11.0;
+        return 9.0;
     }
 
     // See Knook.h
