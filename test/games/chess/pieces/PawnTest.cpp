@@ -381,10 +381,14 @@ TEST_CASE("Pawn: Promotion")
     // Promote to a bishop
     REQUIRE(chessState->movePiece(std::make_pair(7, 2), std::make_pair(7, 1), static_cast<int>(Pawn::PromotionIdx::bishop)));
     CHECK(board->getPiece(std::make_pair(7, 1))->getID() == BISHOP_ID);
+    CHECK(board->getPiece(std::make_pair(7, 1))->getPlayerAccess(Player::black));
+    CHECK(board->getPiece(std::make_pair(7, 1))->getPlayerAccess(Player::white) == false);
 
     // Promote to a knook
     REQUIRE(chessState->movePiece(std::make_pair(2, 7), std::make_pair(2, 8), static_cast<int>(Pawn::PromotionIdx::knook)));
     CHECK(board->getPiece(std::make_pair(2, 8))->getID() == KNOOK_ID);
+    CHECK(board->getPiece(std::make_pair(2, 8))->getPlayerAccess(Player::white));
+    CHECK(board->getPiece(std::make_pair(2, 8))->getPlayerAccess(Player::black) == false);
 }
 
 TEST_CASE("Pawn: Knight Boosting")

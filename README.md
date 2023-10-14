@@ -79,6 +79,7 @@ Below is a list of special moves currently implemented (more coming soon!). Note
 - Knook Promotion: A Pawn may promote to a Knook, a mythical piece that moves like a Rook and a Knight.
 - Knight Boosting: If a Pawn is promoted to a Knight, it can take an extra move.
 - Il Vaticano (partially forced, priority 3): If two Bishops are aligned horizontally or vertically 3 spaces away from each other with 2 Pawns occupying the spaces between them, the Bishops may swap places and capture the Pawns in the process.
+- Knooklear Fusion: A Knight may move onto the space of a Rook of the same color. If the Knight does so, it will fuse with the Rook, forming a Knook.
 
 Thanks to the power of the engine, implementing these special moves is relatively easy. Check out the `.cpp` files for each of the Chess piece types to see how these special moves are implemented and how easy it is to add more!
 

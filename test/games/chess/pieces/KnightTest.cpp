@@ -15,6 +15,11 @@
 #include "GameBoard.h"
 #include "GameState.h"
 #include "Knight.h"
+#include "Pawn.h"
+#include "Queen.h"
+#include "Bishop.h"
+#include "Rook.h"
+#include "Knook.h"
 
 using namespace logic;
 using namespace chess;
@@ -166,4 +171,50 @@ TEST_CASE("Knight: Value")
 
     // Make sure the knight's ID is correctly set
     CHECK(knight->getID() == KNIGHT_ID);
+}
+
+TEST_CASE("Knight: Knooklear Fusion")
+{
+    // Create a ChessBoard without any pieces
+    ChessBoard* board = new ChessBoard(false);
+
+    // Add pieces to create this board state:
+    // https://lichess.org/editor/8/8/2R1P3/1R3Q2/3N4/1B3R2/2r1R2k/7K_w_-_-_0_1?color=white
+    ChessPiece* knight    = new Knight(  Player::white, std::make_pair(4, 4));
+    ChessPiece* rook1     = new Rook(    Player::white, std::make_pair(2, 5));
+    ChessPiece* rook2     = new Rook(    Player::white, std::make_pair(3, 6));
+    ChessPiece* rook3     = new Rook(    Player::white, std::make_pair(5, 2));
+    ChessPiece* rook4     = new Rook(    Player::white, std::make_pair(6, 3));
+    ChessPiece* pawn      = new Pawn(    Player::white, std::make_pair(5, 6));
+    ChessPiece* queen     = new Queen(   Player::white, std::make_pair(6, 5));
+    ChessPiece* bishop    = new Bishop(  Player::white, std::make_pair(2, 3));
+    ChessPiece* enemyRook = new Rook(    Player::black, std::make_pair(3, 2));
+    ChessPiece* whiteKing = new TestKing(Player::white, std::make_pair(8, 1));
+    ChessPiece* blackKing = new TestKing(Player::black, std::make_pair(8, 2));
+    board->addPieces({knight, rook1, rook2, rook3, rook4, pawn, queen, bishop, enemyRook, whiteKing, blackKing});
+
+    // Create a ChessGameState
+    ChessGameState* chessState = new ChessGameState(board);
+
+    // Make sure the knight attacks only the enemy rook
+    std::vector<Move>& attacks = knight->getAttackingMoves(*chessState);
+    REQUIRE(attacks.size() == 1);
+    CHECK(attacks[0].getPositions().size() == 1);
+
+    // Make sure the knight can only move to valid positions
+    // In this case, valid positions are those with rooks
+    std::set<Move::position> validPositions {
+        std::make_pair(2, 5),
+        std::make_pair(3, 6),
+        std::make_pair(5, 2),
+        std::make_pair(6, 3),
+        std::make_pair(3, 2)
+    };
+    TestChessHelpers::testPiecePositions(chessState, knight->getPosition(), validPositions);
+
+    // Move the piece and make sure it properly fused into a Knook
+    REQUIRE(chessState->movePiece(std::make_pair(4, 4), std::make_pair(2, 5)));
+    CHECK(board->getPiece(std::make_pair(2, 5))->getID() == KNOOK_ID);
+    CHECK(board->getPiece(std::make_pair(2, 5))->getPlayerAccess(Player::white));
+    CHECK(board->getPiece(std::make_pair(2, 5))->getPlayerAccess(Player::black) == false);
 }

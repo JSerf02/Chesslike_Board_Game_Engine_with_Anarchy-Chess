@@ -306,10 +306,11 @@ namespace chess {
     // See Pawn.h
     void Pawn::forceAddPromotion(std::vector<Move>& moves, ChessGameState& chessState, Move::position promotePosition, int priority, std::vector<std::shared_ptr<Action>> extraPreMoves)
     {
+        Player player = getPlayer();
         for(int i = static_cast<int>(PromotionIdx::pawn) + 1; i < static_cast<int>(PromotionIdx::length); i++) {
             addPosition(promotePosition, moves, chessState, priority, extraPreMoves, {
                 make_action(new RemovePieceAction()),
-                make_action(new AddPieceAction([i](std::vector<Player> players, Move::position start) {
+                make_action(new AddPieceAction(player, [i](std::vector<Player> players, Move::position start) {
                     switch(static_cast<PromotionIdx>(i)) {
                         case PromotionIdx::queen:
                             return static_cast<Piece*>(new Queen(players, start));
@@ -365,6 +366,7 @@ namespace chess {
             std::make_pair(-2 + boostPosition.first,  1 + boostPosition.second),
             std::make_pair(-1 + boostPosition.first,  2 + boostPosition.second)
         };
+        Player player = getPlayer();
         std::vector<std::shared_ptr<Action>> preMoves{};
         for(std::shared_ptr<Action> action : extraPreMoves) {
             preMoves.push_back(action);
@@ -372,7 +374,7 @@ namespace chess {
         preMoves.push_back(make_action(new TryCapturePieceAction(getPlayer())));
         addUnrelatedPositions(positions, moves, chessState, priority, preMoves, {
             make_action(new RemovePieceAction()),
-            make_action(new AddPieceAction([](std::vector<Player> players, Move::position start){ return new Knight(players, start); }))
+            make_action(new AddPieceAction(player, [](std::vector<Player> players, Move::position start){ return new Knight(players, start); }))
         });
     }
 

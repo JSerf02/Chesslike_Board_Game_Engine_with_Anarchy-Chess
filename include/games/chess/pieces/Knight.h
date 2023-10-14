@@ -27,7 +27,8 @@ namespace chess {
 
         private:
             /*
-            * Returns moves along L-shaped paths that are not blocked
+            * Returns moves along L-shaped paths that are not blocked and Knooklear
+            * Fusion moves
             */
             std::vector<Move> generateMoves(GameState& gameState) override;
 
@@ -35,6 +36,17 @@ namespace chess {
             * Returns moves along L-shaped paths that are not blocked
             */
             std::vector<Move> generateAttackingMoves(GameState& gameState) override;
+
+            /*
+            * Returns moves along L-shaped paths that are not blocked
+            */
+            std::vector<Move> generateStandardMoves(GameState& gameState);
+
+            /*
+            * Adds moves along L-shaped paths that are blocked by rooks
+            * - These moves replace the rooks with Knooks
+            */
+            void addKnooklearFusion(std::vector<Move>& moves, GameState& gameState);
     };
 
 }

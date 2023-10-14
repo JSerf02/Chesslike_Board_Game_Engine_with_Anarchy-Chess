@@ -74,12 +74,6 @@ namespace chess {
         const Move::position curPosition = getPosition();
         GameBoard* board = chessState.getBoard();
         Player crntPlayer = getPlayer();
-
-        // Cannot add if the space isn't on the board or is occupied
-        if(!(board->onBoard(position))
-        || (board->occupiedOnBoard(position) && board->getPiece(position)->getPlayerAccess(crntPlayer))) {
-            return false;
-        }
         
         // Try to create a new move with the inputted position
         Move newMove = Move({}, priority, preMoves, postMoves);
@@ -106,12 +100,6 @@ namespace chess {
 
         // Iterate through all of the possible positions
         for(Move::position position : positions) {
-            // Cannot add if the space isn't on the board or is occupied
-            if(!(board->onBoard(position))
-            || (board->occupiedOnBoard(position) && board->getPiece(position)->getPlayerAccess(crntPlayer))) {
-                continue;
-            }
-
             // Try to create a new move with the inputted position
             Move newMove = Move({}, priority, preMoves, postMoves);
             if(addToMove(position, newMove, chessState)) {
@@ -143,11 +131,6 @@ namespace chess {
 
         // Iterate through all of the possible positions
         for(Move::position position : positions) {
-            // Cannot add if the space isn't on the board or is occupied
-            if(!(board->onBoard(position))) {
-                break;
-            }
-
             // Occupied spaces can only be added if they are controlled by the enemy
             bool occupied = board->occupiedOnBoard(position);
             if (occupied && board->getPiece(position)->getPlayerAccess(crntPlayer)) {
